@@ -15,14 +15,14 @@ export type MoodEntry = InsertMoodEntry & {
 };
 
 export const moodOptions = [
-  { emoji: "🐻", mood: "Happy", color: "bg-yellow-100" },
-  { emoji: "🦊", mood: "Calm", color: "bg-blue-100" },
+  { emoji: "🐻", mood: "Happy", color: "bg-secondary-custom" },
+  { emoji: "🦊", mood: "Calm", color: "bg-calm-custom bg-opacity-30" },
   { emoji: "🐢", mood: "Tired", color: "bg-purple-100" },
   { emoji: "🦦", mood: "Anxious", color: "bg-orange-100" },
   { emoji: "🐰", mood: "Excited", color: "bg-pink-100" },
   { emoji: "🦋", mood: "Peaceful", color: "bg-green-100" },
   { emoji: "🦔", mood: "Overwhelmed", color: "bg-red-100" },
-  { emoji: "🐨", mood: "Content", color: "bg-green-100" },
+  { emoji: "🐨", mood: "Content", color: "bg-emerald-100" },
 ] as const;
 
 export { encouragementMessages } from "./encouragements";
