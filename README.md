@@ -56,13 +56,13 @@ Everything stays on YOUR device. We literally can't see your data even if we wan
 ## 🛠️ Tech & Architecture
 
 **Frontend:**  
-React (with TypeScript), Vite for fast dev/build, Tailwind CSS for cozy styles, shadcn/ui for accessible UI, and Wouter for simple page navigation.
+React (with TypeScript), Vite for fast dev/build, Tailwind CSS for cozy styles, shadcn/ui for accessible UI, and Wouter for simple page navigation. Service worker registration is handled by a dedicated `useServiceWorker` hook to keep the app shell lean.
 
 **State & Storage:**  
 All moods/notes are stored locally in your browser. The app is ready for future features like user accounts, but you don't need one now.
 
 **Backend (future ready):**  
-Express.js with TypeScript, Drizzle ORM, and PostgreSQL for possible future login or sync. This is currently not required.
+Express.js with TypeScript, Drizzle ORM, and PostgreSQL for possible future login or sync, with a reusable `requestLogger` middleware for development visibility. This is currently not required.
 
 **Accessibility & Design:**  
 Uses Radix UI for solid ARIA and keyboard support, warm animal friendly color palette, and responsive/mobile first layouts.
