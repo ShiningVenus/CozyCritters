@@ -28,6 +28,13 @@ export class MemStorage implements IStorage {
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
+    const existing = await this.getUserByUsername(insertUser.username);
+    if (existing) {
+      const err = new Error("Username already taken");
+      (err as any).status = 400;
+      throw err;
+    }
+
     const id = randomUUID();
     const user: User = { ...insertUser, id };
     this.users.set(id, user);
