@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { moodOptions, encouragementMessages } from "@shared/schema";
+import { encouragementMessages } from "@shared/schema";
 import { EncouragementMessage } from "./encouragement-message";
+import { MoodPicker } from "./mood-picker";
 
 interface MoodCheckInProps {
   onMoodSelected: (mood: { emoji: string; mood: string; message: string }) => void;
@@ -40,22 +41,13 @@ export function MoodCheckIn({ onMoodSelected }: MoodCheckInProps) {
         <p className="text-gray-600">Pick a cozy critter that matches your mood</p>
       </div>
 
-      {/* Mood selector grid */}
-      <div className="grid grid-cols-2 gap-4 mb-8">
-        {moodOptions.map((option, index) => (
-          <button
-            key={index}
-            onClick={() => handleMoodSelect(option.emoji, option.mood)}
-            className={`mood-card p-6 rounded-2xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200 text-center ${
-              option.mood === "Happy" ? "bg-secondary-custom" :
-              option.mood === "Calm" ? "bg-calm-custom bg-opacity-30" :
-              option.color
-            }`}
-          >
-            <div className="text-4xl mb-3">{option.emoji}</div>
-            <span className="text-brown-custom font-medium">{option.mood}</span>
-          </button>
-        ))}
+      {/* Mood selector */}
+      <div className="mb-8">
+        <MoodPicker
+          onMoodSelect={handleMoodSelect}
+          selectedMood={selectedMood?.mood}
+          disabled={!!selectedMood}
+        />
       </div>
 
       {/* Encouragement message */}
