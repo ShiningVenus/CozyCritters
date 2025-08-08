@@ -129,6 +129,16 @@ We literally can't see your data even if we wanted to.
 
 ## 🛠️ Tech & Architecture
 
+ bekn8k-codex/refactor-app-for-modular-design
+**Frontend:**  
+React (with TypeScript), Vite for fast dev/build, Tailwind CSS for cozy styles, shadcn/ui for accessible UI, and Wouter for simple page navigation. Service worker registration is handled by a dedicated `useServiceWorker` hook to keep the app shell lean.
+
+**State & Storage:**  
+All moods/notes are stored locally in your browser. The app is ready for future features like user accounts, but you don't need one now.
+
+**Backend (future ready):**  
+Express.js with TypeScript, Drizzle ORM, and PostgreSQL for possible future login or sync, with a reusable `requestLogger` middleware for development visibility. This is currently not required.
+=======
 ### 🎨 Frontend Stack
 - **React** with TypeScript for type safety
 - **Vite** for fast dev/build cycles
@@ -156,6 +166,7 @@ We literally can't see your data even if we wanted to.
 - **Motion sensitivity** respected
 
 ## 🚀 How to Run Locally
+ main
 
 ### Quick Start (3 steps)
 
@@ -173,12 +184,29 @@ We literally can't see your data even if we wanted to.
    yarn dev
    ```
 
+ bekn8k-codex/refactor-app-for-modular-design
+**Start the dev server:**
+```bash
+npm run dev
+# or
+yarn dev
+```
+
+**Open in your browser:**
+Usually at http://localhost:5173
+=======
 3. **Open in your browser**
    ```
    http://localhost:5173
    ```
 
 **That's it!** 🎉 No database setup, no API keys, no complicated configuration.
+ main
+
+**Run the test suite:**
+```bash
+npm test
+```
 
 ## 🔐 Privacy Promise + Technical Proof
 
