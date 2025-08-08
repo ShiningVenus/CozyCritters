@@ -1,11 +1,45 @@
 import express, { type Request, Response, NextFunction } from "express";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
+import cors from "cors";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import { requestLogger } from "./middleware/request-logger";
 
 const app = express();
+
+// Configure trust proxy for accurate IP detection behind proxies
+// This is required for rate limiting to work properly in production
+app.set('trust proxy', process.env.NODE_ENV === 'production' ? 1 : false);
+
+// CORS configuration
+const corsOptions = {
+  origin: process.env.NODE_ENV === 'production' 
+    ? [
+        // Add your production domains here
+        'https://your-app-name.replit.app',
+        /\.replit\.app$/  // Allow any .replit.app subdomain
+      ]
+    : [
+        'http://localhost:3000',
+        'http://localhost:5000',
+        'http://127.0.0.1:3000',
+        'http://127.0.0.1:5000'
+      ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: [
+    'Origin',
+    'X-Requested-With', 
+    'Content-Type', 
+    'Accept',
+    'Authorization',
+    'Cache-Control'
+  ],
+  credentials: true, // Allow cookies and credentials
+  maxAge: 86400 // Cache preflight for 24 hours
+};
+
+app.use(cors(corsOptions));
 
 // Security middleware
 app.use(helmet({
