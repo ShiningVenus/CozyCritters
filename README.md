@@ -1,16 +1,16 @@
-# Cozy Critter — Animal-Themed Mood Tracker
+# Cozy Critter - Animal Themed Mood Tracker
 
-Cozy Critter is a neurodivergent-friendly mood tracking app that makes emotional self-care gentle, private, and fun.
+Cozy Critter is a neurodivergent friendly mood tracking app that makes emotional self-care gentle, private, and fun.
 
-Check in with adorable animal emoji, add your own notes, and get encouragement that really gets ND life. All your data stays on your device—no accounts, no cloud, no stress.
+Check in with adorable animal emoji, add your own notes, and get encouragement that really gets ND life. All your data stays on your device. No accounts, no cloud, no stress.
 
 ## ✨ Features
 
-**Animal emoji mood check-in**  
+**Animal emoji mood check in**  
 Choose the animal that matches how you feel today.
 
 **Optional notes**  
-Write a quick note with any mood—useful for journaling, venting, or celebrating!
+Write a quick note with any mood. Useful for journaling, venting, or celebrating!
 
 **Custom encouragement**  
 Get (or even create) affirmations tailored to neurodivergent needs: masking, stimming, executive function, sensory breaks, and more.
@@ -35,11 +35,11 @@ React (with TypeScript), Vite for fast dev/build, Tailwind CSS for cozy styles, 
 **State & Storage:**  
 All moods/notes are stored locally in your browser. The app is ready for future features like user accounts, but you don't need one now.
 
-**Backend (future-ready):**  
-Express.js with TypeScript, Drizzle ORM, and PostgreSQL for possible future login or sync—currently not required.
+**Backend (future ready):**  
+Express.js with TypeScript, Drizzle ORM, and PostgreSQL for possible future login or sync. This is currently not required.
 
 **Accessibility & Design:**  
-Uses Radix UI for solid ARIA and keyboard support, warm animal-friendly color palette, and responsive/mobile-first layouts.
+Uses Radix UI for solid ARIA and keyboard support, warm animal friendly color palette, and responsive/mobile first layouts.
 
 ## 🚀 How to Run Locally
 
@@ -64,13 +64,13 @@ Usually at http://localhost:5173
 
 - **No tracking, no accounts, no data collection**
 - **Everything stays on your device** (browser localStorage)
-- **One-click delete everything** - prove your privacy is real
+- **One click delete everything** - prove your privacy is real
 - **Works offline** - no internet required after first load
 - **No external dependencies** for your personal mood data
 
 📋 **[Read our full Privacy Policy](privacy-policy.md)** - See exactly how we protect your data (spoiler: we can't access it even if we wanted to!)
 
-## 💝 Neurodivergent-Friendly Features
+## 💝 Neurodivergent Friendly Features
 
 - **Understanding encouragement** for masking, stimming, sensory needs, executive function
 - **No pressure** - add notes only when you want to
@@ -87,7 +87,7 @@ Usually at http://localhost:5173
 
 ## 💚 Questions or want to contribute?
 
-Open an issue or reach out—friendly contributions and suggestions are always welcome!
+Open an issue or reach out. Friendly contributions and suggestions are always welcome!
 
 ---
 
