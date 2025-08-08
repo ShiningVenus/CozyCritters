@@ -59,7 +59,7 @@ export function PrivacySettings({ onBack }: PrivacySettingsProps) {
   };
 
   const showSourceCode = () => {
-    window.open('https://github.com/username/cozy-critter', '_blank');
+    window.open('https://github.com/CatgirlRika/CozyCritters', '_blank');
   };
 
   const handleDeleteAllData = async () => {
