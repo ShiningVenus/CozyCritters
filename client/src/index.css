@@ -112,15 +112,6 @@
     font-family: var(--font-inter);
   }
   
-  /* Visual indicator for autism awareness theme */
-  .autism-awareness body {
-    border-top: 5px solid hsl(41 90% 55%) !important;
-  }
-  
-  .autism-awareness .theme-test {
-    background: linear-gradient(45deg, hsl(41 90% 55%), hsl(280 60% 70%)) !important;
-    color: hsl(30 35% 10%) !important;
-  }
   
   .bg-primary-custom {
     background-color: hsl(124.2353 17.2840% 51.7647%);

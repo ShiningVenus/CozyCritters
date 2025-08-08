@@ -1,5 +1,5 @@
-const CACHE_NAME = 'cozy-critter-v1.1.0-autism-theme';
-const RUNTIME_CACHE = 'cozy-critter-runtime-v1.1.0';
+const CACHE_NAME = 'cozy-critter-v1.0.0';
+const RUNTIME_CACHE = 'cozy-critter-runtime';
 
 // Resources to cache on install
 const STATIC_RESOURCES = [
@@ -13,43 +13,35 @@ const STATIC_RESOURCES = [
 
 // Install event - cache static resources
 self.addEventListener('install', (event) => {
-  console.log('🐾 Cozy Critter Service Worker: Installing...');
-  
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => {
-        console.log('🐾 Caching static resources');
         return cache.addAll(STATIC_RESOURCES);
       })
       .then(() => {
-        console.log('🐾 Service Worker installed successfully');
         // Force activation of new service worker
         return self.skipWaiting();
       })
       .catch((error) => {
-        console.error('🐾 Service Worker installation failed:', error);
+        console.error('Service Worker installation failed:', error);
       })
   );
 });
 
 // Activate event - clean up old caches
 self.addEventListener('activate', (event) => {
-  console.log('🐾 Cozy Critter Service Worker: Activating...');
-  
   event.waitUntil(
     caches.keys()
       .then((cacheNames) => {
         return Promise.all(
           cacheNames.map((cacheName) => {
             if (cacheName !== CACHE_NAME && cacheName !== RUNTIME_CACHE) {
-              console.log('🐾 Deleting old cache:', cacheName);
               return caches.delete(cacheName);
             }
           })
         );
       })
       .then(() => {
-        console.log('🐾 Service Worker activated successfully');
         // Take control of all clients
         return self.clients.claim();
       })
@@ -74,7 +66,6 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(
       fetch(event.request)
         .then((response) => {
-          console.log('🎨 Network-first for theme files:', event.request.url);
           // Cache the fresh response
           if (response && response.status === 200) {
             const responseToCache = response.clone();
@@ -97,7 +88,6 @@ self.addEventListener('fetch', (event) => {
       .then((cachedResponse) => {
         // Return cached version if available
         if (cachedResponse) {
-          console.log('🐾 Serving from cache:', event.request.url);
           return cachedResponse;
         }
 
@@ -115,15 +105,12 @@ self.addEventListener('fetch', (event) => {
             // Cache the new response
             caches.open(RUNTIME_CACHE)
               .then((cache) => {
-                console.log('🐾 Caching new resource:', event.request.url);
                 cache.put(event.request, responseToCache);
               });
 
             return response;
           })
           .catch((error) => {
-            console.log('🐾 Network request failed, serving offline fallback');
-            
             // For navigation requests, return the cached index.html
             if (event.request.mode === 'navigate') {
               return caches.match('/index.html');
@@ -139,7 +126,6 @@ self.addEventListener('fetch', (event) => {
 // Background sync for when connectivity returns
 self.addEventListener('sync', (event) => {
   if (event.tag === 'background-sync') {
-    console.log('🐾 Background sync triggered');
     // Here you could sync any pending mood entries or custom messages
     // that couldn't be processed while offline
   }
@@ -175,8 +161,6 @@ self.addEventListener('push', (event) => {
 
 // Handle notification clicks
 self.addEventListener('notificationclick', (event) => {
-  console.log('🐾 Notification clicked:', event.action);
-  
   event.notification.close();
   
   if (event.action === 'checkin') {

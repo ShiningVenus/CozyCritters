@@ -3,9 +3,6 @@ import { useTheme } from "@/contexts/theme-context";
 
 export function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
-  
-  // Debug logging
-  console.log('🎨 Current theme in toggle:', theme);
 
   const getNextTheme = () => {
     if (theme === "light") return "dark";

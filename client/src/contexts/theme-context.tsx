@@ -22,7 +22,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   });
 
   useEffect(() => {
-    // Apply theme to document element
     const root = document.documentElement;
     
     // Remove all theme classes first
@@ -35,32 +34,14 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       root.classList.add("autism-awareness");
     }
     
-    // Debug logging
-    console.log('🎨 Theme changed to:', theme);
-    console.log('🔧 Classes on root:', root.className);
-    console.log('🧪 Root element:', root);
-    
     // Save to localStorage
     localStorage.setItem("cozy-critter-theme", theme);
-    
-    // Force a repaint to ensure styles are applied
-    root.style.display = 'none';
-    root.offsetHeight; // trigger reflow
-    root.style.display = '';
   }, [theme]);
 
   const toggleTheme = () => {
     setTheme(prev => {
-      console.log('🔄 Toggling from theme:', prev);
-      if (prev === "light") {
-        console.log('➡️ Going to dark theme');
-        return "dark";
-      }
-      if (prev === "dark") {
-        console.log('➡️ Going to autism-awareness theme');
-        return "autism-awareness";
-      }
-      console.log('➡️ Going to light theme');
+      if (prev === "light") return "dark";
+      if (prev === "dark") return "autism-awareness";
       return "light";
     });
   };
