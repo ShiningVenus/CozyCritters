@@ -67,6 +67,61 @@ const ChartContainer = React.forwardRef<
 })
 ChartContainer.displayName = "Chart"
 
+// Predefined safe color tokens
+const SAFE_COLOR_TOKENS = [
+  // CSS color keywords
+  'transparent', 'currentColor', 'inherit', 'initial', 'unset',
+  // Standard CSS colors
+  'red', 'green', 'blue', 'yellow', 'orange', 'purple', 'pink', 'cyan', 'magenta',
+  'black', 'white', 'gray', 'grey', 'brown', 'lime', 'indigo', 'violet', 'gold',
+  'silver', 'navy', 'teal', 'olive', 'maroon', 'aqua', 'fuchsia',
+  // Tailwind CSS variables (common patterns)
+  'hsl(var(--primary))', 'hsl(var(--secondary))', 'hsl(var(--accent))',
+  'hsl(var(--muted))', 'hsl(var(--foreground))', 'hsl(var(--background))',
+  'hsl(var(--border))', 'hsl(var(--destructive))', 'hsl(var(--success))'
+] as const;
+
+// Regex patterns for safe color values
+const SAFE_COLOR_PATTERNS = [
+  /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/, // Hex colors
+  /^rgb\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*\)$/, // RGB
+  /^rgba\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*(0|1|0?\.\d+)\s*\)$/, // RGBA
+  /^hsl\(\s*\d{1,3}\s*,\s*\d{1,3}%\s*,\s*\d{1,3}%\s*\)$/, // HSL
+  /^hsla\(\s*\d{1,3}\s*,\s*\d{1,3}%\s*,\s*\d{1,3}%\s*,\s*(0|1|0?\.\d+)\s*\)$/, // HSLA
+  /^hsl\(var\(--[\w-]+\)\)$/, // CSS custom properties (Tailwind pattern)
+  /^var\(--[\w-]+\)$/, // Generic CSS custom properties
+];
+
+function sanitizeColor(color: string): string | null {
+  if (!color || typeof color !== 'string') {
+    return null;
+  }
+
+  // Trim and normalize
+  const normalizedColor = color.trim().toLowerCase();
+
+  // Check against safe color tokens
+  if (SAFE_COLOR_TOKENS.includes(normalizedColor as any)) {
+    return normalizedColor;
+  }
+
+  // Check against safe patterns
+  for (const pattern of SAFE_COLOR_PATTERNS) {
+    if (pattern.test(normalizedColor)) {
+      return normalizedColor;
+    }
+  }
+
+  // Reject unsafe colors
+  console.warn(`Unsafe color value rejected: ${color}`);
+  return null;
+}
+
+function sanitizeCSSIdentifier(identifier: string): string {
+  // Only allow alphanumeric characters, hyphens, and underscores
+  return identifier.replace(/[^a-zA-Z0-9-_]/g, '');
+}
+
 const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
   const colorConfig = Object.entries(config).filter(
     ([, config]) => config.theme || config.color
@@ -76,28 +131,61 @@ const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
     return null
   }
 
+  // Sanitize the chart ID
+  const sanitizedId = sanitizeCSSIdentifier(id);
+
+  // Generate CSS custom properties safely
+  const cssVariables = React.useMemo(() => {
+    const variables: Record<string, Record<string, string>> = {};
+
+    Object.entries(THEMES).forEach(([theme, prefix]) => {
+      variables[theme] = {};
+      
+      colorConfig.forEach(([key, itemConfig]) => {
+        const color = itemConfig.theme?.[theme as keyof typeof itemConfig.theme] || itemConfig.color;
+        if (!color) return;
+        
+        const sanitizedColor = sanitizeColor(color);
+        const sanitizedKey = sanitizeCSSIdentifier(key);
+        
+        if (sanitizedColor && sanitizedKey) {
+          variables[theme][`--color-${sanitizedKey}`] = sanitizedColor;
+        }
+      });
+    });
+
+    return variables;
+  }, [colorConfig]);
+
+  // Create style elements using React's safe DOM manipulation
   return (
-    <style
-      dangerouslySetInnerHTML={{
-        __html: Object.entries(THEMES)
-          .map(
-            ([theme, prefix]) => `
-${prefix} [data-chart=${id}] {
-${colorConfig
-  .map(([key, itemConfig]) => {
-    const color =
-      itemConfig.theme?.[theme as keyof typeof itemConfig.theme] ||
-      itemConfig.color
-    return color ? `  --color-${key}: ${color};` : null
-  })
-  .join("\n")}
-}
-`
-          )
-          .join("\n"),
-      }}
-    />
-  )
+    <>
+      {Object.entries(THEMES).map(([theme, prefix]) => {
+        const themeVariables = cssVariables[theme];
+        
+        if (!Object.keys(themeVariables).length) {
+          return null;
+        }
+
+        const selector = prefix ? `${prefix} [data-chart="${sanitizedId}"]` : `[data-chart="${sanitizedId}"]`;
+        
+        return (
+          <style
+            key={theme}
+            // Use a safer approach by constructing the CSS via textContent
+            ref={(el) => {
+              if (el) {
+                const cssText = `${selector} {\n${Object.entries(themeVariables)
+                  .map(([property, value]) => `  ${property}: ${value};`)
+                  .join('\n')}\n}`;
+                el.textContent = cssText;
+              }
+            }}
+          />
+        );
+      })}
+    </>
+  );
 }
 
 const ChartTooltip = RechartsPrimitive.Tooltip
