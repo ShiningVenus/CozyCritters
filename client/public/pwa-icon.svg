@@ -1,0 +1,42 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="256" cy="256" r="256" fill="#7c9885"/>
+  
+  <!-- Decorative leaves -->
+  <path d="M150 180c-20 30-15 70 15 90s70 15 90-15-15-70-15-90-70-15-90 15z" fill="#9fb8a8" opacity="0.7"/>
+  <path d="M380 150c20 25 15 60-10 75s-60 10-75-10-10-60 10-75 60-10 75 10z" fill="#9fb8a8" opacity="0.6"/>
+  
+  <!-- Main bear face -->
+  <ellipse cx="256" cy="280" rx="120" ry="100" fill="#f5f3f0"/>
+  
+  <!-- Bear ears -->
+  <circle cx="200" cy="220" r="35" fill="#e8e6e3"/>
+  <circle cx="312" cy="220" r="35" fill="#e8e6e3"/>
+  <circle cx="200" cy="220" r="20" fill="#d4b896"/>
+  <circle cx="312" cy="220" r="20" fill="#d4b896"/>
+  
+  <!-- Eyes -->
+  <ellipse cx="225" cy="260" rx="8" ry="12" fill="#2d3748"/>
+  <ellipse cx="287" cy="260" rx="8" ry="12" fill="#2d3748"/>
+  <circle cx="227" cy="258" r="3" fill="#ffffff"/>
+  <circle cx="289" cy="258" r="3" fill="#ffffff"/>
+  
+  <!-- Nose -->
+  <ellipse cx="256" cy="295" rx="6" ry="4" fill="#d4b896"/>
+  
+  <!-- Mouth -->
+  <path d="M256 305 C246 315 266 315 256 305" stroke="#2d3748" stroke-width="2" fill="none" stroke-linecap="round"/>
+  
+  <!-- Decorative hearts -->
+  <path d="M380 380c-5-5-15-5-20 0-5-5-15-5-20 0s0 15 20 25c20-10 25-20 20-25z" fill="#ff9999" opacity="0.8"/>
+  <path d="M140 350c-3-3-9-3-12 0-3-3-9-3-12 0s0 9 12 15c12-6 15-12 12-15z" fill="#ff9999" opacity="0.7"/>
+  
+  <!-- Sparkles -->
+  <circle cx="350" cy="250" r="4" fill="#fff" opacity="0.9"/>
+  <circle cx="170" cy="320" r="3" fill="#fff" opacity="0.8"/>
+  <circle cx="420" cy="300" r="3" fill="#fff" opacity="0.7"/>
+  
+  <!-- Text badge -->
+  <rect x="150" y="400" width="212" height="40" rx="20" fill="#ffffff" opacity="0.95"/>
+  <text x="256" y="425" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#7c9885">Cozy Critter</text>
+</svg>
