@@ -83,6 +83,52 @@ export class MoodStorage {
     localStorage.removeItem(MOOD_STORAGE_KEY);
   }
 
+  public clearAllCustomMessages(): void {
+    localStorage.removeItem(CUSTOM_MESSAGES_KEY);
+  }
+
+  public clearAllData(): void {
+    localStorage.removeItem(MOOD_STORAGE_KEY);
+    localStorage.removeItem(CUSTOM_MESSAGES_KEY);
+    // Also clear theme preference to fully reset
+    localStorage.removeItem("cozy-critter-theme");
+  }
+
+  public getDataSummary(): { 
+    moodEntries: number; 
+    customMessages: number; 
+    storageUsed: string;
+    oldestEntry?: Date;
+    newestEntry?: Date;
+  } {
+    const moods = this.getAllMoodEntries();
+    const messages = this.getAllCustomMessages();
+    
+    // Calculate approximate storage usage
+    const moodData = localStorage.getItem(MOOD_STORAGE_KEY) || '';
+    const messageData = localStorage.getItem(CUSTOM_MESSAGES_KEY) || '';
+    const themeData = localStorage.getItem("cozy-critter-theme") || '';
+    const totalBytes = moodData.length + messageData.length + themeData.length;
+    const storageUsed = totalBytes < 1024 ? `${totalBytes} bytes` : `${(totalBytes / 1024).toFixed(1)} KB`;
+
+    let oldestEntry: Date | undefined;
+    let newestEntry: Date | undefined;
+
+    if (moods.length > 0) {
+      const timestamps = moods.map(m => m.timestamp).sort((a, b) => a - b);
+      oldestEntry = new Date(timestamps[0]);
+      newestEntry = new Date(timestamps[timestamps.length - 1]);
+    }
+
+    return {
+      moodEntries: moods.length,
+      customMessages: messages.length,
+      storageUsed,
+      oldestEntry,
+      newestEntry,
+    };
+  }
+
   // Custom Messages Management
   public saveCustomMessage(message: Omit<CustomMessage, 'id' | 'createdAt'>): CustomMessage {
     const customMessage: CustomMessage = {
