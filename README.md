@@ -68,6 +68,8 @@ Usually at http://localhost:5173
 - **Works offline** - no internet required after first load
 - **No external dependencies** for your personal mood data
 
+📋 **[Read our full Privacy Policy](privacy-policy.md)** - See exactly how we protect your data (spoiler: we can't access it even if we wanted to!)
+
 ## 💝 Neurodivergent-Friendly Features
 
 - **Understanding encouragement** for masking, stimming, sensory needs, executive function
