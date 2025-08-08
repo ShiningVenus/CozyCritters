@@ -64,6 +64,19 @@ export function PrivacySettings({ onBack }: PrivacySettingsProps) {
         </div>
       </div>
 
+      {/* App Version */}
+      <div className="bg-muted/30 dark:bg-muted/10 rounded-lg p-3">
+        <div className="flex items-center justify-between">
+          <div>
+            <h3 className="text-sm font-medium text-foreground">Cozy Critter</h3>
+            <p className="text-xs text-muted-foreground">Version 1.0.0</p>
+          </div>
+          <div className="text-xs text-muted-foreground">
+            Built with privacy in mind 💚
+          </div>
+        </div>
+      </div>
+
       {showSuccess && (
         <div className="bg-green-100 dark:bg-green-900/30 border border-green-200 dark:border-green-800 rounded-lg p-4">
           <div className="flex items-center gap-3">
@@ -207,6 +220,18 @@ export function PrivacySettings({ onBack }: PrivacySettingsProps) {
           <li>• No traces of your old data will remain</li>
           <li>• You prove that your privacy is in your hands</li>
         </ul>
+      </div>
+
+      {/* App Information */}
+      <div className="border-t pt-6 mt-2">
+        <div className="text-center">
+          <p className="text-xs text-muted-foreground">
+            Cozy Critter v1.0.0 • Made with 💚 for neurodivergent self-care
+          </p>
+          <p className="text-xs text-muted-foreground mt-1">
+            Open source • Privacy-first • No data collection
+          </p>
+        </div>
       </div>
     </div>
   );

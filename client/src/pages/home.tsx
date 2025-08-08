@@ -34,6 +34,7 @@ export default function Home() {
             <span role="img" aria-label="leaf">🌿</span> Cozy Critter
           </h1>
           <p className="text-sm opacity-90">Your safe space for mood tracking</p>
+          <p className="text-xs opacity-70 mt-1">v1.0.0</p>
         </div>
         
         {/* Navigation tabs */}
