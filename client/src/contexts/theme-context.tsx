@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-type Theme = "light" | "dark";
+type Theme = "light" | "dark" | "autism-awareness";
 
 interface ThemeContextType {
   theme: Theme;
@@ -13,7 +13,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>(() => {
     // Check localStorage first, then system preference
     const stored = localStorage.getItem("cozy-critter-theme");
-    if (stored === "light" || stored === "dark") {
+    if (stored === "light" || stored === "dark" || stored === "autism-awareness") {
       return stored as Theme;
     }
     
@@ -24,10 +24,12 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     // Apply theme to document element
     const root = document.documentElement;
+    root.classList.remove("dark", "autism-awareness");
+    
     if (theme === "dark") {
       root.classList.add("dark");
-    } else {
-      root.classList.remove("dark");
+    } else if (theme === "autism-awareness") {
+      root.classList.add("autism-awareness");
     }
     
     // Save to localStorage
@@ -35,7 +37,11 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme(prev => prev === "light" ? "dark" : "light");
+    setTheme(prev => {
+      if (prev === "light") return "dark";
+      if (prev === "dark") return "autism-awareness";
+      return "light";
+    });
   };
 
   return (

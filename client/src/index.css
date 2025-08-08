@@ -55,6 +55,31 @@
   --calm: hsl(183.7500 33.6735% 72.1569%);
 }
 
+.autism-awareness {
+  --background: hsl(45 60% 97%);
+  --foreground: hsl(30 15% 15%);
+  --card: hsl(48 50% 94%);
+  --card-foreground: hsl(30 15% 20%);
+  --popover: hsl(45 60% 97%);
+  --popover-foreground: hsl(30 15% 15%);
+  --primary: hsl(43 85% 58%);
+  --primary-foreground: hsl(30 25% 10%);
+  --secondary: hsl(25 75% 75%);
+  --secondary-foreground: hsl(15 40% 25%);
+  --muted: hsl(42 30% 88%);
+  --muted-foreground: hsl(30 10% 40%);
+  --accent: hsl(280 50% 75%);
+  --accent-foreground: hsl(280 20% 15%);
+  --destructive: hsl(356 85% 60%);
+  --destructive-foreground: hsl(0 0% 100%);
+  --border: hsl(42 40% 85%);
+  --input: hsl(45 45% 92%);
+  --ring: hsl(43 85% 58%);
+  --neutral: hsl(45 60% 96%);
+  --brown: hsl(35 50% 45%);
+  --calm: hsl(280 35% 80%);
+}
+
 @layer base {
   * {
     @apply border-border;
