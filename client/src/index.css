@@ -137,6 +137,18 @@
     background-color: hsl(183.7500 33.6735% 72.1569%);
   }
   
+  .bg-secondary-custom {
+    background-color: var(--secondary);
+  }
+  
+  .bg-content-custom {
+    background-color: hsl(110 40% 85%);
+  }
+  
+  .dark .bg-content-custom {
+    background-color: hsl(110 30% 25%);
+  }
+  
   .text-brown-custom {
     color: hsl(35.7143 45.8333% 37.0588%);
   }
