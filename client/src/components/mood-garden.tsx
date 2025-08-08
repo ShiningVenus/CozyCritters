@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { moodStorage } from "@/lib/mood-storage";
 import { MoodEntry } from "@shared/schema";
 import { format, isToday, isYesterday } from "date-fns";
+import { Trash2 } from "lucide-react";
 
 interface MoodGardenProps {
   onStartCheckIn: () => void;
@@ -9,13 +10,14 @@ interface MoodGardenProps {
 
 export function MoodGarden({ onStartCheckIn }: MoodGardenProps) {
   const [moodHistory, setMoodHistory] = useState<MoodEntry[]>([]);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
+
+  const loadMoodHistory = () => {
+    const moods = moodStorage.getRecentMoodEntries(20);
+    setMoodHistory(moods);
+  };
 
   useEffect(() => {
-    const loadMoodHistory = () => {
-      const moods = moodStorage.getRecentMoodEntries(20);
-      setMoodHistory(moods);
-    };
-
     loadMoodHistory();
     
     // Listen for storage changes (in case of updates from other tabs)
@@ -28,6 +30,17 @@ export function MoodGarden({ onStartCheckIn }: MoodGardenProps) {
     window.addEventListener("storage", handleStorageChange);
     return () => window.removeEventListener("storage", handleStorageChange);
   }, []);
+
+  const handleDeleteEntry = (id: string) => {
+    if (window.confirm("Are you sure you want to delete this mood entry? This action cannot be undone.")) {
+      setDeletingId(id);
+      const success = moodStorage.deleteMoodEntry(id);
+      if (success) {
+        loadMoodHistory(); // Reload the mood history
+      }
+      setDeletingId(null);
+    }
+  };
 
   const formatDate = (timestamp: number): string => {
     const date = new Date(timestamp);
@@ -116,9 +129,19 @@ export function MoodGarden({ onStartCheckIn }: MoodGardenProps) {
                   <span className="font-medium text-brown-custom">
                     {entry.mood}
                   </span>
-                  <span className="text-sm text-gray-500">
-                    {formatDate(entry.timestamp)}
-                  </span>
+                  <div className="flex items-center space-x-2">
+                    <span className="text-sm text-gray-500">
+                      {formatDate(entry.timestamp)}
+                    </span>
+                    <button
+                      onClick={() => handleDeleteEntry(entry.id)}
+                      disabled={deletingId === entry.id}
+                      className="text-gray-400 hover:text-red-500 transition-colors p-1 rounded hover:bg-gray-100 disabled:opacity-50"
+                      title="Delete entry"
+                    >
+                      <Trash2 size={16} />
+                    </button>
+                  </div>
                 </div>
                 <p className="text-sm text-gray-600 mt-1 mb-2">
                   "{entry.message}"

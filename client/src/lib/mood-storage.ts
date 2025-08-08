@@ -53,6 +53,24 @@ export class MoodStorage {
     return allMoods.slice(0, limit);
   }
 
+  public deleteMoodEntry(id: string): boolean {
+    try {
+      const existingMoods = this.getAllMoodEntries();
+      const updatedMoods = existingMoods.filter(mood => mood.id !== id);
+      
+      if (existingMoods.length === updatedMoods.length) {
+        // No entry was found with the given id
+        return false;
+      }
+      
+      localStorage.setItem(MOOD_STORAGE_KEY, JSON.stringify(updatedMoods));
+      return true;
+    } catch (error) {
+      console.error("Error deleting mood entry from localStorage:", error);
+      return false;
+    }
+  }
+
   public clearAllMoodEntries(): void {
     localStorage.removeItem(MOOD_STORAGE_KEY);
   }
