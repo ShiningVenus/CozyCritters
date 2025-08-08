@@ -1,0 +1,679 @@
+o1151714.ingest.sentry.io/api/6318792/envelope/?sentry_key=8aa91189a4274b5a8c9b7b01d46ea360&sentry_version=7&sentry_client=sentry.javascript.browser%2F7.112.0:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+_app-26762a5f7ebfa5bb.js:13 
+      /////////////////////
+   ///////////////////////////
+  ////////@@@@@@@//////////////
+  ////////@@@@@@@//////////////
+  ////////@@@@@@@//////////////        Curious and driven?
+  ///////////////@@@@@@@///////        Work with us!
+  ///////////////@@@@@@@///////
+  ///////////////@@@@@@@///////        https://join.replit.com/hack.with.us
+  ////////@@@@@@@//////////////
+  ////////@@@@@@@//////////////
+  ////////@@@@@@#//////////////
+   ///////////////////////////
+      /////////////////////
+      
+cdn.segment.com/next-integrations/actions/tiktok-pixel/920266289e7b08bf066b.js:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+_app-26762a5f7ebfa5bb.js:13 Failed to create PluginFactory Object
+(anonymous) @ _app-26762a5f7ebfa5bb.js:13
+_app-26762a5f7ebfa5bb.js:13 Failed to load Remote Plugin Error: Failed to load https://cdn.segment.com/next-integrations/actions/tiktok-pixel/920266289e7b08bf066b.js
+    at i.6238.o.onerror (load-script.ts:53:24)
+(anonymous) @ _app-26762a5f7ebfa5bb.js:13
+_app-26762a5f7ebfa5bb.js:13 [LaunchDarkly] LaunchDarkly client initialized
+www.google-analytics.com/analytics.js:1  Failed to load resource: net::ERR_UNSAFE_REDIRECT
+www.googletagmanager.com/gtag/js?id=AW-11411994397:1  Failed to load resource: net::ERR_UNSAFE_REDIRECT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+shared-ca2bcb8a74454…f432c0e8ebf9f2.js:1 Uncaught (in promise) 
+web-client-content-script.js:2 Uncaught TypeError: Failed to execute 'observe' on 'MutationObserver': parameter 1 is not of type 'Node'.
+    at HTMLIFrameElement.<anonymous> (web-client-content-script.js:2:534973)
+_app-26762a5f7ebfa5bb.js:13 Adding extension: ZIP Extractor Object
+ Unrecognized feature: 'ambient-light-sensor'.
+_ @ framework-691e6bf3592772bc.js:1
+ Unrecognized feature: 'battery'.
+_ @ framework-691e6bf3592772bc.js:1
+ Unrecognized feature: 'execution-while-not-rendered'.
+_ @ framework-691e6bf3592772bc.js:1
+ Unrecognized feature: 'execution-while-out-of-viewport'.
+_ @ framework-691e6bf3592772bc.js:1
+ Unrecognized feature: 'layout-animations'.
+_ @ framework-691e6bf3592772bc.js:1
+ Unrecognized feature: 'legacy-image-formats'.
+_ @ framework-691e6bf3592772bc.js:1
+ Unrecognized feature: 'navigation-override'.
+_ @ framework-691e6bf3592772bc.js:1
+ Unrecognized feature: 'oversized-images'.
+_ @ framework-691e6bf3592772bc.js:1
+ Unrecognized feature: 'publickey-credentials'.
+_ @ framework-691e6bf3592772bc.js:1
+ Unrecognized feature: 'speaker-selection'.
+_ @ framework-691e6bf3592772bc.js:1
+ Unrecognized feature: 'unoptimized-images'.
+_ @ framework-691e6bf3592772bc.js:1
+ Unrecognized feature: 'unsized-media'.
+_ @ framework-691e6bf3592772bc.js:1
+ Unrecognized feature: 'pointer-lock'.
+_ @ framework-691e6bf3592772bc.js:1
+about:srcdoc:1 An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+ cdn.tailwindcss.com should not be used in production. To use Tailwind CSS in production, install it as a PostCSS plugin or use the Tailwind CLI: https://tailwindcss.com/docs/installation
+(anonymous) @ cdn.tailwindcss.com/:64
+CritterMind:1 Banner not shown: beforeinstallpromptevent.preventDefault() called. The page must call beforeinstallpromptevent.prompt() to show the banner.
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+shared-ca2bcb8a74454…f432c0e8ebf9f2.js:1 Uncaught (in promise) 
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+shared-ca2bcb8a74454…f432c0e8ebf9f2.js:1 Uncaught (in promise) 
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+web-client-content-script.js:2 Uncaught 
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+shared-ca2bcb8a74454…f432c0e8ebf9f2.js:1 Uncaught (in promise) 
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+ Allow attribute will take precedence over 'allowfullscreen'.
+_ @ framework-691e6bf3592772bc.js:1
+ Allow attribute will take precedence over 'allowpaymentrequest'.
+_ @ framework-691e6bf3592772bc.js:1
+_app-26762a5f7ebfa5bb.js:13 onClick is deprecated, please use onPress
+(anonymous) @ _app-26762a5f7ebfa5bb.js:13
+events.launchdarkly.com/events/diagnostic/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/diagnostic/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+o1151714.ingest.sentry.io/api/6318792/envelope/?sentry_key=8aa91189a4274b5a8c9b7b01d46ea360&sentry_version=7&sentry_client=sentry.javascript.browser%2F7.112.0:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+shared-ca2bcb8a74454…f432c0e8ebf9f2.js:1 Uncaught (in promise) 
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Abeacon%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3Af09e562a&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=e72b95e4-df43-4f36-9502-ea3cbc815d18:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+o1151714.ingest.sentry.io/api/6318792/envelope/?sentry_key=8aa91189a4274b5a8c9b7b01d46ea360&sentry_version=7&sentry_client=sentry.javascript.browser%2F7.112.0:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+shared-ca2bcb8a74454…f432c0e8ebf9f2.js:1 Uncaught (in promise) 
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Abeacon%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3Af09e562a&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=75faa5c8-72e1-4c9b-8cf6-0f803b96d49e:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+o1151714.ingest.sentry.io/api/6318792/envelope/?sentry_key=8aa91189a4274b5a8c9b7b01d46ea360&sentry_version=7&sentry_client=sentry.javascript.browser%2F7.112.0:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Abeacon%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3Af09e562a&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=63e793be-7001-4f1d-a5a1-f2a277c4377f:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+o1151714.ingest.sentry.io/api/6318792/envelope/?sentry_key=8aa91189a4274b5a8c9b7b01d46ea360&sentry_version=7&sentry_client=sentry.javascript.browser%2F7.112.0:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+shared-ca2bcb8a74454…f432c0e8ebf9f2.js:1 Uncaught (in promise) 
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/diagnostic/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/diagnostic/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Abeacon%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3Af09e562a&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=1863a268-9cac-4e0c-a0e3-0cd629b8cd2b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+o1151714.ingest.sentry.io/api/6318792/envelope/?sentry_key=8aa91189a4274b5a8c9b7b01d46ea360&sentry_version=7&sentry_client=sentry.javascript.browser%2F7.112.0:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Abeacon%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3Af09e562a&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=07ec2a76-9b9c-44b3-a58d-dc95142ba83a:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+o1151714.ingest.sentry.io/api/6318792/envelope/?sentry_key=8aa91189a4274b5a8c9b7b01d46ea360&sentry_version=7&sentry_client=sentry.javascript.browser%2F7.112.0:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+shared-ca2bcb8a74454…f432c0e8ebf9f2.js:1 Uncaught (in promise) 
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+o1151714.ingest.sentry.io/api/6318792/envelope/?sentry_key=8aa91189a4274b5a8c9b7b01d46ea360&sentry_version=7&sentry_client=sentry.javascript.browser%2F7.112.0:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+shared-ca2bcb8a74454…f432c0e8ebf9f2.js:1 Uncaught (in promise) 
+events.launchdarkly.com/events/diagnostic/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/diagnostic/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+_app-26762a5f7ebfa5bb.js:13 WARN: A component changed from uncontrolled to controlled.
+(anonymous) @ _app-26762a5f7ebfa5bb.js:13
+o1151714.ingest.sentry.io/api/6318792/envelope/?sentry_key=8aa91189a4274b5a8c9b7b01d46ea360&sentry_version=7&sentry_client=sentry.javascript.browser%2F7.112.0:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+o1151714.ingest.sentry.io/api/6318792/envelope/?sentry_key=8aa91189a4274b5a8c9b7b01d46ea360&sentry_version=7&sentry_client=sentry.javascript.browser%2F7.112.0:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+o1151714.ingest.sentry.io/api/6318792/envelope/?sentry_key=8aa91189a4274b5a8c9b7b01d46ea360&sentry_version=7&sentry_client=sentry.javascript.browser%2F7.112.0:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+o1151714.ingest.sentry.io/api/6318792/envelope/?sentry_key=8aa91189a4274b5a8c9b7b01d46ea360&sentry_version=7&sentry_client=sentry.javascript.browser%2F7.112.0:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+o1151714.ingest.sentry.io/api/6318792/envelope/?sentry_key=8aa91189a4274b5a8c9b7b01d46ea360&sentry_version=7&sentry_client=sentry.javascript.browser%2F7.112.0:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+shared-ca2bcb8a74454…f432c0e8ebf9f2.js:1 Uncaught (in promise) 
+o1151714.ingest.sentry.io/api/6318792/envelope/?sentry_key=8aa91189a4274b5a8c9b7b01d46ea360&sentry_version=7&sentry_client=sentry.javascript.browser%2F7.112.0:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+o1151714.ingest.sentry.io/api/6318792/envelope/?sentry_key=8aa91189a4274b5a8c9b7b01d46ea360&sentry_version=7&sentry_client=sentry.javascript.browser%2F7.112.0:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+o1151714.ingest.sentry.io/api/6318792/envelope/?sentry_key=8aa91189a4274b5a8c9b7b01d46ea360&sentry_version=7&sentry_client=sentry.javascript.browser%2F7.112.0:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+o1151714.ingest.sentry.io/api/6318792/envelope/?sentry_key=8aa91189a4274b5a8c9b7b01d46ea360&sentry_version=7&sentry_client=sentry.javascript.browser%2F7.112.0:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+o1151714.ingest.sentry.io/api/6318792/envelope/?sentry_key=8aa91189a4274b5a8c9b7b01d46ea360&sentry_version=7&sentry_client=sentry.javascript.browser%2F7.112.0:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+o1151714.ingest.sentry.io/api/6318792/envelope/?sentry_key=8aa91189a4274b5a8c9b7b01d46ea360&sentry_version=7&sentry_client=sentry.javascript.browser%2F7.112.0:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+o1151714.ingest.sentry.io/api/6318792/envelope/?sentry_key=8aa91189a4274b5a8c9b7b01d46ea360&sentry_version=7&sentry_client=sentry.javascript.browser%2F7.112.0:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+o1151714.ingest.sentry.io/api/6318792/envelope/?sentry_key=8aa91189a4274b5a8c9b7b01d46ea360&sentry_version=7&sentry_client=sentry.javascript.browser%2F7.112.0:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+o1151714.ingest.sentry.io/api/6318792/envelope/?sentry_key=8aa91189a4274b5a8c9b7b01d46ea360&sentry_version=7&sentry_client=sentry.javascript.browser%2F7.112.0:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Abeacon%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3Af09e562a&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=f5de276b-99cb-4a08-a741-e13d1447ad65:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+shared-ca2bcb8a74454…f432c0e8ebf9f2.js:1 Uncaught (in promise) 
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@vite/client
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@react-refresh
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/node_modules/vite/dist/client/env.mjs
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/lib/queryClient.ts
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/ui/toaster.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/contexts/theme-context.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/ui/tooltip.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/pwa-install-prompt.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/offline-indicator.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/pages/home.tsx?t=1754620154269
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/pages/not-found.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/hooks/use-toast.ts
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/ui/toast.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/lib/utils.ts
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/hooks/use-pwa.ts
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/ui/card.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/mood-check-in.tsx?t=1754620116215
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/mood-garden.tsx?t=1754620116215
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/mini-game-placeholder.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/theme-toggle.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/custom-messages.tsx?t=1754620116215
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/privacy-settings.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/mood-picker.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/encouragement-message.tsx?t=1754620116215
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/nd-affirmation.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/lib/mood-storage.ts?t=1754620116215
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/ui/button.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/ui/alert-dialog.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/shared/schema.ts
+ 🐾 Network request failed, serving offline fallback
+The FetchEvent for "https://replit.com/public/js/beacon.js" resulted in a network error response: the promise was rejected.
+sw.js:76  Uncaught (in promise) 
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Arrn%3A
+ 🐾 Caching new resource: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar19k%3A
+workspace_iframe.html:32 Unrecognized feature: 'ambient-light-sensor'.
+workspace_iframe.html:32 Unrecognized feature: 'ambient-light-sensor'.
+workspace_iframe.html:32 Unrecognized feature: 'battery'.
+workspace_iframe.html:32 Unrecognized feature: 'battery'.
+workspace_iframe.html:32 Unrecognized feature: 'execution-while-not-rendered'.
+workspace_iframe.html:32 Unrecognized feature: 'execution-while-not-rendered'.
+workspace_iframe.html:32 Unrecognized feature: 'execution-while-out-of-viewport'.
+workspace_iframe.html:32 Unrecognized feature: 'execution-while-out-of-viewport'.
+workspace_iframe.html:32 Unrecognized feature: 'layout-animations'.
+workspace_iframe.html:32 Unrecognized feature: 'layout-animations'.
+workspace_iframe.html:32 Unrecognized feature: 'legacy-image-formats'.
+workspace_iframe.html:32 Unrecognized feature: 'legacy-image-formats'.
+workspace_iframe.html:32 Unrecognized feature: 'navigation-override'.
+workspace_iframe.html:32 Unrecognized feature: 'navigation-override'.
+workspace_iframe.html:32 Unrecognized feature: 'oversized-images'.
+workspace_iframe.html:32 Unrecognized feature: 'oversized-images'.
+workspace_iframe.html:32 Unrecognized feature: 'publickey-credentials'.
+workspace_iframe.html:32 Unrecognized feature: 'publickey-credentials'.
+workspace_iframe.html:32 Unrecognized feature: 'speaker-selection'.
+workspace_iframe.html:32 Unrecognized feature: 'speaker-selection'.
+workspace_iframe.html:32 Unrecognized feature: 'unoptimized-images'.
+workspace_iframe.html:32 Unrecognized feature: 'unoptimized-images'.
+workspace_iframe.html:32 Unrecognized feature: 'unsized-media'.
+workspace_iframe.html:32 Unrecognized feature: 'unsized-media'.
+workspace_iframe.html:32 Allow attribute will take precedence over 'allowfullscreen'.
+workspace_iframe.html:32 Allow attribute will take precedence over 'allowfullscreen'.
+workspace_iframe.html:32 Allow attribute will take precedence over 'allowpaymentrequest'.
+workspace_iframe.html:32 Allow attribute will take precedence over 'allowpaymentrequest'.
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@vite/client
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@react-refresh
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/node_modules/vite/dist/client/env.mjs
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/lib/queryClient.ts
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/ui/toaster.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/ui/tooltip.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/contexts/theme-context.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/pwa-install-prompt.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/offline-indicator.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/pages/home.tsx?t=1754620154269
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/pages/not-found.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/lib/utils.ts
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/hooks/use-toast.ts
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/ui/toast.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/hooks/use-pwa.ts
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/ui/card.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/mood-check-in.tsx?t=1754620116215
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/mood-garden.tsx?t=1754620116215
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/mini-game-placeholder.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/theme-toggle.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/custom-messages.tsx?t=1754620116215
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/privacy-settings.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/encouragement-message.tsx?t=1754620116215
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/mood-picker.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/lib/mood-storage.ts?t=1754620116215
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/nd-affirmation.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/ui/button.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/ui/alert-dialog.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/shared/schema.ts
+ 🐾 Network request failed, serving offline fallback
+The FetchEvent for "https://replit.com/public/js/beacon.js" resulted in a network error response: the promise was rejected.
+sw.js:76  Uncaught (in promise) 
+/public/js/beacon.js:1  Failed to load resource: net::ERR_FAILED
+/public/js/beacon.js:1  Failed to load resource: net::ERR_FAILED
+ WebSocket connection to 'wss://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/?token=NmV7q-zVNV1l' failed: 
+setupWebSocket @ client:536
+ WebSocket connection to 'wss://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/?token=NmV7q-zVNV1l' failed: 
+setupWebSocket @ client:536
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar19k%3A
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@vite/client
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@react-refresh
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/node_modules/vite/dist/client/env.mjs
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/lib/queryClient.ts
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/ui/toaster.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/contexts/theme-context.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/pwa-install-prompt.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/ui/tooltip.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/offline-indicator.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/pages/home.tsx?t=1754620154269
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/pages/not-found.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/ui/toast.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/hooks/use-toast.ts
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/hooks/use-pwa.ts
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/lib/utils.ts
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/ui/card.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/mood-garden.tsx?t=1754620116215
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/mini-game-placeholder.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/mood-check-in.tsx?t=1754620116215
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/theme-toggle.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/custom-messages.tsx?t=1754620116215
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/privacy-settings.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/lib/mood-storage.ts?t=1754620116215
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/encouragement-message.tsx?t=1754620116215
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/mood-picker.tsx
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/nd-affirmation.tsx
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/ui/button.tsx
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/ui/alert-dialog.tsx
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/shared/schema.ts
+chunk-QCHXOAYK.js?v=9f2cbb79:136 Warning: Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://reactjs.org/link/invalid-hook-call for tips about how to debug and fix this problem.
+printWarning @ chunk-QCHXOAYK.js?v=9f2cbb79:136
+chunk-QCHXOAYK.js?v=9f2cbb79:136 Warning: Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://reactjs.org/link/invalid-hook-call for tips about how to debug and fix this problem.
+printWarning @ chunk-QCHXOAYK.js?v=9f2cbb79:136
+chunk-QCHXOAYK.js?v=9f2cbb79:1066 Uncaught TypeError: Cannot read properties of null (reading 'useState')
+    at useState (chunk-QCHXOAYK.js?v=9f2cbb79:1066:29)
+    at Home (home.tsx:13:41)
+    at renderWithHooks (chunk-RPCDYKBN.js?v=93722235:11548:26)
+    at mountIndeterminateComponent (chunk-RPCDYKBN.js?v=93722235:14926:21)
+    at beginWork (chunk-RPCDYKBN.js?v=93722235:15914:22)
+    at HTMLUnknownElement.callCallback2 (chunk-RPCDYKBN.js?v=93722235:3674:22)
+    at Object.invokeGuardedCallbackDev (chunk-RPCDYKBN.js?v=93722235:3699:24)
+    at invokeGuardedCallback (chunk-RPCDYKBN.js?v=93722235:3733:39)
+    at beginWork$1 (chunk-RPCDYKBN.js?v=93722235:19765:15)
+    at performUnitOfWork (chunk-RPCDYKBN.js?v=93722235:19198:20)
+chunk-QCHXOAYK.js?v=9f2cbb79:136 Warning: Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://reactjs.org/link/invalid-hook-call for tips about how to debug and fix this problem.
+printWarning @ chunk-QCHXOAYK.js?v=9f2cbb79:136
+chunk-QCHXOAYK.js?v=9f2cbb79:136 Warning: Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://reactjs.org/link/invalid-hook-call for tips about how to debug and fix this problem.
+printWarning @ chunk-QCHXOAYK.js?v=9f2cbb79:136
+chunk-QCHXOAYK.js?v=9f2cbb79:1066 Uncaught TypeError: Cannot read properties of null (reading 'useState')
+    at useState (chunk-QCHXOAYK.js?v=9f2cbb79:1066:29)
+    at Home (home.tsx:13:41)
+    at renderWithHooks (chunk-RPCDYKBN.js?v=93722235:11548:26)
+    at mountIndeterminateComponent (chunk-RPCDYKBN.js?v=93722235:14926:21)
+    at beginWork (chunk-RPCDYKBN.js?v=93722235:15914:22)
+    at HTMLUnknownElement.callCallback2 (chunk-RPCDYKBN.js?v=93722235:3674:22)
+    at Object.invokeGuardedCallbackDev (chunk-RPCDYKBN.js?v=93722235:3699:24)
+    at invokeGuardedCallback (chunk-RPCDYKBN.js?v=93722235:3733:39)
+    at beginWork$1 (chunk-RPCDYKBN.js?v=93722235:19765:15)
+    at performUnitOfWork (chunk-RPCDYKBN.js?v=93722235:19198:20)
+chunk-RPCDYKBN.js?v=93722235:14032 The above error occurred in the <Home> component:
+
+    at Home (https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/pages/home.tsx?t=1754620154269:27:41)
+    at Route (https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=93722235:323:16)
+    at Switch (https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=93722235:379:17)
+    at Router
+    at Provider (https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-3CVUYQTY.js?v=93722235:45:15)
+    at TooltipProvider (https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-tooltip.js?v=93722235:2242:5)
+    at ThemeProvider (https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/contexts/theme-context.tsx:20:33)
+    at QueryClientProvider (https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=93722235:2805:3)
+    at App (https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/App.tsx?t=1754620154269&v=DWY9HSheh65rHzh9AXrre:50:3)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+logCapturedError @ chunk-RPCDYKBN.js?v=93722235:14032
+chunk-RPCDYKBN.js?v=93722235:19413 Uncaught TypeError: Cannot read properties of null (reading 'useState')
+    at useState (chunk-QCHXOAYK.js?v=9f2cbb79:1066:29)
+    at Home (home.tsx:13:41)
+    at renderWithHooks (chunk-RPCDYKBN.js?v=93722235:11548:26)
+    at mountIndeterminateComponent (chunk-RPCDYKBN.js?v=93722235:14926:21)
+    at beginWork (chunk-RPCDYKBN.js?v=93722235:15914:22)
+    at beginWork$1 (chunk-RPCDYKBN.js?v=93722235:19753:22)
+    at performUnitOfWork (chunk-RPCDYKBN.js?v=93722235:19198:20)
+    at workLoopSync (chunk-RPCDYKBN.js?v=93722235:19137:13)
+    at renderRootSync (chunk-RPCDYKBN.js?v=93722235:19116:15)
+    at recoverFromConcurrentError (chunk-RPCDYKBN.js?v=93722235:18736:28)
+sw.js:96 🐾 Network request failed, serving offline fallback
+The FetchEvent for "https://replit.com/public/js/beacon.js" resulted in a network error response: the promise was rejected.
+sw.js:76  Uncaught (in promise) TypeError: Failed to fetch
+    at sw.js:76:16
+beacon.js:1  Failed to load resource: net::ERR_FAILED
+/public/js/beacon.js:1  Failed to load resource: net::ERR_FAILED
+client:536 WebSocket connection to 'wss://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/?token=NmV7q-zVNV1l' failed: 
+setupWebSocket @ client:536
+ WebSocket connection to 'wss://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/?token=NmV7q-zVNV1l' failed: 
+setupWebSocket @ 458f7955-e095-41cd-8…ev/@vite/client:536
+client:536 Uncaught (in promise) SyntaxError: Failed to construct 'WebSocket': The URL 'wss://localhost:undefined/?token=NmV7q-zVNV1l' is invalid.
+    at setupWebSocket (client:536:19)
+    at fallback (client:509:16)
+    at WebSocket.<anonymous> (client:555:7)
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar19k%3A
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/manifest.json
+stallwart.build.js:1 stallwart: failed ping 1
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar19k%3A
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@vite/client
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@react-refresh
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/node_modules/vite/dist/client/env.mjs
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/lib/queryClient.ts
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/ui/toaster.tsx
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/ui/tooltip.tsx
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/contexts/theme-context.tsx
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/pwa-install-prompt.tsx
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/offline-indicator.tsx
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/pages/home.tsx?t=1754620154269
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/pages/not-found.tsx
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/hooks/use-toast.ts
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/ui/toast.tsx
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/lib/utils.ts
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/hooks/use-pwa.ts
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/ui/card.tsx
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/mood-check-in.tsx?t=1754620116215
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/mood-garden.tsx?t=1754620116215
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/mini-game-placeholder.tsx
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/theme-toggle.tsx
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/custom-messages.tsx?t=1754620116215
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/privacy-settings.tsx
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/encouragement-message.tsx?t=1754620116215
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/mood-picker.tsx
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/nd-affirmation.tsx
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/lib/mood-storage.ts?t=1754620116215
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/ui/button.tsx
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/ui/alert-dialog.tsx
+client:536 WebSocket connection to 'wss://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/?token=NmV7q-zVNV1l' failed: 
+setupWebSocket @ client:536
+(anonymous) @ client:531
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/shared/schema.ts
+client:536 Uncaught (in promise) SyntaxError: Failed to construct 'WebSocket': The URL 'wss://localhost:undefined/?token=NmV7q-zVNV1l' is invalid.
+    at setupWebSocket (client:536:19)
+    at fallback (client:509:16)
+    at WebSocket.<anonymous> (client:555:7)
+setupWebSocket @ client:536
+fallback @ client:509
+(anonymous) @ client:555
+home.tsx:13 Warning: Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://reactjs.org/link/invalid-hook-call for tips about how to debug and fix this problem.
+printWarning @ chunk-QCHXOAYK.js?v=9f2cbb79:136
+error @ chunk-QCHXOAYK.js?v=9f2cbb79:120
+resolveDispatcher @ chunk-QCHXOAYK.js?v=9f2cbb79:1045
+useState @ chunk-QCHXOAYK.js?v=9f2cbb79:1065
+Home @ home.tsx:13
+renderWithHooks @ chunk-RPCDYKBN.js?v=93722235:11548
+mountIndeterminateComponent @ chunk-RPCDYKBN.js?v=93722235:14926
+beginWork @ chunk-RPCDYKBN.js?v=93722235:15914
+beginWork$1 @ chunk-RPCDYKBN.js?v=93722235:19753
+performUnitOfWork @ chunk-RPCDYKBN.js?v=93722235:19198
+workLoopSync @ chunk-RPCDYKBN.js?v=93722235:19137
+renderRootSync @ chunk-RPCDYKBN.js?v=93722235:19116
+performConcurrentWorkOnRoot @ chunk-RPCDYKBN.js?v=93722235:18678
+workLoop @ chunk-RPCDYKBN.js?v=93722235:197
+flushWork @ chunk-RPCDYKBN.js?v=93722235:176
+performWorkUntilDeadline @ chunk-RPCDYKBN.js?v=93722235:384
+home.tsx:13 Warning: Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://reactjs.org/link/invalid-hook-call for tips about how to debug and fix this problem.
+printWarning @ chunk-QCHXOAYK.js?v=9f2cbb79:136
+error @ chunk-QCHXOAYK.js?v=9f2cbb79:120
+resolveDispatcher @ chunk-QCHXOAYK.js?v=9f2cbb79:1045
+useState @ chunk-QCHXOAYK.js?v=9f2cbb79:1065
+Home @ home.tsx:13
+renderWithHooks @ chunk-RPCDYKBN.js?v=93722235:11548
+mountIndeterminateComponent @ chunk-RPCDYKBN.js?v=93722235:14926
+beginWork @ chunk-RPCDYKBN.js?v=93722235:15914
+callCallback2 @ chunk-RPCDYKBN.js?v=93722235:3674
+invokeGuardedCallbackDev @ chunk-RPCDYKBN.js?v=93722235:3699
+invokeGuardedCallback @ chunk-RPCDYKBN.js?v=93722235:3733
+beginWork$1 @ chunk-RPCDYKBN.js?v=93722235:19765
+performUnitOfWork @ chunk-RPCDYKBN.js?v=93722235:19198
+workLoopSync @ chunk-RPCDYKBN.js?v=93722235:19137
+renderRootSync @ chunk-RPCDYKBN.js?v=93722235:19116
+performConcurrentWorkOnRoot @ chunk-RPCDYKBN.js?v=93722235:18678
+workLoop @ chunk-RPCDYKBN.js?v=93722235:197
+flushWork @ chunk-RPCDYKBN.js?v=93722235:176
+performWorkUntilDeadline @ chunk-RPCDYKBN.js?v=93722235:384
+chunk-QCHXOAYK.js?v=9f2cbb79:1066 Uncaught TypeError: Cannot read properties of null (reading 'useState')
+    at useState (chunk-QCHXOAYK.js?v=9f2cbb79:1066:29)
+    at Home (home.tsx:13:41)
+    at renderWithHooks (chunk-RPCDYKBN.js?v=93722235:11548:26)
+    at mountIndeterminateComponent (chunk-RPCDYKBN.js?v=93722235:14926:21)
+    at beginWork (chunk-RPCDYKBN.js?v=93722235:15914:22)
+    at HTMLUnknownElement.callCallback2 (chunk-RPCDYKBN.js?v=93722235:3674:22)
+    at Object.invokeGuardedCallbackDev (chunk-RPCDYKBN.js?v=93722235:3699:24)
+    at invokeGuardedCallback (chunk-RPCDYKBN.js?v=93722235:3733:39)
+    at beginWork$1 (chunk-RPCDYKBN.js?v=93722235:19765:15)
+    at performUnitOfWork (chunk-RPCDYKBN.js?v=93722235:19198:20)
+useState @ chunk-QCHXOAYK.js?v=9f2cbb79:1066
+Home @ home.tsx:13
+renderWithHooks @ chunk-RPCDYKBN.js?v=93722235:11548
+mountIndeterminateComponent @ chunk-RPCDYKBN.js?v=93722235:14926
+beginWork @ chunk-RPCDYKBN.js?v=93722235:15914
+callCallback2 @ chunk-RPCDYKBN.js?v=93722235:3674
+invokeGuardedCallbackDev @ chunk-RPCDYKBN.js?v=93722235:3699
+invokeGuardedCallback @ chunk-RPCDYKBN.js?v=93722235:3733
+beginWork$1 @ chunk-RPCDYKBN.js?v=93722235:19765
+performUnitOfWork @ chunk-RPCDYKBN.js?v=93722235:19198
+workLoopSync @ chunk-RPCDYKBN.js?v=93722235:19137
+renderRootSync @ chunk-RPCDYKBN.js?v=93722235:19116
+performConcurrentWorkOnRoot @ chunk-RPCDYKBN.js?v=93722235:18678
+workLoop @ chunk-RPCDYKBN.js?v=93722235:197
+flushWork @ chunk-RPCDYKBN.js?v=93722235:176
+performWorkUntilDeadline @ chunk-RPCDYKBN.js?v=93722235:384
+home.tsx:13 Warning: Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://reactjs.org/link/invalid-hook-call for tips about how to debug and fix this problem.
+printWarning @ chunk-QCHXOAYK.js?v=9f2cbb79:136
+error @ chunk-QCHXOAYK.js?v=9f2cbb79:120
+resolveDispatcher @ chunk-QCHXOAYK.js?v=9f2cbb79:1045
+useState @ chunk-QCHXOAYK.js?v=9f2cbb79:1065
+Home @ home.tsx:13
+renderWithHooks @ chunk-RPCDYKBN.js?v=93722235:11548
+mountIndeterminateComponent @ chunk-RPCDYKBN.js?v=93722235:14926
+beginWork @ chunk-RPCDYKBN.js?v=93722235:15914
+beginWork$1 @ chunk-RPCDYKBN.js?v=93722235:19753
+performUnitOfWork @ chunk-RPCDYKBN.js?v=93722235:19198
+workLoopSync @ chunk-RPCDYKBN.js?v=93722235:19137
+renderRootSync @ chunk-RPCDYKBN.js?v=93722235:19116
+recoverFromConcurrentError @ chunk-RPCDYKBN.js?v=93722235:18736
+performConcurrentWorkOnRoot @ chunk-RPCDYKBN.js?v=93722235:18684
+workLoop @ chunk-RPCDYKBN.js?v=93722235:197
+flushWork @ chunk-RPCDYKBN.js?v=93722235:176
+performWorkUntilDeadline @ chunk-RPCDYKBN.js?v=93722235:384
+home.tsx:13 Warning: Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://reactjs.org/link/invalid-hook-call for tips about how to debug and fix this problem.
+printWarning @ chunk-QCHXOAYK.js?v=9f2cbb79:136
+error @ chunk-QCHXOAYK.js?v=9f2cbb79:120
+resolveDispatcher @ chunk-QCHXOAYK.js?v=9f2cbb79:1045
+useState @ chunk-QCHXOAYK.js?v=9f2cbb79:1065
+Home @ home.tsx:13
+renderWithHooks @ chunk-RPCDYKBN.js?v=93722235:11548
+mountIndeterminateComponent @ chunk-RPCDYKBN.js?v=93722235:14926
+beginWork @ chunk-RPCDYKBN.js?v=93722235:15914
+callCallback2 @ chunk-RPCDYKBN.js?v=93722235:3674
+invokeGuardedCallbackDev @ chunk-RPCDYKBN.js?v=93722235:3699
+invokeGuardedCallback @ chunk-RPCDYKBN.js?v=93722235:3733
+beginWork$1 @ chunk-RPCDYKBN.js?v=93722235:19765
+performUnitOfWork @ chunk-RPCDYKBN.js?v=93722235:19198
+workLoopSync @ chunk-RPCDYKBN.js?v=93722235:19137
+renderRootSync @ chunk-RPCDYKBN.js?v=93722235:19116
+recoverFromConcurrentError @ chunk-RPCDYKBN.js?v=93722235:18736
+performConcurrentWorkOnRoot @ chunk-RPCDYKBN.js?v=93722235:18684
+workLoop @ chunk-RPCDYKBN.js?v=93722235:197
+flushWork @ chunk-RPCDYKBN.js?v=93722235:176
+performWorkUntilDeadline @ chunk-RPCDYKBN.js?v=93722235:384
+chunk-QCHXOAYK.js?v=9f2cbb79:1066 Uncaught TypeError: Cannot read properties of null (reading 'useState')
+    at useState (chunk-QCHXOAYK.js?v=9f2cbb79:1066:29)
+    at Home (home.tsx:13:41)
+    at renderWithHooks (chunk-RPCDYKBN.js?v=93722235:11548:26)
+    at mountIndeterminateComponent (chunk-RPCDYKBN.js?v=93722235:14926:21)
+    at beginWork (chunk-RPCDYKBN.js?v=93722235:15914:22)
+    at HTMLUnknownElement.callCallback2 (chunk-RPCDYKBN.js?v=93722235:3674:22)
+    at Object.invokeGuardedCallbackDev (chunk-RPCDYKBN.js?v=93722235:3699:24)
+    at invokeGuardedCallback (chunk-RPCDYKBN.js?v=93722235:3733:39)
+    at beginWork$1 (chunk-RPCDYKBN.js?v=93722235:19765:15)
+    at performUnitOfWork (chunk-RPCDYKBN.js?v=93722235:19198:20)
+useState @ chunk-QCHXOAYK.js?v=9f2cbb79:1066
+Home @ home.tsx:13
+renderWithHooks @ chunk-RPCDYKBN.js?v=93722235:11548
+mountIndeterminateComponent @ chunk-RPCDYKBN.js?v=93722235:14926
+beginWork @ chunk-RPCDYKBN.js?v=93722235:15914
+callCallback2 @ chunk-RPCDYKBN.js?v=93722235:3674
+invokeGuardedCallbackDev @ chunk-RPCDYKBN.js?v=93722235:3699
+invokeGuardedCallback @ chunk-RPCDYKBN.js?v=93722235:3733
+beginWork$1 @ chunk-RPCDYKBN.js?v=93722235:19765
+performUnitOfWork @ chunk-RPCDYKBN.js?v=93722235:19198
+workLoopSync @ chunk-RPCDYKBN.js?v=93722235:19137
+renderRootSync @ chunk-RPCDYKBN.js?v=93722235:19116
+recoverFromConcurrentError @ chunk-RPCDYKBN.js?v=93722235:18736
+performConcurrentWorkOnRoot @ chunk-RPCDYKBN.js?v=93722235:18684
+workLoop @ chunk-RPCDYKBN.js?v=93722235:197
+flushWork @ chunk-RPCDYKBN.js?v=93722235:176
+performWorkUntilDeadline @ chunk-RPCDYKBN.js?v=93722235:384
+chunk-RPCDYKBN.js?v=93722235:14032 The above error occurred in the <Home> component:
+
+    at Home (https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/pages/home.tsx?t=1754620154269:27:41)
+    at Route (https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=93722235:323:16)
+    at Switch (https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=93722235:379:17)
+    at Router
+    at Provider (https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-3CVUYQTY.js?v=93722235:45:15)
+    at TooltipProvider (https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-tooltip.js?v=93722235:2242:5)
+    at ThemeProvider (https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/contexts/theme-context.tsx:20:33)
+    at QueryClientProvider (https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=93722235:2805:3)
+    at App (https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/App.tsx?t=1754620154269&v=DWY9HSheh65rHzh9AXrre:50:3)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+logCapturedError @ chunk-RPCDYKBN.js?v=93722235:14032
+update.callback @ chunk-RPCDYKBN.js?v=93722235:14052
+callCallback @ chunk-RPCDYKBN.js?v=93722235:11248
+commitUpdateQueue @ chunk-RPCDYKBN.js?v=93722235:11265
+commitLayoutEffectOnFiber @ chunk-RPCDYKBN.js?v=93722235:17093
+commitLayoutMountEffects_complete @ chunk-RPCDYKBN.js?v=93722235:17980
+commitLayoutEffects_begin @ chunk-RPCDYKBN.js?v=93722235:17969
+commitLayoutEffects @ chunk-RPCDYKBN.js?v=93722235:17920
+commitRootImpl @ chunk-RPCDYKBN.js?v=93722235:19353
+commitRoot @ chunk-RPCDYKBN.js?v=93722235:19277
+finishConcurrentRender @ chunk-RPCDYKBN.js?v=93722235:18760
+performConcurrentWorkOnRoot @ chunk-RPCDYKBN.js?v=93722235:18718
+workLoop @ chunk-RPCDYKBN.js?v=93722235:197
+flushWork @ chunk-RPCDYKBN.js?v=93722235:176
+performWorkUntilDeadline @ chunk-RPCDYKBN.js?v=93722235:384
+chunk-RPCDYKBN.js?v=93722235:19413 Uncaught TypeError: Cannot read properties of null (reading 'useState')
+    at useState (chunk-QCHXOAYK.js?v=9f2cbb79:1066:29)
+    at Home (home.tsx:13:41)
+    at renderWithHooks (chunk-RPCDYKBN.js?v=93722235:11548:26)
+    at mountIndeterminateComponent (chunk-RPCDYKBN.js?v=93722235:14926:21)
+    at beginWork (chunk-RPCDYKBN.js?v=93722235:15914:22)
+    at beginWork$1 (chunk-RPCDYKBN.js?v=93722235:19753:22)
+    at performUnitOfWork (chunk-RPCDYKBN.js?v=93722235:19198:20)
+    at workLoopSync (chunk-RPCDYKBN.js?v=93722235:19137:13)
+    at renderRootSync (chunk-RPCDYKBN.js?v=93722235:19116:15)
+    at recoverFromConcurrentError (chunk-RPCDYKBN.js?v=93722235:18736:28)
+useState @ chunk-QCHXOAYK.js?v=9f2cbb79:1066
+Home @ home.tsx:13
+renderWithHooks @ chunk-RPCDYKBN.js?v=93722235:11548
+mountIndeterminateComponent @ chunk-RPCDYKBN.js?v=93722235:14926
+beginWork @ chunk-RPCDYKBN.js?v=93722235:15914
+beginWork$1 @ chunk-RPCDYKBN.js?v=93722235:19753
+performUnitOfWork @ chunk-RPCDYKBN.js?v=93722235:19198
+workLoopSync @ chunk-RPCDYKBN.js?v=93722235:19137
+renderRootSync @ chunk-RPCDYKBN.js?v=93722235:19116
+recoverFromConcurrentError @ chunk-RPCDYKBN.js?v=93722235:18736
+performConcurrentWorkOnRoot @ chunk-RPCDYKBN.js?v=93722235:18684
+workLoop @ chunk-RPCDYKBN.js?v=93722235:197
+flushWork @ chunk-RPCDYKBN.js?v=93722235:176
+performWorkUntilDeadline @ chunk-RPCDYKBN.js?v=93722235:384
+sw.js:96 🐾 Network request failed, serving offline fallback
+The FetchEvent for "https://replit.com/public/js/beacon.js" resulted in a network error response: the promise was rejected.
+Promise.then
+(anonymous) @ sw.js:66
+sw.js:76  Uncaught (in promise) TypeError: Failed to fetch
+    at sw.js:76:16
+(anonymous) @ sw.js:76
+Promise.then
+(anonymous) @ sw.js:68
+workspace_iframe.html?initialPath=%2F&id=%3Ar19k%3A:142  GET https://replit.com/public/js/beacon.js net::ERR_FAILED
+onIframeLoad @ workspace_iframe.html?initialPath=%2F&id=%3Ar19k%3A:142
