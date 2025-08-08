@@ -15,6 +15,8 @@ The frontend is built using React with TypeScript and follows a component-based 
 **Key architectural decisions:**
 - **React with TypeScript**: Provides type safety and better developer experience while maintaining component reusability
 - **Wouter for routing**: Lightweight routing solution chosen over React Router for simpler navigation needs
+- **Dedicated router module**: Centralizes navigation logic outside the main `App` component
+- **Service worker hook**: Encapsulates PWA registration in a reusable `useServiceWorker` hook
 - **shadcn/ui component library**: Pre-built accessible components with Radix UI primitives and Tailwind CSS styling
 - **TanStack Query**: Handles server state management and caching, though currently only used for client-side patterns
 - **Local storage for data persistence**: All mood entries are stored in browser localStorage, ensuring complete privacy
@@ -26,6 +28,7 @@ The backend follows an Express.js server architecture with TypeScript support. T
 **Key architectural decisions:**
 - **Express.js with TypeScript**: Provides familiar REST API patterns with type safety
 - **Modular storage interface**: Abstract storage interface allows switching between in-memory and database storage
+- **Request logging middleware**: Reusable `requestLogger` captures API calls for easier debugging
 - **Development middleware**: Integrated Vite development server for seamless full-stack development
 - **ESM modules**: Modern module system for better tree-shaking and performance
 
