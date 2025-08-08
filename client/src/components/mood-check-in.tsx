@@ -16,6 +16,7 @@ export function MoodCheckIn({ onMoodSelected }: MoodCheckInProps) {
     note?: string;
   } | null>(null);
   const [note, setNote] = useState<string>("");
+  const [showAffirmation, setShowAffirmation] = useState(() => Math.random() > 0.6);
 
   const handleMoodSelect = (emoji: string, mood: string) => {
     // Get a random message from both default and custom messages
@@ -31,6 +32,7 @@ export function MoodCheckIn({ onMoodSelected }: MoodCheckInProps) {
     setTimeout(() => {
       setSelectedMood(null);
       setNote("");
+      setShowAffirmation(Math.random() > 0.6);
     }, 1500);
   };
 
@@ -76,7 +78,7 @@ export function MoodCheckIn({ onMoodSelected }: MoodCheckInProps) {
       </div>
 
       {/* ND Affirmation - shown randomly */}
-      {!selectedMood && Math.random() > 0.6 && (
+      {!selectedMood && showAffirmation && (
         <div className="mb-6">
           <NDAffirmation type={Math.random() > 0.5 ? 'general' : ['sensory', 'executive', 'social'][Math.floor(Math.random() * 3)] as any} />
         </div>
