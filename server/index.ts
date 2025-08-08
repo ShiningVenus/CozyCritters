@@ -52,7 +52,12 @@ app.use(helmet({
     directives: {
       defaultSrc: ["'self'"],
       styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
-      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"], // Allow inline scripts for Vite dev
+      scriptSrc: [
+        "'self'",
+        "'unsafe-inline'",
+        "'unsafe-eval'",
+        ...(process.env.NODE_ENV === "development" ? ["https://replit.com"] : []),
+      ], // Allow inline scripts for Vite dev and Replit dev banner
       imgSrc: ["'self'", "data:", "blob:"],
       connectSrc: ["'self'", "ws:", "wss:"], // Allow WebSocket for HMR
       fontSrc: ["'self'", "https://fonts.gstatic.com"],
