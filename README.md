@@ -1,132 +1,92 @@
-# 🐾 Cozy Critter Mood Tracker
+# Cozy Critter — Animal-Themed Mood Tracker
 
-A gentle, neurodivergent-friendly mood tracking app that helps you check in with your feelings through cute animal friends.
+Cozy Critter is a neurodivergent-friendly mood tracking app that makes emotional self-care gentle, private, and fun.
 
-## ✨ What is Cozy Critter?
+Check in with adorable animal emoji, add your own notes, and get encouragement that really gets ND life. All your data stays on your device—no accounts, no cloud, no stress.
 
-Cozy Critter is a simple, private mood tracking app designed with neurodivergent folks in mind. Track your feelings with adorable animal emojis, add personal notes, and get encouraging messages that understand your unique experiences.
+## ✨ Features
 
-**Your data stays completely private** - everything is stored only on your device, never shared or uploaded anywhere.
+**Animal emoji mood check-in**  
+Choose the animal that matches how you feel today.
 
-## 🌟 Features
+**Optional notes**  
+Write a quick note with any mood—useful for journaling, venting, or celebrating!
 
-### Mood Tracking Made Simple
-- **Animal emoji check-ins**: Pick from friendly creatures that match your mood
-- **Optional notes**: Add details when you want to, skip when you don't
-- **Your personal garden**: See your mood history in a timeline called "My Garden"
-- **Delete entries**: Remove any mood entries you no longer want
+**Custom encouragement**  
+Get (or even create) affirmations tailored to neurodivergent needs: masking, stimming, executive function, sensory breaks, and more.
 
-### Neurodivergent-Friendly Design
-- **Understanding messages**: Encouragement that acknowledges masking, stimming, sensory needs, and executive function
-- **Custom messages**: Create your own encouraging messages
-- **Accessibility first**: Screen reader support, keyboard navigation, and clear visual design
-- **Sensory considerations**: Respects your motion and contrast preferences
+**Mood history ("My Garden")**  
+Review your past moods and notes in a cozy visual timeline.
 
-### Works Everywhere
-- **Progressive Web App**: Install on your phone like a native app
-- **Offline support**: Works even without internet connection
-- **Dark/light modes**: Switches automatically or manually to match your preference
-- **Mobile-first**: Designed for phones but works great on computers too
+**Complete privacy & data control**  
+Data is saved only in your browser (localStorage). It never leaves your device. Delete everything with one button to prove your privacy is real.
 
-## 🚀 Getting Started
+**Installable & offline**  
+Works offline and can be added to your phone's home screen as an app.
 
-### Quick Start (For Users)
+**Accessibility built in**  
+Keyboard navigation, screen reader support, color contrast, and respects motion preferences.
 
-1. **Open the app** in your web browser
-2. **Pick an animal** that matches how you're feeling right now
-3. **Add a note** if you want to (totally optional!)
-4. **Get encouragement** - the app will share a supportive message
-5. **View your garden** - see all your past check-ins in one place
+## 🛠️ Tech & Architecture
 
-### Installing as an App
+**Frontend:**  
+React (with TypeScript), Vite for fast dev/build, Tailwind CSS for cozy styles, shadcn/ui for accessible UI, and Wouter for simple page navigation.
 
-When you first visit, you might see a prompt to "Install Cozy Critter". Tap **Install** to add it to your home screen like any other app!
+**State & Storage:**  
+All moods/notes are stored locally in your browser. The app is ready for future features like user accounts, but you don't need one now.
 
-## 🛠️ For Developers
+**Backend (future-ready):**  
+Express.js with TypeScript, Drizzle ORM, and PostgreSQL for possible future login or sync—currently not required.
 
-### What's Inside
+**Accessibility & Design:**  
+Uses Radix UI for solid ARIA and keyboard support, warm animal-friendly color palette, and responsive/mobile-first layouts.
 
-- **Frontend**: React with TypeScript
-- **Styling**: Tailwind CSS with custom cozy colors
-- **Storage**: Local browser storage (no server needed!)
-- **Accessibility**: Built with screen readers and keyboard navigation in mind
-- **PWA**: Full offline support and installable
+## 🚀 How to Run Locally
 
-### Running the Project
-
-1. **Install everything**: `npm install`
-2. **Start developing**: `npm run dev`
-3. **Open your browser** to the URL shown (usually http://localhost:5173)
-
-### Project Structure
-
-```
-client/                 # Frontend React app
-├── src/
-│   ├── components/    # Reusable UI pieces
-│   ├── pages/         # Different app screens
-│   ├── hooks/         # Custom React hooks
-│   ├── lib/           # Helper functions and storage
-│   └── contexts/      # App-wide state (like themes)
-server/                # Backend (minimal, mostly serves the app)
-shared/                # Code shared between frontend and backend
+**Install dependencies:**
+```bash
+npm install
+# or
+yarn
 ```
 
-### Key Files to Know
+**Start the dev server:**
+```bash
+npm run dev
+# or  
+yarn dev
+```
 
-- `client/src/lib/mood-storage.ts` - How moods are saved and loaded
-- `client/src/components/mood-check-in.tsx` - Main mood selection interface
-- `client/src/components/custom-messages.tsx` - Encouragement message management
-- `shared/schema.ts` - Data structure definitions
+**Open in your browser:**  
+Usually at http://localhost:5173
 
-## 🌈 Accessibility Features
+## 🔐 Privacy Promise
 
-This app is built accessibility-first:
+- **No tracking, no accounts, no data collection**
+- **Everything stays on your device** (browser localStorage)
+- **One-click delete everything** - prove your privacy is real
+- **Works offline** - no internet required after first load
+- **No external dependencies** for your personal mood data
 
-- **Screen reader friendly**: All buttons and content properly labeled
-- **Keyboard navigation**: Use Tab, Enter, and arrow keys to navigate
-- **High contrast support**: Respects your system's contrast preferences  
-- **Motion sensitivity**: Honors your reduced motion preferences
-- **Clear language**: Simple, jargon-free text throughout
-- **Visual cues**: Colors paired with icons and text for clarity
+## 💝 Neurodivergent-Friendly Features
 
-## 💝 Neurodivergent Considerations
+- **Understanding encouragement** for masking, stimming, sensory needs, executive function
+- **No pressure** - add notes only when you want to
+- **Simple, clear interfaces** that don't overwhelm
+- **Flexible interaction** - multiple ways to use features
+- **Gentle design** that respects different brain types
 
-We understand that neurodivergent brains work differently, so Cozy Critter includes:
+## 💡 Next Steps / Ideas
 
-- **No pressure tracking**: Add notes only when you want to
-- **Executive function support**: Simple, clear interfaces that don't overwhelm
-- **Masking awareness**: Messages that acknowledge the effort of masking
-- **Stimming positivity**: Encouraging words about natural self-regulation
-- **Sensory understanding**: Recognition of sensory processing differences
-- **Flexible interaction**: Multiple ways to interact with features
+- Export your garden as a file
+- More animal themes and custom encouragements
+- Mood statistics and patterns
+- Enhanced PWA features
 
-## 🔐 Privacy & Data
+## 💚 Questions or want to contribute?
 
-**Your privacy matters.** 
-
-- All your mood data stays on YOUR device
-- No accounts required, no sign-ups needed  
-- No data is ever sent to servers or shared
-- You can delete the app anytime and all data goes with it
-- Works completely offline once loaded
-
-## 🐛 Having Issues?
-
-The app is designed to be simple and reliable, but if something seems wrong:
-
-1. **Try refreshing** the browser page
-2. **Check if you're offline** - a small indicator will show your connection status
-3. **Clear browser data** if things seem stuck (note: this will delete your mood history)
-
-## 💚 Contributing
-
-This project welcomes contributions that maintain its neurodivergent-friendly and accessibility-first approach. Please keep changes simple, well-documented, and considerate of different brain types and abilities.
-
-## 📄 License
-
-This project is open source and available under the MIT License.
+Open an issue or reach out—friendly contributions and suggestions are always welcome!
 
 ---
 
-Made with 💝 for the neurodivergent community and anyone who wants a gentle, private way to track their emotional wellbeing.
+Made with 💝 for gentle mood tracking and neurodivergent self-care.
