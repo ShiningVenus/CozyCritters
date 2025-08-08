@@ -6,6 +6,7 @@ interface EncouragementMessageProps {
     emoji: string;
     mood: string;
     message: string;
+    note?: string;
   };
   onAddToGarden: () => void;
 }
@@ -19,6 +20,7 @@ export function EncouragementMessage({ mood, onAddToGarden }: EncouragementMessa
       emoji: mood.emoji,
       mood: mood.mood,
       message: mood.message,
+      note: mood.note,
       timestamp: Date.now(),
     });
 
@@ -38,6 +40,13 @@ export function EncouragementMessage({ mood, onAddToGarden }: EncouragementMessa
       <p className="text-gray-600 italic mb-4">
         "{mood.message}"
       </p>
+      {mood.note && (
+        <div className="bg-white bg-opacity-50 rounded-lg p-3 mb-4 text-left">
+          <p className="text-sm text-gray-700">
+            <span className="font-medium text-brown-custom">Your note:</span> {mood.note}
+          </p>
+        </div>
+      )}
       <button
         onClick={handleAddToGarden}
         disabled={isAdded}

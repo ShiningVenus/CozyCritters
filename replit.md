@@ -1,6 +1,6 @@
 # Overview
 
-Cozy Critter is a mood tracking application with an animal-themed interface that allows users to track their emotional wellbeing through cute animal emoji check-ins. The app provides encouraging messages and maintains a personal mood history called "My Garden" where users can view their past mood entries. All mood data is stored locally in the browser's localStorage, ensuring privacy as no data leaves the user's device.
+Cozy Critter is a mood tracking application with an animal-themed interface that allows users to track their emotional wellbeing through cute animal emoji check-ins. Users can add optional personal notes to each mood entry for more detailed tracking. The app provides encouraging messages and maintains a personal mood history called "My Garden" where users can view their past mood entries and notes. All mood data is stored locally in the browser's localStorage, ensuring privacy as no data leaves the user's device.
 
 # User Preferences
 

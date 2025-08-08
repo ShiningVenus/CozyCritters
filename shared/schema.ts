@@ -4,6 +4,7 @@ export const insertMoodEntrySchema = z.object({
   emoji: z.string().min(1),
   mood: z.string().min(1),
   message: z.string().min(1),
+  note: z.string().optional(),
   timestamp: z.number(),
 });
 

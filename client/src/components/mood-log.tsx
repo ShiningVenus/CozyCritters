@@ -164,9 +164,16 @@ export function MoodLog({ onStartCheckIn }: MoodLogProps) {
                             {formatDateTime(entry.timestamp)}
                           </span>
                         </div>
-                        <p className="text-sm text-gray-600 italic">
+                        <p className="text-sm text-gray-600 italic mb-2">
                           "{entry.message}"
                         </p>
+                        {entry.note && (
+                          <div className="bg-white bg-opacity-70 rounded-lg p-2 mt-2">
+                            <p className="text-xs text-gray-700">
+                              <span className="font-medium text-brown-custom">Note:</span> {entry.note}
+                            </p>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>

@@ -9,7 +9,7 @@ type View = "checkIn" | "moodLog";
 export default function Home() {
   const [currentView, setCurrentView] = useState<View>("checkIn");
 
-  const handleMoodSelected = (mood: { emoji: string; mood: string; message: string }) => {
+  const handleMoodSelected = (mood: { emoji: string; mood: string; message: string; note?: string }) => {
     // The mood will be saved by the EncouragementMessage component
     // We can add any additional logic here if needed
   };

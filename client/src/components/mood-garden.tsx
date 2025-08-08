@@ -120,9 +120,16 @@ export function MoodGarden({ onStartCheckIn }: MoodGardenProps) {
                     {formatDate(entry.timestamp)}
                   </span>
                 </div>
-                <p className="text-sm text-gray-600 mt-1">
+                <p className="text-sm text-gray-600 mt-1 mb-2">
                   "{entry.message}"
                 </p>
+                {entry.note && (
+                  <div className="bg-white bg-opacity-70 rounded p-2 mt-2">
+                    <p className="text-xs text-gray-700">
+                      <span className="font-medium text-brown-custom">Note:</span> {entry.note}
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
             {/* Timeline connector */}
