@@ -1,9 +1,60 @@
 import express, { type Request, Response, NextFunction } from "express";
+import helmet from "helmet";
+import rateLimit from "express-rate-limit";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import { requestLogger } from "./middleware/request-logger";
 
 const app = express();
+
+// Security middleware
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"], // Allow inline scripts for Vite dev
+      imgSrc: ["'self'", "data:", "blob:"],
+      connectSrc: ["'self'", "ws:", "wss:"], // Allow WebSocket for HMR
+      fontSrc: ["'self'"],
+      objectSrc: ["'none'"],
+      mediaSrc: ["'self'"],
+      frameSrc: ["'none'"],
+    },
+  },
+  crossOriginEmbedderPolicy: false, // Disable for dev compatibility
+}));
+
+// Rate limiting configuration
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per windowMs
+  message: {
+    error: "Too many requests from this IP, please try again later.",
+    retryAfter: "15 minutes"
+  },
+  standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+});
+
+// Stricter rate limiting for API routes
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 50, // Limit each IP to 50 API requests per windowMs
+  message: {
+    error: "Too many API requests from this IP, please try again later.",
+    retryAfter: "15 minutes"
+  },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+// Apply general rate limiting to all requests
+app.use(limiter);
+
+// Apply stricter rate limiting to API routes
+app.use('/api', apiLimiter);
+
 app.use(express.json({ limit: '100kb' }));
 app.use(express.urlencoded({ extended: false, limit: '100kb' }));
 
