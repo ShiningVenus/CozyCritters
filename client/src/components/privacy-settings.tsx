@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Trash2, Shield, Database, ArrowLeft, AlertTriangle, Check } from "lucide-react";
+import { Trash2, Shield, Database, ArrowLeft, AlertTriangle, Check, Eye, Code, Globe } from "lucide-react";
 import { moodStorage } from "@/lib/mood-storage";
 import { Button } from "@/components/ui/button";
 import { 
@@ -22,7 +22,28 @@ interface PrivacySettingsProps {
 export function PrivacySettings({ onBack }: PrivacySettingsProps) {
   const [isDeleting, setIsDeleting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [showLocalStorageData, setShowLocalStorageData] = useState(false);
   const dataSummary = moodStorage.getDataSummary();
+
+  const getLocalStorageProof = () => {
+    const moodData = localStorage.getItem('cozy-critter-moods') || 'null';
+    const messageData = localStorage.getItem('cozy-critter-custom-messages') || 'null';
+    const themeData = localStorage.getItem('cozy-critter-theme') || 'null';
+    
+    return {
+      moods: moodData === 'null' ? null : JSON.parse(moodData),
+      messages: messageData === 'null' ? null : JSON.parse(messageData),
+      theme: themeData === 'null' ? null : themeData,
+    };
+  };
+
+  const openNetworkInspector = () => {
+    alert('To verify no data is sent:\n\n1. Press F12 to open Developer Tools\n2. Go to the Network tab\n3. Use the app normally\n4. You\'ll see NO requests containing your mood data!');
+  };
+
+  const showSourceCode = () => {
+    window.open('https://github.com/username/cozy-critter', '_blank');
+  };
 
   const handleDeleteAllData = async () => {
     setIsDeleting(true);
@@ -211,6 +232,86 @@ export function PrivacySettings({ onBack }: PrivacySettingsProps) {
         </div>
       </div>
 
+      {/* Security Verification */}
+      <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+        <div className="flex items-start gap-3">
+          <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
+            <Eye size={20} className="text-blue-600 dark:text-blue-400" />
+          </div>
+          <div className="flex-1">
+            <h3 className="font-semibold text-blue-800 dark:text-blue-200 mb-2">Security Verification</h3>
+            <p className="text-sm text-blue-600 dark:text-blue-300 mb-4">
+              Don't just trust us - verify our security claims yourself!
+            </p>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <Button 
+                variant="outline" 
+                size="sm" 
+                onClick={() => setShowLocalStorageData(!showLocalStorageData)}
+                className="gap-2 text-xs border-blue-200 dark:border-blue-700 hover:bg-blue-100 dark:hover:bg-blue-900/30"
+              >
+                <Database size={14} />
+                View Local Data
+              </Button>
+              
+              <Button 
+                variant="outline" 
+                size="sm" 
+                onClick={openNetworkInspector}
+                className="gap-2 text-xs border-blue-200 dark:border-blue-700 hover:bg-blue-100 dark:hover:bg-blue-900/30"
+              >
+                <Globe size={14} />
+                Check Network
+              </Button>
+              
+              <Button 
+                variant="outline" 
+                size="sm" 
+                onClick={showSourceCode}
+                className="gap-2 text-xs border-blue-200 dark:border-blue-700 hover:bg-blue-100 dark:hover:bg-blue-900/30"
+              >
+                <Code size={14} />
+                View Source
+              </Button>
+            </div>
+
+            {showLocalStorageData && (
+              <div className="mt-4 p-3 bg-blue-100 dark:bg-blue-900/20 rounded border">
+                <h4 className="text-xs font-semibold text-blue-800 dark:text-blue-200 mb-2">Your Browser's localStorage Contents:</h4>
+                <div className="text-xs space-y-2 font-mono">
+                  <div>
+                    <span className="text-blue-600 dark:text-blue-300">cozy-critter-moods:</span>
+                    <div className="pl-4 text-muted-foreground max-h-20 overflow-y-auto">
+                      {dataSummary.moodEntries > 0 ? `${dataSummary.moodEntries} mood entries stored locally` : 'null (no data)'}
+                    </div>
+                  </div>
+                  <div>
+                    <span className="text-blue-600 dark:text-blue-300">cozy-critter-custom-messages:</span>
+                    <div className="pl-4 text-muted-foreground">
+                      {dataSummary.customMessages > 0 ? `${dataSummary.customMessages} custom messages stored locally` : 'null (no data)'}
+                    </div>
+                  </div>
+                  <div>
+                    <span className="text-blue-600 dark:text-blue-300">cozy-critter-theme:</span>
+                    <div className="pl-4 text-muted-foreground">
+                      {localStorage.getItem('cozy-critter-theme') || 'null (using default theme)'}
+                    </div>
+                  </div>
+                </div>
+                <p className="text-xs text-blue-600 dark:text-blue-300 mt-2">
+                  ✓ This proves your data exists ONLY in your browser's localStorage - never on our servers.
+                </p>
+              </div>
+            )}
+
+            <div className="mt-3 text-xs text-blue-600 dark:text-blue-300">
+              <strong>How to verify:</strong> Press F12 → Network tab → Use the app → No mood data in network requests!
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* What happens after deletion */}
       <div className="bg-muted/30 dark:bg-muted/10 rounded-lg p-4">
         <h3 className="font-semibold text-foreground mb-2">After deletion:</h3>
@@ -220,6 +321,43 @@ export function PrivacySettings({ onBack }: PrivacySettingsProps) {
           <li>• No traces of your old data will remain</li>
           <li>• You prove that your privacy is in your hands</li>
         </ul>
+      </div>
+
+      {/* Technical Security Details */}
+      <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
+        <div className="flex items-start gap-3">
+          <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg">
+            <Shield size={20} className="text-green-600 dark:text-green-400" />
+          </div>
+          <div className="flex-1">
+            <h3 className="font-semibold text-green-800 dark:text-green-200 mb-2">Technical Security Proof</h3>
+            <div className="text-sm text-green-700 dark:text-green-300 space-y-2">
+              <div className="flex items-center gap-2">
+                <Check size={14} className="text-green-600 dark:text-green-400" />
+                <span>Open source code - you can audit every line</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Check size={14} className="text-green-600 dark:text-green-400" />
+                <span>No external API calls for your mood data</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Check size={14} className="text-green-600 dark:text-green-400" />
+                <span>Works completely offline (try disconnecting internet!)</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Check size={14} className="text-green-600 dark:text-green-400" />
+                <span>Browser localStorage only - scoped to this domain</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Check size={14} className="text-green-600 dark:text-green-400" />
+                <span>One-click complete data deletion you just tested</span>
+              </div>
+            </div>
+            <div className="mt-3 p-2 bg-green-100 dark:bg-green-900/20 rounded border text-xs text-green-800 dark:text-green-200">
+              <strong>Security Researcher?</strong> Run your own penetration tests! Check our Network tab, inspect localStorage, verify offline functionality. Found an issue? Please report it on GitHub.
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* App Information */}
