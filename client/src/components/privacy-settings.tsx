@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Trash2, Shield, Database, ArrowLeft, AlertTriangle, Check } from "lucide-react";
 import { moodStorage } from "@/lib/mood-storage";
 import { Button } from "@/components/ui/button";
