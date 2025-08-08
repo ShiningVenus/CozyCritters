@@ -1,0 +1,73 @@
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/main.tsx?v=C-fW8VrKHTU8jkrLjVb2-
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@vite/client
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@react-refresh
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/node_modules/vite/dist/client/env.mjs
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=93722235
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/App.tsx?v=C-fW8VrKHTU8jkrLjVb2
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/react-dom_client.js?v=93722235
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/index.css?v=C-fW8VrKHTU8jkrLjVb2
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=93722235
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-QCHXOAYK.js?v=93722235
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-WOOG5QLI.js?v=93722235
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=93722235
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/lib/queryClient.ts
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=93722235
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/ui/toaster.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/ui/tooltip.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/contexts/theme-context.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/pwa-install-prompt.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/offline-indicator.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/pages/home.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/pages/not-found.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/react.js?v=93722235
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/hooks/use-toast.ts
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/ui/toast.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-tooltip.js?v=93722235
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/lib/utils.ts
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/lucide-react.js?v=93722235
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/hooks/use-pwa.ts
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/ui/card.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/mood-check-in.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/mood-garden.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/mini-game-placeholder.tsx
+ 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/theme-toggle.tsx
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/custom-messages.tsx
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/privacy-settings.tsx
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-KBTYAULA.js?v=93722235
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-toast.js?v=93722235
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/class-variance-authority.js?v=93722235
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/tailwind-merge.js?v=93722235
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/clsx.js?v=93722235
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-YTCM2RZ2.js?v=93722235
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-6H527ZLU.js?v=93722235
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-3CVUYQTY.js?v=93722235
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-EVLBUYTV.js?v=93722235
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/encouragement-message.tsx
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/mood-picker.tsx
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/nd-affirmation.tsx
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/lib/mood-storage.ts
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/date-fns.js?v=93722235
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/ui/button.tsx
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/src/components/ui/alert-dialog.tsx
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-U7P2NEEE.js?v=93722235
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/shared/schema.ts
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/nanoid.js?v=93722235
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-alert-dialog.js?v=93722235
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-slot.js?v=93722235
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/zod.js?v=93722235
+chunk-RPCDYKBN.js?v=93722235:21551 Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+client:536 WebSocket connection to 'wss://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/?token=3LbXyeu-Cz5P' failed: 
+setupWebSocket @ client:536
+(anonymous) @ client:531
+App.tsx:29 🐾 SW registered:  ServiceWorkerRegistration {installing: null, waiting: null, active: ServiceWorker, navigationPreload: NavigationPreloadManager, scope: 'https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/', …}
+client:536 Uncaught (in promise) SyntaxError: Failed to construct 'WebSocket': The URL 'wss://localhost:undefined/?token=3LbXyeu-Cz5P' is invalid.
+    at setupWebSocket (client:536:19)
+    at fallback (client:509:16)
+    at WebSocket.<anonymous> (client:555:7)
+setupWebSocket @ client:536
+fallback @ client:509
+(anonymous) @ client:555
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/pwa-icon.svg
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/manifest.json
+sw.js:71 🐾 Serving from cache: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/apple-touch-icon.png
+458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/:1 Error while trying to use the following icon from the Manifest: https://458f7955-e095-41cd-86f0-b75f4cb33803-00-1lof8k7yjgn33.spock.replit.dev/apple-touch-icon.png (Download error or resource isn't a valid image)

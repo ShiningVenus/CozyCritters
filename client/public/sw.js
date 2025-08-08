@@ -1,5 +1,5 @@
-const CACHE_NAME = 'cozy-critter-v1.0.0';
-const RUNTIME_CACHE = 'cozy-critter-runtime';
+const CACHE_NAME = 'cozy-critter-v1.1.0-autism-theme';
+const RUNTIME_CACHE = 'cozy-critter-runtime-v1.1.0';
 
 // Resources to cache on install
 const STATIC_RESOURCES = [
@@ -60,6 +60,35 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   // Skip non-GET requests and chrome-extension requests
   if (event.request.method !== 'GET' || event.request.url.startsWith('chrome-extension://')) {
+    return;
+  }
+
+  // For CSS and JS files, use network-first strategy for fresh updates
+  const isStyleOrScript = event.request.url.includes('.css') || 
+                          event.request.url.includes('.tsx') || 
+                          event.request.url.includes('.ts') ||
+                          event.request.url.includes('theme-context') ||
+                          event.request.url.includes('index.css');
+
+  if (isStyleOrScript) {
+    event.respondWith(
+      fetch(event.request)
+        .then((response) => {
+          console.log('🎨 Network-first for theme files:', event.request.url);
+          // Cache the fresh response
+          if (response && response.status === 200) {
+            const responseToCache = response.clone();
+            caches.open(RUNTIME_CACHE).then((cache) => {
+              cache.put(event.request, responseToCache);
+            });
+          }
+          return response;
+        })
+        .catch(() => {
+          // Fallback to cache if network fails
+          return caches.match(event.request);
+        })
+    );
     return;
   }
 
