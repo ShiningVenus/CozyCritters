@@ -21,21 +21,25 @@ export default function Home() {
 
   return (
     <div className="min-h-screen max-w-md mx-auto bg-background dark:bg-background shadow-lg relative">
+      <a href="#main-content" className="skip-link">Skip to main content</a>
       {/* Header */}
-      <header className="bg-primary text-primary-foreground p-6 rounded-b-3xl shadow-md relative">
+      <header role="banner" className="bg-primary text-primary-foreground p-6 rounded-b-3xl shadow-md relative">
         <div className="absolute top-4 right-4">
           <ThemeToggle />
         </div>
         <div className="text-center">
-          <h1 className="text-2xl font-bold mb-2">🌿 Cozy Critter</h1>
-          <p className="text-sm opacity-90">Mood Tracker</p>
+          <h1 className="text-2xl font-bold mb-2">
+            <span role="img" aria-label="leaf">🌿</span> Cozy Critter
+          </h1>
+          <p className="text-sm opacity-90">Your safe space for mood tracking</p>
         </div>
         
         {/* Navigation tabs */}
-        <div className="flex justify-center mt-4 space-x-4">
+        <nav role="navigation" aria-label="Main navigation" className="flex justify-center mt-4 space-x-4">
           <button
             onClick={() => setCurrentView("checkIn")}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+            aria-pressed={currentView === "checkIn"}
+            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 ${
               currentView === "checkIn"
                 ? "bg-white bg-opacity-20"
                 : "hover:bg-white hover:bg-opacity-10"
@@ -45,7 +49,8 @@ export default function Home() {
           </button>
           <button
             onClick={() => setCurrentView("moodLog")}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+            aria-pressed={currentView === "moodLog"}
+            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 ${
               currentView === "moodLog"
                 ? "bg-white bg-opacity-20"
                 : "hover:bg-white hover:bg-opacity-10"
@@ -53,25 +58,29 @@ export default function Home() {
           >
             My Garden
           </button>
-        </div>
+        </nav>
       </header>
 
       {/* Content */}
-      {currentView === "checkIn" ? (
-        <>
-          <MoodCheckIn onMoodSelected={handleMoodSelected} />
-          <div className="px-6 pb-6">
-            <MiniGamePlaceholder />
-          </div>
-        </>
-      ) : (
-        <MoodGarden onStartCheckIn={handleStartCheckIn} />
-      )}
+      <main id="main-content" role="main">
+        {currentView === "checkIn" ? (
+          <>
+            <MoodCheckIn onMoodSelected={handleMoodSelected} />
+            <div className="px-6 pb-6">
+              <MiniGamePlaceholder />
+            </div>
+          </>
+        ) : (
+          <MoodGarden onStartCheckIn={handleStartCheckIn} />
+        )}
+      </main>
 
       {/* Footer */}
-      <footer className="p-6 text-center text-sm text-muted-foreground dark:text-muted-foreground">
-        <p className="mb-2">💚 All your data stays private on your device</p>
-        <p>Made with love for your wellbeing</p>
+      <footer role="contentinfo" className="p-6 text-center text-sm text-muted-foreground dark:text-muted-foreground">
+        <p className="mb-2">
+          <span role="img" aria-label="green heart">💚</span> All your data stays private on your device
+        </p>
+        <p>Made with love for your wellbeing and neurodivergent minds</p>
       </footer>
     </div>
   );

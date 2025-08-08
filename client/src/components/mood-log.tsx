@@ -180,10 +180,11 @@ export function MoodLog({ onStartCheckIn }: MoodLogProps) {
                             <button
                               onClick={() => handleDeleteEntry(entry.id)}
                               disabled={deletingId === entry.id}
-                              className="text-muted-foreground hover:text-red-500 dark:text-muted-foreground dark:hover:text-red-400 transition-colors p-1 rounded hover:bg-muted dark:hover:bg-muted disabled:opacity-50"
-                              title="Delete entry"
+                              aria-label={`Delete mood entry from ${formatDateTime(entry.timestamp)}`}
+                              className="text-muted-foreground hover:text-red-500 dark:text-muted-foreground dark:hover:text-red-400 transition-colors p-1 rounded hover:bg-muted dark:hover:bg-muted disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-red-500/50"
                             >
-                              <Trash2 size={14} />
+                              <Trash2 size={14} aria-hidden="true" />
+                              <span className="sr-only">Delete this mood entry</span>
                             </button>
                           </div>
                         </div>

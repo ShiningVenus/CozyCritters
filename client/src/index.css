@@ -63,6 +63,22 @@
   body {
     @apply font-inter antialiased bg-neutral text-foreground;
     font-family: var(--font-inter);
+    line-height: 1.6;
+  }
+
+  /* Better focus management for keyboard users */
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  /* Ensure text remains readable at 200% zoom */
+  @media (max-width: 640px) {
+    html {
+      font-size: 16px;
+    }
   }
 }
 
@@ -97,5 +113,72 @@
   
   .text-brown-custom {
     color: hsl(35.7143 45.8333% 37.0588%);
+  }
+
+  /* Screen reader only text */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Skip to content link for keyboard users */
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: var(--primary);
+    color: var(--primary-foreground);
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 4px;
+    z-index: 1000;
+  }
+  .skip-link:focus {
+    top: 6px;
+  }
+
+  /* Reduced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .mood-card {
+      border: 2px solid currentColor !important;
+    }
+    
+    button:not(:disabled) {
+      border: 2px solid currentColor;
+    }
+  }
+
+  /* Focus indicators that respect user preferences */
+  @media (prefers-reduced-motion: no-preference) {
+    button:focus,
+    input:focus,
+    textarea:focus,
+    select:focus {
+      transition: box-shadow 0.15s ease-in-out;
+    }
+  }
+
+  /* Ensure sufficient color contrast */
+  .mood-card:focus {
+    outline: 3px solid var(--ring);
+    outline-offset: 2px;
   }
 }

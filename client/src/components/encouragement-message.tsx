@@ -50,13 +50,14 @@ export function EncouragementMessage({ mood, onAddToGarden }: EncouragementMessa
       <button
         onClick={handleAddToGarden}
         disabled={isAdded}
-        className={`px-6 py-2 rounded-full font-medium transition-colors ${
+        aria-live="polite"
+        className={`px-6 py-2 rounded-full font-medium transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-primary/50 ${
           isAdded
-            ? "bg-green-500 text-white"
-            : "bg-primary text-primary-foreground hover:bg-primary/90"
+            ? "bg-green-500 text-white scale-105"
+            : "bg-primary text-primary-foreground hover:bg-primary/90 hover:scale-105 active:scale-95"
         }`}
       >
-        {isAdded ? "Added! 🌱" : "Add to My Garden"}
+        {isAdded ? "Added to your garden! 🌱" : "Save this moment 💾"}
       </button>
     </div>
   );

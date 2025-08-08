@@ -21,6 +21,8 @@ export const moodOptions = [
   { emoji: "🦦", mood: "Anxious", color: "bg-orange-100" },
   { emoji: "🐰", mood: "Excited", color: "bg-pink-100" },
   { emoji: "🦋", mood: "Peaceful", color: "bg-green-100" },
+  { emoji: "🦔", mood: "Overwhelmed", color: "bg-red-100" },
+  { emoji: "🐨", mood: "Content", color: "bg-green-100" },
 ] as const;
 
 export const encouragementMessages = [
@@ -31,7 +33,17 @@ export const encouragementMessages = [
   "Rest is important - be kind to yourself! 💤",
   "You're growing stronger every day! 🌱",
   "Remember to celebrate the small victories! 🎉",
-  "You're braver than you believe and stronger than you seem! 🦁",
-  "Progress, not perfection - you're on the right path! 🌈",
-  "Your kindness to yourself matters just as much as kindness to others! 💖",
+  "Your brain works beautifully in its own unique way! 🧠✨",
+  "It's okay to need breaks - your energy is precious! 🌿",
+  "Masking is exhausting - you're safe to be yourself here! 🎭➡️😌",
+  "Your sensory needs matter - honor what feels right! 🌈",
+  "Stimming is self-care - move in ways that feel good! 🤲",
+  "Executive function struggles are valid - you're not lazy! ⚡",
+  "Your special interests bring joy - embrace what you love! 💫",
+  "Social battery low? That's totally normal and okay! 🔋",
+  "Routine changes are hard - give yourself extra kindness! 🗓️",
+  "Your way of processing emotions is valid and important! 🧩",
+  "Bad brain days happen - tomorrow is a fresh start! 🌅",
+  "You're not 'too much' or 'not enough' - you're just right! 💝",
+  "Different doesn't mean broken - neurodiversity is beautiful! 🌺",
 ] as const;
