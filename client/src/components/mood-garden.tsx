@@ -75,7 +75,7 @@ export function MoodGarden({ onStartCheckIn }: MoodGardenProps) {
 
   if (moodHistory.length === 0) {
     return (
-      <main className="p-6">
+      <main className="p-6 bg-background dark:bg-background">
         <div className="text-center mb-8">
           <h2 className="text-2xl font-semibold text-brown-custom mb-3">
             Your Cozy Garden
@@ -85,15 +85,15 @@ export function MoodGarden({ onStartCheckIn }: MoodGardenProps) {
 
         <div className="text-center py-12">
           <div className="text-6xl mb-4">🌱</div>
-          <h3 className="text-lg font-semibold text-brown-custom mb-2">
+          <h3 className="text-lg font-semibold text-brown dark:text-brown mb-2">
             Your garden is just getting started!
           </h3>
-          <p className="text-gray-600 mb-6">
+          <p className="text-muted-foreground dark:text-muted-foreground mb-6">
             Check in with your mood to start growing your cozy critter collection.
           </p>
           <button
             onClick={onStartCheckIn}
-            className="bg-primary-custom text-white px-6 py-2 rounded-full font-medium hover:bg-opacity-90 transition-colors"
+            className="bg-primary text-primary-foreground px-6 py-2 rounded-full font-medium hover:bg-primary/90 transition-colors"
           >
             Add Your First Mood
           </button>
@@ -103,19 +103,19 @@ export function MoodGarden({ onStartCheckIn }: MoodGardenProps) {
   }
 
   return (
-    <main className="p-6">
+    <main className="p-6 bg-background dark:bg-background">
       <div className="text-center mb-8">
-        <h2 className="text-2xl font-semibold text-brown-custom mb-3">
+        <h2 className="text-2xl font-semibold text-brown dark:text-brown mb-3">
           Your Cozy Garden
         </h2>
-        <p className="text-gray-600">A timeline of your mood journey</p>
+        <p className="text-muted-foreground dark:text-muted-foreground">A timeline of your mood journey</p>
       </div>
 
       <div className="space-y-4">
         {moodHistory.map((entry, index) => (
           <div
             key={entry.id}
-            className="mood-timeline-item bg-white rounded-2xl p-4 shadow-md border border-gray-100 relative"
+            className="mood-timeline-item bg-card dark:bg-card rounded-2xl p-4 shadow-md border border-border dark:border-border relative"
             style={{
               position: "relative",
             }}
@@ -126,30 +126,30 @@ export function MoodGarden({ onStartCheckIn }: MoodGardenProps) {
               </div>
               <div className="flex-1">
                 <div className="flex justify-between items-center">
-                  <span className="font-medium text-brown-custom">
+                  <span className="font-medium text-brown dark:text-brown">
                     {entry.mood}
                   </span>
                   <div className="flex items-center space-x-2">
-                    <span className="text-sm text-gray-500">
+                    <span className="text-sm text-muted-foreground dark:text-muted-foreground">
                       {formatDate(entry.timestamp)}
                     </span>
                     <button
                       onClick={() => handleDeleteEntry(entry.id)}
                       disabled={deletingId === entry.id}
-                      className="text-gray-400 hover:text-red-500 transition-colors p-1 rounded hover:bg-gray-100 disabled:opacity-50"
+                      className="text-muted-foreground hover:text-red-500 dark:text-muted-foreground dark:hover:text-red-400 transition-colors p-1 rounded hover:bg-muted dark:hover:bg-muted disabled:opacity-50"
                       title="Delete entry"
                     >
                       <Trash2 size={16} />
                     </button>
                   </div>
                 </div>
-                <p className="text-sm text-gray-600 mt-1 mb-2">
+                <p className="text-sm text-muted-foreground dark:text-muted-foreground mt-1 mb-2">
                   "{entry.message}"
                 </p>
                 {entry.note && (
-                  <div className="bg-white bg-opacity-70 rounded p-2 mt-2">
-                    <p className="text-xs text-gray-700">
-                      <span className="font-medium text-brown-custom">Note:</span> {entry.note}
+                  <div className="bg-background/70 dark:bg-background/30 rounded p-2 mt-2">
+                    <p className="text-xs text-foreground dark:text-foreground">
+                      <span className="font-medium text-brown dark:text-brown">Note:</span> {entry.note}
                     </p>
                   </div>
                 )}

@@ -39,12 +39,12 @@ export function MoodPicker({ onMoodSelect, selectedMood, disabled = false }: Moo
               : "hover:shadow-lg transform hover:-translate-y-1"
           } ${
             selectedMood === option.mood 
-              ? "ring-2 ring-primary-custom ring-opacity-60" 
+              ? "ring-2 ring-primary dark:ring-primary ring-opacity-60" 
               : ""
           } ${getMoodBackgroundClass(option.mood)}`}
         >
           <div className="text-4xl mb-3">{option.emoji}</div>
-          <span className="text-brown-custom font-medium">{option.mood}</span>
+          <span className="text-brown dark:text-brown font-medium">{option.mood}</span>
         </button>
       ))}
     </div>

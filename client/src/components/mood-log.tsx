@@ -109,26 +109,26 @@ export function MoodLog({ onStartCheckIn }: MoodLogProps) {
 
   if (moodEntries.length === 0) {
     return (
-      <div className="p-6">
+      <div className="p-6 bg-background dark:bg-background">
         <div className="text-center mb-8">
-          <h2 className="text-2xl font-semibold text-brown-custom mb-3">
+          <h2 className="text-2xl font-semibold text-brown dark:text-brown mb-3">
             Mood Log
           </h2>
-          <p className="text-gray-600">Your mood tracking history</p>
+          <p className="text-muted-foreground dark:text-muted-foreground">Your mood tracking history</p>
         </div>
 
         <div className="text-center py-12">
           <div className="text-6xl mb-4">📋</div>
-          <h3 className="text-lg font-semibold text-brown-custom mb-2">
+          <h3 className="text-lg font-semibold text-brown dark:text-brown mb-2">
             No mood entries yet
           </h3>
-          <p className="text-gray-600 mb-6">
+          <p className="text-muted-foreground dark:text-muted-foreground mb-6">
             Start tracking your mood to see your entries here.
           </p>
           {onStartCheckIn && (
             <button
               onClick={onStartCheckIn}
-              className="bg-primary-custom text-white px-6 py-2 rounded-full font-medium hover:bg-opacity-90 transition-colors"
+              className="bg-primary text-primary-foreground px-6 py-2 rounded-full font-medium hover:bg-primary/90 transition-colors"
             >
               Start Tracking
             </button>
@@ -139,9 +139,9 @@ export function MoodLog({ onStartCheckIn }: MoodLogProps) {
   }
 
   return (
-    <div className="p-6">
+    <div className="p-6 bg-background dark:bg-background">
       <div className="text-center mb-8">
-        <h2 className="text-2xl font-semibold text-brown-custom mb-3">
+        <h2 className="text-2xl font-semibold text-brown dark:text-brown mb-3">
           Mood Log
         </h2>
         <p className="text-gray-600">
@@ -152,7 +152,7 @@ export function MoodLog({ onStartCheckIn }: MoodLogProps) {
       <div className="space-y-6">
         {sortedDateKeys.map(dateKey => (
           <div key={dateKey} className="space-y-3">
-            <h3 className="text-lg font-semibold text-brown-custom border-b border-brown-custom border-opacity-20 pb-2">
+            <h3 className="text-lg font-semibold text-brown dark:text-brown border-b border-brown/20 dark:border-brown/30 pb-2">
               {getDateHeader(dateKey)}
             </h3>
             
@@ -170,30 +170,30 @@ export function MoodLog({ onStartCheckIn }: MoodLogProps) {
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between mb-1">
-                          <span className="font-medium text-brown-custom">
+                          <span className="font-medium text-brown dark:text-brown">
                             {entry.mood}
                           </span>
                           <div className="flex items-center space-x-2">
-                            <span className="text-xs text-gray-500">
+                            <span className="text-xs text-muted-foreground dark:text-muted-foreground">
                               {formatDateTime(entry.timestamp)}
                             </span>
                             <button
                               onClick={() => handleDeleteEntry(entry.id)}
                               disabled={deletingId === entry.id}
-                              className="text-gray-400 hover:text-red-500 transition-colors p-1 rounded hover:bg-gray-100 disabled:opacity-50"
+                              className="text-muted-foreground hover:text-red-500 dark:text-muted-foreground dark:hover:text-red-400 transition-colors p-1 rounded hover:bg-muted dark:hover:bg-muted disabled:opacity-50"
                               title="Delete entry"
                             >
                               <Trash2 size={14} />
                             </button>
                           </div>
                         </div>
-                        <p className="text-sm text-gray-600 italic mb-2">
+                        <p className="text-sm text-muted-foreground dark:text-muted-foreground italic mb-2">
                           "{entry.message}"
                         </p>
                         {entry.note && (
-                          <div className="bg-white bg-opacity-70 rounded-lg p-2 mt-2">
-                            <p className="text-xs text-gray-700">
-                              <span className="font-medium text-brown-custom">Note:</span> {entry.note}
+                          <div className="bg-background/70 dark:bg-background/30 rounded-lg p-2 mt-2">
+                            <p className="text-xs text-foreground dark:text-foreground">
+                              <span className="font-medium text-brown dark:text-brown">Note:</span> {entry.note}
                             </p>
                           </div>
                         )}

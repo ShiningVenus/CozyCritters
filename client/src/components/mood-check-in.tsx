@@ -35,13 +35,13 @@ export function MoodCheckIn({ onMoodSelected }: MoodCheckInProps) {
   };
 
   return (
-    <main className="p-6">
+    <main className="p-6 bg-background dark:bg-background">
       {/* Welcome section */}
       <div className="text-center mb-8">
-        <h2 className="text-2xl font-semibold text-brown-custom mb-3">
+        <h2 className="text-2xl font-semibold text-brown dark:text-brown mb-3">
           How are you feeling today?
         </h2>
-        <p className="text-gray-600">Pick a cozy critter that matches your mood</p>
+        <p className="text-muted-foreground dark:text-muted-foreground">Pick a cozy critter that matches your mood</p>
       </div>
 
       {/* Mood selector */}
@@ -55,7 +55,7 @@ export function MoodCheckIn({ onMoodSelected }: MoodCheckInProps) {
 
       {/* Optional note input */}
       <div className="mb-8">
-        <label className="block text-sm font-medium text-brown-custom mb-2">
+        <label className="block text-sm font-medium text-brown dark:text-brown mb-2">
           Add a note (optional)
         </label>
         <textarea
@@ -63,11 +63,11 @@ export function MoodCheckIn({ onMoodSelected }: MoodCheckInProps) {
           onChange={(e) => setNote(e.target.value)}
           disabled={!!selectedMood}
           placeholder="How are you feeling? What's on your mind?"
-          className="w-full p-3 border border-gray-200 rounded-xl resize-none focus:outline-none focus:ring-2 focus:ring-primary-custom focus:ring-opacity-30 disabled:bg-gray-50 disabled:opacity-50"
+          className="w-full p-3 border border-border dark:border-border bg-background dark:bg-background text-foreground dark:text-foreground rounded-xl resize-none focus:outline-none focus:ring-2 focus:ring-ring focus:ring-opacity-30 disabled:bg-muted disabled:opacity-50"
           rows={3}
           maxLength={200}
         />
-        <div className="text-xs text-gray-500 mt-1 text-right">
+        <div className="text-xs text-muted-foreground dark:text-muted-foreground mt-1 text-right">
           {note.length}/200
         </div>
       </div>

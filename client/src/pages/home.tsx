@@ -2,6 +2,7 @@ import { useState } from "react";
 import { MoodCheckIn } from "@/components/mood-check-in";
 import { MoodGarden } from "@/components/mood-garden";
 import { MiniGamePlaceholder } from "@/components/mini-game-placeholder";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { moodStorage } from "@/lib/mood-storage";
 
 type View = "checkIn" | "moodLog";
@@ -19,9 +20,12 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen max-w-md mx-auto bg-white shadow-lg relative">
+    <div className="min-h-screen max-w-md mx-auto bg-background dark:bg-background shadow-lg relative">
       {/* Header */}
-      <header className="bg-primary-custom text-white p-6 rounded-b-3xl shadow-md">
+      <header className="bg-primary text-primary-foreground p-6 rounded-b-3xl shadow-md relative">
+        <div className="absolute top-4 right-4">
+          <ThemeToggle />
+        </div>
         <div className="text-center">
           <h1 className="text-2xl font-bold mb-2">🌿 Cozy Critter</h1>
           <p className="text-sm opacity-90">Mood Tracker</p>
@@ -65,7 +69,7 @@ export default function Home() {
       )}
 
       {/* Footer */}
-      <footer className="p-6 text-center text-sm text-gray-500">
+      <footer className="p-6 text-center text-sm text-muted-foreground dark:text-muted-foreground">
         <p className="mb-2">💚 All your data stays private on your device</p>
         <p>Made with love for your wellbeing</p>
       </footer>
