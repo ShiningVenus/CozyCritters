@@ -62,19 +62,35 @@ app.use(helmet({
 // Rate limiting configuration
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // Limit each IP to 100 requests per windowMs
+  max: process.env.NODE_ENV === 'development' ? 1000 : 200, // Higher limit in development
   message: {
     error: "Too many requests from this IP, please try again later.",
     retryAfter: "15 minutes"
   },
-  standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+  standardHeaders: true,
+  legacyHeaders: false,
+  // Skip rate limiting for static assets in development
+  skip: (req) => {
+    if (process.env.NODE_ENV === 'development') {
+      const path = req.path;
+      // Skip common static asset paths
+      return path.endsWith('.css') || 
+             path.endsWith('.js') || 
+             path.endsWith('.tsx') || 
+             path.endsWith('.ts') || 
+             path.includes('/src/') ||
+             path.includes('/@') || // Vite internal paths
+             path === '/favicon.ico' ||
+             path === '/manifest.json';
+    }
+    return false;
+  }
 });
 
-// Stricter rate limiting for API routes
+// Stricter rate limiting for API routes only
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 50, // Limit each IP to 50 API requests per windowMs
+  max: process.env.NODE_ENV === 'development' ? 500 : 100,
   message: {
     error: "Too many API requests from this IP, please try again later.",
     retryAfter: "15 minutes"
@@ -86,7 +102,7 @@ const apiLimiter = rateLimit({
 // Apply general rate limiting to all requests
 app.use(limiter);
 
-// Apply stricter rate limiting to API routes
+// Apply stricter rate limiting only to API routes
 app.use('/api', apiLimiter);
 
 app.use(express.json({ limit: '100kb' }));
