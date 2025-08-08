@@ -22,7 +22,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen max-w-md mx-auto bg-background dark:bg-background shadow-lg relative">
+    <div className="min-h-screen max-w-md mx-auto bg-background shadow-lg relative">
       <a href="#main-content" className="skip-link">Skip to main content</a>
       {/* Header */}
       <header role="banner" className="bg-primary text-primary-foreground p-6 rounded-b-3xl shadow-md relative">

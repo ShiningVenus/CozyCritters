@@ -61,7 +61,7 @@
   }
 
   body {
-    @apply font-inter antialiased bg-neutral text-foreground;
+    @apply font-inter antialiased bg-background text-foreground;
     font-family: var(--font-inter);
     line-height: 1.6;
   }
