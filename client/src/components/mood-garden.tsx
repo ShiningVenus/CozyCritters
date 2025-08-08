@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { moodStorage } from "@/lib/mood-storage";
-import { MoodEntry } from "@shared/schema";
+import { MoodEntry, moodOptions } from "@shared/schema";
 import { format, isToday, isYesterday } from "date-fns";
 import { Trash2 } from "lucide-react";
 
@@ -54,25 +54,6 @@ export function MoodGarden({ onStartCheckIn }: MoodGardenProps) {
     }
   };
 
-  const getMoodColor = (mood: string): string => {
-    switch (mood) {
-      case "Happy":
-        return "bg-secondary-custom";
-      case "Calm":
-        return "bg-calm-custom bg-opacity-30";
-      case "Tired":
-        return "bg-purple-100";
-      case "Anxious":
-        return "bg-orange-100";
-      case "Excited":
-        return "bg-pink-100";
-      case "Peaceful":
-        return "bg-green-100";
-      default:
-        return "bg-gray-100";
-    }
-  };
-
   if (moodHistory.length === 0) {
     return (
       <main className="p-6 bg-background dark:bg-background">
@@ -112,61 +93,66 @@ export function MoodGarden({ onStartCheckIn }: MoodGardenProps) {
       </div>
 
       <div className="space-y-4">
-        {moodHistory.map((entry, index) => (
-          <div
-            key={entry.id}
-            className="mood-timeline-item bg-card dark:bg-card rounded-2xl p-4 shadow-md border border-border dark:border-border relative"
-            style={{
-              position: "relative",
-            }}
-          >
-            <div className="flex items-center space-x-4">
-              <div className={`text-3xl ${getMoodColor(entry.mood)} rounded-full p-2`}>
-                {entry.emoji}
-              </div>
-              <div className="flex-1">
-                <div className="flex justify-between items-center">
-                  <span className="font-medium text-brown dark:text-brown">
-                    {entry.mood}
-                  </span>
-                  <div className="flex items-center space-x-2">
-                    <span className="text-sm text-muted-foreground dark:text-muted-foreground">
-                      {formatDate(entry.timestamp)}
-                    </span>
-                    <button
-                      onClick={() => handleDeleteEntry(entry.id)}
-                      disabled={deletingId === entry.id}
-                      aria-label={`Delete mood entry from ${formatDate(entry.timestamp)}`}
-                      className="text-muted-foreground hover:text-red-500 dark:text-muted-foreground dark:hover:text-red-400 transition-colors p-1 rounded hover:bg-muted dark:hover:bg-muted disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-red-500/50"
-                    >
-                      <Trash2 size={16} aria-hidden="true" />
-                      <span className="sr-only">Delete this mood entry</span>
-                    </button>
-                  </div>
+        {moodHistory.map((entry, index) => {
+          const color =
+            moodOptions.find((m) => m.mood === entry.mood)?.color || "bg-gray-100";
+
+          return (
+            <div
+              key={entry.id}
+              className="mood-timeline-item bg-card dark:bg-card rounded-2xl p-4 shadow-md border border-border dark:border-border relative"
+              style={{
+                position: "relative",
+              }}
+            >
+              <div className="flex items-center space-x-4">
+                <div className={`text-3xl ${color} rounded-full p-2`}>
+                  {entry.emoji}
                 </div>
-                <p className="text-sm text-muted-foreground dark:text-muted-foreground mt-1 mb-2">
-                  "{entry.message}"
-                </p>
-                {entry.note && (
-                  <div className="bg-background/70 dark:bg-background/30 rounded p-2 mt-2">
-                    <p className="text-xs text-foreground dark:text-foreground">
-                      <span className="font-medium text-brown dark:text-brown">Note:</span> {entry.note}
-                    </p>
+                <div className="flex-1">
+                  <div className="flex justify-between items-center">
+                    <span className="font-medium text-brown dark:text-brown">
+                      {entry.mood}
+                    </span>
+                    <div className="flex items-center space-x-2">
+                      <span className="text-sm text-muted-foreground dark:text-muted-foreground">
+                        {formatDate(entry.timestamp)}
+                      </span>
+                      <button
+                        onClick={() => handleDeleteEntry(entry.id)}
+                        disabled={deletingId === entry.id}
+                        aria-label={`Delete mood entry from ${formatDate(entry.timestamp)}`}
+                        className="text-muted-foreground hover:text-red-500 dark:text-muted-foreground dark:hover:text-red-400 transition-colors p-1 rounded hover:bg-muted dark:hover:bg-muted disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-red-500/50"
+                      >
+                        <Trash2 size={16} aria-hidden="true" />
+                        <span className="sr-only">Delete this mood entry</span>
+                      </button>
+                    </div>
                   </div>
-                )}
+                  <p className="text-sm text-muted-foreground dark:text-muted-foreground mt-1 mb-2">
+                    "{entry.message}"
+                  </p>
+                  {entry.note && (
+                    <div className="bg-background/70 dark:bg-background/30 rounded p-2 mt-2">
+                      <p className="text-xs text-foreground dark:text-foreground">
+                        <span className="font-medium text-brown dark:text-brown">Note:</span> {entry.note}
+                      </p>
+                    </div>
+                  )}
+                </div>
               </div>
+              {/* Timeline connector */}
+              {index !== moodHistory.length - 1 && (
+                <div
+                  className="absolute left-6 w-0.5 h-4 bg-gray-200"
+                  style={{
+                    bottom: "-16px",
+                  }}
+                />
+              )}
             </div>
-            {/* Timeline connector */}
-            {index !== moodHistory.length - 1 && (
-              <div
-                className="absolute left-6 w-0.5 h-4 bg-gray-200"
-                style={{
-                  bottom: "-16px",
-                }}
-              />
-            )}
-          </div>
-        ))}
+          );
+        })}
       </div>
     </main>
   );
