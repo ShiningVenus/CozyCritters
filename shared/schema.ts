@@ -30,7 +30,7 @@ export const moodOptions = [
   { emoji: "🐰", mood: "Excited", color: "bg-pink-100" },
   { emoji: "🦋", mood: "Peaceful", color: "bg-green-100" },
   { emoji: "🦔", mood: "Overwhelmed", color: "bg-red-100" },
-  { emoji: "🐨", mood: "Content", color: "bg-emerald-100" },
+  { emoji: "🐨", mood: "Content", color: "bg-content-custom" },
 ] as const;
 
 export { encouragementMessages } from "./encouragements";

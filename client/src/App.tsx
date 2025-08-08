@@ -7,6 +7,10 @@ import { PWAInstallPrompt } from "@/components/pwa-install-prompt";
 import { OfflineIndicator } from "@/components/offline-indicator";
 import Router from "@/router";
 import { useServiceWorker } from "@/hooks/use-service-worker";
+ bekn8k-codex/refactor-app-for-modular-design
+=======
+import "@/lib/games"; // Initialize game registry
+ main
 
 function App() {
   useServiceWorker();

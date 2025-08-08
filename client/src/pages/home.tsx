@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { MoodCheckIn } from "@/components/mood-check-in";
 import { MoodGarden } from "@/components/mood-garden";
-import { MiniGamePlaceholder } from "@/components/mini-game-placeholder";
+import { MiniGamesPreview } from "@/components/mini-games-preview";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { CustomMessages } from "@/components/custom-messages";
 import { PrivacySettings } from "@/components/privacy-settings";
@@ -92,7 +92,7 @@ export default function Home() {
           <>
             <MoodCheckIn onMoodSelected={handleMoodSelected} />
             <div className="px-6 pb-6">
-              <MiniGamePlaceholder />
+              <MiniGamesPreview />
             </div>
           </>
         ) : currentView === "moodLog" ? (
