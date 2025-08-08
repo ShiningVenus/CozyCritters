@@ -96,6 +96,17 @@ Usually at http://localhost:5173
 
 📋 **[Read our full Privacy Policy](privacy-policy.md)** - See exactly how we protect your data (spoiler: we can't access it even if we wanted to!)
 
+## 📄 **Open Source & Free Forever**
+
+**Cozy Critter is MIT Licensed** - which means:
+- ✅ **Free to use** - individuals, nonprofits, organizations, everyone
+- ✅ **Free to modify** - customize it for your community's needs
+- ✅ **Free to share** - spread the accessibility love
+- ✅ **Transparent** - all code is visible, nothing hidden
+- ✅ **Community-driven** - your feedback and contributions welcome
+
+*Because mental health tools shouldn't be locked behind paywalls or corporate control.*
+
 ## 💝 Why This App "Gets It"
 
 **Built by understanding, not assumptions:**
@@ -155,12 +166,13 @@ Cozy Critter v1.0.0 is **completely free and open source** - perfect for your co
 - **Staff wellbeing** - Even your ND staff and volunteers can benefit!
 - **Educational settings** - Help students develop emotional vocabulary safely
 
-### 🆓 **Completely Free to Use**
-- **No licensing fees** - Ever
+### 🆓 **MIT Licensed = Maximum Freedom**
+- **No licensing fees** - Ever, for anyone
 - **No user limits** - Share with your entire community
 - **No premium features** - Everything works for everyone
 - **Host it yourself** - Full control over deployment and data
-- **White-label friendly** - Customize for your organization's needs
+- **Modify freely** - Customize for your organization's specific needs
+- **Transparent code** - Verify our privacy promises yourself
 
 ### 🤝 **Want to Collaborate?**
 We'd love to hear how your organization uses Cozy Critter or how we can make it even better for your community. Reach out for:
@@ -196,3 +208,5 @@ Interested in using Cozy Critter for your autism/ND programs? Want to collaborat
 - Grant writing support for digital wellness programs
 
 *Open source, privacy-first tools should serve everyone - especially marginalized communities.*
+
+**📜 Licensed under MIT** - See [LICENSE](LICENSE) file for full details.
