@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0 0% 100%);
+  --foreground: hsl(210 25% 7.8431%);
+  --card: hsl(180 6.6667% 97.0588%);
+  --card-foreground: hsl(210 25% 7.8431%);
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(210 25% 7.8431%);
+  --primary: hsl(124.2353 17.2840% 51.7647%);
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(47.0588 65.1515% 84.1176%);
+  --secondary-foreground: hsl(37.5000 50.9804% 25.8824%);
+  --muted: hsl(240 1.9608% 90%);
+  --muted-foreground: hsl(210 25% 7.8431%);
+  --accent: hsl(14.7059 69.1176% 63.5294%);
+  --accent-foreground: hsl(0 0% 100%);
+  --destructive: hsl(356.3033 90.5579% 54.3137%);
+  --destructive-foreground: hsl(0 0% 100%);
+  --border: hsl(201.4286 30.4348% 90.9804%);
+  --input: hsl(200 23.0769% 97.4510%);
+  --ring: hsl(202.8169 89.1213% 53.1373%);
+  --neutral: hsl(43.6364 28.5714% 95.6863%);
+  --brown: hsl(35.7143 45.8333% 37.0588%);
+  --calm: hsl(183.7500 33.6735% 72.1569%);
+  --radius: 1.3rem;
+  --font-inter: 'Inter', sans-serif;
+}
+
+.dark {
+  --background: hsl(0 0% 0%);
+  --foreground: hsl(200 6.6667% 91.1765%);
+  --card: hsl(228 9.8039% 10%);
+  --card-foreground: hsl(0 0% 85.0980%);
+  --popover: hsl(0 0% 0%);
+  --popover-foreground: hsl(200 6.6667% 91.1765%);
+  --primary: hsl(124.2353 17.2840% 51.7647%);
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(47.0588 65.1515% 84.1176%);
+  --secondary-foreground: hsl(37.5000 50.9804% 25.8824%);
+  --muted: hsl(0 0% 9.4118%);
+  --muted-foreground: hsl(210 3.3898% 46.2745%);
+  --accent: hsl(14.7059 69.1176% 63.5294%);
+  --accent-foreground: hsl(0 0% 100%);
+  --destructive: hsl(356.3033 90.5579% 54.3137%);
+  --destructive-foreground: hsl(0 0% 100%);
+  --border: hsl(210 5.2632% 14.9020%);
+  --input: hsl(207.6923 27.6596% 18.4314%);
+  --ring: hsl(202.8169 89.1213% 53.1373%);
+  --neutral: hsl(43.6364 28.5714% 95.6863%);
+  --brown: hsl(35.7143 45.8333% 37.0588%);
+  --calm: hsl(183.7500 33.6735% 72.1569%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-inter antialiased bg-neutral text-foreground;
+    font-family: var(--font-inter);
+  }
+}
+
+@layer utilities {
+  .font-inter {
+    font-family: var(--font-inter);
+  }
+  
+  .bg-primary-custom {
+    background-color: hsl(124.2353 17.2840% 51.7647%);
+  }
+  
+  .bg-secondary-custom {
+    background-color: hsl(47.0588 65.1515% 84.1176%);
+  }
+  
+  .bg-accent-custom {
+    background-color: hsl(14.7059 69.1176% 63.5294%);
+  }
+  
+  .bg-neutral-custom {
+    background-color: hsl(43.6364 28.5714% 95.6863%);
+  }
+  
+  .bg-brown-custom {
+    background-color: hsl(35.7143 45.8333% 37.0588%);
+  }
+  
+  .bg-calm-custom {
+    background-color: hsl(183.7500 33.6735% 72.1569%);
+  }
+  
+  .text-brown-custom {
+    color: hsl(35.7143 45.8333% 37.0588%);
+  }
+}

@@ -1,0 +1,142 @@
+import { useEffect, useState } from "react";
+import { moodStorage } from "@/lib/mood-storage";
+import { MoodEntry } from "@shared/schema";
+import { format, isToday, isYesterday } from "date-fns";
+
+interface MoodGardenProps {
+  onStartCheckIn: () => void;
+}
+
+export function MoodGarden({ onStartCheckIn }: MoodGardenProps) {
+  const [moodHistory, setMoodHistory] = useState<MoodEntry[]>([]);
+
+  useEffect(() => {
+    const loadMoodHistory = () => {
+      const moods = moodStorage.getRecentMoodEntries(20);
+      setMoodHistory(moods);
+    };
+
+    loadMoodHistory();
+    
+    // Listen for storage changes (in case of updates from other tabs)
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === "cozy-critter-moods") {
+        loadMoodHistory();
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
+
+  const formatDate = (timestamp: number): string => {
+    const date = new Date(timestamp);
+    
+    if (isToday(date)) {
+      return `Today, ${format(date, "h:mm a")}`;
+    } else if (isYesterday(date)) {
+      return `Yesterday, ${format(date, "h:mm a")}`;
+    } else {
+      return format(date, "MMM d, h:mm a");
+    }
+  };
+
+  const getMoodColor = (mood: string): string => {
+    switch (mood) {
+      case "Happy":
+        return "bg-secondary-custom";
+      case "Calm":
+        return "bg-calm-custom bg-opacity-30";
+      case "Tired":
+        return "bg-purple-100";
+      case "Anxious":
+        return "bg-orange-100";
+      case "Excited":
+        return "bg-pink-100";
+      case "Peaceful":
+        return "bg-green-100";
+      default:
+        return "bg-gray-100";
+    }
+  };
+
+  if (moodHistory.length === 0) {
+    return (
+      <main className="p-6">
+        <div className="text-center mb-8">
+          <h2 className="text-2xl font-semibold text-brown-custom mb-3">
+            Your Cozy Garden
+          </h2>
+          <p className="text-gray-600">A timeline of your mood journey</p>
+        </div>
+
+        <div className="text-center py-12">
+          <div className="text-6xl mb-4">🌱</div>
+          <h3 className="text-lg font-semibold text-brown-custom mb-2">
+            Your garden is just getting started!
+          </h3>
+          <p className="text-gray-600 mb-6">
+            Check in with your mood to start growing your cozy critter collection.
+          </p>
+          <button
+            onClick={onStartCheckIn}
+            className="bg-primary-custom text-white px-6 py-2 rounded-full font-medium hover:bg-opacity-90 transition-colors"
+          >
+            Add Your First Mood
+          </button>
+        </div>
+      </main>
+    );
+  }
+
+  return (
+    <main className="p-6">
+      <div className="text-center mb-8">
+        <h2 className="text-2xl font-semibold text-brown-custom mb-3">
+          Your Cozy Garden
+        </h2>
+        <p className="text-gray-600">A timeline of your mood journey</p>
+      </div>
+
+      <div className="space-y-4">
+        {moodHistory.map((entry, index) => (
+          <div
+            key={entry.id}
+            className="mood-timeline-item bg-white rounded-2xl p-4 shadow-md border border-gray-100 relative"
+            style={{
+              position: "relative",
+            }}
+          >
+            <div className="flex items-center space-x-4">
+              <div className={`text-3xl ${getMoodColor(entry.mood)} rounded-full p-2`}>
+                {entry.emoji}
+              </div>
+              <div className="flex-1">
+                <div className="flex justify-between items-center">
+                  <span className="font-medium text-brown-custom">
+                    {entry.mood}
+                  </span>
+                  <span className="text-sm text-gray-500">
+                    {formatDate(entry.timestamp)}
+                  </span>
+                </div>
+                <p className="text-sm text-gray-600 mt-1">
+                  "{entry.message}"
+                </p>
+              </div>
+            </div>
+            {/* Timeline connector */}
+            {index !== moodHistory.length - 1 && (
+              <div
+                className="absolute left-6 w-0.5 h-4 bg-gray-200"
+                style={{
+                  bottom: "-16px",
+                }}
+              />
+            )}
+          </div>
+        ))}
+      </div>
+    </main>
+  );
+}
