@@ -41,4 +41,7 @@ app.use(requestLogger);
   }, () => {
     log(`serving on port ${port}`);
   });
-})();
+})().catch((err) => {
+  log(err.message);
+  process.exit(1);
+});
