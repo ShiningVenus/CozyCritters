@@ -7,6 +7,7 @@ import { PWAInstallPrompt } from "@/components/pwa-install-prompt";
 import { OfflineIndicator } from "@/components/offline-indicator";
 import Router from "@/router";
 import { useServiceWorker } from "@/hooks/use-service-worker";
+import "@/lib/games"; // Initialize game registry
 
 function App() {
   useServiceWorker();
