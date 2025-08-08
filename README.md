@@ -135,6 +135,42 @@ Usually at http://localhost:5173
 
 **But honestly?** V1 is already a complete, useful app. You don't need to wait for "more features" to start taking better care of your emotional wellbeing.
 
+## 🏢 For Autism & Neurodivergent Support Organizations
+
+**Are you a nonprofit, support group, or organization serving the autistic/ND community?**
+
+Cozy Critter v1.0.0 is **completely free and open source** - perfect for your community programs.
+
+### 🎯 **Why Your Community Will Love This**
+- **Privacy-first design** - No data concerns for vulnerable individuals
+- **No accounts required** - Removes barriers and privacy worries
+- **Actually accessible** - Built with real ND input, not compliance checkboxes
+- **Works offline** - Great for individuals with limited internet access
+- **Trauma-informed** - No forced positivity or invalidating messaging
+
+### 💡 **How Organizations Can Use Cozy Critter**
+- **Therapy support** - Clients can track moods between sessions privately
+- **Workshop tool** - Demonstrate self-advocacy and emotional awareness
+- **Community programs** - Share as a resource without data collection concerns
+- **Staff wellbeing** - Even your ND staff and volunteers can benefit!
+- **Educational settings** - Help students develop emotional vocabulary safely
+
+### 🆓 **Completely Free to Use**
+- **No licensing fees** - Ever
+- **No user limits** - Share with your entire community
+- **No premium features** - Everything works for everyone
+- **Host it yourself** - Full control over deployment and data
+- **White-label friendly** - Customize for your organization's needs
+
+### 🤝 **Want to Collaborate?**
+We'd love to hear how your organization uses Cozy Critter or how we can make it even better for your community. Reach out for:
+- Custom deployment assistance
+- Training materials for staff
+- Feedback on features that would help your programs
+- Collaboration on accessibility improvements
+
+*Your community's wellbeing matters. Let's make emotional self-care accessible together.*
+
 ## 💚 Questions or want to contribute?
 
 Open an issue or reach out. Friendly contributions and suggestions are always welcome!
@@ -146,3 +182,17 @@ Open an issue or reach out. Friendly contributions and suggestions are always we
 **Cozy Critter v1.0.0** - Made with 💚 by people who understand that your brain works beautifully, just differently.
 
 *Finally, a mood tracking app that doesn't try to "fix" you.*
+
+---
+
+### 📞 **For Organizations & Partnerships**
+Interested in using Cozy Critter for your autism/ND programs? Want to collaborate or need deployment help? We're here to support organizations making a real difference in the ND community.
+
+**Contact us about:**
+- Community partnerships
+- Custom deployment assistance  
+- Staff training materials
+- Accessibility feedback and improvements
+- Grant writing support for digital wellness programs
+
+*Open source, privacy-first tools should serve everyone - especially marginalized communities.*
