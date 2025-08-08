@@ -3,9 +3,10 @@ import { MoodCheckIn } from "@/components/mood-check-in";
 import { MoodGarden } from "@/components/mood-garden";
 import { MiniGamePlaceholder } from "@/components/mini-game-placeholder";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { CustomMessages } from "@/components/custom-messages";
 import { moodStorage } from "@/lib/mood-storage";
 
-type View = "checkIn" | "moodLog";
+type View = "checkIn" | "moodLog" | "customMessages";
 
 export default function Home() {
   const [currentView, setCurrentView] = useState<View>("checkIn");
@@ -35,11 +36,11 @@ export default function Home() {
         </div>
         
         {/* Navigation tabs */}
-        <nav role="navigation" aria-label="Main navigation" className="flex justify-center mt-4 space-x-4">
+        <nav role="navigation" aria-label="Main navigation" className="flex justify-center mt-4 space-x-2">
           <button
             onClick={() => setCurrentView("checkIn")}
             aria-pressed={currentView === "checkIn"}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 ${
+            className={`px-3 py-2 rounded-full text-xs font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 ${
               currentView === "checkIn"
                 ? "bg-white bg-opacity-20"
                 : "hover:bg-white hover:bg-opacity-10"
@@ -50,13 +51,24 @@ export default function Home() {
           <button
             onClick={() => setCurrentView("moodLog")}
             aria-pressed={currentView === "moodLog"}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 ${
+            className={`px-3 py-2 rounded-full text-xs font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 ${
               currentView === "moodLog"
                 ? "bg-white bg-opacity-20"
                 : "hover:bg-white hover:bg-opacity-10"
             }`}
           >
             My Garden
+          </button>
+          <button
+            onClick={() => setCurrentView("customMessages")}
+            aria-pressed={currentView === "customMessages"}
+            className={`px-3 py-2 rounded-full text-xs font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 ${
+              currentView === "customMessages"
+                ? "bg-white bg-opacity-20"
+                : "hover:bg-white hover:bg-opacity-10"
+            }`}
+          >
+            Messages
           </button>
         </nav>
       </header>
@@ -70,8 +82,10 @@ export default function Home() {
               <MiniGamePlaceholder />
             </div>
           </>
-        ) : (
+        ) : currentView === "moodLog" ? (
           <MoodGarden onStartCheckIn={handleStartCheckIn} />
+        ) : (
+          <CustomMessages onBack={() => setCurrentView("checkIn")} />
         )}
       </main>
 

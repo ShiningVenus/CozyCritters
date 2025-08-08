@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { encouragementMessages } from "@shared/schema";
 import { EncouragementMessage } from "./encouragement-message";
 import { MoodPicker } from "./mood-picker";
 import { NDAffirmation } from "./nd-affirmation";
+import { moodStorage } from "@/lib/mood-storage";
 
 interface MoodCheckInProps {
   onMoodSelected: (mood: { emoji: string; mood: string; message: string; note?: string }) => void;
@@ -18,9 +18,8 @@ export function MoodCheckIn({ onMoodSelected }: MoodCheckInProps) {
   const [note, setNote] = useState<string>("");
 
   const handleMoodSelect = (emoji: string, mood: string) => {
-    const randomMessage = encouragementMessages[
-      Math.floor(Math.random() * encouragementMessages.length)
-    ];
+    // Get a random message from both default and custom messages
+    const randomMessage = moodStorage.getRandomMessage(true);
     
     const moodData = { emoji, mood, message: randomMessage, note: note.trim() || undefined };
     setSelectedMood(moodData);
