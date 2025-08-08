@@ -32,6 +32,10 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       root.classList.add("autism-awareness");
     }
     
+    // Debug logging
+    console.log('🎨 Theme changed to:', theme);
+    console.log('🔧 Classes on root:', root.className);
+    
     // Save to localStorage
     localStorage.setItem("cozy-critter-theme", theme);
   }, [theme]);
