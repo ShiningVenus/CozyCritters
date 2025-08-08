@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { MoodCheckIn } from "@/components/mood-check-in";
 import { MoodGarden } from "@/components/mood-garden";
 import { MiniGamePlaceholder } from "@/components/mini-game-placeholder";
