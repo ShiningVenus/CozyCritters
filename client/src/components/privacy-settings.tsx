@@ -29,10 +29,27 @@ export function PrivacySettings({ onBack }: PrivacySettingsProps) {
     const moodData = localStorage.getItem('cozy-critter-moods') || 'null';
     const messageData = localStorage.getItem('cozy-critter-custom-messages') || 'null';
     const themeData = localStorage.getItem('cozy-critter-theme') || 'null';
-    
+
+    let moods = null;
+    let messages = null;
+
+    try {
+      moods = moodData === 'null' ? null : JSON.parse(moodData);
+    } catch (error) {
+      console.warn('Failed to parse mood data from localStorage', error);
+      moods = null;
+    }
+
+    try {
+      messages = messageData === 'null' ? null : JSON.parse(messageData);
+    } catch (error) {
+      console.warn('Failed to parse custom message data from localStorage', error);
+      messages = null;
+    }
+
     return {
-      moods: moodData === 'null' ? null : JSON.parse(moodData),
-      messages: messageData === 'null' ? null : JSON.parse(messageData),
+      moods,
+      messages,
       theme: themeData === 'null' ? null : themeData,
     };
   };
