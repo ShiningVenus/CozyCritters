@@ -18,13 +18,18 @@ const corsOptions = {
     ? [
         // Add your production domains here
         'https://your-app-name.replit.app',
-        /\.replit\.app$/  // Allow any .replit.app subdomain
+        /\.replit\.app$/,  // Allow any .replit.app subdomain
+        /\.replit\.dev$/   // Allow any .replit.dev subdomain
       ]
     : [
         'http://localhost:3000',
         'http://localhost:5000',
         'http://127.0.0.1:3000',
-        'http://127.0.0.1:5000'
+        'http://127.0.0.1:5000',
+        // Add the current Replit domain for development
+        `https://${process.env.REPLIT_DOMAINS}`,
+        /\.spock\.replit\.dev$/,  // Allow Replit dev domains
+        /\.replit\.dev$/         // Allow any .replit.dev subdomain
       ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: [
