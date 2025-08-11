@@ -6,11 +6,13 @@
 [build.environment]
   NODE_VERSION = "18"
 
+# SPA routing
 [[redirects]]
   from = "/*"
   to   = "/index.html"
   status = 200
 
+# Base security and defaults
 [[headers]]
   for = "/*"
   [headers.values]
@@ -18,12 +20,21 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "geolocation=(), microphone=(), camera=()"
 
+# Long cache for hashed assets
 [[headers]]
   for = "/assets/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
+# HTML shell should not be cached aggressively
 [[headers]]
-  for = "/service-worker.js"
+  for = "/index.html"
   [headers.values]
     Cache-Control = "no-cache"
+
+# Match your actual SW filename
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache"
+
