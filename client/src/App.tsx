@@ -1,3 +1,4 @@
+// client/src/App.tsx
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -6,9 +7,9 @@ import { ThemeProvider } from "@/contexts/theme-context";
 import { PWAInstallPrompt } from "@/components/pwa-install-prompt";
 import { OfflineIndicator } from "@/components/offline-indicator";
 import { ErrorBoundary } from "@/components/error-boundary";
-import Router from "@/router";
+import AppRoutes from "@/router";                // <-- rename import
 import { useServiceWorker } from "@/hooks/use-service-worker";
-import "@/lib/games"; // Initialize game registry
+import "@/lib/games";
 
 function App() {
   useServiceWorker();
@@ -20,7 +21,7 @@ function App() {
           <TooltipProvider>
             <OfflineIndicator />
             <Toaster />
-            <Router />
+            <AppRoutes />                        {/* <-- use renamed component */}
             <PWAInstallPrompt />
           </TooltipProvider>
         </ThemeProvider>
@@ -30,3 +31,4 @@ function App() {
 }
 
 export default App;
+
