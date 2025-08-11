@@ -153,6 +153,24 @@ Proof:
 - Screen reader optimized
 - Motion sensitivity respected
 
+---
+
+## 📚 Full Documentation
+
+A dedicated `docs/` folder provides everything you need for development, self-hosting, privacy verification, and community contributions.
+
+- [docs/README.md](docs/README.md) — Docs overview & quick links
+- [Self-hosting guide](docs/self-hosting.md)
+- [Local development](docs/local-development.md)
+- [Architecture overview](docs/architecture.md)
+- [Privacy & security verification](docs/privacy-security.md)
+- [Backup & export](docs/backup-export.md)
+- [FAQ](docs/faq.md)
+- [Contributing guide](docs/contributing.md)
+- [Reddit r/selfhosted post draft](docs/reddit-selfhosted-post.md)
+
+---
+
 ## 🚀 How to Run Locally
 
 ### Quick Start (3 steps)
