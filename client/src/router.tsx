@@ -1,13 +1,13 @@
+// client/src/router.tsx
 import React, { Suspense } from "react";
 import { Switch, Route } from "wouter";
 import { LoadingPage } from "@/components/loading";
 
-// Lazy load pages for better performance
 const Home = React.lazy(() => import("@/pages/home"));
 const GamesPage = React.lazy(() => import("@/pages/games-page"));
 const NotFound = React.lazy(() => import("@/pages/not-found"));
 
-export default function Router() {
+export default function AppRoutes() {
   return (
     <Suspense fallback={<LoadingPage />}>
       <Switch>
@@ -18,3 +18,4 @@ export default function Router() {
     </Suspense>
   );
 }
+
