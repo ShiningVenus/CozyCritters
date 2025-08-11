@@ -8,8 +8,14 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const isProd = process.env.NODE_ENV === "production";
 const onReplit = process.env.REPL_ID !== undefined;
 
+// Use VITE_BASE if provided, else "/"
+const base = process.env.VITE_BASE && process.env.VITE_BASE.trim() !== ""
+  ? process.env.VITE_BASE
+  : "/";
+
 export default defineConfig(async () => ({
   root: resolve(__dirname, "client"),
+  base,                         // <- key line
   plugins: [
     react(),
     runtimeErrorOverlay(),
@@ -25,10 +31,11 @@ export default defineConfig(async () => ({
     },
   },
   build: {
-    outDir: "dist", // => client/dist
+    outDir: "dist",
     emptyOutDir: true,
   },
   server: {
     fs: { strict: true, deny: ["**/.*"] },
   },
 }));
+
