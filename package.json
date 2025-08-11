@@ -4,10 +4,10 @@
   "type": "module",
   "license": "MIT",
   "description": "A neurodivergent-friendly mood tracking app with animal companions. Built with Vite, React, Tailwind, Express, and Drizzle ORM.",
+  "engines": { "node": ">=18 <20" },
   "scripts": {
     "dev": "NODE_ENV=development tsx server/index.ts",
     "build": "vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist",
-    "build:pages": "vite build --base=/CozyCritters/",
     "preview": "vite preview",
     "start": "NODE_ENV=production node dist/index.js",
     "check": "tsc",
@@ -111,4 +111,3 @@
     "bufferutil": "^4.0.8"
   }
 }
-
