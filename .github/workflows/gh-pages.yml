@@ -1,3 +1,4 @@
+# .github/workflows/gh-pages.yml
 name: Deploy to GitHub Pages
 
 on:
@@ -25,8 +26,8 @@ jobs:
           cache: npm
       - name: Install deps
         run: npm ci
-      - name: Build with GH Pages base
-        run: npm run build -- --base=/${{ github.event.repository.name }}/
+      - name: Build client for Pages
+        run: npm run build:pages
       - name: SPA fallback
         run: cp client/dist/index.html client/dist/404.html
       - name: Upload artifact
