@@ -1,4 +1,4 @@
-# Reddit r/selfhosted Post Draft
+# Reddit r/selfhosted Post Draft (ignore this for now!)
 
 Here’s a draft you can use to share Cozy Critter with the self-hosting community:
 
