@@ -219,4 +219,23 @@
     outline: 3px solid var(--ring);
     outline-offset: 2px;
   }
+  
+  /* Skip link accessibility */
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: var(--primary);
+    color: var(--primary-foreground);
+    padding: 8px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    z-index: 100;
+    transition: top 0.3s;
+  }
+  
+  .skip-link:focus {
+    top: 6px;
+  }
 }
