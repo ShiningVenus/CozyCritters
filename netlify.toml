@@ -1,7 +1,7 @@
 [build]
-  command   = "npm ci && npm run build"
-  publish   = "dist/public"
-  functions = "netlify/functions"
+  base = "client"
+  command = "npm ci && npm run build"
+  publish = "dist"
 
 [build.environment]
   NODE_VERSION = "18"
@@ -32,7 +32,7 @@
   [headers.values]
     Cache-Control = "no-cache"
 
-# Match your actual SW filename
+# Service worker should not be cached
 [[headers]]
   for = "/sw.js"
   [headers.values]
