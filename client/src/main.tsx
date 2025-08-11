@@ -1,4 +1,3 @@
-// client/src/main.tsx
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { Router as WouterRouter } from "wouter";
