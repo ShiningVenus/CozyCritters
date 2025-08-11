@@ -28,6 +28,7 @@ Everything stays on your device because your emotional data is deeply personal.
 - [🛡️ Privacy & Security](#-privacy-promise--technical-proof)
 - [🏢 For Organizations](#-for-autism--neurodivergent-support-organizations)
 - [🛠️ Technical Details](#-tech--architecture)
+- [📚 Full Docs](docs/README.md)
 
 ---
 
