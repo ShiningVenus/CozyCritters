@@ -107,7 +107,7 @@ export function BreathingBubble({ onComplete, onExit, config }: GameProps) {
       {/* Breathing Bubble */}
       <div className="relative mb-8">
         <div
-          className={`w-32 h-32 rounded-full bg-gradient-to-br from-blue-200 to-purple-200 dark:from-blue-600 dark:to-purple-600 transition-transform duration-[4000ms] ease-in-out ${getBubbleScale()}`}
+          className={`w-32 h-32 rounded-full bg-gradient-to-br from-blue-200 to-purple-200 dark:from-blue-600 dark:to-purple-600 ${getBubbleScale()}`}
           style={{
             boxShadow: '0 0 50px rgba(59, 130, 246, 0.5)',
             transition: `transform ${phaseDurations[phase]}ms ease-in-out`

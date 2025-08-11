@@ -4,10 +4,12 @@ import { EventEmitter } from 'node:events';
 import { requestLogger } from './request-logger';
 
 test('logs API requests and calls next', (t) => {
-  const req = { method: 'GET', path: '/api/ping' } as any;
+  const req = { method: 'GET', originalUrl: '/api/ping' } as any;
   const res = new EventEmitter() as any;
   res.statusCode = 200;
   res.json = (body: any) => body;
+  res.send = (body: any) => body;
+  res.end = (chunk?: any, ...args: any[]) => chunk;
   const next = t.mock.fn();
 
   const logs: string[] = [];
