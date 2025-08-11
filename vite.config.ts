@@ -25,11 +25,10 @@ export default defineConfig(async () => ({
     },
   },
   build: {
-    outDir: "dist",        // relative to root => client/dist
+    outDir: "dist", // => client/dist
     emptyOutDir: true,
   },
   server: {
     fs: { strict: true, deny: ["**/.*"] },
   },
 }));
-
