@@ -5,6 +5,7 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Privacy First](https://img.shields.io/badge/privacy-first-gold.svg)](#-privacy-promise--technical-proof)
 [![Accessibility](https://img.shields.io/badge/accessibility-AAA-purple.svg)](#-what-v1-includes)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/0b8a2ea2-73c5-4158-b6fd-3050f6007f63/deploy-status)](https://app.netlify.com/projects/cozycritter/deploys)
 
 > A complete, production-ready app designed specifically for neurodivergent folks.
 
