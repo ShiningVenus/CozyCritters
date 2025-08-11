@@ -1,5 +1,4 @@
-
--- CozyCritters community schema (Supabase-ready)
+- CozyCritters community schema (Supabase-ready)
 -- Clean apply helper, then full schema with RLS, triggers, indexes, and a public profiles view.
 
 /* =========================================================
@@ -442,3 +441,237 @@ using (
   exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'moderator')
   and exists (select 1 from public.flags f where f.post_id = public.posts.id)
 );
+
+/* =========================================================
+   SECURITY HARDENING: roles, guardrails, mod/admin powers
+========================================================= */
+
+-- 1) Expand roles: add 'admin' to profiles.role
+alter table public.profiles
+  drop constraint if exists profiles_role_check;
+
+alter table public.profiles
+  add constraint profiles_role_check
+  check (role in ('user','moderator','admin'));
+
+-- 2) Helper predicates so we don’t copy/paste role checks
+create or replace function public.is_moderator() returns boolean
+language sql stable as $$
+  select exists (
+    select 1 from public.profiles p
+    where p.id = auth.uid() and p.role in ('moderator','admin')
+  )
+$$;
+
+create or replace function public.is_admin() returns boolean
+language sql stable as $$
+  select exists (
+    select 1 from public.profiles p
+    where p.id = auth.uid() and p.role = 'admin'
+  )
+$$;
+
+-- 3) Freeze role changes by normal users.
+--    Users can still edit their own non-privileged fields,
+--    but cannot change role unless they are admin.
+create or replace function public.block_role_change_if_not_admin()
+returns trigger language plpgsql as $$
+begin
+  if new.role is distinct from old.role and not public.is_admin() then
+    raise exception 'Only admins can change roles' using errcode = '42501';
+  end if;
+  return new;
+end $$;
+
+drop trigger if exists protect_profile_roles on public.profiles;
+create trigger protect_profile_roles
+before update on public.profiles
+for each row execute function public.block_role_change_if_not_admin();
+
+-- 4) Tighten profile policy: keep “self-manage” but forbid changing role via WITH CHECK.
+drop policy if exists "profiles upsert own" on public.profiles;
+create policy "profiles upsert own"
+on public.profiles for update
+using (auth.uid() = id)
+with check (
+  auth.uid() = id
+  and new.role = (select role from public.profiles where id = auth.uid())
+);
+
+-- Allow insert of own profile row (bootstrap safety) but force role = 'user'
+drop policy if exists "profiles insert self as user" on public.profiles;
+create policy "profiles insert self as user"
+on public.profiles for insert
+with check (
+  id = auth.uid()
+  and role = 'user'
+);
+
+-- Moderators can read all profiles; admins can update any profile (e.g., username/avatar)
+drop policy if exists "profiles moderator read" on public.profiles;
+create policy "profiles moderator read"
+on public.profiles for select
+using (public.is_moderator());
+
+drop policy if exists "profiles admin manage" on public.profiles;
+create policy "profiles admin manage"
+on public.profiles for update
+using (public.is_admin())
+with check (public.is_admin());
+
+-- 5) Flags: let reporters see their own, mods/admin see all, only mods/admin delete
+drop policy if exists "flags reporter read own" on public.flags;
+create policy "flags reporter read own"
+on public.flags for select
+using (reporter_id = auth.uid());
+
+drop policy if exists "flags moderator read" on public.flags;
+create policy "flags moderator read"
+on public.flags for select
+using (public.is_moderator());
+
+drop policy if exists "flags mod delete" on public.flags;
+create policy "flags mod delete"
+on public.flags for delete
+using (public.is_moderator());
+
+-- 6) Posts/Threads: authors manage their own; mods/admin can delete flagged or lock threads
+-- Optional: add a lock to threads that blocks new posts unless mod/admin
+alter table public.threads
+  add column if not exists is_locked boolean not null default false;
+
+-- Only moderators/admins can lock/unlock or edit any thread details
+drop policy if exists "threads mod lock" on public.threads;
+create policy "threads mod lock"
+on public.threads for update
+using (public.is_moderator())
+with check (true);
+
+-- Moderators may delete entire threads if necessary
+drop policy if exists "threads moderator delete" on public.threads;
+create policy "threads moderator delete"
+on public.threads for delete
+using (public.is_moderator());
+
+-- Prevent posting in locked threads unless moderator/admin or author editing own existing post
+create or replace function public.block_posts_in_locked_threads()
+returns trigger language plpgsql as $$
+declare v_locked boolean;
+begin
+  select t.is_locked into v_locked
+  from public.threads t
+  where t.id = coalesce(new.thread_id, old.thread_id);
+
+  if v_locked and not public.is_moderator() then
+    -- allow updating your own existing post but forbid inserts/other people editing
+    if TG_OP = 'INSERT' then
+      raise exception 'Thread is locked';
+    elsif TG_OP = 'UPDATE' and old.author_id <> auth.uid() then
+      raise exception 'Only moderators can edit posts in locked threads';
+    end if;
+  end if;
+  return case when TG_OP = 'DELETE' then old else new end;
+end $$;
+
+drop trigger if exists check_locked_thread_on_posts on public.posts;
+create trigger check_locked_thread_on_posts
+before insert or update on public.posts
+for each row execute function public.block_posts_in_locked_threads();
+
+-- Keep your existing “mods can delete flagged posts” but route through predicate
+drop policy if exists "posts moderator delete flagged" on public.posts;
+create policy "posts moderator delete flagged"
+on public.posts for delete
+using (
+  public.is_moderator()
+  and exists (select 1 from public.flags f where f.post_id = public.posts.id)
+);
+
+-- Moderators can also edit any post (for emergency content edits)
+drop policy if exists "posts moderator manage" on public.posts;
+create policy "posts moderator manage"
+on public.posts for update
+using (public.is_moderator())
+with check (public.is_moderator());
+
+-- 7) Nest membership: only nest owner or admin can add/remove people; users can leave themselves
+drop policy if exists "members view accessible" on public.nest_members;
+create policy "members view accessible"
+on public.nest_members for select
+using (
+  exists (
+    select 1 from public.nests n
+    where n.id = public.nest_members.nest_id
+      and (
+        not n.is_private
+        or n.owner_id = auth.uid()
+        or exists (
+          select 1 from public.nest_members nm
+          where nm.nest_id = n.id and nm.profile_id = auth.uid()
+        )
+      )
+  )
+);
+
+drop policy if exists "nest_members owner/admin manage" on public.nest_members;
+create policy "nest_members owner/admin manage"
+on public.nest_members for insert
+with check (
+  exists (
+    select 1 from public.nests n
+    where n.id = public.nest_members.nest_id
+      and (n.owner_id = auth.uid() or public.is_admin())
+  )
+);
+
+drop policy if exists "nest_members owner/admin delete" on public.nest_members;
+create policy "nest_members owner/admin delete"
+on public.nest_members for delete
+using (
+  exists (
+    select 1 from public.nests n
+    where n.id = public.nest_members.nest_id
+      and (n.owner_id = auth.uid() or public.is_admin())
+  )
+);
+
+-- Let a member remove themselves (leave a nest)
+drop policy if exists "nest_members self leave" on public.nest_members;
+create policy "nest_members self leave"
+on public.nest_members for delete
+using (profile_id = auth.uid());
+
+-- 8) Privileged role changes only via a SECURITY DEFINER function (optional, clean)
+create or replace function public.set_user_role(target uuid, new_role text)
+returns void
+language plpgsql
+security definer
+set search_path = public as $$
+begin
+  if not public.is_admin() then
+    raise exception 'Only admins can set roles' using errcode = '42501';
+  end if;
+  if new_role not in ('user','moderator','admin') then
+    raise exception 'Invalid role value';
+  end if;
+  update public.profiles set role = new_role where id = target;
+end $$;
+
+revoke all on function public.set_user_role(uuid, text) from public;
+grant execute on function public.set_user_role(uuid, text) to authenticated;
+
+/* =========================================================
+   PRIVILEGE GRANTS (tight defaults, RLS still enforced)
+   - No base table access for anon
+   - Authenticated can operate; RLS decides row-level access
+========================================================= */
+revoke all on all tables in schema public from anon;
+revoke all on all sequences in schema public from anon;
+
+grant select, insert, update, delete on public.profiles       to authenticated;
+grant select, insert, update, delete on public.nests          to authenticated;
+grant select, insert, update, delete on public.nest_members   to authenticated;
+grant select, insert, update, delete on public.threads        to authenticated;
+grant select, insert, update, delete on public.posts          to authenticated;
+grant select, insert, update, delete on public.reactions      to authenticated;
+grant select, insert, update, delete on public.flags          to authenticated;
