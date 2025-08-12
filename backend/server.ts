@@ -6,11 +6,12 @@ import { authMiddleware } from "./src/middleware/auth";
 import { auditLogger } from "./src/middleware/auditLogger";
 import modRoutes from "./src/routes/mod";
 import adminRoutes from "./src/routes/admin";
+import { env } from "./src/env";
 
 const app = express();
 app.use(express.json());
 app.use(helmet());
-app.use(cors({ origin: process.env.CORS_ORIGIN, credentials: true }));
+app.use(cors({ origin: env.CORS_ORIGIN, credentials: true }));
 app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 100 }));
 
 // Health check
