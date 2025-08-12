@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { gameRegistry } from '@/lib/games';
 import { Game, GameConfig, GameResult } from '@/types/game';
 import { getCompletedGames, markGameCompleted, getGameData } from '@/lib/game-progress';
+import { GameInstructions } from '@/components/game-instructions';
 
 interface MiniGamesProps {
   onBack: () => void;
@@ -11,6 +12,7 @@ interface MiniGamesProps {
 
 export default function MiniGames({ onBack }: MiniGamesProps) {
   const [currentGame, setCurrentGame] = useState<Game | null>(null);
+  const [pendingGame, setPendingGame] = useState<Game | null>(null);
   const [filter, setFilter] = useState<GameConfig['category'] | 'all'>('all');
   const [completedGames, setCompletedGames] = useState<string[]>(() => getCompletedGames());
 
@@ -31,6 +33,26 @@ export default function MiniGames({ onBack }: MiniGamesProps) {
 
   const handleGameExit = () => {
     setCurrentGame(null);
+  };
+
+  const handleSelectGame = (game: Game) => {
+    const skip = localStorage.getItem(`skip-instructions-${game.config.id}`) === 'true';
+    if (skip) {
+      setCurrentGame(game);
+    } else {
+      setPendingGame(game);
+    }
+  };
+
+  const handleStartPendingGame = () => {
+    if (pendingGame) {
+      setCurrentGame(pendingGame);
+      setPendingGame(null);
+    }
+  };
+
+  const handleCloseInstructions = () => {
+    setPendingGame(null);
   };
 
   const getCategoryIcon = (category: GameConfig['category']) => {
@@ -209,7 +231,7 @@ export default function MiniGames({ onBack }: MiniGamesProps) {
             )}
 
             <Button
-              onClick={() => setCurrentGame(game)}
+              onClick={() => handleSelectGame(game)}
               className="w-full"
             >
               {completedGames.includes(game.config.id) ? 'Play Again' : 'Start Game'}
@@ -236,6 +258,17 @@ export default function MiniGames({ onBack }: MiniGamesProps) {
           We're working on more sensory-friendly games including drawing pads, gentle puzzles, and stim-friendly activities.
         </p>
       </div>
+
+      {pendingGame && (
+        <GameInstructions
+          open={!!pendingGame}
+          gameId={pendingGame.config.id}
+          title={pendingGame.config.name}
+          description={pendingGame.config.description}
+          onStart={handleStartPendingGame}
+          onClose={handleCloseInstructions}
+        />
+      )}
     </div>
   );
 }
