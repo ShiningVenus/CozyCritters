@@ -14,6 +14,7 @@ Quick links
 - Local development: ./local-development.md
 - Architecture overview: ./architecture.md
 - Privacy & security verification: ./privacy-security.md
+- Accessibility notes: ./accessibility.md
 - Backup & export: ./backup-export.md
 - FAQ: ./faq.md
 - Contributing: ./contributing.md
