@@ -1,7 +1,14 @@
 import { Router } from "express";
+import { z } from "zod";
 import { supabase } from "../utils/supabase";
 
 const router = Router();
+
+const idSchema = z.object({ id: z.string().uuid() });
+const banSchema = z.object({
+  target_id: z.string().uuid(),
+  reason: z.string().min(1),
+});
 
 router.get("/flags", async (_req, res) => {
   const { data, error } = await supabase.from("flags").select("*");
@@ -10,7 +17,11 @@ router.get("/flags", async (_req, res) => {
 });
 
 router.patch("/posts/:id/soft-delete", async (req, res) => {
-  const { id } = req.params;
+  const result = idSchema.safeParse(req.params);
+  if (!result.success) {
+    return res.status(400).json({ error: result.error.flatten() });
+  }
+  const { id } = result.data;
   const { data, error } = await supabase
     .from("posts")
     .update({ deleted: true })
@@ -20,7 +31,11 @@ router.patch("/posts/:id/soft-delete", async (req, res) => {
 });
 
 router.post("/bans", async (req, res) => {
-  const { target_id, reason } = req.body;
+  const result = banSchema.safeParse(req.body);
+  if (!result.success) {
+    return res.status(400).json({ error: result.error.flatten() });
+  }
+  const { target_id, reason } = result.data;
   const { data, error } = await supabase
     .from("bans")
     .insert({ target_id, reason, status: "pending" });
