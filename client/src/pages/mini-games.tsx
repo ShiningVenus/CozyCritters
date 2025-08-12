@@ -3,13 +3,9 @@ import { ArrowLeft, Filter, Star, Clock, Target, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { gameRegistry } from '@/lib/games';
 import { Game, GameConfig, GameResult } from '@/types/game';
-import {
-  getCompletedGames,
-  getFavoriteGames,
-  markGameCompleted,
-  getGameData,
-  toggleFavoriteGame,
-} from '@/lib/game-progress';
+import { getCompletedGames, markGameCompleted, getGameData } from '@/lib/game-progress';
+import { GameInstructions } from '@/components/game-instructions';
+
 
 interface MiniGamesProps {
   onBack: () => void;
@@ -17,8 +13,8 @@ interface MiniGamesProps {
 
 export default function MiniGames({ onBack }: MiniGamesProps) {
   const [currentGame, setCurrentGame] = useState<Game | null>(null);
-  const [filter, setFilter] =
-    useState<GameConfig['category'] | 'all' | 'completed' | 'favorites'>('all');
+  const [pendingGame, setPendingGame] = useState<Game | null>(null);
+  const [filter, setFilter] = useState<GameConfig['category'] | 'all'>('all');
   const [completedGames, setCompletedGames] = useState<string[]>(() => getCompletedGames());
   const [favoriteGames, setFavoriteGames] = useState<string[]>(() => getFavoriteGames());
 
@@ -46,6 +42,25 @@ export default function MiniGames({ onBack }: MiniGamesProps) {
     setCurrentGame(null);
   };
 
+  const handleSelectGame = (game: Game) => {
+    const skip = localStorage.getItem(`skip-instructions-${game.config.id}`) === 'true';
+    if (skip) {
+      setCurrentGame(game);
+    } else {
+      setPendingGame(game);
+    }
+  };
+
+  const handleStartPendingGame = () => {
+    if (pendingGame) {
+      setCurrentGame(pendingGame);
+      setPendingGame(null);
+    }
+  };
+
+  const handleCloseInstructions = () => {
+    setPendingGame(null);
+=======
   const handleToggleFavorite = (id: string) => {
     toggleFavoriteGame(id);
     setFavoriteGames(getFavoriteGames());
@@ -263,7 +278,7 @@ export default function MiniGames({ onBack }: MiniGamesProps) {
             )}
 
             <Button
-              onClick={() => setCurrentGame(game)}
+              onClick={() => handleSelectGame(game)}
               className="w-full"
             >
               {completedGames.includes(game.config.id) ? 'Play Again' : 'Start Game'}
@@ -290,6 +305,16 @@ export default function MiniGames({ onBack }: MiniGamesProps) {
           We're working on more sensory-friendly games including drawing pads, gentle puzzles, and stim-friendly activities.
         </p>
       </div>
+
+      {pendingGame && (
+        <GameInstructions
+          gameId={pendingGame.config.id}
+          title={pendingGame.config.name}
+          description={pendingGame.config.description}
+          onStart={handleStartPendingGame}
+          onClose={handleCloseInstructions}
+        />
+      )}
     </div>
   );
 }
