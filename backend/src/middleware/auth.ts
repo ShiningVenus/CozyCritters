@@ -1,43 +1,28 @@
 import { Request, Response, NextFunction } from "express";
-import jwt from "jsonwebtoken";
-import jwksClient from "jwks-rsa";
-import { supabase } from "../utils/supabase";
-import { env } from "../env";
 
-const client = jwksClient({
-  jwksUri: env.SUPABASE_JWKS_URL,
-});
+// In-memory map of API keys to roles
+const keyRoleMap: Record<string, string> = {
+  [process.env.API_KEY || ""]: "admin",
+};
 
-function getKey(header: any, callback: any) {
-  client.getSigningKey(header.kid, function (err, key) {
-    const signingKey = key?.getPublicKey();
-    callback(err, signingKey);
-  });
-}
+export function simpleAuth(allowedRoles: string[]) {
+  return (req: Request, res: Response, next: NextFunction) => {
+    const key = req.headers["x-api-key"];
 
-export function authMiddleware(allowedRoles: string[]) {
-  return async (req: Request, res: Response, next: NextFunction) => {
-    const authHeader = req.headers.authorization;
-    if (!authHeader?.startsWith("Bearer ")) {
+    if (typeof key !== "string" || key !== process.env.API_KEY) {
       return res.status(401).json({ error: "Unauthorized" });
     }
-    const token = authHeader.split(" ")[1];
 
-    jwt.verify(token, getKey, { algorithms: ["RS256"] }, async (err, decoded: any) => {
-      if (err) return res.status(401).json({ error: "Invalid token" });
+    const role = keyRoleMap[key];
+    if (!role) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
 
-      const { data: profile } = await supabase
-        .from("profiles")
-        .select("id, role")
-        .eq("id", decoded.sub)
-        .single();
+    if (!allowedRoles.includes(role)) {
+      return res.status(403).json({ error: "Forbidden" });
+    }
 
-      if (!profile || !allowedRoles.includes(profile.role)) {
-        return res.status(403).json({ error: "Forbidden" });
-      }
-
-      (req as any).user = profile;
-      next();
-    });
+    (req as any).user = { id: key, role };
+    next();
   };
 }

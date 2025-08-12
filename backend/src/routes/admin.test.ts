@@ -1,8 +1,14 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import express from 'express';
+
+process.env.SUPABASE_URL = 'http://localhost';
+process.env.SUPABASE_SERVICE_ROLE_KEY = 'service';
+process.env.SUPABASE_JWKS_URL = 'http://localhost/jwks';
+process.env.CORS_ORIGIN = '*';
+
 const { supabase } = await import('../utils/supabase');
-import adminRoutes from './admin';
+const { default: adminRoutes } = await import('./admin');
 
 test('approves a ban', async (t) => {
   const app = express();
@@ -16,18 +22,21 @@ test('approves a ban', async (t) => {
   t.mock.method(supabase, 'from', () => ({ update }));
 
   const server = app.listen(0);
-  t.teardown(() => server.close());
   await new Promise((resolve) => server.once('listening', resolve));
   const port = (server.address() as any).port;
 
-  const res = await fetch(`http://127.0.0.1:${port}/admin/bans/${id}/approve`, {
-    method: 'PATCH',
-  });
-  const body = await res.json();
+  try {
+    const res = await fetch(`http://127.0.0.1:${port}/admin/bans/${id}/approve`, {
+      method: 'PATCH',
+    });
+    const body = await res.json();
 
-  assert.equal(res.status, 200);
-  assert.equal(eq.mock.calls[0].arguments[0], 'id');
-  assert.equal(eq.mock.calls[0].arguments[1], id);
-  assert.equal(update.mock.calls[0].arguments[0].status, 'approved');
-  assert.equal(body[0].status, 'approved');
+    assert.equal(res.status, 200);
+    assert.equal(eq.mock.calls[0].arguments[0], 'id');
+    assert.equal(eq.mock.calls[0].arguments[1], id);
+    assert.equal(update.mock.calls[0].arguments[0].status, 'approved');
+    assert.equal(body[0].status, 'approved');
+  } finally {
+    server.close();
+  }
 });

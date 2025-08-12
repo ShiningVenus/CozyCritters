@@ -1,6 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
+process.env.SUPABASE_URL = 'http://localhost';
+process.env.SUPABASE_SERVICE_ROLE_KEY = 'service';
+process.env.SUPABASE_JWKS_URL = 'http://localhost/jwks';
+process.env.CORS_ORIGIN = '*';
+
 const { auditLogger } = await import('./auditLogger');
 const { supabase } = await import('../utils/supabase');
 
