@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { z } from "zod";
 import fs from "node:fs/promises";
-import { createHash } from "node:crypto";
+import bcrypt from "bcryptjs";
 import { env } from "../env";
 
 // Access to these routes is restricted via an API key in the `x-api-key` header.
@@ -46,8 +46,8 @@ router.post("/htaccess/users", async (req, res) => {
   }
   const { username, password } = result.data;
   try {
-    const digest = createHash("sha1").update(password).digest("base64");
-    await fs.appendFile(env.HTPASSWD_PATH, `${username}:{SHA}${digest}\n`);
+    const hash = bcrypt.hashSync(password, 10);
+    await fs.appendFile(env.HTPASSWD_PATH, `${username}:${hash}\n`);
     res.json({ success: true });
   } catch (error) {
     res.status(500).json({ error: "Failed to update htpasswd" });
