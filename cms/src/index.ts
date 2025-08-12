@@ -7,16 +7,34 @@ import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
 
-// --- Minimal Upload Setup ---
+// --- Minimal Upload Setup with File Type Restriction ---
 const uploadDir = path.join(process.cwd(), 'uploads');
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
 }
+
+// Accept only basic file types: images, plain text, and PDFs
+const ALLOWED_MIME = [
+  'image/png',
+  'image/jpeg',
+  'image/gif',
+  'image/webp',
+  'application/pdf',
+  'text/plain'
+];
+
 const storage = multer.diskStorage({
   destination: (_req, _file, cb) => cb(null, uploadDir),
   filename: (_req, file, cb) => cb(null, Date.now() + '-' + file.originalname)
 });
-const upload = multer({ storage });
+const fileFilter: multer.Options['fileFilter'] = (_req, file, cb) => {
+  if (ALLOWED_MIME.includes(file.mimetype)) {
+    cb(null, true);
+  } else {
+    cb(new Error('File type not allowed'), false);
+  }
+};
+const upload = multer({ storage, fileFilter });
 // --- End Upload Setup ---
 
 const app = express();
@@ -38,7 +56,7 @@ app.use(express.json());
 // --- Upload endpoint ---
 app.post('/upload', upload.single('file'), (req, res) => {
   if (!req.file) {
-    return res.status(400).json({ error: 'No file uploaded' });
+    return res.status(400).json({ error: 'No file uploaded or file type not allowed' });
   }
   res.json({
     filename: req.file.filename,
