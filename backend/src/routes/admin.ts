@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { z } from "zod";
 
-// Access to these routes is expected to be restricted via `.htaccess`.
+// Access to these routes is restricted via an API key in the `x-api-key` header.
 // Supabase is not used for authentication here.
 const router = Router();
 
