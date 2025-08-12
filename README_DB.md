@@ -27,7 +27,7 @@ Run this first when re-applying to a dirty DB. It drops conflicting policies and
 ```sql
 -- Drop conflicting RLS policies safely (no-ops if missing)
 do $$
-delcare r record;
+declare r record;
 begin
   for r in
     select polname, schemaname, tablename
