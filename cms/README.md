@@ -8,6 +8,18 @@ A lightweight Express server that stores editable site content in local JSON fil
 - Secured admin endpoints with HTTP Basic Auth
 
 ## Setup
+
+### Quick start
+Run the helper script to install dependencies, create an `.env` file, and start the server:
+
+```bash
+cd cms
+./install.sh
+```
+
+The script verifies Node (18 or newer) and `npm`, installs packages, copies `.env.example` to `.env`, prompts for `CMS_USER` and `CMS_PASS` (generating strong random values if left blank) and copies them to your clipboard, then builds and launches the server.
+
+### Manual steps
 1. Install dependencies
    ```bash
    cd cms
