@@ -28,6 +28,22 @@ Cozy Critter is built with privacy by default.
 - You can export your data (see [backup-export.md](./backup-export.md)).
 - Backups are plain JSON—keep them secure.
 
+## User Data Management (Supabase)
+
+For self-hosted deployments that include the Supabase backend, two RPCs help users manage their data:
+
+- `export_user_data` – returns a JSON document containing the user’s profile, posts, reactions, and nest memberships.
+- `delete_user_account` – removes the authenticated user and cascades deletes to related rows.
+
+Example usage with the provided TypeScript helpers:
+
+```ts
+import { exportUserData, deleteUserAccount } from '../backend/ts/user_privacy';
+
+const { data } = await exportUserData(supabase);
+await deleteUserAccount(supabase);
+```
+
 ## Reporting Issues
 
 - Privacy or security concern? Please open an issue or email the maintainer.
