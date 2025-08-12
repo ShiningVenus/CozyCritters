@@ -1,4 +1,5 @@
 import type { Request, Response, NextFunction } from 'express';
+import { timingSafeEqual } from 'crypto';
 
 const DEFAULT_USER = 'admin';
 const DEFAULT_PASS = 'change-me';
@@ -18,8 +19,36 @@ export function requireAuth(req: Request, res: Response, next: NextFunction) {
     return res.status(401).send('Authentication required');
   }
 
-  const [user, pass] = Buffer.from(auth.split(' ')[1], 'base64').toString().split(':');
-  if (user === ADMIN_USER && pass === ADMIN_PASS) {
+  let credentials: string;
+  try {
+    credentials = Buffer.from(auth.split(' ')[1], 'base64').toString();
+  } catch {
+    res.set('WWW-Authenticate', 'Basic realm="cms"');
+    return res.status(400).send('Invalid authorization header');
+  }
+
+  const separator = credentials.indexOf(':');
+  if (separator === -1) {
+    res.set('WWW-Authenticate', 'Basic realm="cms"');
+    return res.status(400).send('Invalid authorization header');
+  }
+
+  const user = credentials.slice(0, separator);
+  const pass = credentials.slice(separator + 1);
+
+  const userBuf = Buffer.from(user);
+  const passBuf = Buffer.from(pass);
+  const adminUserBuf = Buffer.from(ADMIN_USER);
+  const adminPassBuf = Buffer.from(ADMIN_PASS);
+
+  const userMatch =
+    userBuf.length === adminUserBuf.length &&
+    timingSafeEqual(userBuf, adminUserBuf);
+  const passMatch =
+    passBuf.length === adminPassBuf.length &&
+    timingSafeEqual(passBuf, adminPassBuf);
+
+  if (userMatch && passMatch) {
     return next();
   }
 
