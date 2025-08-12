@@ -9,6 +9,8 @@ const app = express();
 app.use(express.json());
 app.use(requestLogger);
 
+app.get("/ping", (_req, res) => res.json({ ok: true }));
+
 const modRoles = ["moderator", "admin"];
 const adminRoles = ["admin"];
 
