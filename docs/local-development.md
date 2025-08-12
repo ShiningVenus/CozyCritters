@@ -21,20 +21,16 @@ Want to hack on Cozy Critter? Here’s how to get started.
    ```bash
    npm run dev
    ```
-   The app will be available on `http://localhost:3000` or similar.
+   The app will be available on `http://localhost:5173`.
 
 3. **Make changes**
    - Code is reloaded on save.
-   - The main app is usually in `src/`.
+   - The main app is in `client/src/`.
 
 4. **Build for production**
    ```bash
    npm run build
    ```
-
-## Linting & Formatting
-
-- Run `npm run lint` and `npm run format` (if available).
 
 ## Testing
 
