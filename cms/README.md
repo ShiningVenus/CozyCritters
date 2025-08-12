@@ -31,6 +31,8 @@ The script verifies Node (18 or newer) and `npm`, installs packages, copies `.en
    # edit .env as needed
    ```
 
+**Security note:** Before deploying to production, set `CMS_USER` and `CMS_PASS` to secure values. The server throws an error on startup if these variables remain `admin`/`change-me` when `NODE_ENV` is `production`.
+
 ## Scripts
 - `npm run dev` – start the server in watch mode
 - `npm run build` – compile TypeScript to `dist/`
