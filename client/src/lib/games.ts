@@ -2,6 +2,7 @@ import { gameRegistry } from './game-registry';
 import { BreathingBubble } from '@/games/breathing-bubble';
 import { ColorPattern } from '@/games/color-pattern';
 import { DrawingPad } from '@/games/drawing-pad';
+import { ShapeMatch } from '@/games/shape-match';
 
 // Register all games
 gameRegistry.register({
@@ -40,6 +41,25 @@ gameRegistry.register({
     tags: ['memory', 'focus', 'patterns', 'colors', 'concentration']
   },
   Component: ColorPattern
+});
+
+gameRegistry.register({
+  config: {
+    id: 'shape-match',
+    name: 'Shape Match',
+    description: 'Flip cards to find matching shapes. A gentle memory challenge.',
+    emoji: '🔷',
+    category: 'focus',
+    difficulty: 'easy',
+    estimatedTime: '2-5 min',
+    accessibility: {
+      motionSensitive: false,
+      soundRequired: false,
+      colorBlindFriendly: true
+    },
+    tags: ['memory', 'matching', 'shapes', 'focus']
+  },
+  Component: ShapeMatch
 });
 
 gameRegistry.register({
