@@ -5,6 +5,7 @@ import { LoadingPage } from "@/components/loading";
 
 const Home = React.lazy(() => import("@/pages/home"));
 const GamesPage = React.lazy(() => import("@/pages/games-page"));
+const ThemeCustomizer = React.lazy(() => import("@/pages/ThemeCustomizer"));
 const NotFound = React.lazy(() => import("@/pages/not-found"));
 
 export default function AppRoutes() {
@@ -13,6 +14,7 @@ export default function AppRoutes() {
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/games" component={GamesPage} />
+        <Route path="/settings/theme" component={ThemeCustomizer} />
         <Route component={NotFound} />
       </Switch>
     </Suspense>
