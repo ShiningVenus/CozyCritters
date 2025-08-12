@@ -212,12 +212,6 @@ That's it! 🎉 No database setup, no API keys, no complicated configuration.
 npm test
 ```
 
-`bcryptjs` is mocked for environments where the package cannot be installed. The mock lives at `backend/__mocks__/bcryptjs.ts` and provides minimal hashing helpers so tests can run without the real dependency. To use the actual library locally, install it and remove or rename the mock file so Node resolves the real module instead:
-
-```bash
-npm install bcryptjs
-```
-
 ## 🔐 Privacy Promise + Technical Proof
 
 ### 🎯 Our Claims
