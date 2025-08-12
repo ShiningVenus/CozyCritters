@@ -1,8 +1,8 @@
 import { Router } from "express";
 import { z } from "zod";
 
-// Access to these routes is restricted via an API key in the `x-api-key` header.
-// Supabase is not used for authentication here.
+// Access to these routes is restricted via JWT bearer tokens with
+// appropriate roles supplied by the authentication layer.
 const router = Router();
 
 const idSchema = z.object({ id: z.string().uuid() });
