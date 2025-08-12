@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Trash2, Shield, Database, ArrowLeft, AlertTriangle, Check, Eye, Code, Globe } from "lucide-react";
+import { Trash2, Shield, Database, ArrowLeft, AlertTriangle, Check, Eye, Code, Globe, Palette } from "lucide-react";
 import { moodStorage } from "@/lib/mood-storage";
 import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
 import { 
   AlertDialog, 
   AlertDialogAction, 
@@ -101,6 +102,14 @@ export function PrivacySettings({ onBack }: PrivacySettingsProps) {
           <p className="text-sm text-muted-foreground">Your data, your control</p>
         </div>
       </div>
+
+      {/* Theme Customizer Link */}
+      <Link href="/settings/theme">
+        <Button variant="outline" className="w-full justify-start gap-2">
+          <Palette size={16} />
+          Customize Theme
+        </Button>
+      </Link>
 
       {/* App Version */}
       <div className="bg-muted/30 dark:bg-muted/10 rounded-lg p-3">
