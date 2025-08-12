@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Filter, Star, Clock, Target } from 'lucide-react';
+import { ArrowLeft, Filter, Star, Clock, Target, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { gameRegistry } from '@/lib/games';
 import { Game, GameConfig, GameResult } from '@/types/game';
-import { getCompletedGames, markGameCompleted, getGameData } from '@/lib/game-progress';
+import {
+  getCompletedGames,
+  getFavoriteGames,
+  markGameCompleted,
+  getGameData,
+  toggleFavoriteGame,
+} from '@/lib/game-progress';
 
 interface MiniGamesProps {
   onBack: () => void;
@@ -11,13 +17,20 @@ interface MiniGamesProps {
 
 export default function MiniGames({ onBack }: MiniGamesProps) {
   const [currentGame, setCurrentGame] = useState<Game | null>(null);
-  const [filter, setFilter] = useState<GameConfig['category'] | 'all'>('all');
+  const [filter, setFilter] =
+    useState<GameConfig['category'] | 'all' | 'completed' | 'favorites'>('all');
   const [completedGames, setCompletedGames] = useState<string[]>(() => getCompletedGames());
+  const [favoriteGames, setFavoriteGames] = useState<string[]>(() => getFavoriteGames());
 
   const allGames = gameRegistry.getAllGames();
-  const filteredGames = filter === 'all' 
-    ? allGames 
-    : gameRegistry.getGamesByCategory(filter);
+  const filteredGames =
+    filter === 'all'
+      ? allGames
+      : filter === 'completed'
+      ? allGames.filter((g) => completedGames.includes(g.config.id))
+      : filter === 'favorites'
+      ? allGames.filter((g) => favoriteGames.includes(g.config.id))
+      : gameRegistry.getGamesByCategory(filter);
 
   const handleGameComplete = (result: GameResult) => {
     if (currentGame) {
@@ -31,6 +44,11 @@ export default function MiniGames({ onBack }: MiniGamesProps) {
 
   const handleGameExit = () => {
     setCurrentGame(null);
+  };
+
+  const handleToggleFavorite = (id: string) => {
+    toggleFavoriteGame(id);
+    setFavoriteGames(getFavoriteGames());
   };
 
   const getCategoryIcon = (category: GameConfig['category']) => {
@@ -107,7 +125,17 @@ export default function MiniGames({ onBack }: MiniGamesProps) {
 
       {/* Filter Tabs */}
       <div className="flex flex-wrap gap-2">
-        {(['all', 'calming', 'focus', 'sensory', 'creative'] as const).map((category) => (
+        {(
+          [
+            'all',
+            'completed',
+            'favorites',
+            'calming',
+            'focus',
+            'sensory',
+            'creative',
+          ] as const
+        ).map((category) => (
           <Button
             key={category}
             onClick={() => setFilter(category)}
@@ -115,8 +143,20 @@ export default function MiniGames({ onBack }: MiniGamesProps) {
             size="sm"
             className="gap-2"
           >
-            <Filter size={14} />
-            {category === 'all' ? 'All Games' : category.charAt(0).toUpperCase() + category.slice(1)}
+            {category === 'completed' ? (
+              <Star size={14} />
+            ) : category === 'favorites' ? (
+              <Heart size={14} />
+            ) : (
+              <Filter size={14} />
+            )}
+            {category === 'all'
+              ? 'All Games'
+              : category === 'completed'
+              ? 'Completed'
+              : category === 'favorites'
+              ? 'Favorites'
+              : category.charAt(0).toUpperCase() + category.slice(1)}
           </Button>
         ))}
       </div>
@@ -145,14 +185,28 @@ export default function MiniGames({ onBack }: MiniGamesProps) {
                   </p>
                 </div>
               </div>
-              <div className="text-right">
-                <div className="text-xs text-muted-foreground flex items-center gap-1 mb-1">
-                  <Clock size={12} />
-                  {game.config.estimatedTime}
-                </div>
-                <div className="text-xs text-muted-foreground flex items-center gap-1">
-                  <Target size={12} />
-                  {game.config.difficulty}
+              <div className="flex items-start gap-2">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => handleToggleFavorite(game.config.id)}
+                  className="h-6 w-6 p-0"
+                  aria-label="Toggle favorite"
+                >
+                  <Heart
+                    size={16}
+                    className={favoriteGames.includes(game.config.id) ? 'text-red-500 fill-current' : ''}
+                  />
+                </Button>
+                <div className="text-right">
+                  <div className="text-xs text-muted-foreground flex items-center gap-1 mb-1">
+                    <Clock size={12} />
+                    {game.config.estimatedTime}
+                  </div>
+                  <div className="text-xs text-muted-foreground flex items-center gap-1">
+                    <Target size={12} />
+                    {game.config.difficulty}
+                  </div>
                 </div>
               </div>
             </div>

@@ -6,6 +6,7 @@ export interface GameProgressEntry {
   completed: boolean;
   lastPlayed: number;
   highScore?: number;
+  favorite?: boolean;
 }
 
 interface GameProgressMap {
@@ -30,9 +31,23 @@ export function getCompletedGames(): string[] {
   return Object.keys(progress).filter((id) => progress[id].completed);
 }
 
+export function getFavoriteGames(): string[] {
+  const progress = loadProgress();
+  return Object.keys(progress).filter((id) => progress[id].favorite);
+}
+
 export function getGameData(id: string): GameProgressEntry | undefined {
   const progress = loadProgress();
   return progress[id];
+}
+
+export function toggleFavoriteGame(id: string): boolean {
+  const progress = loadProgress();
+  const existing = progress[id] || { completed: false, lastPlayed: 0 };
+  const favorite = !existing.favorite;
+  progress[id] = { ...existing, favorite };
+  saveProgress(progress);
+  return favorite;
 }
 
 export function markGameCompleted(id: string, result?: GameResult): void {
@@ -44,6 +59,7 @@ export function markGameCompleted(id: string, result?: GameResult): void {
       : existing?.highScore;
 
   progress[id] = {
+    ...existing,
     completed: true,
     lastPlayed: Date.now(),
     highScore,
