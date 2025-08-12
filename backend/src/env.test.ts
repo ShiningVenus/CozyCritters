@@ -24,6 +24,8 @@ test('uses defaults in development', () => {
   const parsed = JSON.parse(result.stdout.trim());
   assert.equal(parsed.JWT_SECRET, 'dev-secret');
   assert.equal(parsed.HTPASSWD_PATH, '.htpasswd');
+  assert.equal(parsed.RATE_LIMIT_WINDOW_MINUTES, 15);
+  assert.equal(parsed.RATE_LIMIT_MAX, 100);
 });
 
 test('throws when required env vars missing in production', () => {
