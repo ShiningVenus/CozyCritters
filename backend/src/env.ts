@@ -4,7 +4,6 @@ const envSchema = z.object({
   SUPABASE_URL: z.string().url(),
   SUPABASE_SERVICE_ROLE_KEY: z.string().min(1),
   SUPABASE_JWKS_URL: z.string().url(),
-  CORS_ORIGIN: z.string().min(1),
 });
 
 const _env = envSchema.safeParse(process.env);
