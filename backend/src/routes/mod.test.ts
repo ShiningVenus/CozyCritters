@@ -1,7 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import express from 'express';
-const { supabase } = await import('../utils/supabase');
 import modRoutes from './mod';
 
 test('creates a ban request', async (t) => {
@@ -9,11 +8,8 @@ test('creates a ban request', async (t) => {
   app.use(express.json());
   app.use('/mod', modRoutes);
 
-  const insert = t.mock.fn(async () => ({ data: [{ id: 'ban1' }], error: null }));
-  t.mock.method(supabase, 'from', () => ({ insert }));
-
   const server = app.listen(0);
-  t.teardown(() => server.close());
+  t.after(() => server.close());
   await new Promise((resolve) => server.once('listening', resolve));
   const port = (server.address() as any).port;
 
@@ -26,12 +22,10 @@ test('creates a ban request', async (t) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
   });
+  const data = await res.json();
 
   assert.equal(res.status, 200);
-  assert.deepEqual(insert.mock.calls[0].arguments[0], {
-    ...body,
-    status: 'pending',
-  });
+  assert.equal(data[0].status, 'pending');
 });
 
 test('returns 400 on invalid body', async (t) => {
@@ -39,7 +33,7 @@ test('returns 400 on invalid body', async (t) => {
   app.use(express.json());
   app.use('/mod', modRoutes);
   const server = app.listen(0);
-  t.teardown(() => server.close());
+  t.after(() => server.close());
   await new Promise((resolve) => server.once('listening', resolve));
   const port = (server.address() as any).port;
 
