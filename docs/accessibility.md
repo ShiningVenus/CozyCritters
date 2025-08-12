@@ -9,7 +9,7 @@ Cozy Critter aims to provide an inclusive experience.
 - Respects motion and contrast preferences
 
 ## Testing
-- Basic checks are run in `scripts/accessibility-test.ts`
+- Basic checks are available by running `node scripts/accessibility-test.ts`
 - A manual audit script is available: open the app in development and run `runAccessibilityAudit()` in the browser console
 
 ## Limitations

@@ -20,6 +20,7 @@ You own your data with Cozy Critter! Here’s how to back it up or move it to an
 - Backups are not encrypted. Store them safely!
 - Only import backups from a trusted source.
 - Data is stored in your browser’s localStorage.
+- See [privacy and security](./privacy-security.md) for more context.
 
 ## Troubleshooting
 

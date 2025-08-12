@@ -2,6 +2,8 @@
 
 A lightweight Express server that stores editable site content in local JSON files. It manages moods, games, and general pages used by the frontend.
 
+The CMS is optional; the core app runs entirely in the browser.
+
 ## Features
 - File-based storage (`cms/data/*.json`)
 - REST endpoints for public content retrieval

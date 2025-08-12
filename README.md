@@ -11,6 +11,7 @@
 
 
 Cozy Critter is a private mood tracking app that actually understands ND life.
+It is open source and simple to self-host.
 
 What makes it different:
 - 🚫 No overwhelming interfaces

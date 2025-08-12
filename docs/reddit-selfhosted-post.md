@@ -1,6 +1,6 @@
-# Reddit r/selfhosted Post Draft (ignore this for now!)
+# Reddit r/selfhosted Post
 
-Here’s a draft you can use to share Cozy Critter with the self-hosting community:
+Use this message to share Cozy Critter with the self-hosting community:
 
 ---
 
@@ -17,4 +17,4 @@ Hi r/selfhosted! I built Cozy Critter, a gentle, privacy-focused mood tracker we
 
 **Get it:** [GitHub repo](https://github.com/CatgirlRika/CozyCritters)
 
-Try it out, self-host it, and let me know what you think!
+Try it out, self-host it, and let the community know what you think!

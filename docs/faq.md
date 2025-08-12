@@ -31,3 +31,7 @@ See [contributing.md](./contributing.md).
 ## Is there a dark mode?
 
 Check the app settings! (Most versions include this.)
+
+## Does the app require a backend?
+
+No. All data stays in your browser. An optional CMS is available for managing content, but it's not required for personal use.

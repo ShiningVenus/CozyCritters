@@ -4,9 +4,7 @@
 
 ## Checklist
 
-- [ ] Used the scripts
-- [ ] No keys in code
-- [ ] Ran `npm run db:push`
-- [ ] Ran `npm run db:seed` and tested mod tools
-- [ ] Clear, short labels
-- [ ] Content warnings added if needed
+- [ ] Tests pass (`npm test`)
+- [ ] Type checks pass (`npm run check`)
+- [ ] Documentation updated if needed
+- [ ] No secrets or keys committed

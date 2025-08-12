@@ -1,6 +1,6 @@
 # Privacy Policy
 
-**Last updated: August 7th 2025**
+**Last updated: January 14, 2025**
 
 ## The Simple Version
 
