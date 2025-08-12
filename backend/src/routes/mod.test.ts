@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import express from 'express';
 import modRoutes from './mod';
-import { bans, posts } from '../store';
+import { bans, posts, flags } from '../store';
 
 async function setupApp(t: test.TestContext) {
   const app = express();
@@ -36,6 +36,22 @@ test('creates a ban request', async (t) => {
   assert.equal(res.status, 200);
   assert.equal(bans.find((b) => b.id === id)?.status, 'pending');
   assert.equal(bans.find((b) => b.id === id)?.target_id, body.target_id);
+});
+
+test('returns flags', async (t) => {
+  const { port } = await setupApp(t);
+  const id = '00000000-0000-0000-0000-000000000006';
+  flags.push({ id });
+  t.after(() => {
+    const i = flags.findIndex((f) => f.id === id);
+    if (i !== -1) flags.splice(i, 1);
+  });
+
+  const res = await fetch(`http://127.0.0.1:${port}/mod/flags`);
+  const data = await res.json();
+
+  assert.equal(res.status, 200);
+  assert.equal(data.find((f: any) => f.id === id)?.id, id);
 });
 
 test('returns 400 on invalid body', async (t) => {
