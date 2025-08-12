@@ -3,7 +3,6 @@ import helmet from "helmet";
 import cors from "cors";
 import rateLimit from "express-rate-limit";
 import { authMiddleware } from "./src/middleware/auth";
-import { auditLogger } from "./src/middleware/auditLogger";
 import modRoutes from "./src/routes/mod";
 import adminRoutes from "./src/routes/admin";
 import { env } from "./src/env";
@@ -18,8 +17,8 @@ app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 100 }));
 app.get("/health", (_req, res) => res.json({ status: "ok" }));
 
 // Protected routes
-app.use("/mod", authMiddleware(["moderator", "admin"]), auditLogger, modRoutes);
-app.use("/admin", authMiddleware(["admin"]), auditLogger, adminRoutes);
+app.use("/mod", authMiddleware(["moderator", "admin"]), modRoutes);
+app.use("/admin", authMiddleware(["admin"]), adminRoutes);
 
 const port = process.env.PORT || 4000;
 app.listen(port, () => {
