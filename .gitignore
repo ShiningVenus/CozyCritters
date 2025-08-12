@@ -11,11 +11,11 @@ build
 server/public
 
 # Environment files
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+**/.env
+**/.env.local
+**/.env.development.local
+**/.env.test.local
+**/.env.production.local
 
 # IDE and editor files
 .vscode/
@@ -82,4 +82,5 @@ vite.config.ts.*
 
 # Replit specific
 .replit
+
 replit.nix
