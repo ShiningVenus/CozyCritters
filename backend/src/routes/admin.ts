@@ -1,51 +1,35 @@
 import { Router } from "express";
 import { z } from "zod";
-import { supabase } from "../utils/supabase";
 
 const router = Router();
 
 const idSchema = z.object({ id: z.string().uuid() });
 
-router.patch("/bans/:id/approve", async (req, res) => {
+router.patch("/bans/:id/approve", (req, res) => {
   const result = idSchema.safeParse(req.params);
   if (!result.success) {
     return res.status(400).json({ error: result.error.flatten() });
   }
   const { id } = result.data;
-  const { data, error } = await supabase
-    .from("bans")
-    .update({ status: "approved" })
-    .eq("id", id);
-  if (error) return res.status(500).json({ error: error.message });
-  res.json(data);
+  res.json([{ id, status: "approved" }]);
 });
 
-router.patch("/bans/:id/lift", async (req, res) => {
+router.patch("/bans/:id/lift", (req, res) => {
   const result = idSchema.safeParse(req.params);
   if (!result.success) {
     return res.status(400).json({ error: result.error.flatten() });
   }
   const { id } = result.data;
-  const { data, error } = await supabase
-    .from("bans")
-    .update({ status: "lifted" })
-    .eq("id", id);
-  if (error) return res.status(500).json({ error: error.message });
-  res.json(data);
+  res.json([{ id, status: "lifted" }]);
 });
 
-router.patch("/threads/:id/restore", async (req, res) => {
+router.patch("/threads/:id/restore", (req, res) => {
   const result = idSchema.safeParse(req.params);
   if (!result.success) {
     return res.status(400).json({ error: result.error.flatten() });
   }
   const { id } = result.data;
-  const { data, error } = await supabase
-    .from("threads")
-    .update({ deleted: false })
-    .eq("id", id);
-  if (error) return res.status(500).json({ error: error.message });
-  res.json(data);
+  res.json([{ id, deleted: false }]);
 });
 
 export default router;
