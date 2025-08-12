@@ -84,6 +84,7 @@ create table if not exists public.posts (
   thread_id uuid not null references public.threads(id) on delete cascade,
   author_id uuid not null references public.profiles(id) on delete cascade,
   content text not null,
+  is_anonymous boolean not null default false,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now(),
   expires_at timestamptz not null default now() + interval '90 days'
@@ -127,6 +128,53 @@ create index if not exists flags_post_idx on public.flags(post_id);
 create index if not exists flags_reporter_idx on public.flags(reporter_id);
 create index if not exists posts_expires_at_idx on public.posts(expires_at);
 create index if not exists flags_expires_at_idx on public.flags(expires_at);
+
+/* =========================================================
+   Views
+========================================================= */
+create or replace view public.posts_redacted as
+select
+  p.id,
+  p.thread_id,
+  case
+    when p.is_anonymous and not (public.is_moderator() or p.author_id = auth.uid())
+      then null
+      else p.author_id
+  end as author_id,
+  p.content,
+  p.created_at,
+  p.updated_at,
+  p.is_anonymous,
+  p.expires_at
+from public.posts p;
+
+revoke select on public.posts from anon, authenticated;
+grant select on public.posts_redacted to anon, authenticated;
+
+/* =========================================================
+   Anonymous post RPC
+========================================================= */
+create or replace function public.create_anonymous_post(
+  p_thread uuid,
+  p_content text
+) returns table (
+  id uuid,
+  thread_id uuid,
+  content text,
+  created_at timestamptz,
+  surrogate_name text
+) language plpgsql
+security invoker as $$
+declare
+  v_post public.posts;
+  v_name text;
+begin
+  v_name := 'anon-' || substr(md5(random()::text),1,8);
+  insert into public.posts(thread_id, author_id, content, is_anonymous)
+  values (p_thread, auth.uid(), p_content, true)
+  returning * into v_post;
+  return query select v_post.id, v_post.thread_id, v_post.content, v_post.created_at, v_name;
+end $$;
 
 /* =========================================================
    Expired content cleanup
@@ -693,6 +741,6 @@ grant select, insert, update, delete on public.profiles       to authenticated;
 grant select, insert, update, delete on public.nests          to authenticated;
 grant select, insert, update, delete on public.nest_members   to authenticated;
 grant select, insert, update, delete on public.threads        to authenticated;
-grant select, insert, update, delete on public.posts          to authenticated;
+grant insert, update, delete on public.posts          to authenticated;
 grant select, insert, update, delete on public.reactions      to authenticated;
 grant select, insert, update, delete on public.flags          to authenticated;
