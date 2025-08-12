@@ -1,8 +1,0 @@
-{
-  "image": "mcr.microsoft.com/devcontainers/typescript-node:latest",
-  "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
-  },
-  "postCreateCommand": "npm ci",
-  "forwardPorts": [5173, 54323, 54324, 54321]
-}
