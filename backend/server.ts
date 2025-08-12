@@ -17,11 +17,13 @@ const limiter = rateLimit({
   legacyHeaders: false,
 });
 
+app.get("/ping", (_req, res) => res.json({ ok: true }));
+
 const modRoles = ["moderator", "admin"];
 const adminRoles = ["admin"];
 
 app.use("/mod", limiter, authMiddleware(modRoles), modRoutes);
-app.use("/admin", limiter, authMiddleware(adminRoles), adminRoutes);
+app.use("/admin", limiter, authMiddleware(adminRoles), adminRoutes)
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((err: any, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
