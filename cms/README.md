@@ -1,0 +1,42 @@
+# Minimal CMS Backend
+
+A lightweight Express server that stores editable site content in local JSON files. It manages moods, games, and general pages used by the frontend.
+
+## Features
+- File-based storage (`cms/data/*.json`)
+- REST endpoints for public content retrieval
+- Secured admin endpoints with HTTP Basic Auth
+
+## Setup
+1. Install dependencies
+   ```bash
+   cd cms
+   npm install
+   ```
+2. Copy environment template and adjust credentials
+   ```bash
+   cp .env.example .env
+   # edit .env as needed
+   ```
+
+## Scripts
+- `npm run dev` – start the server in watch mode
+- `npm run build` – compile TypeScript to `dist/`
+- `npm start` – run the compiled server
+
+## API
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/moods` | Public list of moods |
+| GET | `/games` | Public list of games |
+| GET | `/pages` | Public list of pages |
+| GET | `/admin/moods` | Authenticated list |
+| POST | `/admin/moods` | Create mood |
+| PUT | `/admin/moods/:id` | Update mood |
+| DELETE | `/admin/moods/:id` | Remove mood |
+| POST/PUT/DELETE | `/admin/games` and `/admin/pages` | Same pattern for other content |
+
+All admin routes require HTTP Basic Auth using the credentials defined in `.env` (`CMS_USER` and `CMS_PASS`).
+
+## Extending
+Add more content types by creating another JSON file in `cms/data` and mounting an additional admin router in `src/index.ts` following the existing pattern.
