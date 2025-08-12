@@ -3,6 +3,7 @@ import { z } from "zod";
 import fs from "node:fs/promises";
 import bcrypt from "bcryptjs";
 import { env } from "../env";
+import { createHttpError } from "../utils/httpError";
 
 // Access to these routes is restricted via JWT bearer tokens with the
 // appropriate roles supplied by the authentication layer.
@@ -39,7 +40,7 @@ router.patch("/threads/:id/restore", (req, res) => {
   res.json([{ id, deleted: false }]);
 });
 
-router.post("/htaccess/users", async (req, res) => {
+router.post("/htaccess/users", async (req, res, next) => {
   const result = htUserSchema.safeParse(req.body);
   if (!result.success) {
     return res.status(400).json({ error: result.error.flatten() });
@@ -50,11 +51,11 @@ router.post("/htaccess/users", async (req, res) => {
     await fs.appendFile(env.HTPASSWD_PATH, `${username}:${hash}\n`);
     res.json({ success: true });
   } catch (error) {
-    res.status(500).json({ error: "Failed to update htpasswd" });
+    next(createHttpError(500, "Failed to update htpasswd"));
   }
 });
 
-router.get("/htaccess/users", async (_req, res) => {
+router.get("/htaccess/users", async (_req, res, next) => {
   try {
     const contents = await fs.readFile(env.HTPASSWD_PATH, "utf8").catch(
       (err: any) => (err.code === "ENOENT" ? "" : Promise.reject(err))
@@ -65,11 +66,11 @@ router.get("/htaccess/users", async (_req, res) => {
       .map((line) => ({ username: line.split(":")[0] }));
     res.json(users);
   } catch {
-    res.status(500).json({ error: "Failed to read htpasswd" });
+    next(createHttpError(500, "Failed to read htpasswd"));
   }
 });
 
-router.delete("/htaccess/users/:username", async (req, res) => {
+router.delete("/htaccess/users/:username", async (req, res, next) => {
   const result = usernameSchema.safeParse(req.params);
   if (!result.success) {
     return res.status(400).json({ error: result.error.flatten() });
@@ -87,7 +88,7 @@ router.delete("/htaccess/users/:username", async (req, res) => {
     await fs.writeFile(env.HTPASSWD_PATH, data);
     res.json({ success: true });
   } catch {
-    res.status(500).json({ error: "Failed to update htpasswd" });
+    next(createHttpError(500, "Failed to update htpasswd"));
   }
 });
 
