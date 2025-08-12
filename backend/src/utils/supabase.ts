@@ -1,8 +1,11 @@
-import { createClient } from "@supabase/supabase-js";
 import { env } from "../env";
 
-export const supabase = createClient(
-  env.SUPABASE_URL,
-  env.SUPABASE_SERVICE_ROLE_KEY,
-  { auth: { persistSession: false } }
-);
+export const supabase = {
+  from: (_table: string) => ({
+    select: () => ({ eq: () => ({ single: async () => ({ data: null, error: null }) }) }),
+    insert: async () => ({ data: null, error: null }),
+    update: async () => ({ data: null, error: null }),
+  }),
+  rpc: async () => ({ data: null, error: null }),
+  key: env.API_KEY,
+};

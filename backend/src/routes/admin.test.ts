@@ -16,7 +16,7 @@ test('approves a ban', async (t) => {
   t.mock.method(supabase, 'from', () => ({ update }));
 
   const server = app.listen(0);
-  t.teardown(() => server.close());
+  t.after(() => server.close());
   await new Promise((resolve) => server.once('listening', resolve));
   const port = (server.address() as any).port;
 
