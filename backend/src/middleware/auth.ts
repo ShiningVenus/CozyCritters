@@ -2,9 +2,10 @@ import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import jwksClient from "jwks-rsa";
 import { supabase } from "../utils/supabase";
+import { env } from "../env";
 
 const client = jwksClient({
-  jwksUri: process.env.SUPABASE_JWKS_URL!,
+  jwksUri: env.SUPABASE_JWKS_URL,
 });
 
 function getKey(header: any, callback: any) {
