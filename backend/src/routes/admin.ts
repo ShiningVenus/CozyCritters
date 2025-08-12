@@ -1,6 +1,8 @@
 import { Router } from "express";
 import { z } from "zod";
 
+// Access to these routes is expected to be restricted via `.htaccess`.
+// Supabase is not used for authentication here.
 const router = Router();
 
 const idSchema = z.object({ id: z.string().uuid() });
