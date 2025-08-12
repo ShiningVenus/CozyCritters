@@ -3,6 +3,21 @@ import rateLimit from 'express-rate-limit';
 import { requireAuth } from './auth.js';
 import { readData, writeData } from './storage.js';
 import { generateId } from './utils.js';
+import multer from 'multer';
+import path from 'path';
+import fs from 'fs';
+
+// --- Minimal Upload Setup ---
+const uploadDir = path.join(process.cwd(), 'uploads');
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
+}
+const storage = multer.diskStorage({
+  destination: (_req, _file, cb) => cb(null, uploadDir),
+  filename: (_req, file, cb) => cb(null, Date.now() + '-' + file.originalname)
+});
+const upload = multer({ storage });
+// --- End Upload Setup ---
 
 const app = express();
 
@@ -19,6 +34,20 @@ const limiter = rateLimit({
 
 app.use(limiter);
 app.use(express.json());
+
+// --- Upload endpoint ---
+app.post('/upload', upload.single('file'), (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ error: 'No file uploaded' });
+  }
+  res.json({
+    filename: req.file.filename,
+    url: `/uploads/${req.file.filename}`
+  });
+});
+
+// --- Optionally serve uploaded files (uncomment line below if you want this) ---
+// app.use('/uploads', express.static(uploadDir));
 
 app.get('/moods', async (_req, res) => {
   const data = await readData('moods');
