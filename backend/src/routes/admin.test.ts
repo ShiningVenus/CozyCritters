@@ -72,7 +72,7 @@ test('adds htaccess user', async () => {
     const contents = await fs.readFile(file, 'utf8');
     const [user, hash] = contents.trim().split(':');
     assert.equal(user, 'alice');
-    assert.ok(bcrypt.compareSync('secret', hash));
+    assert.ok(await bcrypt.compare('secret', hash));
   } finally {
     server.close();
   }
