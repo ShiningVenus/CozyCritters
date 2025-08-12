@@ -212,6 +212,23 @@ That's it! 🎉 No database setup, no API keys, no complicated configuration.
 npm test
 ```
 
+## 🏭 Production Install
+
+For a production-ready build use the helper script:
+
+```bash
+# install dependencies and build
+./install-frontend.sh
+
+# launch immediately
+./install-frontend.sh start
+
+# or manage with PM2
+./install-frontend.sh pm2
+```
+
+The script checks for Node.js ≥ 18 and will print a sample systemd unit file when run with `systemd`.
+
 ## 🔐 Privacy Promise + Technical Proof
 
 ### 🎯 Our Claims
