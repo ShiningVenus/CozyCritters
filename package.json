@@ -14,7 +14,7 @@
     "preview": "vite preview",
     "start": "NODE_ENV=production node dist/index.js",
     "check": "tsc",
-    "test": "node --import tsx --test server/**/*.test.ts",
+    "test": "node --import tsx --test $(find backend server -name '*.test.ts')",
     "db:reset": "supabase db reset",
     "db:push": "supabase db push",
     "db:push:drizzle": "drizzle-kit push",
