@@ -5,7 +5,6 @@ import { LoadingPage } from "@/components/loading";
 
 const Home = React.lazy(() => import("@/pages/home"));
 const GamesPage = React.lazy(() => import("@/pages/games-page"));
-const HtaccessAdmin = React.lazy(() => import("@/pages/htaccess-admin"));
 const NotFound = React.lazy(() => import("@/pages/not-found"));
 
 export default function AppRoutes() {
@@ -14,7 +13,6 @@ export default function AppRoutes() {
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/games" component={GamesPage} />
-        <Route path="/admin/htaccess" component={HtaccessAdmin} />
         <Route component={NotFound} />
       </Switch>
     </Suspense>
