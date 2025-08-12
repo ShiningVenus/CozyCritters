@@ -117,3 +117,38 @@ test('appends to htpasswd file', async () => {
     server.close();
   }
 });
+
+test('lists htaccess users', async () => {
+  const dir = await fs.mkdtemp(path.join(os.tmpdir(), 'htpasswd-'));
+  const file = path.join(dir, '.htpasswd');
+  env.HTPASSWD_PATH = file;
+  await fs.writeFile(file, 'alice:{SHA}hash1\n' + 'bob:{SHA}hash2\n');
+  const { server, port } = buildServer();
+  try {
+    const res = await fetch(`http://localhost:${port}/htaccess/users`);
+    assert.equal(res.status, 200);
+    const body = await res.json();
+    assert.deepEqual(body, [{ username: 'alice' }, { username: 'bob' }]);
+  } finally {
+    server.close();
+  }
+});
+
+test('removes htaccess user', async () => {
+  const dir = await fs.mkdtemp(path.join(os.tmpdir(), 'htpasswd-'));
+  const file = path.join(dir, '.htpasswd');
+  env.HTPASSWD_PATH = file;
+  await fs.writeFile(file, 'alice:{SHA}hash1\n' + 'bob:{SHA}hash2\n');
+  const { server, port } = buildServer();
+  try {
+    const res = await fetch(`http://localhost:${port}/htaccess/users/alice`, { method: 'DELETE' });
+    assert.equal(res.status, 200);
+    const body = await res.json();
+    assert.deepEqual(body, { success: true });
+    const contents = await fs.readFile(file, 'utf8');
+    const lines = contents.trim().split('\n');
+    assert.deepEqual(lines, ['bob:{SHA}hash2']);
+  } finally {
+    server.close();
+  }
+});
