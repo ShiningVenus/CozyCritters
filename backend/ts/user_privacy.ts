@@ -9,3 +9,20 @@ export async function exportUserData(supabase: any) {
 export async function deleteUserAccount(supabase: any) {
   return await supabase.rpc('delete_user_account');
 }
+
+export async function setEncryptedEmail(
+  supabase: any,
+  email: string,
+  key: string,
+) {
+  return await supabase.rpc('set_encrypted_email', {
+    p_email: email,
+    p_key: key,
+  });
+}
+
+export async function getEncryptedEmail(supabase: any, key: string) {
+  return await supabase.rpc('get_encrypted_email', {
+    p_key: key,
+  });
+}
