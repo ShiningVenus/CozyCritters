@@ -1,7 +1,15 @@
 import type { Request, Response, NextFunction } from 'express';
 
-const ADMIN_USER = process.env.CMS_USER || 'admin';
-const ADMIN_PASS = process.env.CMS_PASS || 'change-me';
+const DEFAULT_USER = 'admin';
+const DEFAULT_PASS = 'change-me';
+const ADMIN_USER = process.env.CMS_USER || DEFAULT_USER;
+const ADMIN_PASS = process.env.CMS_PASS || DEFAULT_PASS;
+
+if (process.env.NODE_ENV === 'production') {
+  if (ADMIN_USER === DEFAULT_USER || ADMIN_PASS === DEFAULT_PASS) {
+    throw new Error('CMS_USER and CMS_PASS must be set to secure values in production');
+  }
+}
 
 export function requireAuth(req: Request, res: Response, next: NextFunction) {
   const auth = req.headers.authorization;
