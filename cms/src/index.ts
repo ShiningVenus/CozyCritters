@@ -1,9 +1,23 @@
 import express from 'express';
+import rateLimit from 'express-rate-limit';
 import { requireAuth } from './auth.js';
 import { readData, writeData } from './storage.js';
 import { generateId } from './utils.js';
 
 const app = express();
+
+// Enable trust proxy when behind a reverse proxy (e.g., production)
+app.set('trust proxy', process.env.NODE_ENV === 'production' ? 1 : false);
+
+// Basic rate limiting
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100,
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+app.use(limiter);
 app.use(express.json());
 
 app.get('/moods', async (_req, res) => {
