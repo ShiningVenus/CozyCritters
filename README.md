@@ -330,7 +330,7 @@ Open a GitHub issue — we take security seriously and will address verified con
 
 ---
 
-📋 Read our full Privacy Policy: [privacy-policy.md](privacy-policy.md)
+📋 Read our full Privacy Policy: [privacy-policy.md](docs/privacy-policy.md)
 
 Spoiler: we can't access your data even if we wanted to!
 
