@@ -3,27 +3,26 @@
 ## Features
 - Express.js + TypeScript
 - Supabase integration (Service Role Key server-only)
-- JWT verification via Supabase JWKS
+- HMAC-signed JWT authentication using a shared secret
 - Role-based auth for moderators and admins
 - Audit logging for all mod/admin actions
 - Soft delete + ban approval workflow
- - JWT bearer authentication for mod and admin routes
+- JWT bearer authentication for mod and admin routes
 
 ## Setup
-1. Copy `.env.example` → `.env` and fill with your Supabase project details.
-2. Set `JWT_SECRET` in `.env` to the value used to sign authentication tokens.
-3. Install dependencies:
+1. Copy `.env.example` → `.env` and fill with your project details. Set `JWT_SECRET` to the shared secret used to sign authentication tokens.
+2. Install dependencies:
    ```bash
    npm install
    ```
-4. Start the server:
+3. Start the server:
    ```bash
    npm run dev:server
    ```
 
 ## Authentication
 
-Requests to the `/mod` and `/admin` routes must include an `Authorization` header with a valid bearer token. Tokens must be signed with `JWT_SECRET` and include the appropriate `roles` claim.
+Requests to the `/mod` and `/admin` routes must include an `Authorization` header with a bearer token signed using HMAC with `JWT_SECRET`. The token payload must include the appropriate `roles` claim.
 
 ## htaccess User Management
 
