@@ -3,6 +3,7 @@ import { ArrowLeft, Filter, Star, Clock, Target } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { gameRegistry } from '@/lib/games';
 import { Game, GameConfig, GameResult } from '@/types/game';
+import { getCompletedGames, markGameCompleted, getGameData } from '@/lib/game-progress';
 
 interface MiniGamesProps {
   onBack: () => void;
@@ -11,7 +12,7 @@ interface MiniGamesProps {
 export default function MiniGames({ onBack }: MiniGamesProps) {
   const [currentGame, setCurrentGame] = useState<Game | null>(null);
   const [filter, setFilter] = useState<GameConfig['category'] | 'all'>('all');
-  const [completedGames, setCompletedGames] = useState<string[]>([]);
+  const [completedGames, setCompletedGames] = useState<string[]>(() => getCompletedGames());
 
   const allGames = gameRegistry.getAllGames();
   const filteredGames = filter === 'all' 
@@ -19,10 +20,13 @@ export default function MiniGames({ onBack }: MiniGamesProps) {
     : gameRegistry.getGamesByCategory(filter);
 
   const handleGameComplete = (result: GameResult) => {
-    if (result.completed && currentGame) {
-      setCompletedGames(prev => [...prev, currentGame.config.id]);
+    if (currentGame) {
+      if (result.completed) {
+        markGameCompleted(currentGame.config.id, result);
+        setCompletedGames(getCompletedGames());
+      }
+      setCurrentGame(null);
     }
-    setCurrentGame(null);
   };
 
   const handleGameExit = () => {
@@ -119,7 +123,9 @@ export default function MiniGames({ onBack }: MiniGamesProps) {
 
       {/* Games Grid */}
       <div className="grid grid-cols-1 gap-4">
-        {filteredGames.map((game) => (
+        {filteredGames.map((game) => {
+          const progress = getGameData(game.config.id);
+          return (
           <div
             key={game.config.id}
             className={`bg-gradient-to-br ${getCategoryColor(game.config.category)} rounded-2xl p-6 border shadow-sm transition-all hover:shadow-md`}
@@ -191,6 +197,17 @@ export default function MiniGames({ onBack }: MiniGamesProps) {
               )}
             </div>
 
+            {(progress?.lastPlayed || typeof progress?.highScore === 'number') && (
+              <div className="text-xs text-muted-foreground mb-4 space-y-1">
+                {progress.lastPlayed && (
+                  <div>Last played: {new Date(progress.lastPlayed).toLocaleDateString()}</div>
+                )}
+                {typeof progress.highScore === 'number' && (
+                  <div>High score: {progress.highScore}</div>
+                )}
+              </div>
+            )}
+
             <Button
               onClick={() => setCurrentGame(game)}
               className="w-full"
@@ -198,7 +215,8 @@ export default function MiniGames({ onBack }: MiniGamesProps) {
               {completedGames.includes(game.config.id) ? 'Play Again' : 'Start Game'}
             </Button>
           </div>
-        ))}
+        );
+        })}
       </div>
 
       {filteredGames.length === 0 && (
