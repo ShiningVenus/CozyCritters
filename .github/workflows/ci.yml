@@ -22,6 +22,7 @@ jobs:
         with:
           node-version: 20
       - run: npm ci
+      - run: npm test
       - run: npm run -s build || true
       - run: npx supabase@latest db lint || true
       - run: npx supabase@latest db push --dry-run || true

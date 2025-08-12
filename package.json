@@ -14,7 +14,7 @@
     "preview": "vite preview",
     "start": "NODE_ENV=production node dist/index.js",
     "check": "tsc",
-    "test": "node --import tsx --test server/**/*.test.ts",
+    "test": "node --import tsx --test $(find backend server -name '*.test.ts')",
     "db:reset": "supabase db reset",
     "db:push": "supabase db push",
     "db:push:drizzle": "drizzle-kit push",
@@ -87,7 +87,10 @@
     "wouter": "^3.3.5",
     "ws": "^8.18.0",
     "zod": "^3.24.2",
-    "zod-validation-error": "^3.4.0"
+    "zod-validation-error": "^3.4.0",
+    "@supabase/supabase-js": "^2.45.3",
+    "jsonwebtoken": "^9.0.2",
+    "jwks-rsa": "^3.1.0"
   },
   "devDependencies": {
     "@replit/vite-plugin-cartographer": "^0.2.8",
@@ -100,6 +103,7 @@
     "@types/node": "20.16.11",
     "@types/passport": "^1.0.16",
     "@types/passport-local": "^1.0.38",
+    "@types/jsonwebtoken": "^9.0.5",
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.1",
     "@types/ws": "^8.5.13",
