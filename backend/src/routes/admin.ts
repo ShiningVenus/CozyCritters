@@ -1,10 +1,17 @@
 import { Router } from "express";
+import { z } from "zod";
 import { supabase } from "../utils/supabase";
 
 const router = Router();
 
+const idSchema = z.object({ id: z.string().uuid() });
+
 router.patch("/bans/:id/approve", async (req, res) => {
-  const { id } = req.params;
+  const result = idSchema.safeParse(req.params);
+  if (!result.success) {
+    return res.status(400).json({ error: result.error.flatten() });
+  }
+  const { id } = result.data;
   const { data, error } = await supabase
     .from("bans")
     .update({ status: "approved" })
@@ -14,7 +21,11 @@ router.patch("/bans/:id/approve", async (req, res) => {
 });
 
 router.patch("/bans/:id/lift", async (req, res) => {
-  const { id } = req.params;
+  const result = idSchema.safeParse(req.params);
+  if (!result.success) {
+    return res.status(400).json({ error: result.error.flatten() });
+  }
+  const { id } = result.data;
   const { data, error } = await supabase
     .from("bans")
     .update({ status: "lifted" })
@@ -24,7 +35,11 @@ router.patch("/bans/:id/lift", async (req, res) => {
 });
 
 router.patch("/threads/:id/restore", async (req, res) => {
-  const { id } = req.params;
+  const result = idSchema.safeParse(req.params);
+  if (!result.success) {
+    return res.status(400).json({ error: result.error.flatten() });
+  }
+  const { id } = result.data;
   const { data, error } = await supabase
     .from("threads")
     .update({ deleted: false })
