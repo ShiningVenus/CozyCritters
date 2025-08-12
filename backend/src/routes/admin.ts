@@ -4,8 +4,8 @@ import fs from "node:fs/promises";
 import bcrypt from "bcryptjs";
 import { env } from "../env";
 
-// Access to these routes is restricted via an API key in the `x-api-key` header.
-// Supabase is not used for authentication here.
+// Access to these routes is restricted via JWT bearer tokens with the
+// appropriate roles supplied by the authentication layer.
 const router = Router();
 
 const idSchema = z.object({ id: z.string().uuid() });

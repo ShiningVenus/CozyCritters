@@ -1,4 +1,4 @@
-import { test, mock } from 'node:test';
+import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import express from 'express';
 import { randomUUID } from 'node:crypto';
@@ -7,11 +7,6 @@ import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 
-const bcryptMock = await import('../../__mocks__/bcryptjs');
-mock.module('bcryptjs', {
-  namedExports: bcryptMock,
-  defaultExport: bcryptMock.default
-});
 const adminRouter = (await import('./admin')).default;
 const bcrypt = (await import('bcryptjs')).default;
 

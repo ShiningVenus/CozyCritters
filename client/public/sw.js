@@ -53,7 +53,6 @@ const SENSITIVE_HEADERS = [
   'authorization',
   'x-csrf-token',
   'x-auth-token',
-  'x-api-key',
   'x-session-token',
   'authenticate',
   'proxy-authenticate',

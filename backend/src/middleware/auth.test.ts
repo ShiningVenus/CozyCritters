@@ -1,8 +1,21 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import express from 'express';
+import { createHmac } from 'node:crypto';
 import { authMiddleware } from './auth';
 import { env } from '../env';
+
+function createToken(payload: any) {
+  const header = { alg: 'HS256', typ: 'JWT' };
+  const encode = (obj: any) =>
+    Buffer.from(JSON.stringify(obj)).toString('base64url');
+  const headerB64 = encode(header);
+  const payloadB64 = encode(payload);
+  const signature = createHmac('sha256', env.JWT_SECRET)
+    .update(`${headerB64}.${payloadB64}`)
+    .digest('base64url');
+  return `${headerB64}.${payloadB64}.${signature}`;
+}
 
 function buildServer(allowedRoles: string[]) {
   const app = express();
@@ -18,10 +31,10 @@ function buildServer(allowedRoles: string[]) {
 test('rejects request with unauthorized roles', async () => {
   const { server, port } = buildServer(['admin']);
   try {
+    const token = createToken({ roles: ['user'] });
     const res = await fetch(`http://localhost:${port}/protected`, {
       headers: {
-        'x-api-key': env.API_KEY,
-        'x-roles': 'user'
+        authorization: `Bearer ${token}`
       }
     });
     assert.equal(res.status, 401);
@@ -33,10 +46,10 @@ test('rejects request with unauthorized roles', async () => {
 test('allows request with matching role', async () => {
   const { server, port } = buildServer(['admin']);
   try {
+    const token = createToken({ roles: ['user', 'admin'] });
     const res = await fetch(`http://localhost:${port}/protected`, {
       headers: {
-        'x-api-key': env.API_KEY,
-        'x-roles': 'user,admin'
+        authorization: `Bearer ${token}`
       }
     });
     assert.equal(res.status, 200);
