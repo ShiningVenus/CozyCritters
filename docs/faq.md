@@ -30,7 +30,7 @@ See [contributing.md](./contributing.md).
 
 ## Is there a dark mode?
 
-Check the app settings! (Most versions include this.)
+Yes
 
 ## Does the app require a backend?
 
