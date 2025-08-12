@@ -6,6 +6,11 @@ import adminRoutes from "./src/routes/admin";
 
 const app = express();
 app.use(express.json());
-app.use("/mod", authMiddleware(["moderator", "admin"]), modRoutes);
-app.use("/admin", authMiddleware(["admin"]), adminRoutes);
+
+const modRoles = ["moderator", "admin"];
+const adminRoles = ["admin"];
+
+app.use("/mod", authMiddleware(modRoles), modRoutes);
+app.use("/admin", authMiddleware(adminRoles), adminRoutes);
+
 app.listen(env.PORT);
