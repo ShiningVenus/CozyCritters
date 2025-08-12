@@ -1,6 +1,7 @@
 import { gameRegistry } from './game-registry';
 import { BreathingBubble } from '@/games/breathing-bubble';
 import { ColorPattern } from '@/games/color-pattern';
+import { DrawingPad } from '@/games/drawing-pad';
 
 // Register all games
 gameRegistry.register({
@@ -39,6 +40,25 @@ gameRegistry.register({
     tags: ['memory', 'focus', 'patterns', 'colors', 'concentration']
   },
   Component: ColorPattern
+});
+
+gameRegistry.register({
+  config: {
+    id: 'drawing-pad',
+    name: 'Drawing Pad',
+    description: 'A simple canvas for free drawing with soft color swatches.',
+    emoji: '🎨',
+    category: 'creative',
+    difficulty: 'easy',
+    estimatedTime: '2-5 min',
+    accessibility: {
+      motionSensitive: false,
+      soundRequired: false,
+      colorBlindFriendly: true
+    },
+    tags: ['drawing', 'art', 'creative', 'expression']
+  },
+  Component: DrawingPad
 });
 
 // Export the registry for use in components
