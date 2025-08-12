@@ -44,6 +44,16 @@ const { data } = await exportUserData(supabase);
 await deleteUserAccount(supabase);
 ```
 
+## Expired Content Cleanup (Supabase)
+
+Self-hosted deployments that use Supabase automatically expire moderation and discussion data:
+
+- `posts` and `flags` tables include an `expires_at` column.
+- New records default to expiring **90 days** after creation.
+- A daily cron job (`purge_expired_content`) removes any rows past their `expires_at`.
+
+You can change the retention period by modifying the column default or setting `expires_at` explicitly when inserting rows.
+
 ## Reporting Issues
 
 - Privacy or security concern? Please open an issue or email the maintainer.
