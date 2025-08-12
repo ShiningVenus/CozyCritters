@@ -47,27 +47,37 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Security middleware
-app.use(helmet({
-  contentSecurityPolicy: {
-    directives: {
-      defaultSrc: ["'self'"],
-      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
-      scriptSrc: [
-        "'self'",
-        "'unsafe-inline'",
-        "'unsafe-eval'",
-        ...(process.env.NODE_ENV === "development" ? ["https://replit.com"] : []),
-      ], // Allow inline scripts for Vite dev and Replit dev banner
-      imgSrc: ["'self'", "data:", "blob:"],
-      connectSrc: ["'self'", "ws:", "wss:"], // Allow WebSocket for HMR
-      fontSrc: ["'self'", "https://fonts.gstatic.com"],
-      objectSrc: ["'none'"],
-      mediaSrc: ["'self'"],
-      frameSrc: ["'none'"],
+const isProduction = process.env.NODE_ENV === 'production';
+
+const scriptSrc = ["'self'"];
+const styleSrc = ["'self'", "https://fonts.googleapis.com"];
+
+if (!isProduction) {
+  // Allow inline scripts/styles and eval in development for Vite and Replit banner
+  scriptSrc.push("'unsafe-inline'", "'unsafe-eval'", "https://replit.com");
+  styleSrc.push("'unsafe-inline'");
+} else {
+  // In production, inline scripts or styles should use nonces, hashes, or be moved to external files
+}
+
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        styleSrc,
+        scriptSrc,
+        imgSrc: ["'self'", "data:", "blob:"],
+        connectSrc: ["'self'", "ws:", "wss:"], // Allow WebSocket for HMR
+        fontSrc: ["'self'", "https://fonts.gstatic.com"],
+        objectSrc: ["'none'"],
+        mediaSrc: ["'self'"],
+        frameSrc: ["'none'"],
+      },
     },
-  },
-  crossOriginEmbedderPolicy: false, // Disable for dev compatibility
-}));
+    crossOriginEmbedderPolicy: false, // Disable for dev compatibility
+  })
+);
 
 // Rate limiting configuration
 const limiter = rateLimit({
