@@ -11,13 +11,13 @@ License: MIT
 
 Quick links
 - Self-hosting: ./self-hosting.md
-- Local development: ./local-development.md
-- Architecture overview: ./architecture.md
+- Deployment guide: ./deployment-guide.md
 - Privacy & security verification: ./privacy-security.md
+- Accessibility notes: ./accessibility.md
 - Backup & export: ./backup-export.md
 - FAQ: ./faq.md
 - Contributing: ./contributing.md
-- Reddit r/selfhosted post draft: ./reddit-selfhosted-post.md
+- Reddit r/selfhosted post: ./reddit-selfhosted-post.md
 
 Need help?
 - Open an issue on GitHub with clear steps and your environment.

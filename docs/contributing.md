@@ -15,6 +15,7 @@ Thank you for your interest in Cozy Critter!
 
 4. **Test your changes**
    - Run `npm run dev` and check functionality.
+   - Run `npm test` and `npm run check`.
 
 5. **Open a Pull Request**
    - Fill out the PR template.
@@ -22,7 +23,7 @@ Thank you for your interest in Cozy Critter!
 
 ## Code of Conduct
 
-Be respectful and inclusive. See [CODE_OF_CONDUCT.md](../CODE_OF_CONDUCT.md) if available.
+Be respectful and inclusive. See the [Code of Conduct](../CODE_OF_CONDUCT.md) for details.
 
 ## Need help?
 

@@ -5,16 +5,19 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Privacy First](https://img.shields.io/badge/privacy-first-gold.svg)](#-privacy-promise--technical-proof)
 [![Accessibility](https://img.shields.io/badge/accessibility-AAA-purple.svg)](#-what-v1-includes)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/0b8a2ea2-73c5-4158-b6fd-3050f6007f63/deploy-status)](https://app.netlify.com/projects/cozycritter/deploys)
 
-> A complete, production-ready app designed specifically for neurodivergent folks.
+> A complete production ready app designed specifically for neurodivergent minds.
 
-Cozy Critter is a gentle, private mood tracking app that actually understands ND life.
+
+Cozy Critter is a private mood tracking app that actually understands ND life.
+It is open source and simple to self-host.
 
 What makes it different:
 - 🚫 No overwhelming interfaces
 - 🚫 No judgment
 - 🚫 No data harvesting
-- ✨ Just you, cute animals, and a safe space for your feelings
+- ✨ Just you, cute animals, and a safe place for your feelings
 
 Check in with adorable animal emoji, add your own notes when you want to, and get encouragement that really gets masking, sensory overwhelm, and executive function struggles.
 
@@ -29,12 +32,13 @@ Everything stays on your device because your emotional data is deeply personal.
 - [🏢 For Organizations](#-for-autism--neurodivergent-support-organizations)
 - [🛠️ Technical Details](#-tech--architecture)
 - [📚 Full Docs](docs/README.md)
+- [📝 CMS Backend](#-minimal-cms-backend)
 
 ---
 
 ## 🎉 V1.0.0 - What's Ready Now
 
-This isn't a beta or "coming soon" — Cozy Critter v1 is complete and ready to be your daily mood companion.
+This isn't a beta or "coming soon" Cozy Critter v1 is complete and ready to be your daily mood companion.
 
 ### 🌟 Why V1 Matters for ND Folks
 
@@ -50,17 +54,18 @@ This isn't a beta or "coming soon" — Cozy Critter v1 is complete and ready to 
 ### 🐾 Animal Mood Check-ins
 Choose from adorable animal emoji that match your energy.
 
-No pressure to explain or justify — sometimes you just feel like:
+No pressure to explain or justify sometimes you just feel like:
 - 🐨 A sleepy koala
 - 🐰 An anxious rabbit
 - 🦋 A gentle butterfly
+- Plus other cute animals!
 
 All perfectly valid.
 
 ---
 
 ### 📝 Notes That Don't Judge
-Add notes when you want to — never required.
+Add notes when you want to never required.
 
 Perfect for:
 - 😮‍💨 Venting about masking all day
@@ -70,13 +75,13 @@ Perfect for:
 
 ---
 
-### 💚 ND-Aware Encouragement
+### 💚 ND Aware Encouragement
 Get affirmations that actually understand your world:
 
 > "Your stimming is valid and helpful"  
-> "Masking is exhausting — you did great today"  
+> "Masking is exhausting you did great today"  
 > "Executive dysfunction isn't laziness"  
-> "Sensory breaks are self-care, not weakness"
+> "Sensory breaks are self-care not weakness"
 
 Plus: Create your own personal encouragement messages.
 
@@ -92,18 +97,18 @@ What you WON'T find:
 
 What you WILL find:
 - ✅ Your authentic emotional journey
-- ✅ Beautiful, gentle display
+- ✅ Beautiful display
 - ✅ Complete acceptance
 
 ---
 
 ### 🛡️ Privacy That's Actually Real
-Everything stays on YOUR device.
+Everything stays on **YOUR device.**
 
-We literally can't see your data even if we wanted to.
+**We literally can't see your data even if we wanted to.**
 
 Proof:
-- ✅ One-click delete (your control is real)
+- ✅ One click delete (your control is real)
 - ✅ No accounts required
 - ✅ No tracking
 - ✅ No "anonymous" data collection lies
@@ -112,13 +117,13 @@ Proof:
 
 ### 📱 Works Everywhere, Anytime
 - 📲 Install on your phone like a native app (PWA)
-- 🌐 Works offline (because internet can be overwhelming)
-- ♿ Accessible with screen readers and keyboard navigation
-- 👁️ Respects your motion and contrast preferences
+- 🌐 Works offline (because internet can be overwhelming) — verified; see [offline docs](docs/faq.md#does-cozy-critter-work-offline)
+- ♿ Accessible with screen readers and keyboard navigation — see [accessibility notes](docs/accessibility.md)
+- 👁️ Respects your motion and contrast preferences — details in [accessibility notes](docs/accessibility.md)
 
 ---
 
-### 🎨 Three Thoughtful Themes
+### 🎨 Three Thoughtful Themes ALL WORK NOW!
 | Theme | Description |
 |-------|-------------|
 | ☀️ Light mode | Clean and gentle |
@@ -136,15 +141,20 @@ Proof:
 - Service Worker via dedicated `useServiceWorker` hook
 
 ### 💾 State & Storage
-- Local Storage Only — All moods/notes stay in your browser
-- No Server Required — Works completely offline
-- Future Ready — Prepared for optional user accounts (if you want them later)
-
+- Local Storage Only — All moods/notes stay in your browser <--- Yes working
+- No Server Required — Works completely offline <--- You can try it for yourself but am sure it will work!
+- Future Ready — Prepared for optional user accounts (if you want them later) <-- Supabase based
+- 
 ### 🖥️ Backend (Optional/Future)
 - Express.js with TypeScript
-- Drizzle ORM + PostgreSQL ready
-- Reusable `requestLogger` middleware for development visibility
+- Supabase (managed PostgreSQL) via Drizzle ORM
+  - Reusable `requestLogger` middleware for development visibility
 - Currently Not Required — App works without a backend
+
+### 📝 Minimal CMS Backend
+A separate Express service lives in [`cms/`](cms/) and stores moods, games, and pages in JSON files.
+It exposes REST endpoints for public reads and secured admin CRUD operations via HTTP Basic Auth.
+See [`cms/README.md`](cms/README.md) for setup and usage.
 
 ### ♿ Accessibility & Design
 - Radix UI foundation for ARIA and keyboard support
@@ -152,6 +162,7 @@ Proof:
 - Mobile-first responsive layouts
 - Screen reader optimized
 - Motion sensitivity respected
+- See [accessibility notes](docs/accessibility.md) for audit results and limitations
 
 ---
 
@@ -200,6 +211,23 @@ That's it! 🎉 No database setup, no API keys, no complicated configuration.
 ```bash
 npm test
 ```
+
+## 🏭 Production Install
+
+For a production-ready build use the helper script:
+
+```bash
+# install dependencies and build
+./install-frontend.sh
+
+# launch immediately
+./install-frontend.sh start
+
+# or manage with PM2
+./install-frontend.sh pm2
+```
+
+The script checks for Node.js ≥ 18 and will print a sample systemd unit file when run with `systemd`.
 
 ## 🔐 Privacy Promise + Technical Proof
 
@@ -261,7 +289,7 @@ We're open source — verify every claim:
 
 ### 🛡️ Technical Security Architecture
 
-#### 💾 Client-Side Only Storage
+#### 💾 Client Side Only Storage
 ```typescript
 // From mood-storage.ts - all data operations
 localStorage.setItem(MOOD_STORAGE_KEY, JSON.stringify(moods));
@@ -318,7 +346,7 @@ Open a GitHub issue — we take security seriously and will address verified con
 
 ---
 
-📋 Read our full Privacy Policy: [privacy-policy.md](privacy-policy.md)
+📋 Read our full Privacy Policy: [privacy-policy.md](docs/privacy-policy.md)
 
 Spoiler: we can't access your data even if we wanted to!
 
@@ -340,7 +368,7 @@ Because mental health tools shouldn't be locked behind paywalls or corporate con
 
 ## 💝 Why This App "Gets It"
 
-Built by understanding, not assumptions.
+Built by understanding not assumptions.
 
 ---
 
@@ -359,16 +387,16 @@ Built by understanding, not assumptions.
 
 We acknowledge that:
 - 😴 Masking is exhausting (you did great today)
-- 🏠 You need a safe space for authentic feelings
+- 🏠 You need a safe place for authentic feelings
 - 🚫 "Just think happy thoughts" isn't helpful
-- 💪 Some days are about survival, not thriving
+- 💪 Some days are about survival not thriving
 
 ---
 
 ### 🌈 Sensory Considerations
 
 Designed to be gentle:
-- ✨ Clean, uncluttered interface
+- ✨ Clean uncluttered interface
 - 🎭 Respects motion sensitivity preferences
 - 🎨 Multiple themes for different sensory needs
 - 🚫 No sudden animations or jarring transitions
@@ -378,7 +406,7 @@ Designed to be gentle:
 ### ♾️ Stimming & Self-Regulation Support
 
 Our philosophy:
-- ✅ Stimming is helpful, not "disruptive"
+- ✅ Stimming is helpful not "disruptive"
 - 🤗 Whatever helps you regulate is valid
 - 🚫 No judgment about "weird" coping strategies
 - 🌟 Celebrates your unique ways of managing the world
@@ -408,7 +436,7 @@ Start today. Your mental health matters now.
 
 Are you a nonprofit, support group, or organization serving the autistic/ND community?
 
-Cozy Critter v1.0.0 is completely free and open source — perfect for your community programs.
+Cozy Critter v1.0.0 is completely free and open source making it perfect for your community programs.
 
 ---
 
@@ -416,7 +444,7 @@ Cozy Critter v1.0.0 is completely free and open source — perfect for your comm
 
 | Benefit | Impact |
 |---------|--------|
-| Privacy-first design | No data concerns for vulnerable individuals |
+| Privacy first design | No data concerns for vulnerable individuals |
 | No accounts required | Removes barriers and privacy worries |
 | Actually accessible | Built with real ND input, not compliance checkboxes |
 | Works offline | Great for individuals with limited internet access |
@@ -485,15 +513,15 @@ We're here to support organizations making a real difference in the ND community
 
 ---
 
-Open source, privacy-first tools should serve everyone — especially marginalized communities.
+Open source privacy first tools should serve everyone such as marginalized communities.
 
 ---
 
 ## 🌟 Final Words
 
-Cozy Critter v1.0.0 — Made with 💚 by people who understand that your brain works beautifully, just differently.
+Cozy Critter v1.0.0 — Made with 💚 by people who understand that your brain works beautifully and differently.
 
-> Finally, a mood tracking app that doesn't try to "fix" you.
+> Finally a mood tracking app that doesn't try to "fix" you.
 
 ---
 

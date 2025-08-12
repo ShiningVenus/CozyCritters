@@ -37,6 +37,7 @@ For full PWA features (like installability and offline use), your site must use 
 
 - Pull changes from this repo and re-deploy.
 - No migration needed—user data is not affected.
+- For backing up your mood entries, see [backup-export.md](./backup-export.md).
 
 ## Troubleshooting
 

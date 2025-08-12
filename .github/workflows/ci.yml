@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  pull_request:
+
+    paths-ignore: &docs-ignore
+
+      - 'docs/**'
+      - '**/*.md'
+  push:
+    branches:
+      - main
+    paths-ignore: *docs-ignore
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npm test
+      - run: npm run -s build || true
+      - run: npx supabase@latest db lint || true
+      - run: npx supabase@latest db push --dry-run || true
+

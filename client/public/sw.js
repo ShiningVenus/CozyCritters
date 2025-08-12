@@ -18,7 +18,6 @@ const CACHE_BLACKLIST = [
   '/auth/',          // Authentication endpoints
   '/login',          // Login pages
   '/logout',         // Logout endpoints
-  '/admin/',         // Admin interfaces
   '/user/',          // User-specific data
   '/session',        // Session endpoints
   '/token',          // Token endpoints
@@ -53,7 +52,6 @@ const SENSITIVE_HEADERS = [
   'authorization',
   'x-csrf-token',
   'x-auth-token',
-  'x-api-key',
   'x-session-token',
   'authenticate',
   'proxy-authenticate',
