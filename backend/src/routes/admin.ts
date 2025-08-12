@@ -47,7 +47,7 @@ router.post("/htaccess/users", async (req, res, next) => {
   }
   const { username, password } = result.data;
   try {
-    const hash = bcrypt.hashSync(password, 10);
+    const hash = await bcrypt.hash(password, 10);
     await fs.appendFile(env.HTPASSWD_PATH, `${username}:${hash}\n`);
     res.json({ success: true });
   } catch (error) {
