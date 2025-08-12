@@ -1,14 +1,18 @@
+Copilot said: ```ignore list # Dependencies node_modules/ npm-debug.log* yarn-debug.log* yarn-error.log* pnpm-debug.log* # Build outputs dist/ build/ server/public/ frontend/dist/ frontend/build/ # Environment files **/.env **/.env.local **/.env.development.local **/.env.test.local **/.env.production.local #
+ignore
 # Dependencies
-node_modules
+node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
 # Build outputs
-dist
-build
-server/public
+dist/
+build/
+server/public/
+frontend/dist/
+frontend/build/
 
 # Environment files
 **/.env
@@ -17,42 +21,29 @@ server/public
 **/.env.test.local
 **/.env.production.local
 
-# IDE and editor files
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-
-# OS files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
+# TypeScript
+*.tsbuildinfo
 
 # Logs
 *.log
-logs
+logs/
 
 # Runtime data
-pids
+pids/
 *.pid
 *.seed
 *.pid.lock
 
 # Coverage directory used by tools like istanbul
-coverage
+coverage/
 *.lcov
 
 # Temporary folders
-tmp
-temp
+tmp/
+temp/
 
 # Optional npm cache directory
-.npm
+.npm/
 
 # Optional eslint cache
 .eslintcache
@@ -76,11 +67,34 @@ temp
 vite.config.ts.*
 *.tar.gz
 
-# Database
+# Database files
 *.sqlite
 *.db
 
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
 # Replit specific
 .replit
-
 replit.nix
+
+# --- CMS-specific ---
+cms/uploads/
+cms/storage/
+
+# Test output
+junit.xml
+test-results/
+
+# Add any other app-specific generated assets below
