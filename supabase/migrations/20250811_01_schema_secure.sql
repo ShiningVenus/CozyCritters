@@ -32,6 +32,7 @@ create table public.profiles (
   id uuid primary key references auth.users on delete cascade,
   username citext not null unique,
   avatar_url text,
+  encrypted_email bytea,
   role text not null default 'user' check (role in ('user','moderator','admin')),
   created_at timestamptz not null default now()
 );

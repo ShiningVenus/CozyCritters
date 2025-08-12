@@ -27,6 +27,29 @@ set search_path = public, auth as $$
 $$;
 
 /* =========================================================
+   Encrypted email helpers
+========================================================= */
+create or replace function public.set_encrypted_email(p_email text, p_key text)
+returns void
+language sql
+security definer
+set search_path = public as $$
+  update public.profiles
+     set encrypted_email = pgp_sym_encrypt(p_email, p_key)
+   where id = auth.uid();
+$$;
+
+create or replace function public.get_encrypted_email(p_key text)
+returns text
+language sql
+security definer
+set search_path = public as $$
+  select pgp_sym_decrypt(encrypted_email, p_key)::text
+    from public.profiles
+   where id = auth.uid();
+$$;
+
+/* =========================================================
    Grants
 ========================================================= */
 revoke all on function public.export_user_data() from public;
@@ -34,3 +57,9 @@ grant execute on function public.export_user_data() to authenticated;
 
 revoke all on function public.delete_user_account() from public;
 grant execute on function public.delete_user_account() to authenticated;
+
+revoke all on function public.set_encrypted_email(text, text) from public;
+grant execute on function public.set_encrypted_email(text, text) to authenticated;
+
+revoke all on function public.get_encrypted_email(text) from public;
+grant execute on function public.get_encrypted_email(text) to authenticated;
