@@ -6,6 +6,7 @@ A lightweight Express server that stores editable site content in local JSON fil
 - File-based storage (`cms/data/*.json`)
 - REST endpoints for public content retrieval
 - Secured admin endpoints with HTTP Basic Auth
+- Basic rate limiting to prevent abuse
 
 ## Setup
 
