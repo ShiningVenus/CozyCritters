@@ -1,17 +1,13 @@
 import { Request, Response, NextFunction } from "express";
-import { createHmac } from "node:crypto";
+import jwt, { JwtPayload } from "jsonwebtoken";
 import { env } from "../env";
 
 function verifyToken(token: string) {
-  const parts = token.split(".");
-  if (parts.length !== 3) throw new Error("Invalid token");
-  const [headerB64, payloadB64, signature] = parts;
-  const expected = createHmac("sha256", env.JWT_SECRET)
-    .update(`${headerB64}.${payloadB64}`)
-    .digest("base64url");
-  if (signature !== expected) throw new Error("Invalid signature");
-  const payloadJson = Buffer.from(payloadB64, "base64url").toString();
-  return JSON.parse(payloadJson);
+  const payload = jwt.verify(token, env.JWT_SECRET, {
+    algorithms: ["HS256"],
+  }) as JwtPayload;
+  if (!payload.exp) throw new Error("Missing exp");
+  return payload;
 }
 
 export function authMiddleware(allowedRoles: string[]) {

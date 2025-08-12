@@ -1,20 +1,16 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import express from 'express';
-import { createHmac } from 'node:crypto';
+import jwt from 'jsonwebtoken';
 import { authMiddleware } from './auth';
 import { env } from '../env';
 
-function createToken(payload: any) {
-  const header = { alg: 'HS256', typ: 'JWT' };
-  const encode = (obj: any) =>
-    Buffer.from(JSON.stringify(obj)).toString('base64url');
-  const headerB64 = encode(header);
-  const payloadB64 = encode(payload);
-  const signature = createHmac('sha256', env.JWT_SECRET)
-    .update(`${headerB64}.${payloadB64}`)
-    .digest('base64url');
-  return `${headerB64}.${payloadB64}.${signature}`;
+function createToken(payload: any, options?: jwt.SignOptions) {
+  return jwt.sign(payload, env.JWT_SECRET, {
+    algorithm: 'HS256',
+    expiresIn: '1h',
+    ...options,
+  });
 }
 
 function buildServer(allowedRoles: string[]) {
@@ -55,6 +51,40 @@ test('allows request with matching role', async () => {
     assert.equal(res.status, 200);
     const body = await res.json();
     assert.deepEqual(body, { ok: true });
+  } finally {
+    server.close();
+  }
+});
+
+test('rejects request with invalid token', async () => {
+  const { server, port } = buildServer(['admin']);
+  try {
+    const token = jwt.sign(
+      { roles: ['admin'] },
+      'wrong-secret',
+      { algorithm: 'HS256', expiresIn: '1h' }
+    );
+    const res = await fetch(`http://localhost:${port}/protected`, {
+      headers: {
+        authorization: `Bearer ${token}`
+      }
+    });
+    assert.equal(res.status, 401);
+  } finally {
+    server.close();
+  }
+});
+
+test('rejects request with expired token', async () => {
+  const { server, port } = buildServer(['admin']);
+  try {
+    const token = createToken({ roles: ['admin'] }, { expiresIn: '-1s' });
+    const res = await fetch(`http://localhost:${port}/protected`, {
+      headers: {
+        authorization: `Bearer ${token}`
+      }
+    });
+    assert.equal(res.status, 401);
   } finally {
     server.close();
   }
