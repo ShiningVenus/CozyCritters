@@ -2,7 +2,8 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import express from 'express';
 import adminRouter from './admin';
-import { randomUUID, createHash } from 'node:crypto';
+import { randomUUID } from 'node:crypto';
+import bcrypt from 'bcryptjs';
 import { env } from '../env';
 import fs from 'node:fs/promises';
 import os from 'node:os';
@@ -70,8 +71,7 @@ test('adds htaccess user', async () => {
     const contents = await fs.readFile(file, 'utf8');
     const [user, hash] = contents.trim().split(':');
     assert.equal(user, 'alice');
-    const expected = '{SHA}' + createHash('sha1').update('secret').digest('base64');
-    assert.equal(hash, expected);
+    assert.ok(bcrypt.compareSync('secret', hash));
   } finally {
     server.close();
   }
@@ -122,7 +122,7 @@ test('lists htaccess users', async () => {
   const dir = await fs.mkdtemp(path.join(os.tmpdir(), 'htpasswd-'));
   const file = path.join(dir, '.htpasswd');
   env.HTPASSWD_PATH = file;
-  await fs.writeFile(file, 'alice:{SHA}hash1\n' + 'bob:{SHA}hash2\n');
+  await fs.writeFile(file, 'alice:hash1\n' + 'bob:hash2\n');
   const { server, port } = buildServer();
   try {
     const res = await fetch(`http://localhost:${port}/htaccess/users`);
@@ -138,7 +138,7 @@ test('removes htaccess user', async () => {
   const dir = await fs.mkdtemp(path.join(os.tmpdir(), 'htpasswd-'));
   const file = path.join(dir, '.htpasswd');
   env.HTPASSWD_PATH = file;
-  await fs.writeFile(file, 'alice:{SHA}hash1\n' + 'bob:{SHA}hash2\n');
+  await fs.writeFile(file, 'alice:hash1\n' + 'bob:hash2\n');
   const { server, port } = buildServer();
   try {
     const res = await fetch(`http://localhost:${port}/htaccess/users/alice`, { method: 'DELETE' });
@@ -147,7 +147,7 @@ test('removes htaccess user', async () => {
     assert.deepEqual(body, { success: true });
     const contents = await fs.readFile(file, 'utf8');
     const lines = contents.trim().split('\n');
-    assert.deepEqual(lines, ['bob:{SHA}hash2']);
+    assert.deepEqual(lines, ['bob:hash2']);
   } finally {
     server.close();
   }

@@ -33,7 +33,7 @@ The admin router can manage an Apache-style `.htpasswd` file defined by `HTPASSW
 Returns the list of usernames currently in the file.
 
 ### `POST /htaccess/users`
-Adds a user. Body must contain `{ "username": string, "password": string }` and the password is stored as a SHA1 digest.
+Adds a user. Body must contain `{ "username": string, "password": string }` and the password is stored as a bcrypt hash.
 
 ### `DELETE /htaccess/users/:username`
 Removes the matching user from the file.
