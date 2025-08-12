@@ -31,6 +31,7 @@ drop view if exists public.public_profiles cascade;
 ========================================================= */
 create extension if not exists pgcrypto;
 create extension if not exists citext;
+create extension if not exists pg_cron;
 
 /* =========================================================
    TABLES
@@ -83,7 +84,8 @@ create table if not exists public.posts (
   author_id uuid not null references public.profiles(id) on delete cascade,
   content text not null,
   created_at timestamptz not null default now(),
-  updated_at timestamptz not null default now()
+  updated_at timestamptz not null default now(),
+  expires_at timestamptz not null default now() + interval '90 days'
 );
 
 -- Reactions to posts
@@ -103,7 +105,8 @@ create table if not exists public.flags (
   post_id uuid not null references public.posts(id) on delete cascade,
   reporter_id uuid not null references public.profiles(id) on delete cascade,
   reason text,
-  created_at timestamptz not null default now()
+  created_at timestamptz not null default now(),
+  expires_at timestamptz not null default now() + interval '90 days'
 );
 
 /* =========================================================
@@ -121,6 +124,23 @@ create index if not exists reactions_post_idx on public.reactions(post_id);
 create index if not exists reactions_author_idx on public.reactions(author_id);
 create index if not exists flags_post_idx on public.flags(post_id);
 create index if not exists flags_reporter_idx on public.flags(reporter_id);
+create index if not exists posts_expires_at_idx on public.posts(expires_at);
+create index if not exists flags_expires_at_idx on public.flags(expires_at);
+
+/* =========================================================
+   Expired content cleanup
+========================================================= */
+create or replace function public.purge_expired_content()
+returns void
+language sql
+security definer
+as $$
+  delete from public.flags where expires_at < now();
+  delete from public.posts where expires_at < now();
+$$;
+
+select cron.schedule('purge_expired_content', '0 3 * * *', $$select public.purge_expired_content();$$)
+where not exists (select 1 from cron.job where jobname = 'purge_expired_content');
 
 /* =========================================================
    TRIGGERS FOR updated_at
