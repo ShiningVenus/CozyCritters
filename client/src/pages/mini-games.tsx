@@ -261,7 +261,6 @@ export default function MiniGames({ onBack }: MiniGamesProps) {
 
       {pendingGame && (
         <GameInstructions
-          open={!!pendingGame}
           gameId={pendingGame.config.id}
           title={pendingGame.config.name}
           description={pendingGame.config.description}

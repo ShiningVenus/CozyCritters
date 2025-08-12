@@ -5,7 +5,6 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 
 interface GameInstructionsProps {
-  open: boolean;
   title: string;
   description: string;
   gameId: string;
@@ -13,7 +12,7 @@ interface GameInstructionsProps {
   onClose: () => void;
 }
 
-export function GameInstructions({ open, title, description, gameId, onStart, onClose }: GameInstructionsProps) {
+export function GameInstructions({ title, description, gameId, onStart, onClose }: GameInstructionsProps) {
   const [skip, setSkip] = useState(false);
 
   const handleStart = () => {
@@ -24,7 +23,7 @@ export function GameInstructions({ open, title, description, gameId, onStart, on
   };
 
   return (
-    <Dialog open={open} onOpenChange={(o) => { if (!o) onClose(); }}>
+    <Dialog open onOpenChange={(o) => { if (!o) onClose(); }}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
