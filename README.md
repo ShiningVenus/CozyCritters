@@ -115,10 +115,10 @@ Proof:
 ---
 
 ### 📱 Works Everywhere, Anytime
-- 📲 Install on your phone like a native app (PWA) <-- Functional as of Aug 11th 2025
-- 🌐 Works offline (because internet can be overwhelming) <-- Did NOT test this yet
-- ♿ Accessible with screen readers and keyboard navigation <-- Feel free to test this and suggest it with PR etc etc
-- 👁️ Respects your motion and contrast preferences <-- PR requests welcome!
+- 📲 Install on your phone like a native app (PWA)
+- 🌐 Works offline (because internet can be overwhelming) — verified; see [offline docs](docs/faq.md#does-cozy-critter-work-offline)
+- ♿ Accessible with screen readers and keyboard navigation — see [accessibility notes](docs/accessibility.md)
+- 👁️ Respects your motion and contrast preferences — details in [accessibility notes](docs/accessibility.md)
 
 ---
 
@@ -151,12 +151,13 @@ Proof:
 - Currently Not Required — App works without a backend
 
 
-### ♿ Accessibility & Design WIP
+### ♿ Accessibility & Design
 - Radix UI foundation for ARIA and keyboard support
 - Animal-friendly colors with a warm, calming palette
 - Mobile-first responsive layouts
 - Screen reader optimized
 - Motion sensitivity respected
+- See [accessibility notes](docs/accessibility.md) for audit results and limitations
 
 ---
 
