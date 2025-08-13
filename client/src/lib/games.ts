@@ -3,6 +3,7 @@ import { BreathingBubble } from '@/games/breathing-bubble';
 import { ColorPattern } from '@/games/color-pattern';
 import { DrawingPad } from '@/games/drawing-pad';
 import { ShapeMatch } from '@/games/shape-match';
+import { ZenBlocks } from '@/games/zen-blocks';
 
 // Register all games
 gameRegistry.register({
@@ -78,7 +79,26 @@ gameRegistry.register({
     },
     tags: ['drawing', 'art', 'creative', 'expression']
   },
-  Component: DrawingPad
+    Component: DrawingPad
+  });
+
+gameRegistry.register({
+  config: {
+    id: 'zen-blocks',
+    name: 'Zen Blocks',
+    description: 'A relaxing block-stacking game with slow falling pieces and no game over.',
+    emoji: '🧘',
+    category: 'calming',
+    difficulty: 'easy',
+    estimatedTime: '5-10 min',
+    accessibility: {
+      motionSensitive: false,
+      soundRequired: false,
+      colorBlindFriendly: true
+    },
+    tags: ['blocks', 'calming', 'focus', 'tetris']
+  },
+  Component: ZenBlocks
 });
 
 // Export the registry for use in components

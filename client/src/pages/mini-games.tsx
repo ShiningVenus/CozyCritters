@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowLeft, Filter, Star, Clock, Target, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { gameRegistry } from '@/lib/games';
 import { Game, GameConfig, GameResult } from '@/types/game';
 import {
@@ -20,6 +21,7 @@ interface MiniGamesProps {
 export default function MiniGames({ onBack }: MiniGamesProps) {
   const [currentGame, setCurrentGame] = useState<Game | null>(null);
   const [pendingGame, setPendingGame] = useState<Game | null>(null);
+  const [summary, setSummary] = useState<{ game: Game; result: GameResult } | null>(null);
   const [filter, setFilter] = useState<
     GameConfig['category'] | 'all' | 'completed' | 'favorites'
   >('all');
@@ -42,6 +44,7 @@ export default function MiniGames({ onBack }: MiniGamesProps) {
         markGameCompleted(currentGame.config.id, result);
         setCompletedGames(getCompletedGames());
       }
+      setSummary({ game: currentGame, result });
       setCurrentGame(null);
     }
   };
@@ -323,6 +326,37 @@ export default function MiniGames({ onBack }: MiniGamesProps) {
           onStart={handleStartPendingGame}
           onClose={handleCloseInstructions}
         />
+      )}
+
+      {summary && (
+        <Dialog open onOpenChange={(o) => { if (!o) setSummary(null); }}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>{summary.game.config.name} Complete</DialogTitle>
+              <DialogDescription>
+                {summary.result.completed ? 'Great job taking a mindful break!' : 'Session ended.'}
+              </DialogDescription>
+            </DialogHeader>
+            <div className="py-4 text-sm space-y-1">
+              <div>Time: {summary.result.timeSpent}s</div>
+              {typeof summary.result.score === 'number' && (
+                <div>Score: {summary.result.score}</div>
+              )}
+            </div>
+            <DialogFooter className="justify-between">
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setSummary(null);
+                  setCurrentGame(summary.game);
+                }}
+              >
+                Play Again
+              </Button>
+              <Button onClick={() => setSummary(null)}>Back</Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       )}
     </div>
   );
