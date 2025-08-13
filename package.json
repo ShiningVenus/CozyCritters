@@ -9,7 +9,7 @@
     "dev": "npm run dev:web",
     "dev:web": "vite",
     "dev:server": "NODE_ENV=development tsx server/index.ts",
-    "build": "vite build && cp -r public/admin client/dist/admin && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist",
+    "build": "vite build && cp -r public/admin client/dist/admin && mkdir -p dist/public && cp -r client/dist/* dist/public && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist",
     "preview": "vite preview",
     "start": "NODE_ENV=production node dist/index.js",
     "check": "tsc",
