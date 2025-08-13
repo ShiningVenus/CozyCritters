@@ -20,6 +20,16 @@ Use the interface to add, update, or remove entries. Changes are written as comm
 
 When you publish, Decap CMS commits the updated JSON files. Redeploy your site so the new content is served.
 
+## Editorial workflow
+
+Decap CMS organizes unpublished content into three status columns:
+
+- **Draft** – initial saves that are still being written.
+- **In Review** – content submitted for approval.
+- **Ready** – approved entries ready to publish.
+
+Editors move entries through these columns so only reviewed content is merged and deployed.
+
 ## Local development
 
 Run the development server and open `http://localhost:5000/admin/` (adjust the port if needed). The CMS will write directly to your local Git repo.
