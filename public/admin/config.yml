@@ -1,14 +1,7 @@
 backend:
-  name: github
-  ## The GitHub repository slug in the form "owner/repo".
-  ## Update this to match your project repository.
-  repo: CatgirlRika/CozyCritters
+  name: file-system
+  api_root: /api
   branch: main
-  ## Use Netlify to handle authentication.
-  base_url: https://api.netlify.com
-  auth_endpoint: auth
-  site_id: cozycritter
-  ## Access is restricted to GitHub collaborators with write permissions.
 publish_mode: editorial_workflow
 media_folder: "public/uploads"
 public_folder: "/uploads"
