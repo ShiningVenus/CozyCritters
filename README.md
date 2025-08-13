@@ -32,7 +32,7 @@ Everything stays on your device because your emotional data is deeply personal.
 - [🏢 For Organizations](#-for-autism--neurodivergent-support-organizations)
 - [🛠️ Technical Details](#-tech--architecture)
 - [📚 Full Docs](docs/README.md)
-- [📝 CMS Backend](#-minimal-cms-backend)
+- [📝 Content Management](#-content-management)
 
 ---
 
@@ -151,10 +151,8 @@ Proof:
   - Reusable `requestLogger` middleware for development visibility
 - Currently Not Required — App works without a backend
 
-### 📝 Minimal CMS Backend
-A separate Express service lives in [`cms/`](cms/) and stores moods, games, and pages in JSON files.
-It exposes REST endpoints for public reads and secured admin CRUD operations via HTTP Basic Auth.
-See [`cms/README.md`](cms/README.md) for setup and usage.
+### 📝 Content Management
+An optional [Decap CMS](https://decapcms.org/) interface lives at `/admin/` and edits JSON files in the `content/` directory via Git commits.
 
 ### ♿ Accessibility & Design
 - Radix UI foundation for ARIA and keyboard support

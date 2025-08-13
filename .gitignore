@@ -87,9 +87,6 @@ Thumbs.db
 .replit
 replit.nix
 
-# --- CMS-specific ---
-cms/uploads/
-cms/storage/
 
 # Test output
 junit.xml
