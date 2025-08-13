@@ -1,5 +1,6 @@
 import { type Request, type Response, type NextFunction } from "express";
 import crypto from "crypto";
+import cookie from "cookie";
 import { getUser } from "../admin-users";
 
 const JWT_SECRET = process.env.JWT_SECRET || "change-me";
@@ -40,14 +41,9 @@ export function cmsAuth(req: Request, res: Response, next: NextFunction): void {
 
   if (header?.startsWith("Bearer ")) {
     token = header.substring(7);
-  } else if (req.headers.cookie) {
-    const match = req.headers.cookie
-      .split(";")
-      .map((c) => c.trim())
-      .find((c) => c.startsWith("token="));
-    if (match) {
-      token = match.split("=")[1];
-    }
+  } else {
+    const cookies = cookie.parse(req.headers.cookie ?? "");
+    token = cookies.token;
   }
 
   if (!token) {
