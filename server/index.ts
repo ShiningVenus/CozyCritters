@@ -7,26 +7,10 @@ import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import { requestLogger } from "./middleware/request-logger";
 import { cmsAuth } from "./middleware/cms-auth";
-import crypto from "crypto";
+import jwt from "jsonwebtoken";
 import { getUser, verifyPassword } from "./admin-users";
 
 const JWT_SECRET = process.env.JWT_SECRET || "change-me";
-
-function base64url(input: Buffer): string {
-  return input
-    .toString("base64")
-    .replace(/=/g, "")
-    .replace(/\+/g, "-")
-    .replace(/\//g, "_");
-}
-
-function signToken(payload: Record<string, any>): string {
-  const data = base64url(Buffer.from(JSON.stringify(payload)));
-  const sig = base64url(
-    crypto.createHmac("sha256", JWT_SECRET).update(data).digest()
-  );
-  return `${data}.${sig}`;
-}
 
 const app = express();
 
@@ -157,11 +141,11 @@ app.post('/api/login', (req, res) => {
     res.status(401).json({ message: 'Invalid credentials' });
     return;
   }
-  const token = signToken({
-    username,
-    passwordHash: user.password,
-    role: user.role,
-  });
+  const token = jwt.sign(
+    { username, passwordHash: user.password, role: user.role },
+    JWT_SECRET,
+    { expiresIn: "1h" }
+  );
   res.cookie('token', token, {
     httpOnly: true,
     sameSite: 'lax',

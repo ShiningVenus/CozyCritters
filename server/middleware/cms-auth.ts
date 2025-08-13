@@ -1,38 +1,16 @@
 import { type Request, type Response, type NextFunction } from "express";
-import crypto from "crypto";
 import cookie from "cookie";
+import jwt from "jsonwebtoken";
 import { getUser } from "../admin-users";
 
 const JWT_SECRET = process.env.JWT_SECRET || "change-me";
 
-function base64url(input: Buffer): string {
-  return input
-    .toString("base64")
-    .replace(/=/g, "")
-    .replace(/\+/g, "-")
-    .replace(/\//g, "_");
-}
-
-function verifyToken(token: string): {
+interface TokenPayload {
   username: string;
   passwordHash: string;
   role: string;
-} {
-  const [data, sig] = token.split(".");
-  if (!data || !sig) {
-    throw new Error("Invalid token");
-  }
-  const expected = base64url(
-    crypto.createHmac("sha256", JWT_SECRET).update(data).digest()
-  );
-  if (!crypto.timingSafeEqual(Buffer.from(sig), Buffer.from(expected))) {
-    throw new Error("Invalid token");
-  }
-  const json = Buffer.from(
-    data.replace(/-/g, "+").replace(/_/g, "/"),
-    "base64"
-  ).toString();
-  return JSON.parse(json);
+  iat: number;
+  exp: number;
 }
 
 export function cmsAuth(req: Request, res: Response, next: NextFunction): void {
@@ -52,7 +30,7 @@ export function cmsAuth(req: Request, res: Response, next: NextFunction): void {
   }
 
   try {
-    const payload = verifyToken(token);
+    const payload = jwt.verify(token, JWT_SECRET) as TokenPayload;
 
     const user = getUser(payload.username);
     if (!user || user.password !== payload.passwordHash) {
