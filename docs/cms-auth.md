@@ -15,7 +15,8 @@ backend:
 
 ## Creating accounts
 
-1. Run `npm run cms:add-user -- <username> <password> [role]` to create a user. If `cms-users.json` doesn't exist it will be created. The role defaults to `admin`.
+1. Run `npm run cms:init [username]` to generate the first admin account. The script prints a strong password so you can copy and store it safely. Add more accounts later with `npm run cms:add-user -- <username> <password> [role]`.
+
 2. Alternatively, set the `CMS_USERS` environment variable to a JSON object mapping usernames to an object with `password` and `role` fields, for example:
 
    ```bash

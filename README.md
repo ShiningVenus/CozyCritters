@@ -152,7 +152,7 @@ Proof:
 - Currently Not Required — App works without a backend
 
 ### 📝 Content Management
-An optional [Decap CMS](https://decapcms.org/) interface lives at `/admin/`. Run `npm run cms:add-user -- <username> <password> [role]` to create your first account (stored in `cms-users.json` and ignored by Git), then sign in through `/cms-login.html` to edit JSON files in the `content/` directory without relying on GitHub. For production hosting, the CMS endpoints require a Node server; Netlify can serve only the static client, so pair it with an external server or use a full-stack host like Vercel or Railway.
+An optional [Decap CMS](https://decapcms.org/) interface lives at `/admin/`. Run `npm run cms:init [username]` to generate the first admin account; a strong password is printed so you can copy and save it. Add more accounts with `npm run cms:add-user -- <username> <password> [role]`, then sign in through `/cms-login.html` to edit JSON files in the `content/` directory without relying on GitHub. For production hosting, the CMS endpoints require a Node server; Netlify can serve only the static client, so pair it with an external server or use a full-stack host like Vercel or Railway.
 
 
 ### ♿ Accessibility & Design

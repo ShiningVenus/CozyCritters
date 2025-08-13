@@ -3,8 +3,7 @@
 Cozy Critters uses [Decap CMS](https://decapcms.org/) to edit JSON files stored in the `content/` directory.
 
 ## Accessing the editor
-
-1. Create a CMS account if one doesn't exist yet: `npm run cms:add-user -- <username> <password> [role]`. The first account should be an `admin`.
+1. Initialize the first admin account with `npm run cms:init [username]`. The script prints a strong password so you can copy it.
 2. Open `/cms-login.html` and sign in with that username and password.
 3. You'll be redirected to `/admin/` where the CMS UI loads.
 
