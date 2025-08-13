@@ -3,6 +3,21 @@
   <head>
     <meta charset="utf-8" />
     <title>Cozy Critters Admin</title>
+    <script>
+      const token = localStorage.getItem('cmsAuth');
+      if (token) {
+        const origFetch = window.fetch.bind(window);
+        window.fetch = (input, init = {}) => {
+          init.headers = init.headers || {};
+          if (init.headers instanceof Headers) {
+            init.headers.set('Authorization', 'Basic ' + token);
+          } else {
+            init.headers['Authorization'] = 'Basic ' + token;
+          }
+          return origFetch(input, init);
+        };
+      }
+    </script>
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/markdown-it@14.0.0/dist/markdown-it.min.js" defer></script>
   </head>

@@ -152,7 +152,7 @@ Proof:
 - Currently Not Required — App works without a backend
 
 ### 📝 Content Management
-An optional [Decap CMS](https://decapcms.org/) interface lives at `/admin/` and edits JSON files in the `content/` directory via Git commits.
+An optional [Decap CMS](https://decapcms.org/) interface lives at `/admin/`. Sign in through `/cms-login.html` using credentials from `cms-users.json` to edit JSON files in the `content/` directory without relying on GitHub.
 
 ### ♿ Accessibility & Design
 - Radix UI foundation for ARIA and keyboard support
