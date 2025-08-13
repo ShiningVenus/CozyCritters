@@ -1,6 +1,8 @@
 # CMS Authentication
 
 GitHub manages access to the Decap CMS admin area.
+For self‑hosted deployments, the server can also require HTTP Basic Auth
+before the CMS assets or APIs are served.
 
 ### Configuration
 
@@ -15,6 +17,20 @@ backend:
 ```
 
 Only collaborators with write access to the repository can open the CMS.
+
+## Basic Auth setup
+
+1. **Create editor accounts**
+   - Run `npm run cms:add-user -- <username> <password>` to hash a password and
+     append it to `cms-users.json`.
+   - Alternatively, set the `CMS_USERS` environment variable to a JSON object
+     mapping usernames to `<salt>:<hash>` strings.
+2. **Protect CMS routes**
+   - The server automatically applies Basic Auth to `/admin`, `/api`, and
+     `/content` routes when credentials are present.
+3. **Log in**
+   - Open `/admin/` in the browser and enter the username and password when
+     prompted.
 
 ### Login flow
 

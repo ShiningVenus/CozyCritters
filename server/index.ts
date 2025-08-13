@@ -6,6 +6,7 @@ import path from "path";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import { requestLogger } from "./middleware/request-logger";
+import { cmsAuth } from "./middleware/cms-auth";
 
 const app = express();
 
@@ -128,6 +129,9 @@ app.use('/api', apiLimiter);
 
 app.use(express.json({ limit: '100kb' }));
 app.use(express.urlencoded({ extended: false, limit: '100kb' }));
+
+// Basic authentication for CMS related routes
+app.use(["/admin", "/api", "/content"], cmsAuth);
 
 app.use("/content", express.static(path.resolve("content")));
 
