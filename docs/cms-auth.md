@@ -1,23 +1,46 @@
 # CMS Authentication
 
-Netlify Identity manages access to the Decap CMS admin area.
+GitHub manages access to the Decap CMS admin area.
 
-## Login flow
+### Configuration
+
+In `public/admin/config.yml` the backend is configured to use GitHub:
+
+```yml
+backend:
+  name: github
+  repo: owner/CozyCritters
+  branch: main
+  auth_type: implicit
+```
+
+Only collaborators with write access to the repository can open the CMS.
+
+### Login flow
 
 1. Deploy the app or run the development server.
-2. Visit `/admin/` and select **Log in**.
-3. Authenticate with Netlify Identity or a connected GitHub account.
-4. After authentication, the CMS loads if your Identity role is `admin` or `editor`.
+2. Visit `/admin/` and choose **Log in with GitHub**.
+3. Authorize the application in the GitHub OAuth screen.
+4. After authentication, the CMS loads if your GitHub account has write access to the repository.
 
-## Inviting new editors
+### Inviting new editors
+
+1. In the GitHub repository, open **Settings → Collaborators and teams**.
+2. Click **Add people** and enter the editor's username or email.
+3. Grant the user write access and send the invitation.
+4. The recipient accepts the invitation to gain CMS access.
+
+### Account recovery
+
+- **Forgot password:** Use GitHub's password reset process.
+- **Lost or expired invite:** Send a new invitation from the repository settings on GitHub.
+- **Other login issues:** Review your GitHub account status or contact the repository owner.
+
+### Migrating from Netlify Identity
+
+Netlify Identity has been deprecated. If your project previously used it:
 
 1. In the Netlify dashboard, open the **Identity** tab.
-2. Click **Invite users** and enter the editor's email.
-3. Assign the `editor` role and send the invitation.
-4. The recipient follows the email link to create a password and access the CMS.
+2. Select **Export users** to download a CSV of existing accounts.
+3. Notify users to authenticate with GitHub going forward.
 
-## Account recovery
-
-- **Forgot password:** Use the **Forgot your password?** link on the login screen. A reset link will be emailed.
-- **Lost or expired invite:** An admin can resend the invitation from the Netlify Identity dashboard.
-- **GitHub login issues:** Reset the password through GitHub's recovery process and retry logging in.
