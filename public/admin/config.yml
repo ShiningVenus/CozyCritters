@@ -7,6 +7,7 @@ backend:
   ## Use GitHub's implicit OAuth flow for authentication.
   auth_type: implicit
   ## Access is restricted to GitHub collaborators with write permissions.
+publish_mode: editorial_workflow
 media_folder: "public/uploads"
 public_folder: "/uploads"
 collections:
