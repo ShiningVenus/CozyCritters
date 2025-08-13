@@ -34,4 +34,4 @@ Yes
 
 ## Does the app require a backend?
 
-No. All data stays in your browser. An optional CMS is available for managing content, but it's not required for personal use.
+No. All data stays in your browser. An optional git-based CMS (Decap CMS) can be used to edit the JSON files under `content/`, but it's not required for personal use.

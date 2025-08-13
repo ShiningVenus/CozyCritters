@@ -22,6 +22,16 @@ Thanks for helping make Cozy Critter better!
 - `npm run check` – TypeScript checks
 - `npm test` – run tests
 
+## Editorial workflow
+
+Content edited in Decap CMS uses an editorial workflow with three stages:
+
+1. **Draft** – save unfinished work.
+2. **In Review** – submit for maintainer review.
+3. **Ready** – approved content that can be merged and published.
+
+Once changes reach the Ready stage and are merged into `main`, a Netlify build hook deploys the updated site.
+
 ## Pull Request Checklist
 
 - [ ] Tests pass (`npm test`)

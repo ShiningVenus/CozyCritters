@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Cozy Critters Admin</title>
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  </head>
+  <body>
+    <div id="cms"></div>
+    <script type="module">
+      import MoodsPreview from './previews/moods.js';
+      import GamesPreview from './previews/games.js';
+      import PagesPreview from './previews/pages.js';
+      import GameDifficultyWidget from './widgets/game-difficulty.js';
+      import MoodColorWidget from './widgets/mood-color.js';
+
+      CMS.registerPreviewStyle('https://cdn.jsdelivr.net/npm/tailwindcss@3.4.17/dist/tailwind.min.css');
+      CMS.registerPreviewStyle('https://cdn.jsdelivr.net/npm/@tailwindcss/typography@0.5.15/dist/typography.min.css');
+
+      CMS.registerPreviewTemplate('moods', MoodsPreview);
+      CMS.registerPreviewTemplate('games', GamesPreview);
+      CMS.registerPreviewTemplate('pages', PagesPreview);
+
+      CMS.registerWidget('game-difficulty', GameDifficultyWidget.control, GameDifficultyWidget.preview);
+      CMS.registerWidget('mood-color', MoodColorWidget.control, MoodColorWidget.preview);
+
+      CMS.init({ element: document.getElementById('cms') });
+    </script>
+  </body>
+</html>

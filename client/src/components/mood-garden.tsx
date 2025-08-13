@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { moodStorage } from "@/lib/mood-storage";
-import { MoodEntry, moodOptions } from "@shared/schema";
+import { MoodEntry } from "@shared/schema";
+import { fetchMoods, MoodOption } from "@/lib/content";
 import { format, isToday, isYesterday } from "date-fns";
 import { Trash2 } from "lucide-react";
 
@@ -11,6 +12,7 @@ interface MoodGardenProps {
 export function MoodGarden({ onStartCheckIn }: MoodGardenProps) {
   const [moodHistory, setMoodHistory] = useState<MoodEntry[]>([]);
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [moodOptions, setMoodOptions] = useState<MoodOption[]>([]);
 
   const loadMoodHistory = () => {
     const moods = moodStorage.getRecentMoodEntries(20);
@@ -19,6 +21,7 @@ export function MoodGarden({ onStartCheckIn }: MoodGardenProps) {
 
   useEffect(() => {
     loadMoodHistory();
+    fetchMoods().then(setMoodOptions).catch(() => setMoodOptions([]));
     
     // Listen for storage changes (in case of updates from other tabs)
     const handleStorageChange = (e: StorageEvent) => {
