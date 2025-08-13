@@ -7,8 +7,8 @@ import {
   createUser as createCmsUser,
   updateUser as updateCmsUser,
   deleteUser as deleteCmsUser,
-  ensureAdmin,
 } from "./admin-users";
+import { requireAdmin } from "./middleware/require-admin";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // put application routes here
@@ -27,11 +27,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.get("/api/admin/users", ensureAdmin, (_req, res) => {
+  app.get("/api/admin/users", requireAdmin, (_req, res) => {
     res.json(listCmsUsers());
   });
 
-  app.post("/api/admin/users", ensureAdmin, (req, res, next) => {
+  app.post("/api/admin/users", requireAdmin, (req, res, next) => {
     try {
       const { username, password, role } = req.body as {
         username: string;
@@ -45,7 +45,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.put("/api/admin/users/:username", ensureAdmin, (req, res, next) => {
+  app.put("/api/admin/users/:username", requireAdmin, (req, res, next) => {
     try {
       const { password, role } = req.body as {
         password?: string;
@@ -58,7 +58,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.delete("/api/admin/users/:username", ensureAdmin, (req, res, next) => {
+  app.delete("/api/admin/users/:username", requireAdmin, (req, res, next) => {
     try {
       deleteCmsUser(req.params.username);
       res.status(204).end();

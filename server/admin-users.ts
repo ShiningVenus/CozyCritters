@@ -1,7 +1,6 @@
 import fs from "fs";
 import path from "path";
 import crypto from "crypto";
-import { type Request, type Response, type NextFunction } from "express";
 
 export type CmsRole = "admin" | "mod" | "editor";
 
@@ -97,18 +96,5 @@ export function deleteUser(username: string): void {
   }
   delete users[username];
   saveUsers(users);
-}
-
-export function ensureAdmin(
-  req: Request,
-  res: Response,
-  next: NextFunction
-): void {
-  const user = (req as any).cmsUser as { username: string; role: CmsRole } | undefined;
-  if (!user || user.role !== "admin") {
-    res.status(403).json({ message: "Forbidden" });
-    return;
-  }
-  next();
 }
 
