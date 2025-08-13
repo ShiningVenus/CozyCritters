@@ -14,11 +14,33 @@ Netlify is good for serving the built React client.
 1. Sign up at [netlify.com](https://netlify.com) and click **Add new site → Import an existing project**.
 2. Pick your GitHub fork.
 3. Set **Build command** to `npm run build`.
-4. Set **Publish directory** to `dist/public`.
+4. Set **Publish directory** to `client/dist`.
 5. Add any needed environment variables under **Site settings → Environment variables**.
 6. Press **Deploy site**.
 
-> Netlify hosts only the front‑end. If you need the API, deploy it separately (for example on Railway) and point the client to it.
+Netlify hosts only the front‑end. To use the CMS or API, run the Node server elsewhere (for example on Railway) and proxy requests in `netlify.toml`:
+
+```toml
+[[redirects]]
+  from = "/api/*"
+  to = "https://cms.example.com/api/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/admin/*"
+  to = "https://cms.example.com/admin/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/content/*"
+  to = "https://cms.example.com/content/:splat"
+  status = 200
+  force = true
+```
+
+Replace `https://cms.example.com` with your server URL or choose a full-stack host like Vercel or Railway.
 
 ## Vercel (full stack)
 Vercel can run the server and serve the built client.
