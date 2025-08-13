@@ -3,7 +3,13 @@ import { ArrowLeft, Filter, Star, Clock, Target, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { gameRegistry } from '@/lib/games';
 import { Game, GameConfig, GameResult } from '@/types/game';
-import { getCompletedGames, markGameCompleted, getGameData } from '@/lib/game-progress';
+import {
+  getCompletedGames,
+  markGameCompleted,
+  getGameData,
+  getFavoriteGames,
+  toggleFavoriteGame,
+} from '@/lib/game-progress';
 import { GameInstructions } from '@/components/game-instructions';
 
 
@@ -14,7 +20,9 @@ interface MiniGamesProps {
 export default function MiniGames({ onBack }: MiniGamesProps) {
   const [currentGame, setCurrentGame] = useState<Game | null>(null);
   const [pendingGame, setPendingGame] = useState<Game | null>(null);
-  const [filter, setFilter] = useState<GameConfig['category'] | 'all'>('all');
+  const [filter, setFilter] = useState<
+    GameConfig['category'] | 'all' | 'completed' | 'favorites'
+  >('all');
   const [completedGames, setCompletedGames] = useState<string[]>(() => getCompletedGames());
   const [favoriteGames, setFavoriteGames] = useState<string[]>(() => getFavoriteGames());
 
@@ -60,7 +68,8 @@ export default function MiniGames({ onBack }: MiniGamesProps) {
 
   const handleCloseInstructions = () => {
     setPendingGame(null);
-=======
+  };
+
   const handleToggleFavorite = (id: string) => {
     toggleFavoriteGame(id);
     setFavoriteGames(getFavoriteGames());
