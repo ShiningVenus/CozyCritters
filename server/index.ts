@@ -7,6 +7,26 @@ import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import { requestLogger } from "./middleware/request-logger";
 import { cmsAuth } from "./middleware/cms-auth";
+import crypto from "crypto";
+import { getUser, verifyPassword } from "./admin-users";
+
+const JWT_SECRET = process.env.JWT_SECRET || "change-me";
+
+function base64url(input: Buffer): string {
+  return input
+    .toString("base64")
+    .replace(/=/g, "")
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_");
+}
+
+function signToken(payload: Record<string, any>): string {
+  const data = base64url(Buffer.from(JSON.stringify(payload)));
+  const sig = base64url(
+    crypto.createHmac("sha256", JWT_SECRET).update(data).digest()
+  );
+  return `${data}.${sig}`;
+}
 
 const app = express();
 
@@ -130,7 +150,27 @@ app.use('/api', apiLimiter);
 app.use(express.json({ limit: '100kb' }));
 app.use(express.urlencoded({ extended: false, limit: '100kb' }));
 
-// Basic authentication for CMS related routes
+app.post('/api/login', (req, res) => {
+  const { username, password } = req.body as { username: string; password: string };
+  const user = getUser(username);
+  if (!user || !verifyPassword(password, user.password)) {
+    res.status(401).json({ message: 'Invalid credentials' });
+    return;
+  }
+  const token = signToken({
+    username,
+    passwordHash: user.password,
+    role: user.role,
+  });
+  res.cookie('token', token, {
+    httpOnly: true,
+    sameSite: 'lax',
+    secure: process.env.NODE_ENV === 'production',
+  });
+  res.json({ token });
+});
+
+// Authentication for CMS related routes
 app.use(["/admin", "/api", "/content"], cmsAuth);
 
 app.use("/content", express.static(path.resolve("content")));
