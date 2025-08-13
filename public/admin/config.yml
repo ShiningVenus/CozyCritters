@@ -1,6 +1,11 @@
 backend:
   name: git-gateway
   branch: main
+  identity_url: "/.netlify/identity"
+  gateway_url: "/.netlify/git"
+  allowed_roles:
+    - admin
+    - editor
 media_folder: "public/uploads"
 public_folder: "/uploads"
 collections:
