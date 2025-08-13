@@ -7,7 +7,18 @@
   </head>
   <body>
     <div id="cms"></div>
-    <script>
+    <script type="module">
+      import MoodsPreview from './previews/moods.js';
+      import GamesPreview from './previews/games.js';
+      import PagesPreview from './previews/pages.js';
+
+      CMS.registerPreviewStyle('https://cdn.jsdelivr.net/npm/tailwindcss@3.4.17/dist/tailwind.min.css');
+      CMS.registerPreviewStyle('https://cdn.jsdelivr.net/npm/@tailwindcss/typography@0.5.15/dist/typography.min.css');
+
+      CMS.registerPreviewTemplate('moods', MoodsPreview);
+      CMS.registerPreviewTemplate('games', GamesPreview);
+      CMS.registerPreviewTemplate('pages', PagesPreview);
+
       CMS.init({ element: document.getElementById('cms') });
     </script>
   </body>
