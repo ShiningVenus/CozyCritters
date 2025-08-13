@@ -21,7 +21,7 @@ collections:
         fields:
           - { label: "Emoji", name: "emoji", widget: "string" }
           - { label: "Mood", name: "mood", widget: "string" }
-          - { label: "Color", name: "color", widget: "string" }
+          - { label: "Color", name: "color", widget: "mood-color" }
   - name: "games"
     label: "Games"
     file: "content/games.json"
@@ -33,6 +33,7 @@ collections:
           - { label: "Title", name: "title", widget: "string" }
           - { label: "URL", name: "url", widget: "string" }
           - { label: "Description", name: "description", widget: "text" }
+          - { label: "Difficulty", name: "difficulty", widget: "game-difficulty" }
   - name: "pages"
     label: "Pages"
     file: "content/pages.json"
