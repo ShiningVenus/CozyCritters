@@ -1,28 +1,13 @@
-import fs from "fs";
-import path from "path";
-import crypto from "crypto";
+import { createUser, CmsRole } from "../server/admin-users";
 
-const [,, username, password] = process.argv;
+const [,, username, password, role = "admin"] = process.argv;
 
 if (!username || !password) {
-  console.error("Usage: tsx scripts/add-cms-user.ts <username> <password>");
+  console.error(
+    "Usage: tsx scripts/add-cms-user.ts <username> <password> [role]"
+  );
   process.exit(1);
 }
 
-const salt = crypto.randomBytes(16).toString("hex");
-const hash = crypto.scryptSync(password, salt, 64).toString("hex");
-
-const filePath = path.resolve("cms-users.json");
-let users: Record<string, string> = {};
-if (fs.existsSync(filePath)) {
-  try {
-    users = JSON.parse(fs.readFileSync(filePath, "utf-8"));
-  } catch {
-    // ignore
-  }
-}
-
-users[username] = `${salt}:${hash}`;
-
-fs.writeFileSync(filePath, JSON.stringify(users, null, 2));
-console.log(`User ${username} added to cms-users.json`);
+await createUser(username, password, role as CmsRole);
+console.log(`User ${username} added to cms-users.json with role ${role}`);

@@ -93,3 +93,4 @@ junit.xml
 test-results/
 
 # Add any other app-specific generated assets below
+cms-users.json

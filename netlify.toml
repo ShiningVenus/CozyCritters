@@ -6,12 +6,27 @@
 [build.environment]
   NODE_VERSION = "18"
 
-# SPA routing
+# Proxy CMS requests to an external Node server
+# Replace `https://cms.example.com` with your server's URL
+[[redirects]]
+  from = "/api/*"
+  to = "https://cms.example.com/api/:splat"
+  status = 200
+  force = true
+
 [[redirects]]
   from = "/admin/*"
-  to = "/admin/index.html"
+  to = "https://cms.example.com/admin/:splat"
   status = 200
+  force = true
 
+[[redirects]]
+  from = "/content/*"
+  to = "https://cms.example.com/content/:splat"
+  status = 200
+  force = true
+
+# SPA routing for the main app
 [[redirects]]
   from = "/*"
   to   = "/index.html"
