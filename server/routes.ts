@@ -31,36 +31,36 @@ export async function registerRoutes(app: Express): Promise<Server> {
     res.json(listCmsUsers());
   });
 
-  app.post("/api/admin/users", requireAdmin, (req, res, next) => {
+  app.post("/api/admin/users", requireAdmin, async (req, res, next) => {
     try {
       const { username, password, role } = req.body as {
         username: string;
         password: string;
         role: any;
       };
-      createCmsUser(username, password, role);
+      await createCmsUser(username, password, role);
       res.status(201).end();
     } catch (err) {
       next(err);
     }
   });
 
-  app.put("/api/admin/users/:username", requireAdmin, (req, res, next) => {
+  app.put("/api/admin/users/:username", requireAdmin, async (req, res, next) => {
     try {
       const { password, role } = req.body as {
         password?: string;
         role?: any;
       };
-      updateCmsUser(req.params.username, { password, role });
+      await updateCmsUser(req.params.username, { password, role });
       res.status(204).end();
     } catch (err) {
       next(err);
     }
   });
 
-  app.delete("/api/admin/users/:username", requireAdmin, (req, res, next) => {
+  app.delete("/api/admin/users/:username", requireAdmin, async (req, res, next) => {
     try {
-      deleteCmsUser(req.params.username);
+      await deleteCmsUser(req.params.username);
       res.status(204).end();
     } catch (err) {
       next(err);

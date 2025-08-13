@@ -4,9 +4,9 @@ Cozy Critters uses [Decap CMS](https://decapcms.org/) to edit JSON files stored 
 
 ## Accessing the editor
 
-1. Deploy the app and visit `/admin/`.
-2. Log in with your Git provider when prompted.
-3. After authentication the CMS UI will load.
+1. Create a CMS account if one doesn't exist yet: `npm run cms:add-user -- <username> <password> [role]`. The first account should be an `admin`.
+2. Open `/cms-login.html` and sign in with that username and password.
+3. You'll be redirected to `/admin/` where the CMS UI loads.
 
 ## Editing content
 
@@ -32,4 +32,4 @@ Editors move entries through these columns so only reviewed content is merged an
 
 ## Local development
 
-Run the development server and open `http://localhost:5000/admin/` (adjust the port if needed). The CMS will write directly to your local Git repo.
+Run the development server and open `http://localhost:5000/cms-login.html` (adjust the port if needed) to sign in. After login the CMS at `/admin/` writes directly to your local Git repo.

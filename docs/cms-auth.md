@@ -15,8 +15,12 @@ backend:
 
 ## Creating accounts
 
-1. Run `npm run cms:add-user -- <username> <password>` to hash a password and append it to `cms-users.json`.
-2. Alternatively, set the `CMS_USERS` environment variable to a JSON object mapping usernames to `<salt>:<hash>` strings.
+1. Run `npm run cms:add-user -- <username> <password> [role]` to create a user. If `cms-users.json` doesn't exist it will be created. The role defaults to `admin`.
+2. Alternatively, set the `CMS_USERS` environment variable to a JSON object mapping usernames to an object with `password` and `role` fields, for example:
+
+   ```bash
+   CMS_USERS='{"alice":{"password":"<salt>:<hash>","role":"admin"}}'
+   ```
 
 ## Login flow
 

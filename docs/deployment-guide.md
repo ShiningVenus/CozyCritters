@@ -1,7 +1,7 @@
 # 🌐 Deployment Guide
 
 This guide shows simple ways to run Cozy Critter on popular hosting services. It uses plain language for neurodivergent folks and anyone new to deployment.
-The core app is static; an optional Decap CMS interface can be enabled for editing content.
+The core app is static; an optional Decap CMS interface can be enabled for editing content. If you enable the CMS, create a user with `npm run cms:add-user -- <username> <password> [role]` before signing in at `/cms-login.html`.
 
 ## Before you start
 1. Fork this repository to your own GitHub account.
