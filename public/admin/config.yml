@@ -2,10 +2,12 @@ backend:
   name: github
   ## The GitHub repository slug in the form "owner/repo".
   ## Update this to match your project repository.
-  repo: owner/CozyCritters
+  repo: CatgirlRika/CozyCritters
   branch: main
-  ## Use GitHub's implicit OAuth flow for authentication.
-  auth_type: implicit
+  ## Use Netlify to handle authentication.
+  base_url: https://api.netlify.com
+  auth_endpoint: auth
+  site_id: cozycritter
   ## Access is restricted to GitHub collaborators with write permissions.
 publish_mode: editorial_workflow
 media_folder: "public/uploads"
