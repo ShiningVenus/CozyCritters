@@ -14,6 +14,13 @@ test('shape-match game registered under focus category', () => {
   assert.equal(game!.config.category, 'focus');
 });
 
+// Verify zen-blocks game is registered correctly
+test('zen-blocks game registered under calming category', () => {
+  const game = gameRegistry.getGame('zen-blocks');
+  assert.ok(game, 'zen-blocks game should be registered');
+  assert.equal(game!.config.category, 'calming');
+});
+
 // Verify MiniGames renders the shape-match card
 
 test('MiniGames lists the Shape Match game', () => {
