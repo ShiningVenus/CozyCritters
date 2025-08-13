@@ -154,6 +154,7 @@ Proof:
 ### 📝 Content Management
 An optional [Decap CMS](https://decapcms.org/) interface lives at `/admin/`. Run `npm run cms:add-user -- <username> <password> [role]` to create your first account (stored in `cms-users.json` and ignored by Git), then sign in through `/cms-login.html` to edit JSON files in the `content/` directory without relying on GitHub. For production hosting, the CMS endpoints require a Node server; Netlify can serve only the static client, so pair it with an external server or use a full-stack host like Vercel or Railway.
 
+
 ### ♿ Accessibility & Design
 - Radix UI foundation for ARIA and keyboard support
 - Animal-friendly colors with a warm, calming palette
