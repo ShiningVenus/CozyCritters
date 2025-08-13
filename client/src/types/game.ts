@@ -33,6 +33,7 @@ export interface GameResult {
   completed: boolean;
   score?: number;
   timeSpent: number;
+  cycles?: number;
   achievements?: string[];
   moodImpact?: 'positive' | 'neutral' | 'calming';
 }

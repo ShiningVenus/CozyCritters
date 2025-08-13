@@ -7,10 +7,18 @@ export interface GameProgressEntry {
   lastPlayed: number;
   highScore?: number;
   favorite?: boolean;
+  stats?: GameStat[];
 }
 
 interface GameProgressMap {
   [id: string]: GameProgressEntry;
+}
+
+export interface GameStat {
+  date: number;
+  score?: number;
+  timeSpent?: number;
+  cycles?: number;
 }
 
 function loadProgress(): GameProgressMap {
@@ -58,11 +66,21 @@ export function markGameCompleted(id: string, result?: GameResult): void {
       ? Math.max(result.score, existing?.highScore ?? -Infinity)
       : existing?.highScore;
 
+  const newStat: GameStat | undefined = result
+    ? {
+        date: Date.now(),
+        score: result.score,
+        timeSpent: result.timeSpent,
+        cycles: result.cycles,
+      }
+    : undefined;
+
   progress[id] = {
     ...existing,
     completed: true,
     lastPlayed: Date.now(),
     highScore,
+    stats: newStat ? [...(existing?.stats ?? []), newStat] : existing?.stats,
   };
 
   saveProgress(progress);

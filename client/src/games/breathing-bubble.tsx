@@ -72,6 +72,7 @@ export function BreathingBubble({ onComplete, onExit, config }: GameProps) {
     onComplete?.({
       completed: true,
       timeSpent: Math.round(timeElapsed / 1000),
+      cycles,
       moodImpact: 'calming'
     });
   };

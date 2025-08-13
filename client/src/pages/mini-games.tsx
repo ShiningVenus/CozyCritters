@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
 import { ArrowLeft, Filter, Star, Clock, Target, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from '@/components/ui/dialog';
 import { gameRegistry } from '@/lib/games';
 import { Game, GameConfig, GameResult } from '@/types/game';
 import {
@@ -25,6 +33,8 @@ export default function MiniGames({ onBack }: MiniGamesProps) {
   >('all');
   const [completedGames, setCompletedGames] = useState<string[]>(() => getCompletedGames());
   const [favoriteGames, setFavoriteGames] = useState<string[]>(() => getFavoriteGames());
+  const [summary, setSummary] = useState<{ game: Game; result: GameResult } | null>(null);
+  const canShare = typeof navigator !== 'undefined' && 'share' in navigator;
 
   const allGames = gameRegistry.getAllGames();
   const filteredGames =
@@ -42,6 +52,7 @@ export default function MiniGames({ onBack }: MiniGamesProps) {
         markGameCompleted(currentGame.config.id, result);
         setCompletedGames(getCompletedGames());
       }
+      setSummary({ game: currentGame, result });
       setCurrentGame(null);
     }
   };
@@ -73,6 +84,30 @@ export default function MiniGames({ onBack }: MiniGamesProps) {
   const handleToggleFavorite = (id: string) => {
     toggleFavoriteGame(id);
     setFavoriteGames(getFavoriteGames());
+  };
+
+  const handlePlayAgain = () => {
+    if (summary) {
+      setCurrentGame(summary.game);
+      setSummary(null);
+    }
+  };
+
+  const handleCloseSummary = () => setSummary(null);
+
+  const handleShare = async () => {
+    if (summary && canShare) {
+      try {
+        await navigator.share({
+          title: 'Cozy Critters',
+          text: summary.result.score
+            ? `I scored ${summary.result.score} in ${summary.game.config.name}!`
+            : `I played ${summary.game.config.name}!`,
+        });
+      } catch {
+        // ignore
+      }
+    }
   };
 
   const getCategoryIcon = (category: GameConfig['category']) => {
@@ -308,12 +343,57 @@ export default function MiniGames({ onBack }: MiniGamesProps) {
 
       {/* Coming Soon Teaser */}
       <div className="bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 border border-indigo-200 dark:border-indigo-700 rounded-2xl p-6 text-center">
-        <div className="text-2xl mb-2">🚀</div>
-        <h3 className="font-bold text-indigo-800 dark:text-indigo-200 mb-2">More Games Coming Soon!</h3>
-        <p className="text-sm text-indigo-600 dark:text-indigo-300">
-          We're working on more sensory-friendly games including drawing pads, gentle puzzles, and stim-friendly activities.
-        </p>
-      </div>
+      <div className="text-2xl mb-2">🚀</div>
+      <h3 className="font-bold text-indigo-800 dark:text-indigo-200 mb-2">More Games Coming Soon!</h3>
+      <p className="text-sm text-indigo-600 dark:text-indigo-300">
+        We're working on more sensory-friendly games including drawing pads, gentle puzzles, and stim-friendly activities.
+      </p>
+    </div>
+
+      {summary && (
+        <Dialog open onOpenChange={(open) => !open && handleCloseSummary()}>
+          <DialogContent className="max-w-sm">
+            <DialogHeader>
+              <DialogTitle>Game Summary</DialogTitle>
+              <DialogDescription>
+                {summary.game.config.name} results
+              </DialogDescription>
+            </DialogHeader>
+            <div className="space-y-2 text-sm">
+              {typeof summary.result.score === 'number' && (
+                <p className="flex justify-between">
+                  <span>Score</span>
+                  <span>{summary.result.score}</span>
+                </p>
+              )}
+              {typeof summary.result.cycles === 'number' && (
+                <p className="flex justify-between">
+                  <span>Cycles</span>
+                  <span>{summary.result.cycles}</span>
+                </p>
+              )}
+              <p className="flex justify-between">
+                <span>Time</span>
+                <span>{summary.result.timeSpent}s</span>
+              </p>
+            </div>
+            <div className="mt-4 text-center text-sm text-muted-foreground">
+              Keep it up! You're doing great.
+            </div>
+            <DialogFooter className="sm:justify-center sm:space-x-3">
+              {canShare && (
+                <Button variant="outline" onClick={handleShare}>
+                  Share
+                </Button>
+              )}
+              <Button onClick={handlePlayAgain}>Play Again</Button>
+              <Button variant="outline" onClick={handleCloseSummary}>
+                Back to Games
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      )}
 
       {pendingGame && (
         <GameInstructions
