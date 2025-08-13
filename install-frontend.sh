@@ -17,7 +17,7 @@ if [ "$NODE_MAJOR" -lt 18 ]; then
 fi
 
 echo "Installing dependencies..."
-npm install
+npm ci --omit=dev
 
 echo "Building project..."
 npm run build
@@ -25,7 +25,7 @@ npm run build
 case "$1" in
   start)
     echo "Starting application..."
-    npm start
+    npm_config_production=false npm start
     ;;
   pm2)
     if ! command -v pm2 >/dev/null 2>&1; then
@@ -45,9 +45,10 @@ After=network.target
 [Service]
 Type=simple
 WorkingDirectory=$(pwd)
+ExecStartPre=$(command -v npm) ci --omit=dev
 ExecStart=$(command -v npm) start
 Restart=on-failure
-Environment=NODE_ENV=production
+Environment=NODE_ENV=production npm_config_production=false
 
 [Install]
 WantedBy=multi-user.target
