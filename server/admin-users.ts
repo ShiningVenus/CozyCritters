@@ -30,8 +30,10 @@ function loadUsers(): Record<string, CmsUser> {
   return {};
 }
 
-function saveUsers(users: Record<string, CmsUser>): void {
-  fs.writeFileSync(filePath, JSON.stringify(users, null, 2));
+async function saveUsers(users: Record<string, CmsUser>): Promise<void> {
+  const tempPath = `${filePath}.tmp`;
+  await fs.promises.writeFile(tempPath, JSON.stringify(users, null, 2));
+  await fs.promises.rename(tempPath, filePath);
 }
 
 function hashPassword(password: string): string {
@@ -56,7 +58,11 @@ export function getUser(username: string): CmsUser | undefined {
   return users[username];
 }
 
-export function createUser(username: string, password: string, role: CmsRole): void {
+export async function createUser(
+  username: string,
+  password: string,
+  role: CmsRole
+): Promise<void> {
   const users = loadUsers();
   if (users[username]) {
     const err = new Error("User already exists");
@@ -64,13 +70,13 @@ export function createUser(username: string, password: string, role: CmsRole): v
     throw err;
   }
   users[username] = { password: hashPassword(password), role };
-  saveUsers(users);
+  await saveUsers(users);
 }
 
-export function updateUser(
+export async function updateUser(
   username: string,
   updates: { password?: string; role?: CmsRole }
-): void {
+): Promise<void> {
   const users = loadUsers();
   const user = users[username];
   if (!user) {
@@ -84,10 +90,10 @@ export function updateUser(
   if (updates.role) {
     user.role = updates.role;
   }
-  saveUsers(users);
+  await saveUsers(users);
 }
 
-export function deleteUser(username: string): void {
+export async function deleteUser(username: string): Promise<void> {
   const users = loadUsers();
   if (!users[username]) {
     const err = new Error("User not found");
@@ -95,6 +101,6 @@ export function deleteUser(username: string): void {
     throw err;
   }
   delete users[username];
-  saveUsers(users);
+  await saveUsers(users);
 }
 
