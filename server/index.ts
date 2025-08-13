@@ -2,6 +2,7 @@ import express, { type Request, Response, NextFunction } from "express";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import cors from "cors";
+import path from "path";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import { requestLogger } from "./middleware/request-logger";
@@ -127,6 +128,8 @@ app.use('/api', apiLimiter);
 
 app.use(express.json({ limit: '100kb' }));
 app.use(express.urlencoded({ extended: false, limit: '100kb' }));
+
+app.use("/content", express.static(path.resolve("content")));
 
 app.use(requestLogger);
 

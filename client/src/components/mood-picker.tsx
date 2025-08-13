@@ -1,5 +1,5 @@
-import { moodOptions } from "@shared/schema";
-import { useRef, useEffect, KeyboardEvent } from "react";
+import { useRef, useEffect, useState, KeyboardEvent } from "react";
+import { fetchMoods, MoodOption } from "@/lib/content";
 
 interface MoodPickerProps {
   onMoodSelect: (emoji: string, mood: string) => void;
@@ -9,6 +9,11 @@ interface MoodPickerProps {
 
 export function MoodPicker({ onMoodSelect, selectedMood, disabled = false }: MoodPickerProps) {
   const gridRef = useRef<HTMLDivElement>(null);
+  const [moodOptions, setMoodOptions] = useState<MoodOption[]>([]);
+
+  useEffect(() => {
+    fetchMoods().then(setMoodOptions).catch(() => setMoodOptions([]));
+  }, []);
 
   const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
     if (disabled) return;

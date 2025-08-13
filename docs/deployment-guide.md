@@ -1,7 +1,7 @@
 # 🌐 Deployment Guide
 
 This guide shows simple ways to run Cozy Critter on popular hosting services. It uses plain language for neurodivergent folks and anyone new to deployment.
-The core app is static; the optional CMS backend can be deployed separately if needed.
+The core app is static; an optional Decap CMS interface can be enabled for editing content.
 
 ## Before you start
 1. Fork this repository to your own GitHub account.
