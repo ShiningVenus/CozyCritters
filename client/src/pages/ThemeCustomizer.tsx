@@ -1,14 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import type { RouteComponentProps } from "wouter";
+import { ColorPicker, FontSelector, ResetButton } from "@/components/theme";
 
 interface ThemeSettings {
   primary: string;
@@ -50,7 +42,19 @@ function cssVarToHex(value: string) {
   return "#000000";
 }
 
-export default function ThemeCustomizer() {
+interface ThemeCustomizerProps extends RouteComponentProps {
+  labels?: Partial<
+    Record<"primary" | "secondary" | "accent" | "font" | "reset", string>
+  >;
+  helpText?: Partial<
+    Record<"primary" | "secondary" | "accent" | "font" | "reset", string>
+  >;
+}
+
+export default function ThemeCustomizer({
+  labels = {},
+  helpText = {},
+}: ThemeCustomizerProps) {
   const [settings, setSettings] = useState<ThemeSettings | null>(null);
   const [defaults, setDefaults] = useState<ThemeSettings | null>(null);
 
@@ -116,6 +120,24 @@ export default function ThemeCustomizer() {
     { label: "Courier New", value: "'Courier New', monospace" },
   ];
 
+  const label = {
+    primary: "Primary Color",
+    secondary: "Secondary Color",
+    accent: "Accent Color",
+    font: "Font",
+    reset: "Reset to default",
+    ...labels,
+  };
+
+  const help = {
+    primary: "Select the main color used throughout the app.",
+    secondary: "Pick a secondary color for subtle elements.",
+    accent: "Choose an accent color for highlights.",
+    font: "Choose a font. Options are previewed instantly.",
+    reset: "Revert all changes back to the original theme.",
+    ...helpText,
+  };
+
   return (
     <div className="p-6 space-y-6 max-w-md mx-auto">
       <h2 className="text-2xl font-bold">Theme Customizer</h2>
@@ -125,57 +147,41 @@ export default function ThemeCustomizer() {
           e.preventDefault();
         }}
       >
-        <div className="space-y-2">
-          <Label htmlFor="primary">Primary Color</Label>
-          <Input
-            id="primary"
-            type="color"
-            value={settings.primary}
-            onChange={(e) => updateSetting("primary", e.target.value)}
-          />
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="secondary">Secondary Color</Label>
-          <Input
-            id="secondary"
-            type="color"
-            value={settings.secondary}
-            onChange={(e) => updateSetting("secondary", e.target.value)}
-          />
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="accent">Accent Color</Label>
-          <Input
-            id="accent"
-            type="color"
-            value={settings.accent}
-            onChange={(e) => updateSetting("accent", e.target.value)}
-          />
-        </div>
-        <div className="space-y-2">
-          <Label>Font</Label>
-          <Select
-            value={settings.font}
-            onValueChange={(v) => updateSetting("font", v)}
-          >
-            <SelectTrigger>
-              <SelectValue placeholder="Select font" />
-            </SelectTrigger>
-            <SelectContent>
-              {fontOptions.map((f) => (
-                <SelectItem key={f.value} value={f.value}>
-                  {f.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-        <div className="pt-2">
-          <Button type="button" variant="outline" onClick={reset}>
-            Reset to default
-          </Button>
-        </div>
+        <ColorPicker
+          id="primary"
+          label={label.primary}
+          value={settings.primary}
+          onChange={(v) => updateSetting("primary", v)}
+          helpText={help.primary}
+        />
+        <ColorPicker
+          id="secondary"
+          label={label.secondary}
+          value={settings.secondary}
+          onChange={(v) => updateSetting("secondary", v)}
+          helpText={help.secondary}
+        />
+        <ColorPicker
+          id="accent"
+          label={label.accent}
+          value={settings.accent}
+          onChange={(v) => updateSetting("accent", v)}
+          helpText={help.accent}
+        />
+        <FontSelector
+          label={label.font}
+          value={settings.font}
+          options={fontOptions}
+          onChange={(v) => updateSetting("font", v)}
+          helpText={help.font}
+        />
+        <ResetButton
+          label={label.reset}
+          onReset={reset}
+          helpText={help.reset}
+        />
       </form>
     </div>
   );
 }
+
