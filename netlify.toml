@@ -5,33 +5,6 @@
 
 [build.environment]
   NODE_VERSION = "18"
-  JWT_SECRET = "change-me"
-
-# Proxy CMS requests to an external Node server
-# Set `AUTH_BACKEND_URL` in Netlify to your server's URL
-[[redirects]]
-  from = "/api/*"
-  to = "${AUTH_BACKEND_URL}/api/:splat"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/admin/*"
-  to = "${AUTH_BACKEND_URL}/admin/:splat"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/content/*"
-  to = "${AUTH_BACKEND_URL}/content/:splat"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/auth/*"
-  to   = "https://cms.example.com/auth/:splat"
-  status = 200
-  force = true
 
 # SPA routing for the main app
 [[redirects]]
