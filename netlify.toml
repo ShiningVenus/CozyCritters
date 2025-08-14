@@ -5,6 +5,7 @@
 
 [build.environment]
   NODE_VERSION = "18"
+  JWT_SECRET = "change-me"
 
 # Proxy CMS requests to an external Node server
 # Replace `https://cms.example.com` with your server's URL
