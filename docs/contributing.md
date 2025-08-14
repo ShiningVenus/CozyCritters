@@ -23,7 +23,7 @@ Thank you for your interest in Cozy Critter!
 
 ## Code of Conduct
 
-Be respectful and inclusive. See the [Code of Conduct](../CODE_OF_CONDUCT.md) for details.
+Be respectful and inclusive. See the [Code of Conduct](../CODE_OF_CONDUCT.md) for ND-inclusive expectations and detailed moderation process.
 
 ## Need help?
 
