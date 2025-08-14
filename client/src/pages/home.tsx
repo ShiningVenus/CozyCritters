@@ -5,9 +5,9 @@ import { MiniGamesPreview } from "@/components/mini-games-preview";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { CustomMessages } from "@/components/custom-messages";
 import { PrivacySettings } from "@/components/privacy-settings";
-import { moodStorage } from "@/lib/mood-storage";
+import { MoodManager } from "@/components/mood-manager";
 
-type View = "checkIn" | "moodLog" | "customMessages" | "privacy";
+type View = "checkIn" | "moodLog" | "customMessages" | "moodManager" | "privacy";
 
 export default function Home() {
   const [currentView, setCurrentView] = useState<View>("checkIn");
@@ -73,6 +73,17 @@ export default function Home() {
             Messages
           </button>
           <button
+            onClick={() => setCurrentView("moodManager")}
+            aria-pressed={currentView === "moodManager"}
+            className={`px-3 py-2 rounded-full text-xs font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 ${
+              currentView === "moodManager"
+                ? "bg-white bg-opacity-20"
+                : "hover:bg-white hover:bg-opacity-10"
+            }`}
+          >
+            Moods
+          </button>
+          <button
             onClick={() => setCurrentView("privacy")}
             aria-pressed={currentView === "privacy"}
             className={`px-3 py-2 rounded-full text-xs font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 ${
@@ -99,6 +110,8 @@ export default function Home() {
           <MoodGarden onStartCheckIn={handleStartCheckIn} />
         ) : currentView === "customMessages" ? (
           <CustomMessages onBack={() => setCurrentView("checkIn")} />
+        ) : currentView === "moodManager" ? (
+          <MoodManager onBack={() => setCurrentView("checkIn")} />
         ) : (
           <PrivacySettings onBack={() => setCurrentView("checkIn")} />
         )}
