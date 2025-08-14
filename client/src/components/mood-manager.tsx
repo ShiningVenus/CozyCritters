@@ -28,6 +28,10 @@ export function MoodManager({ onBack }: MoodManagerProps) {
   const [emoji, setEmoji] = useState("");
   const [name, setName] = useState("");
   const [color, setColor] = useState("");
+  const [editing, setEditing] = useState<MoodOption | null>(null);
+  const [editEmoji, setEditEmoji] = useState("");
+  const [editName, setEditName] = useState("");
+  const [editColor, setEditColor] = useState("");
 
   useEffect(() => {
     loadMoods();
@@ -66,6 +70,27 @@ export function MoodManager({ onBack }: MoodManagerProps) {
         saveLocalArray(HIDDEN_MOODS_KEY, [...hidden, mood.mood]);
       }
     }
+    loadMoods();
+  };
+
+  const handleEditMood = (mood: MoodOption) => {
+    setEditing(mood);
+    setEditEmoji(mood.emoji);
+    setEditName(mood.mood);
+    setEditColor(mood.color);
+  };
+
+  const handleSaveEdit = () => {
+    if (!editing || !editEmoji.trim() || !editName.trim() || !editColor.trim()) return;
+    const custom = getLocalArray<MoodOption>(CUSTOM_MOODS_KEY);
+    const updated = custom.map(m =>
+      m.mood === editing.mood ? { emoji: editEmoji.trim(), mood: editName.trim(), color: editColor.trim() } : m
+    );
+    saveLocalArray(CUSTOM_MOODS_KEY, updated);
+    setEditing(null);
+    setEditEmoji("");
+    setEditName("");
+    setEditColor("");
     loadMoods();
   };
 
@@ -131,23 +156,79 @@ export function MoodManager({ onBack }: MoodManagerProps) {
         </div>
 
         <ul className="space-y-3" aria-label="Existing moods">
-          {moods.map(m => (
-            <li
-              key={m.mood}
-              className="flex items-center justify-between bg-card dark:bg-card border border-border dark:border-border rounded-lg p-3"
-            >
-              <span className="flex items-center gap-2">
-                <span className="text-2xl" aria-hidden="true">{m.emoji}</span>
-                <span>{m.mood}</span>
-              </span>
-              <button
-                onClick={() => handleRemoveMood(m)}
-                className="px-2 py-1 text-sm bg-red-600 text-white rounded hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-400"
+          {moods.map(m => {
+            const custom = getLocalArray<MoodOption>(CUSTOM_MOODS_KEY);
+            const isCustom = custom.some(c => c.mood === m.mood);
+            const isEditing = editing?.mood === m.mood;
+            return (
+              <li
+                key={m.mood}
+                className="flex items-center justify-between bg-card dark:bg-card border border-border dark:border-border rounded-lg p-3"
               >
-                Remove
-              </button>
-            </li>
-          ))}
+                {isEditing ? (
+                  <div className="flex flex-col w-full gap-2 sm:flex-row sm:items-center">
+                    <div className="flex flex-1 flex-col sm:flex-row sm:items-center sm:gap-2">
+                      <input
+                        value={editEmoji}
+                        onChange={e => setEditEmoji(e.target.value)}
+                        className="w-full sm:w-20 p-2 border border-border dark:border-border rounded bg-background text-foreground"
+                        aria-label="Emoji"
+                      />
+                      <input
+                        value={editName}
+                        onChange={e => setEditName(e.target.value)}
+                        className="w-full p-2 border border-border dark:border-border rounded bg-background text-foreground"
+                        aria-label="Name"
+                      />
+                      <input
+                        value={editColor}
+                        onChange={e => setEditColor(e.target.value)}
+                        className="w-full p-2 border border-border dark:border-border rounded bg-background text-foreground"
+                        aria-label="Color class"
+                      />
+                    </div>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={handleSaveEdit}
+                        className="px-2 py-1 text-sm bg-primary text-primary-foreground rounded hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary/50"
+                      >
+                        Save
+                      </button>
+                      <button
+                        onClick={() => setEditing(null)}
+                        className="px-2 py-1 text-sm bg-muted text-foreground rounded hover:bg-muted/80 focus:outline-none focus:ring-2 focus:ring-muted/50"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    <span className="flex items-center gap-2">
+                      <span className="text-2xl" aria-hidden="true">{m.emoji}</span>
+                      <span>{m.mood}</span>
+                    </span>
+                    <div className="flex gap-2">
+                      {isCustom && (
+                        <button
+                          onClick={() => handleEditMood(m)}
+                          className="px-2 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        >
+                          Edit
+                        </button>
+                      )}
+                      <button
+                        onClick={() => handleRemoveMood(m)}
+                        className="px-2 py-1 text-sm bg-red-600 text-white rounded hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-400"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  </>
+                )}
+              </li>
+            );
+          })}
         </ul>
       </div>
     </main>

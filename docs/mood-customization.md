@@ -12,6 +12,12 @@ Cozy Critter lets you tailor mood options to match how **you** experience feelin
 3. Provide a Tailwind CSS color class (for high‑contrast, try `bg-green-600 text-white`).
 4. Select **Add mood**. Your new mood appears immediately.
 
+## Edit a Mood
+1. Select **Edit** next to a custom mood.
+2. Adjust the emoji, name, or color class.
+3. Choose **Save** to apply your changes.
+4. Only custom moods can be edited. To change a built-in mood, hide it and add a new one.
+
 ## Remove a Mood
 - Select **Remove** next to a mood you no longer want.
 - Built‑in moods are hidden instead of deleted so you can restore them later by clearing the hidden list.
