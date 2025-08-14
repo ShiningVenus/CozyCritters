@@ -109,7 +109,6 @@ Everything stays on **YOUR device.**
 
 Proof:
 - ✅ One click delete (your control is real)
-- ✅ No accounts required
 - ✅ No tracking
 - ✅ No "anonymous" data collection lies
 
@@ -143,8 +142,6 @@ Proof:
 ### 💾 State & Storage
 - Local Storage Only — All moods/notes stay in your browser <--- Yes working
 - No Server Required — Works completely offline <--- You can try it for yourself but am sure it will work!
-- Future Ready — Prepared for optional user accounts (if you want them later) <-- Supabase based
-- 
 ### 🖥️ Backend (Optional/Future)
 - Express.js with TypeScript
 - Supabase (managed PostgreSQL) via Drizzle ORM
@@ -230,7 +227,7 @@ The script checks for Node.js ≥ 18 and will print a sample systemd unit file w
 
 | Promise | What This Means |
 |---------|------------------|
-| No tracking, no accounts, no data collection | We literally cannot see your data |
+| No tracking, no data collection | We literally cannot see your data |
 | Everything stays on your device | Uses browser localStorage only |
 | One click delete everything | Prove your privacy is real |
 | Works offline | No internet required after first load |
@@ -292,15 +289,6 @@ localStorage.getItem(MOOD_STORAGE_KEY);
 localStorage.removeItem(MOOD_STORAGE_KEY);
 // No fetch(), no axios, no external APIs for mood data
 ```
-
-#### 🚫 No Authentication = No Account Breaches
-Search our entire codebase — you won't find:
-- ❌ User login functions
-- ❌ Password handling
-- ❌ JWT tokens
-- ❌ User session management
-
-Why? Because we don't have accounts to breach!
 
 #### 🌐 Offline-First PWA
 ```javascript
@@ -440,7 +428,6 @@ Cozy Critter v1.0.0 is completely free and open source making it perfect for you
 | Benefit | Impact |
 |---------|--------|
 | Privacy first design | No data concerns for vulnerable individuals |
-| No accounts required | Removes barriers and privacy worries |
 | Actually accessible | Built with real ND input, not compliance checkboxes |
 | Works offline | Great for individuals with limited internet access |
 | Trauma-informed | No forced positivity or invalidating messaging |
