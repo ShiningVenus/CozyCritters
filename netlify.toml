@@ -8,22 +8,22 @@
   JWT_SECRET = "change-me"
 
 # Proxy CMS requests to an external Node server
-# Replace `https://cms.example.com` with your server's URL
+# Set `AUTH_BACKEND_URL` in Netlify to your server's URL
 [[redirects]]
   from = "/api/*"
-  to = "https://cms.example.com/api/:splat"
+  to = "${AUTH_BACKEND_URL}/api/:splat"
   status = 200
   force = true
 
 [[redirects]]
   from = "/admin/*"
-  to = "https://cms.example.com/admin/:splat"
+  to = "${AUTH_BACKEND_URL}/admin/:splat"
   status = 200
   force = true
 
 [[redirects]]
   from = "/content/*"
-  to = "https://cms.example.com/content/:splat"
+  to = "${AUTH_BACKEND_URL}/content/:splat"
   status = 200
   force = true
 
