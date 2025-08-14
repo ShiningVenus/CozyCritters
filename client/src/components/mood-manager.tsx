@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import { fetchMoods, MoodOption } from "@/lib/content";
+import { EmojiPicker } from "@/components/emoji-picker";
+import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
+import { isEmoji } from "@/lib/utils";
 
 interface MoodManagerProps {
   onBack: () => void;
@@ -32,6 +35,8 @@ export function MoodManager({ onBack }: MoodManagerProps) {
   const [editEmoji, setEditEmoji] = useState("");
   const [editName, setEditName] = useState("");
   const [editColor, setEditColor] = useState("");
+  const [showPicker, setShowPicker] = useState(false);
+  const [showEditPicker, setShowEditPicker] = useState(false);
 
   useEffect(() => {
     loadMoods();
@@ -47,7 +52,7 @@ export function MoodManager({ onBack }: MoodManagerProps) {
   };
 
   const handleAddMood = () => {
-    if (!emoji.trim() || !name.trim() || !color.trim()) return;
+    if (!isEmoji(emoji) || !name.trim() || !color.trim()) return;
     const custom = getLocalArray<MoodOption>(CUSTOM_MOODS_KEY);
     const newMood = { emoji: emoji.trim(), mood: name.trim(), color: color.trim() };
     saveLocalArray(CUSTOM_MOODS_KEY, [...custom, newMood]);
@@ -81,7 +86,7 @@ export function MoodManager({ onBack }: MoodManagerProps) {
   };
 
   const handleSaveEdit = () => {
-    if (!editing || !editEmoji.trim() || !editName.trim() || !editColor.trim()) return;
+    if (!editing || !isEmoji(editEmoji) || !editName.trim() || !editColor.trim()) return;
     const custom = getLocalArray<MoodOption>(CUSTOM_MOODS_KEY);
     const updated = custom.map(m =>
       m.mood === editing.mood ? { emoji: editEmoji.trim(), mood: editName.trim(), color: editColor.trim() } : m
@@ -116,12 +121,25 @@ export function MoodManager({ onBack }: MoodManagerProps) {
               <label htmlFor="mood-emoji" className="block text-sm font-medium text-brown dark:text-brown mb-1">
                 Emoji
               </label>
-              <input
-                id="mood-emoji"
-                value={emoji}
-                onChange={e => setEmoji(e.target.value)}
-                className="w-full p-2 border border-border dark:border-border rounded bg-background text-foreground"
-              />
+              <Popover open={showPicker} onOpenChange={setShowPicker}>
+                <PopoverTrigger asChild>
+                  <button
+                    id="mood-emoji"
+                    type="button"
+                    className="w-full p-2 border border-border dark:border-border rounded bg-background text-foreground text-left"
+                  >
+                    {emoji || "Pick emoji"}
+                  </button>
+                </PopoverTrigger>
+                <PopoverContent className="p-0" align="start">
+                  <EmojiPicker
+                    onSelect={e => {
+                      setEmoji(e);
+                      setShowPicker(false);
+                    }}
+                  />
+                </PopoverContent>
+              </Popover>
             </div>
             <div>
               <label htmlFor="mood-name" className="block text-sm font-medium text-brown dark:text-brown mb-1">
@@ -168,12 +186,25 @@ export function MoodManager({ onBack }: MoodManagerProps) {
                 {isEditing ? (
                   <div className="flex flex-col w-full gap-2 sm:flex-row sm:items-center">
                     <div className="flex flex-1 flex-col sm:flex-row sm:items-center sm:gap-2">
-                      <input
-                        value={editEmoji}
-                        onChange={e => setEditEmoji(e.target.value)}
-                        className="w-full sm:w-20 p-2 border border-border dark:border-border rounded bg-background text-foreground"
-                        aria-label="Emoji"
-                      />
+                      <Popover open={showEditPicker} onOpenChange={setShowEditPicker}>
+                        <PopoverTrigger asChild>
+                          <button
+                            type="button"
+                            className="w-full sm:w-20 p-2 border border-border dark:border-border rounded bg-background text-foreground"
+                            aria-label="Emoji"
+                          >
+                            {editEmoji || "Pick"}
+                          </button>
+                        </PopoverTrigger>
+                        <PopoverContent className="p-0" align="start">
+                          <EmojiPicker
+                            onSelect={e => {
+                              setEditEmoji(e);
+                              setShowEditPicker(false);
+                            }}
+                          />
+                        </PopoverContent>
+                      </Popover>
                       <input
                         value={editName}
                         onChange={e => setEditName(e.target.value)}
