@@ -26,6 +26,12 @@
   status = 200
   force = true
 
+[[redirects]]
+  from = "/auth/*"
+  to   = "https://cms.example.com/auth/:splat"
+  status = 200
+  force = true
+
 # SPA routing for the main app
 [[redirects]]
   from = "/*"
