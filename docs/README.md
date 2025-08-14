@@ -15,7 +15,6 @@ Quick links
 - Privacy & security verification: ./privacy-security.md
 - Accessibility notes: ./accessibility.md
 - Backup & export: ./backup-export.md
-- Editing content with Decap CMS: ./decap-cms.md
 - FAQ: ./faq.md
 - Contributing: ./contributing.md
 - Reddit r/selfhosted post: ./reddit-selfhosted-post.md
