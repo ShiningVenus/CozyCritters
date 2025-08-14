@@ -62,11 +62,40 @@ an individual is officially representing the community in public spaces.
 ## Enforcement
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
-reported by contacting the project team through GitHub issues or discussions.
-All complaints will be reviewed and investigated promptly and fairly.
+reported using our anonymous form, by emailing the dedicated moderation team
+at conduct@cozycritters.org, or by contacting the project team through GitHub
+issues or discussions. All complaints will be reviewed and investigated
+promptly and fairly. See the Moderation Policies section for details on how
+reports are handled and what to expect from the process.
 
 All community leaders are obligated to respect the privacy and security of the
 reporter of any incident.
+
+## Moderation Policies
+
+### Receiving Reports
+
+Reports can be submitted through an anonymous online form or by emailing
+conduct@cozycritters.org. Direct messages through GitHub issues or discussions
+are also monitored, but the dedicated channels ensure a prompt response.
+
+### Moderator Roles and Escalation
+
+Initial triage is handled by project moderators. Cases that require additional
+attention are escalated to the lead maintainer and, if necessary, to the
+steering group for final decisions.
+
+### Response and Investigation
+
+Reports are acknowledged within 48 hours. Moderators gather information,
+interview those involved, and document findings. Investigations typically
+conclude within 7 days unless additional time is communicated.
+
+### Appeals and Mediation
+
+Anyone subject to an enforcement action may request mediation or appeal the
+decision. Accommodations for neurodivergent participants, such as written-only
+communication or extended response times, will be honored whenever possible.
 
 ## Enforcement Guidelines
 
