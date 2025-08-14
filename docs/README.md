@@ -14,6 +14,7 @@ Quick links
 - Deployment guide: ./deployment-guide.md
 - Privacy & security verification: ./privacy-security.md
 - Accessibility notes: ./accessibility.md
+- Mood customization: ./mood-customization.md
 - Backup & export: ./backup-export.md
 - FAQ: ./faq.md
 - Contributing: ./contributing.md
