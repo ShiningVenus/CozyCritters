@@ -103,7 +103,7 @@ export default function MiniGames({ onBack }: MiniGamesProps) {
     let active = true;
     if (currentGame) {
       gameRegistry.getComponent(currentGame.config.id).then((comp) => {
-        if (active) setGameComponent(() => comp || null);
+        if (active) setGameComponent(comp || null);
       });
     } else {
       setGameComponent(null);
