@@ -20,8 +20,8 @@
       const form = document.getElementById('loginForm');
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const username = (document.getElementById('username') as HTMLInputElement).value;
-        const password = (document.getElementById('password') as HTMLInputElement).value;
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
         const token = btoa(`${username}:${password}`);
         try {
           const res = await fetch('/admin/index.html', { headers: { 'Authorization': 'Basic ' + token } });
