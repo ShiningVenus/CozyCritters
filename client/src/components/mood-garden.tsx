@@ -38,7 +38,7 @@ export function MoodGarden({ onStartCheckIn }: MoodGardenProps) {
   const handleDeleteEntry = (id: string, confirmed: boolean) => {
     if (!confirmed) return;
     setDeletingId(id);
-    const success = moodStorage.deleteMoodEntry(id);
+    const success = moodStore.deleteMoodEntry(id);
     if (success) {
       loadMoodHistory(); // Reload the mood history
     }
