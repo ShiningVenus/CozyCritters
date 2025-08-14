@@ -133,10 +133,8 @@ export function MoodManager({ onBack }: MoodManagerProps) {
                 </PopoverTrigger>
                 <PopoverContent className="p-0" align="start">
                   <EmojiPicker
-                    onSelect={e => {
-                      setEmoji(e);
-                      setShowPicker(false);
-                    }}
+                    onSelect={e => setEmoji(e)}
+                    close={() => setShowPicker(false)}
                   />
                 </PopoverContent>
               </Popover>
@@ -198,10 +196,8 @@ export function MoodManager({ onBack }: MoodManagerProps) {
                         </PopoverTrigger>
                         <PopoverContent className="p-0" align="start">
                           <EmojiPicker
-                            onSelect={e => {
-                              setEditEmoji(e);
-                              setShowEditPicker(false);
-                            }}
+                            onSelect={e => setEditEmoji(e)}
+                            close={() => setShowEditPicker(false)}
                           />
                         </PopoverContent>
                       </Popover>
