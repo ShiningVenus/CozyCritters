@@ -116,6 +116,12 @@ export default function Home() {
           <span role="img" aria-label="green heart">💚</span> All your data stays private on your device
         </p>
         <p>Made with love for your wellbeing and neurodivergent minds</p>
+        <p className="mt-2">
+          Need help?{' '}
+          <a href="/support" className="underline">
+            Visit Support
+          </a>
+        </p>
       </footer>
     </div>
   );
