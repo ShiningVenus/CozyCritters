@@ -8,6 +8,7 @@ const Home = React.lazy(() => import("@/pages/home"));
 const GamesPage = React.lazy(() => import("@/pages/games-page"));
 const ThemeCustomizer = React.lazy(() => import("@/pages/ThemeCustomizer"));
 const AdminUsers = React.lazy(() => import("@/pages/admin/users"));
+const Support = React.lazy(() => import("@/pages/support"));
 const NotFound = React.lazy(() => import("@/pages/not-found"));
 
 export default function AppRoutes() {
@@ -25,6 +26,7 @@ export default function AppRoutes() {
             </ProtectedRoute>
           )}
         />
+        <Route path="/support" component={Support} />
         <Route component={NotFound} />
       </Switch>
     </Suspense>
