@@ -7,6 +7,15 @@ class GameRegistry {
     this.games.set(game.config.id, game);
   }
 
+  async getComponent(id: string) {
+    const game = this.games.get(id);
+    if (!game) return undefined;
+    if (!game.Component) {
+      game.Component = await game.loader();
+    }
+    return game.Component;
+  }
+
   getGame(id: string): Game | undefined {
     return this.games.get(id);
   }

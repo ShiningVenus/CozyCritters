@@ -39,5 +39,6 @@ export interface GameResult {
 
 export interface Game {
   config: GameConfig;
-  Component: React.ComponentType<GameProps>;
+  loader: () => Promise<React.ComponentType<GameProps>>;
+  Component?: React.ComponentType<GameProps>;
 }

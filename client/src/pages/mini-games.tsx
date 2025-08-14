@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowLeft, Filter, Star, Clock, Target, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { gameRegistry } from '@/lib/games';
-import { Game, GameConfig, GameResult } from '@/types/game';
+import { Game, GameConfig, GameResult, GameProps } from '@/types/game';
 import {
   getCompletedGames,
   markGameCompleted,
@@ -21,6 +21,7 @@ interface MiniGamesProps {
 export default function MiniGames({ onBack }: MiniGamesProps) {
   const [currentGame, setCurrentGame] = useState<Game | null>(null);
   const [pendingGame, setPendingGame] = useState<Game | null>(null);
+  const [GameComponent, setGameComponent] = useState<React.ComponentType<GameProps> | null>(null);
   const [summary, setSummary] = useState<{ game: Game; result: GameResult } | null>(null);
   const [filter, setFilter] = useState<
     GameConfig['category'] | 'all' | 'completed' | 'favorites'
@@ -98,11 +99,28 @@ export default function MiniGames({ onBack }: MiniGamesProps) {
     }
   };
 
+  useEffect(() => {
+    let active = true;
+    if (currentGame) {
+      gameRegistry.getComponent(currentGame.config.id).then((comp) => {
+        if (active) setGameComponent(() => comp || null);
+      });
+    } else {
+      setGameComponent(null);
+    }
+    return () => {
+      active = false;
+    };
+  }, [currentGame]);
+
   if (currentGame) {
-    const GameComponent = currentGame.Component;
+    if (!GameComponent) {
+      return <div className="p-6" />;
+    }
+    const LoadedComponent = GameComponent;
     return (
       <div className="p-6">
-        <GameComponent
+        <LoadedComponent
           config={currentGame.config}
           onComplete={handleGameComplete}
           onExit={handleGameExit}

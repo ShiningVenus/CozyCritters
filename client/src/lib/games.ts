@@ -1,9 +1,4 @@
 import { gameRegistry } from './game-registry';
-import { BreathingBubble } from '@/games/breathing-bubble';
-import { ColorPattern } from '@/games/color-pattern';
-import { DrawingPad } from '@/games/drawing-pad';
-import { ShapeMatch } from '@/games/shape-match';
-import { ZenBlocks } from '@/games/zen-blocks';
 
 // Register all games
 gameRegistry.register({
@@ -22,7 +17,7 @@ gameRegistry.register({
     },
     tags: ['breathing', 'meditation', 'anxiety', 'calming', 'mindfulness']
   },
-  Component: BreathingBubble
+  loader: () => import('@/games/breathing-bubble').then(m => m.BreathingBubble)
 });
 
 gameRegistry.register({
@@ -41,7 +36,7 @@ gameRegistry.register({
     },
     tags: ['memory', 'focus', 'patterns', 'colors', 'concentration']
   },
-  Component: ColorPattern
+  loader: () => import('@/games/color-pattern').then(m => m.ColorPattern)
 });
 
 gameRegistry.register({
@@ -60,7 +55,7 @@ gameRegistry.register({
     },
     tags: ['memory', 'matching', 'shapes', 'focus']
   },
-  Component: ShapeMatch
+  loader: () => import('@/games/shape-match').then(m => m.ShapeMatch)
 });
 
 gameRegistry.register({
@@ -79,8 +74,8 @@ gameRegistry.register({
     },
     tags: ['drawing', 'art', 'creative', 'expression']
   },
-    Component: DrawingPad
-  });
+  loader: () => import('@/games/drawing-pad').then(m => m.DrawingPad)
+});
 
 gameRegistry.register({
   config: {
@@ -98,7 +93,7 @@ gameRegistry.register({
     },
     tags: ['blocks', 'calming', 'focus', 'tetris']
   },
-  Component: ZenBlocks
+  loader: () => import('@/games/zen-blocks').then(m => m.ZenBlocks)
 });
 
 // Export the registry for use in components
