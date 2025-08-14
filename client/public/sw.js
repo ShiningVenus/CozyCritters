@@ -149,19 +149,37 @@ function isCacheableAsset(url) {
 self.addEventListener('fetch', (event) => {
   const request = event.request;
   const url = request.url;
-  
+
   // Skip non-GET requests, chrome-extension requests, and different origins
-  if (request.method !== 'GET' || 
-      url.startsWith('chrome-extension://') || 
+  if (request.method !== 'GET' ||
+      url.startsWith('chrome-extension://') ||
       !isAllowedOrigin(url)) {
     return;
   }
-  
+
+  // Always use network-first for navigation requests so the shell stays fresh
+  if (request.mode === 'navigate') {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          if (!shouldSkipCaching(request, response)) {
+            const copy = response.clone();
+            caches.open(RUNTIME_CACHE).then((cache) => {
+              cache.put('/index.html', copy);
+            });
+          }
+          return response;
+        })
+        .catch(() => caches.match('/index.html'))
+    );
+    return;
+  }
+
   // Skip requests that shouldn't be cached
   if (shouldSkipCaching(request)) {
     return;
   }
-  
+
   // Only cache allowed asset types
   if (!isCacheableAsset(url)) {
     return;
