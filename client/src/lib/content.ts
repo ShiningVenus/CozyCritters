@@ -1,4 +1,5 @@
 export interface MoodOption {
+  id?: string;
   emoji: string;
   mood: string;
   color: string;
@@ -35,9 +36,44 @@ function getLocalArray<T>(key: string): T[] {
   }
 }
 
+export function getCustomMoods(): MoodOption[] {
+  const moods = getLocalArray<MoodOption>(CUSTOM_MOODS_KEY);
+  let updated = false;
+  const withIds = moods.map(m => {
+    if (!m.id) {
+      updated = true;
+      return { ...m, id: crypto.randomUUID() };
+    }
+    return m;
+  });
+  if (updated) {
+    localStorage.setItem(CUSTOM_MOODS_KEY, JSON.stringify(withIds));
+  }
+  return withIds;
+}
+
+export function upsertCustomMood(mood: MoodOption): void {
+  const moods = getCustomMoods();
+  const index = moods.findIndex(m => m.id === mood.id);
+  if (index >= 0) {
+    moods[index] = mood;
+  } else {
+    moods.push(mood);
+  }
+  localStorage.setItem(CUSTOM_MOODS_KEY, JSON.stringify(moods));
+}
+
+export function removeCustomMood(id: string): void {
+  const moods = getCustomMoods();
+  localStorage.setItem(
+    CUSTOM_MOODS_KEY,
+    JSON.stringify(moods.filter(m => m.id !== id))
+  );
+}
+
 export const fetchMoods = async (): Promise<MoodOption[]> => {
   const defaults = await fetchJson<MoodOption[]>("/content/moods.json");
-  const custom = getLocalArray<MoodOption>(CUSTOM_MOODS_KEY);
+  const custom = getCustomMoods();
   const hidden = getLocalArray<string>(HIDDEN_MOODS_KEY);
   return [...defaults, ...custom].filter(m => !hidden.includes(m.mood));
 };

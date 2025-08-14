@@ -1,11 +1,15 @@
 import { useState, useEffect } from "react";
-import { fetchMoods, MoodOption } from "@/lib/content";
+import {
+  fetchMoods,
+  MoodOption,
+  upsertCustomMood,
+  removeCustomMood,
+} from "@/lib/content";
 
 interface MoodManagerProps {
   onBack: () => void;
 }
 
-const CUSTOM_MOODS_KEY = "cozy-critter-custom-moods";
 const HIDDEN_MOODS_KEY = "cozy-critter-hidden-moods";
 
 function getLocalArray<T>(key: string): T[] {
@@ -28,6 +32,7 @@ export function MoodManager({ onBack }: MoodManagerProps) {
   const [emoji, setEmoji] = useState("");
   const [name, setName] = useState("");
   const [color, setColor] = useState("");
+  const [editingId, setEditingId] = useState<string | null>(null);
 
   useEffect(() => {
     loadMoods();
@@ -42,24 +47,33 @@ export function MoodManager({ onBack }: MoodManagerProps) {
     }
   };
 
-  const handleAddMood = () => {
+  const handleSubmit = () => {
     if (!emoji.trim() || !name.trim() || !color.trim()) return;
-    const custom = getLocalArray<MoodOption>(CUSTOM_MOODS_KEY);
-    const newMood = { emoji: emoji.trim(), mood: name.trim(), color: color.trim() };
-    saveLocalArray(CUSTOM_MOODS_KEY, [...custom, newMood]);
+    const mood: MoodOption = {
+      id: editingId ?? crypto.randomUUID(),
+      emoji: emoji.trim(),
+      mood: name.trim(),
+      color: color.trim(),
+    };
+    upsertCustomMood(mood);
     setEmoji("");
     setName("");
     setColor("");
+    setEditingId(null);
     loadMoods();
   };
 
+  const handleEditMood = (mood: MoodOption) => {
+    if (!mood.id) return;
+    setEditingId(mood.id);
+    setEmoji(mood.emoji);
+    setName(mood.mood);
+    setColor(mood.color);
+  };
+
   const handleRemoveMood = (mood: MoodOption) => {
-    const custom = getLocalArray<MoodOption>(CUSTOM_MOODS_KEY);
-    if (custom.find(m => m.mood === mood.mood)) {
-      saveLocalArray(
-        CUSTOM_MOODS_KEY,
-        custom.filter(m => m.mood !== mood.mood)
-      );
+    if (mood.id) {
+      removeCustomMood(mood.id);
     } else {
       const hidden = getLocalArray<string>(HIDDEN_MOODS_KEY);
       if (!hidden.includes(mood.mood)) {
@@ -122,10 +136,10 @@ export function MoodManager({ onBack }: MoodManagerProps) {
               />
             </div>
             <button
-              onClick={handleAddMood}
+              onClick={handleSubmit}
               className="px-4 py-2 bg-primary text-primary-foreground rounded hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary/50"
             >
-              Add mood
+              {editingId ? "Save changes" : "Add mood"}
             </button>
           </div>
         </div>
@@ -133,19 +147,29 @@ export function MoodManager({ onBack }: MoodManagerProps) {
         <ul className="space-y-3" aria-label="Existing moods">
           {moods.map(m => (
             <li
-              key={m.mood}
+              key={m.id ?? m.mood}
               className="flex items-center justify-between bg-card dark:bg-card border border-border dark:border-border rounded-lg p-3"
             >
               <span className="flex items-center gap-2">
                 <span className="text-2xl" aria-hidden="true">{m.emoji}</span>
                 <span>{m.mood}</span>
               </span>
-              <button
-                onClick={() => handleRemoveMood(m)}
-                className="px-2 py-1 text-sm bg-red-600 text-white rounded hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-400"
-              >
-                Remove
-              </button>
+              <div className="flex gap-2">
+                {m.id && (
+                  <button
+                    onClick={() => handleEditMood(m)}
+                    className="px-2 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  >
+                    Edit
+                  </button>
+                )}
+                <button
+                  onClick={() => handleRemoveMood(m)}
+                  className="px-2 py-1 text-sm bg-red-600 text-white rounded hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-400"
+                >
+                  Remove
+                </button>
+              </div>
             </li>
           ))}
         </ul>
