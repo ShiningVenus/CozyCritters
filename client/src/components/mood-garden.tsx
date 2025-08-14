@@ -4,6 +4,7 @@ import { MoodEntry } from "@shared/schema";
 import { fetchMoods, MoodOption } from "@/lib/content";
 import { format, isToday, isYesterday } from "date-fns";
 import { Trash2 } from "lucide-react";
+import { ConfirmDialog } from "@/components/confirm-dialog";
 
 interface MoodGardenProps {
   onStartCheckIn: () => void;
@@ -34,15 +35,14 @@ export function MoodGarden({ onStartCheckIn }: MoodGardenProps) {
     return () => window.removeEventListener("storage", handleStorageChange);
   }, []);
 
-  const handleDeleteEntry = (id: string) => {
-    if (window.confirm("Are you sure you want to delete this mood entry? This action cannot be undone.")) {
-      setDeletingId(id);
-      const success = moodStorage.deleteMoodEntry(id);
-      if (success) {
-        loadMoodHistory(); // Reload the mood history
-      }
-      setDeletingId(null);
+  const handleDeleteEntry = (id: string, confirmed: boolean) => {
+    if (!confirmed) return;
+    setDeletingId(id);
+    const success = moodStorage.deleteMoodEntry(id);
+    if (success) {
+      loadMoodHistory(); // Reload the mood history
     }
+    setDeletingId(null);
   };
 
   const formatDate = (timestamp: number): string => {
@@ -121,15 +121,24 @@ export function MoodGarden({ onStartCheckIn }: MoodGardenProps) {
                       <span className="text-sm text-muted-foreground dark:text-muted-foreground">
                         {formatDate(entry.timestamp)}
                       </span>
-                      <button
-                        onClick={() => handleDeleteEntry(entry.id)}
-                        disabled={deletingId === entry.id}
-                        aria-label={`Delete mood entry from ${formatDate(entry.timestamp)}`}
-                        className="text-muted-foreground hover:text-red-500 dark:text-muted-foreground dark:hover:text-red-400 transition-colors p-1 rounded hover:bg-muted dark:hover:bg-muted disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-red-500/50"
-                      >
-                        <Trash2 size={16} aria-hidden="true" />
-                        <span className="sr-only">Delete this mood entry</span>
-                      </button>
+                      <ConfirmDialog
+                        trigger={
+                          <button
+                            disabled={deletingId === entry.id}
+                            aria-label={`Delete mood entry from ${formatDate(entry.timestamp)}`}
+                            className="text-muted-foreground hover:text-red-500 dark:text-muted-foreground dark:hover:text-red-400 transition-colors p-1 rounded hover:bg-muted dark:hover:bg-muted disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-red-500/50"
+                          >
+                            <Trash2 size={16} aria-hidden="true" />
+                            <span className="sr-only">Delete this mood entry</span>
+                          </button>
+                        }
+                        title="Delete mood entry?"
+                        description="Are you sure you want to delete this mood entry? This action cannot be undone."
+                        confirmText="Delete"
+                        cancelText="Cancel"
+                        onConfirm={() => handleDeleteEntry(entry.id, true)}
+                        onCancel={() => handleDeleteEntry(entry.id, false)}
+                      />
                     </div>
                   </div>
                   <p className="text-sm text-muted-foreground dark:text-muted-foreground mt-1 mb-2">
