@@ -4,3 +4,7 @@ import { twMerge } from "tailwind-merge"
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
+
+export function isEmoji(str: string): boolean {
+  return /^\p{Extended_Pictographic}$/u.test(str)
+}
