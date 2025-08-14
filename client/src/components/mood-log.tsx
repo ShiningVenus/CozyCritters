@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { moodStorage } from "@/lib/mood-storage";
+import { moodStore } from "@/lib/mood-store";
 import { MoodEntry } from "@shared/schema";
 import { format, isToday, isYesterday, isSameDay, startOfDay } from "date-fns";
 import { Trash2 } from "lucide-react";
@@ -14,7 +14,7 @@ export function MoodLog({ onStartCheckIn }: MoodLogProps) {
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
   const loadMoodEntries = () => {
-    const allMoods = moodStorage.getAllMoodEntries();
+    const allMoods = moodStore.getAllMoodEntries();
     setMoodEntries(allMoods);
   };
 
@@ -35,7 +35,7 @@ export function MoodLog({ onStartCheckIn }: MoodLogProps) {
   const handleDeleteEntry = (id: string) => {
     if (window.confirm("Are you sure you want to delete this mood entry? This action cannot be undone.")) {
       setDeletingId(id);
-      const success = moodStorage.deleteMoodEntry(id);
+      const success = moodStore.deleteMoodEntry(id);
       if (success) {
         loadMoodEntries(); // Reload the mood entries
       }

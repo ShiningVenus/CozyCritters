@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Trash2, Shield, Database, ArrowLeft, AlertTriangle, Check, Eye, Code, Globe, Palette } from "lucide-react";
-import { moodStorage } from "@/lib/mood-storage";
+import { moodStore } from "@/lib/mood-store";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { 
@@ -24,7 +24,7 @@ export function PrivacySettings({ onBack }: PrivacySettingsProps) {
   const [isDeleting, setIsDeleting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [showLocalStorageData, setShowLocalStorageData] = useState(false);
-  const dataSummary = moodStorage.getDataSummary();
+  const dataSummary = moodStore.getDataSummary();
 
   const getLocalStorageProof = () => {
     const moodData = localStorage.getItem('cozy-critter-moods') || 'null';
@@ -70,7 +70,7 @@ export function PrivacySettings({ onBack }: PrivacySettingsProps) {
     await new Promise(resolve => setTimeout(resolve, 500));
     
     try {
-      moodStorage.clearAllData();
+      moodStore.clearAllData();
       setShowSuccess(true);
       
       // Hide success message after 3 seconds
