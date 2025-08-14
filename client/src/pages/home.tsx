@@ -64,7 +64,10 @@ export default function Home() {
       <main id="main-content" role="main">
         {currentView === "checkIn" ? (
           <>
-            <MoodCheckIn onMoodSelected={handleMoodSelected} />
+            <MoodCheckIn
+              onMoodSelected={handleMoodSelected}
+              onManageMoods={() => setCurrentView("moodManager")}
+            />
             <div className="px-6 pb-6">
               <MiniGamesPreview />
             </div>

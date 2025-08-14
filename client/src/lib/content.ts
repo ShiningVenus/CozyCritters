@@ -29,6 +29,21 @@ const DEFAULT_MOODS: MoodOption[] = [
   { emoji: "🦋", mood: "Peaceful", color: "bg-green-100" },
   { emoji: "🦔", mood: "Overwhelmed", color: "bg-red-100" },
   { emoji: "🐨", mood: "Content", color: "bg-content-custom" },
+  { emoji: "🐼", mood: "Sad", color: "bg-blue-100" },
+  { emoji: "🦁", mood: "Angry", color: "bg-red-200" },
+  { emoji: "🐱", mood: "Lonely", color: "bg-gray-200" },
+  { emoji: "🦉", mood: "Focused", color: "bg-indigo-100" },
+  { emoji: "🦥", mood: "Bored", color: "bg-gray-100" },
+  { emoji: "🦩", mood: "Silly", color: "bg-pink-200" },
+  { emoji: "🦚", mood: "Proud", color: "bg-yellow-100" },
+  { emoji: "🐙", mood: "Stressed", color: "bg-rose-100" },
+  { emoji: "🦓", mood: "Confused", color: "bg-slate-100" },
+  { emoji: "🦕", mood: "Nostalgic", color: "bg-lime-100" },
+  { emoji: "🐿️", mood: "Hyper", color: "bg-orange-200" },
+  { emoji: "🦢", mood: "Graceful", color: "bg-teal-100" },
+  { emoji: "🦜", mood: "Chatty", color: "bg-emerald-100" },
+  { emoji: "🦄", mood: "Magical", color: "bg-fuchsia-100" },
+  { emoji: "🐧", mood: "Cold", color: "bg-sky-100" },
 ];
 
 async function fetchJson<T>(path: string): Promise<T> {

@@ -6,9 +6,10 @@ import { customMessageStore } from "@/lib/custom-message-store";
 
 interface MoodCheckInProps {
   onMoodSelected: (mood: { emoji: string; mood: string; message: string; note?: string }) => void;
+  onManageMoods?: () => void;
 }
 
-export function MoodCheckIn({ onMoodSelected }: MoodCheckInProps) {
+export function MoodCheckIn({ onMoodSelected, onManageMoods }: MoodCheckInProps) {
   const [selectedMood, setSelectedMood] = useState<{
     emoji: string;
     mood: string;
@@ -53,6 +54,17 @@ export function MoodCheckIn({ onMoodSelected }: MoodCheckInProps) {
           selectedMood={selectedMood?.mood}
           disabled={!!selectedMood}
         />
+        {onManageMoods && (
+          <div className="mt-4 text-center">
+            <button
+              type="button"
+              onClick={onManageMoods}
+              className="text-sm text-primary underline hover:no-underline focus:outline-none focus:ring-2 focus:ring-primary/50 rounded"
+            >
+              Add your own mood
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Optional note input */}
