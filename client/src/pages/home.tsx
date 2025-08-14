@@ -26,7 +26,13 @@ export default function Home() {
       <a href="#main-content" className="skip-link">Skip to main content</a>
       {/* Header */}
       <header role="banner" className="bg-primary text-primary-foreground p-6 rounded-b-3xl shadow-md relative">
-        <div className="absolute top-4 right-4">
+        <div className="absolute top-4 right-4 flex items-center space-x-2">
+          <a
+            href="/support"
+            className="text-sm underline focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
+          >
+            Support
+          </a>
           <ThemeToggle />
         </div>
         <div className="text-center">
