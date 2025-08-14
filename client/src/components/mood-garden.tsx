@@ -137,7 +137,7 @@ export function MoodGarden({ onStartCheckIn }: MoodGardenProps) {
                         confirmText="Delete"
                         cancelText="Cancel"
                         onConfirm={() => handleDeleteEntry(entry.id, true)}
-                        onCancel={() => handleDeleteEntry(entry.id, false)}
+                        onCancel={() => {}}
                       />
                     </div>
                   </div>
