@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { moodStorage } from "@/lib/mood-storage";
+import { moodStore } from "@/lib/mood-store";
 import { MoodEntry } from "@shared/schema";
 import { fetchMoods, MoodOption } from "@/lib/content";
 import { format, isToday, isYesterday } from "date-fns";
@@ -16,7 +16,7 @@ export function MoodGarden({ onStartCheckIn }: MoodGardenProps) {
   const [moodOptions, setMoodOptions] = useState<MoodOption[]>([]);
 
   const loadMoodHistory = () => {
-    const moods = moodStorage.getRecentMoodEntries(20);
+    const moods = moodStore.getRecentMoodEntries(20);
     setMoodHistory(moods);
   };
 
