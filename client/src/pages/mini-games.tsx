@@ -115,7 +115,16 @@ export default function MiniGames({ onBack }: MiniGamesProps) {
 
   if (currentGame) {
     if (!GameComponent) {
-      return <div className="p-6" />;
+      return (
+        <div
+          className="p-6 flex items-center justify-center"
+          aria-label="Loading game"
+          role="status"
+        >
+          <span className="animate-spin mr-2" aria-hidden="true">⏳</span>
+          <span>Loading game...</span>
+        </div>
+      );
     }
     const LoadedComponent = GameComponent;
     return (
