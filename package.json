@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "npm run dev:web",
     "dev:web": "vite",
-    "build": "vite build",
+    "build": "vite build && node scripts/copy-content.js",
     "preview": "vite preview",
     "check": "tsc",
     "test": "echo \"No tests\""
