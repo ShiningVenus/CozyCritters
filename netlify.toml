@@ -5,6 +5,8 @@
 
 [build.environment]
   NODE_VERSION = "18"
+  VITE_CHATWOOT_WEBSITE_TOKEN = ""
+  VITE_CHATWOOT_HOST_URL = ""
 
 # SPA routing for the main app
 [[redirects]]
