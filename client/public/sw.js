@@ -15,16 +15,6 @@ const STATIC_RESOURCES = [
 // Paths that should NEVER be cached (sensitive/dynamic content)
 const CACHE_BLACKLIST = [
   '/api/',           // All API endpoints
-  '/auth/',          // Authentication endpoints
-  '/login',          // Login pages
-  '/logout',         // Logout endpoints
-  '/user/',          // User-specific data
-  '/session',        // Session endpoints
-  '/token',          // Token endpoints
-  '/oauth',          // OAuth flows
-  '/callback',       // Auth callbacks
-  '/webhook',        // Webhook endpoints
-  '/socket',         // WebSocket connections
 ];
 
 // Allowed file extensions for caching (built assets only)
@@ -48,14 +38,7 @@ const CACHEABLE_EXTENSIONS = [
 
 // Sensitive headers that indicate responses should not be cached
 const SENSITIVE_HEADERS = [
-  'set-cookie',
-  'authorization',
-  'x-csrf-token',
-  'x-auth-token',
-  'x-session-token',
-  'authenticate',
-  'proxy-authenticate',
-  'www-authenticate'
+  'set-cookie'
 ];
 
 // Install event - cache static resources
