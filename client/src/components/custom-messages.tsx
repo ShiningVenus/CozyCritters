@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Plus, Edit, Trash2, Save, X, Heart } from "lucide-react";
-import { moodStorage, CustomMessage } from "@/lib/mood-storage";
+import { customMessageStore, CustomMessage } from "@/lib/custom-message-store";
 
 interface CustomMessagesProps {
   onBack: () => void;
@@ -20,13 +20,13 @@ export function CustomMessages({ onBack }: CustomMessagesProps) {
   }, []);
 
   const loadMessages = () => {
-    const customMessages = moodStorage.getAllCustomMessages();
+    const customMessages = customMessageStore.getAllCustomMessages();
     setMessages(customMessages);
   };
 
   const handleAddMessage = () => {
     if (newMessage.trim()) {
-      moodStorage.saveCustomMessage({
+      customMessageStore.saveCustomMessage({
         message: newMessage.trim(),
         category: newCategory
       });
@@ -44,7 +44,7 @@ export function CustomMessages({ onBack }: CustomMessagesProps) {
 
   const handleSaveEdit = () => {
     if (editingId && editingText.trim()) {
-      moodStorage.updateCustomMessage(editingId, {
+      customMessageStore.updateCustomMessage(editingId, {
         message: editingText.trim(),
         category: editingCategory
       });
@@ -56,7 +56,7 @@ export function CustomMessages({ onBack }: CustomMessagesProps) {
 
   const handleDeleteMessage = (id: string) => {
     if (window.confirm("Are you sure you want to delete this custom message? This action cannot be undone.")) {
-      moodStorage.deleteCustomMessage(id);
+      customMessageStore.deleteCustomMessage(id);
       loadMessages();
     }
   };
