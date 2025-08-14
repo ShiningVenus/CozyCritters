@@ -6,8 +6,17 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { CustomMessages } from "@/components/custom-messages";
 import { PrivacySettings } from "@/components/privacy-settings";
 import { MoodManager } from "@/components/mood-manager";
+import { NavButton } from "@/components/nav-button";
 
 type View = "checkIn" | "moodLog" | "customMessages" | "moodManager" | "privacy";
+
+const views: { id: View; label: string }[] = [
+  { id: "checkIn", label: "Check-in" },
+  { id: "moodLog", label: "My Garden" },
+  { id: "customMessages", label: "Messages" },
+  { id: "moodManager", label: "Moods" },
+  { id: "privacy", label: "Privacy" },
+];
 
 export default function Home() {
   const [currentView, setCurrentView] = useState<View>("checkIn");
@@ -39,61 +48,15 @@ export default function Home() {
         
         {/* Navigation tabs */}
         <nav role="navigation" aria-label="Main navigation" className="flex justify-center mt-4 space-x-2">
-          <button
-            onClick={() => setCurrentView("checkIn")}
-            aria-pressed={currentView === "checkIn"}
-            className={`px-3 py-2 rounded-full text-xs font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 ${
-              currentView === "checkIn"
-                ? "bg-white bg-opacity-20"
-                : "hover:bg-white hover:bg-opacity-10"
-            }`}
-          >
-            Check-in
-          </button>
-          <button
-            onClick={() => setCurrentView("moodLog")}
-            aria-pressed={currentView === "moodLog"}
-            className={`px-3 py-2 rounded-full text-xs font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 ${
-              currentView === "moodLog"
-                ? "bg-white bg-opacity-20"
-                : "hover:bg-white hover:bg-opacity-10"
-            }`}
-          >
-            My Garden
-          </button>
-          <button
-            onClick={() => setCurrentView("customMessages")}
-            aria-pressed={currentView === "customMessages"}
-            className={`px-3 py-2 rounded-full text-xs font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 ${
-              currentView === "customMessages"
-                ? "bg-white bg-opacity-20"
-                : "hover:bg-white hover:bg-opacity-10"
-            }`}
-          >
-            Messages
-          </button>
-          <button
-            onClick={() => setCurrentView("moodManager")}
-            aria-pressed={currentView === "moodManager"}
-            className={`px-3 py-2 rounded-full text-xs font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 ${
-              currentView === "moodManager"
-                ? "bg-white bg-opacity-20"
-                : "hover:bg-white hover:bg-opacity-10"
-            }`}
-          >
-            Moods
-          </button>
-          <button
-            onClick={() => setCurrentView("privacy")}
-            aria-pressed={currentView === "privacy"}
-            className={`px-3 py-2 rounded-full text-xs font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 ${
-              currentView === "privacy"
-                ? "bg-white bg-opacity-20"
-                : "hover:bg-white hover:bg-opacity-10"
-            }`}
-          >
-            Privacy
-          </button>
+          {views.map((view) => (
+            <NavButton
+              key={view.id}
+              id={view.id}
+              label={view.label}
+              currentView={currentView}
+              onSelect={setCurrentView}
+            />
+          ))}
         </nav>
       </header>
 

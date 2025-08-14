@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { moodStorage } from "@/lib/mood-storage";
+import { moodStore } from "@/lib/mood-store";
 
 interface EncouragementMessageProps {
   mood: {
@@ -16,7 +16,7 @@ export function EncouragementMessage({ mood, onAddToGarden }: EncouragementMessa
 
   const handleAddToGarden = () => {
     // Save to localStorage
-    moodStorage.saveMoodEntry({
+    moodStore.saveMoodEntry({
       emoji: mood.emoji,
       mood: mood.mood,
       message: mood.message,
