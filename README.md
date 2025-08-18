@@ -163,7 +163,8 @@ Proof:
 A dedicated `docs/` folder provides everything you need for development, self-hosting, privacy verification, and community contributions.
 
 - [docs/README.md](docs/README.md) — Docs overview & quick links
-- [Self-hosting guide](docs/self-hosting.md)
+- [Self-hosting guide](docs/self-hosting.md) — **🐳 Docker support included!**
+- [Docker deployment guide](docs/docker.md) — Complete containerized setup
 - [Local development](docs/local-development.md)
 - [Architecture overview](docs/architecture.md)
 - [Privacy & security verification](docs/privacy-security.md)

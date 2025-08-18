@@ -2,6 +2,25 @@
 
 Cozy Critter is designed for simple self-hosting. It’s a static PWA; no backend required.
 
+## Deployment Options
+
+Choose the method that best fits your setup:
+
+### 🐳 Docker (Recommended)
+
+The easiest way to self-host with automatic HTTPS support.
+
+```bash
+git clone https://github.com/CatgirlRika/CozyCritters.git
+cd CozyCritters
+./docker-build.sh
+docker compose up -d
+```
+
+📖 **[Full Docker Guide](docker.md)**
+
+### 📦 Manual Installation
+
 ## Quick Start
 
 1. **Clone the repo**  
