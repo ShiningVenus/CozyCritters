@@ -16,6 +16,7 @@ Thank you for your interest in Cozy Critter!
 4. **Test your changes**
    - Run `npm run dev` and check functionality.
    - Run `npm test` and `npm run check`.
+   - Use the "Install App" button in the home page header to trigger the browser's install banner when testing PWA features.
 
 5. **Open a Pull Request**
    - Fill out the PR template.

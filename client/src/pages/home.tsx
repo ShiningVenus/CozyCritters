@@ -3,6 +3,7 @@ import { MoodCheckIn } from "@/components/mood-check-in";
 import { MoodGarden } from "@/components/mood-garden";
 import { MiniGamesPreview } from "@/components/mini-games-preview";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { PWAInstallButton } from "@/components/pwa-install-button";
 import { CustomMessages } from "@/components/custom-messages";
 import { PrivacySettings } from "@/components/privacy-settings";
 import { MoodManager } from "@/components/mood-manager";
@@ -35,7 +36,8 @@ export default function Home() {
       <a href="#main-content" className="skip-link">Skip to main content</a>
       {/* Header */}
       <header role="banner" className="bg-primary text-primary-foreground p-6 rounded-b-3xl shadow-md relative">
-        <div className="absolute top-4 right-4">
+        <div className="absolute top-4 right-4 flex gap-2">
+          <PWAInstallButton />
           <ThemeToggle />
         </div>
         <div className="text-center">
