@@ -5,6 +5,7 @@ import { DrawingPad } from '@/games/drawing-pad';
 import { ShapeMatch } from '@/games/shape-match';
 import { ZenBlocks } from '@/games/zen-blocks';
 import { CritterCare } from '@/games/critter-care';
+import { BubblePop } from '@/games/bubble-pop';
 
 // Register all games
 gameRegistry.register({
@@ -119,6 +120,25 @@ gameRegistry.register({
     tags: ['pet', 'care', 'calming', 'mindfulness']
   },
   Component: CritterCare
+});
+
+gameRegistry.register({
+  config: {
+    id: 'bubble-pop',
+    name: 'Bubble Pop',
+    description: 'Pop soothing bubbles that gently deflate.',
+    emoji: '🫧',
+    category: 'calming',
+    difficulty: 'easy',
+    estimatedTime: '1-3 min',
+    accessibility: {
+      motionSensitive: false,
+      soundRequired: false,
+      colorBlindFriendly: true
+    },
+    tags: ['bubbles', 'calming', 'sensory']
+  },
+  Component: BubblePop
 });
 
 // Export the registry for use in components
