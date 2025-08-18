@@ -114,7 +114,7 @@ Proof:
 
 ---
 
-### 📱 Works Everywhere, Anytime
+### 📱 Works Everywhere Anytime
 - 📲 Install on your phone like a native app (PWA)
 - 🌐 Works offline (because internet can be overwhelming) — verified; see [offline docs](docs/faq.md#does-cozy-critter-work-offline)
 - ♿ Accessible with screen readers and keyboard navigation — see [accessibility notes](docs/accessibility.md)
@@ -134,7 +134,7 @@ Proof:
 ### 🎨 Frontend Stack
 - React with TypeScript for type safety
 - Vite for fast dev/build cycles
-- Tailwind CSS for cozy, consistent styles
+- Tailwind CSS for cozy consistent styles
 - shadcn/ui (built on Radix primitives) for accessible UI components
 - Wouter for simple page navigation
 - Service Worker via dedicated `useServiceWorker` hook
@@ -292,7 +292,7 @@ localStorage.removeItem(MOOD_STORAGE_KEY);
 // No fetch(), no axios, no external APIs for mood data
 ```
 
-#### 🌐 Offline-First PWA
+#### 🌐 Offline First PWA
 ```javascript
 // Service Worker caches everything locally
 caches.open(CACHE_NAME).then(cache => {
@@ -327,7 +327,7 @@ Penetration Testing Checklist:
 - [ ] Privacy policy vs. actual behavior comparison
 
 🐛 Found a security issue?  
-Open a GitHub issue — we take security seriously and will address verified concerns immediately.
+Open a GitHub issue we take security seriously and will address verified concerns immediately.
 
 ---
 
@@ -341,10 +341,10 @@ Spoiler: we can't access your data even if we wanted to!
 
 | Freedom | What This Means for You |
 |---------|--------------------------|
-| Free to use | Individuals, nonprofits, organizations — everyone |
+| Free to use | Individuals, nonprofits, organizations everyone |
 | Free to modify | Customize for your community's needs |
 | Free to share | Spread the accessibility love |
-| Transparent | All code visible, nothing hidden |
+| Transparent | All code visible nothing hidden |
 | Community-driven | Your feedback and contributions welcome |
 
 ---
