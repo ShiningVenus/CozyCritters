@@ -19,7 +19,7 @@ export function BubblePop({ onComplete, onExit, config }: GameProps) {
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
       osc.type = 'square';
-      osc.frequency.value = 800;
+      osc.frequency.value = POP_OSC_FREQUENCY;
       gain.gain.setValueAtTime(0.1, ctx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.1);
       osc.connect(gain).connect(ctx.destination);
