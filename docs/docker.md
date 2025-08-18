@@ -1,3 +1,75 @@
+## Installing Docker (Beginner Friendly Guide)
+
+If you are new to Docker, follow these steps to install Docker and Docker Compose on your computer.
+
+### Windows
+
+1. **Download Docker Desktop**
+   - Visit the official Docker website: [https://www.docker.com/products/docker-desktop/](https://www.docker.com/products/docker-desktop/)
+   - Click "Download for Windows" and save the installer.
+
+2. **Run the Installer**
+   - Double-click the downloaded file to begin installation.
+   - Follow the on-screen instructions. You may be asked to enable WSL 2 (Windows Subsystem for Linux); if so, follow the prompts.
+
+3. **Start Docker Desktop**
+   - After installation, launch Docker Desktop from the Start menu.
+   - Wait for the Docker whale icon to appear in your system tray — this means Docker is running.
+
+4. **Verify Installation**
+   - Open "Command Prompt" or "PowerShell".
+   - Type: `docker --version`
+   - You should see the installed Docker version.
+
+### Mac
+
+1. **Download Docker Desktop**
+   - Visit [https://www.docker.com/products/docker-desktop/](https://www.docker.com/products/docker-desktop/)
+   - Click "Download for Mac" (choose Intel or Apple Silicon based on your Mac).
+
+2. **Install Docker Desktop**
+   - Open the downloaded file and drag the Docker icon to your Applications folder.
+   - Open Docker Desktop from Applications.
+
+3. **Verify Installation**
+   - Open "Terminal" and type: `docker --version`
+   - You should see the installed Docker version.
+
+### Linux (Ubuntu example)
+
+1. **Open Terminal**
+
+2. **Install Docker Engine**
+   - Run these commands one by one:
+     ```bash
+     sudo apt-get update
+     sudo apt-get install ca-certificates curl gnupg
+     sudo install -m 0755 -d /etc/apt/keyrings
+     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+     echo \
+       "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+       $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+     sudo apt-get update
+     sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+     ```
+
+3. **Verify Installation**
+   - Type: `docker --version`
+   - You should see the installed Docker version.
+
+4. **(Optional) Allow running Docker without `sudo`:**
+   ```bash
+   sudo usermod -aG docker $USER
+   # Log out and log back in for this change to take effect.
+   ```
+
+### Need Help?
+
+- See Docker’s official installation guides: [https://docs.docker.com/get-docker/](https://docs.docker.com/get-docker/)
+- If you get stuck, ask for help on GitHub Issues or search for your error message.
+
+---
+
 # Docker Deployment Guide for CozyCritters
 
 This guide explains how to deploy CozyCritters using Docker for easy self-hosting.
