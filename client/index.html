@@ -24,6 +24,7 @@
     <script>
       (function(d, t) {
         var BASE_URL = "%VITE_CHATWOOT_HOST_URL%";
+        if (!BASE_URL) return;
         var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
         g.src = BASE_URL + "/packs/js/sdk.js";
         s.parentNode.insertBefore(g, s);
