@@ -4,6 +4,7 @@ import { ColorPattern } from '@/games/color-pattern';
 import { DrawingPad } from '@/games/drawing-pad';
 import { ShapeMatch } from '@/games/shape-match';
 import { ZenBlocks } from '@/games/zen-blocks';
+import { CritterCare } from '@/games/critter-care';
 
 // Register all games
 gameRegistry.register({
@@ -99,6 +100,25 @@ gameRegistry.register({
     tags: ['blocks', 'calming', 'focus', 'tetris']
   },
   Component: ZenBlocks
+});
+
+gameRegistry.register({
+  config: {
+    id: 'critter-care',
+    name: 'Critter Companion',
+    description: 'Nurture a cozy critter by feeding, playing, and letting it rest.',
+    emoji: '🐾',
+    category: 'calming',
+    difficulty: 'easy',
+    estimatedTime: '5–10 min',
+    accessibility: {
+      motionSensitive: false,
+      soundRequired: false,
+      colorBlindFriendly: true
+    },
+    tags: ['pet', 'care', 'calming', 'mindfulness']
+  },
+  Component: CritterCare
 });
 
 // Export the registry for use in components
