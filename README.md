@@ -34,8 +34,6 @@ Everything stays on your device because your emotional data is deeply personal.
 - [🛠️ Technical Details](#-tech--architecture)
 - [📚 Full Docs](docs/README.md)
 - [🎨 Mood Customization](docs/mood-customization.md)
-- [💬 Support](#-support)
-
 ---
 
 ## 🎉 V1.0.0 - What's Ready Now
@@ -206,14 +204,6 @@ That's it! 🎉 No database setup, no API keys, no complicated configuration.
 npm test
 ```
 
-## 💬 Support
-
-Need help or have questions? Every page includes a Chatwoot widget for quick support. Configure your deployment with these environment variables so the widget can connect to your Chatwoot instance:
-
-- `VITE_CHATWOOT_WEBSITE_TOKEN`
-- `VITE_CHATWOOT_HOST_URL`
-
-You can self-host Chatwoot or sign up for a hosted service and then supply the token and host URL above.
 
 ## 🏭 Production Install
 
