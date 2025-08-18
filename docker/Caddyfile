@@ -1,0 +1,24 @@
+# Example Caddyfile for HTTPS support
+# Uncomment and modify as needed for your domain
+
+# Replace 'your-domain.com' with your actual domain
+# your-domain.com {
+#     reverse_proxy cozy-critters:80
+#     
+#     # Optional: Basic security headers
+#     header {
+#         # Enable HSTS
+#         Strict-Transport-Security max-age=31536000;
+#         # Prevent clickjacking
+#         X-Frame-Options DENY
+#         # Prevent content-type sniffing
+#         X-Content-Type-Options nosniff
+#         # Enable XSS protection
+#         X-XSS-Protection "1; mode=block"
+#     }
+# }
+
+# For localhost development with HTTPS (generates self-signed cert)
+localhost {
+    reverse_proxy cozy-critters:80
+}

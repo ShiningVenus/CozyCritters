@@ -1,0 +1,37 @@
+services:
+  cozy-critters:
+    build:
+      context: .
+      dockerfile: Dockerfile.simple
+    container_name: cozy-critters
+    ports:
+      - "${PORT:-3000}:80"
+    restart: unless-stopped
+    labels:
+      - "com.docker.compose.project=cozy-critters"
+      - "org.opencontainers.image.title=CozyCritters"
+      - "org.opencontainers.image.description=Neurodivergent-friendly mood tracking PWA"
+      - "org.opencontainers.image.source=https://github.com/CatgirlRika/CozyCritters"
+
+  # Optional: Add a reverse proxy for HTTPS (required for full PWA features)
+  # Uncomment the section below if you want HTTPS support
+  # 
+  # reverse-proxy:
+  #   image: caddy:2-alpine
+  #   container_name: cozy-critters-proxy
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   volumes:
+  #     - ./docker/Caddyfile:/etc/caddy/Caddyfile:ro
+  #     - caddy_data:/data
+  #     - caddy_config:/config
+  #   environment:
+  #     - DOMAIN=${DOMAIN:-localhost}
+  #   depends_on:
+  #     - cozy-critters
+  #   restart: unless-stopped
+
+# volumes:
+#   caddy_data:
+#   caddy_config:
