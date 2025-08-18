@@ -6,7 +6,7 @@
 [build.environment]
   NODE_VERSION = "18"
   VITE_CHATWOOT_WEBSITE_TOKEN = ""
-  VITE_CHATWOOT_HOST_URL = ""
+  VITE_CHATWOOT_HOST_URL = "https://app.chatwoot.com"
 
 # SPA routing for the main app
 [[redirects]]
