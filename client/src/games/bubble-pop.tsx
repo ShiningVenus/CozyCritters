@@ -2,6 +2,8 @@ import React, { useState, useRef } from 'react';
 import { GameProps } from '@/types/game';
 import { Button } from '@/components/ui/button';
 
+const POP_OSC_FREQUENCY = 440;
+
 export function BubblePop({ onComplete, onExit, config }: GameProps) {
   const gridSize = 5;
   const totalBubbles = gridSize * gridSize;
@@ -11,11 +13,12 @@ export function BubblePop({ onComplete, onExit, config }: GameProps) {
 
   const playPop = () => {
     try {
-      let ctx = audioCtxRef.current;
-      if (!ctx) {
-        ctx = new (window.AudioContext || window.webkitAudioContext)();
-        audioCtxRef.current = ctx;
-      }
+        let ctx = audioCtxRef.current;
+        if (!ctx) {
+          const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
+          ctx = new AudioCtx();
+          audioCtxRef.current = ctx;
+        }
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
       osc.type = 'square';
