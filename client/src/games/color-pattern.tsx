@@ -24,7 +24,7 @@ export function ColorPattern({ onComplete, onExit, config }: GameProps) {
 
   const generatePattern = (length: number) => {
     const newPattern = [];
-    const availableColors = Math.min(level + 2, COLORS.length);
+    const availableColors = Math.min(level + BASE_COLORS, COLORS.length);
     for (let i = 0; i < length; i++) {
       newPattern.push(Math.floor(Math.random() * availableColors));
     }
