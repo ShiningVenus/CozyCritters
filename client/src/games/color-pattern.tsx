@@ -36,10 +36,10 @@ export function ColorPattern({ onComplete, onExit, config }: GameProps) {
   const showPattern = async () => {
     setGameState('showing');
     setShowingPattern(true);
-    
+
     for (let i = 0; i < pattern.length; i++) {
       await new Promise(resolve => setTimeout(resolve, 800));
-      setCurrentStep(i);
+      setCurrentStep(pattern[i]);
       await new Promise(resolve => setTimeout(resolve, 600));
     }
     
