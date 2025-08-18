@@ -1,6 +1,7 @@
 // Game exports for easy importing
 export { BreathingBubble } from './breathing-bubble';
 export { ColorPattern } from './color-pattern';
+export { CritterCare } from './critter-care';
 export { DrawingPad } from './drawing-pad';
 export { ShapeMatch } from './shape-match';
 export { ZenBlocks } from './zen-blocks';
