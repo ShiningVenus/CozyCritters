@@ -147,7 +147,7 @@ This approach:
 |----------|-------------|---------|
 | `PORT` | Host port to expose the application | `3000` |
 
-**Note**: Since CozyCritters is a static PWA, most configuration happens at build time. Environment variables for features like Chatwoot integration should be set before running `./docker-build.sh`.
+**Note**: Since CozyCritters is a static PWA, most configuration happens at build time. Set any required environment variables before running `./docker-build.sh`.
 
 ### Custom Configuration
 

@@ -20,21 +20,6 @@
   </head>
   <body>
     <div id="root"></div>
-<script type="module" src="/src/main.tsx"></script>
-    <script>
-      (function(d, t) {
-        var BASE_URL = "%VITE_CHATWOOT_HOST_URL%";
-        if (!BASE_URL) return;
-        var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
-        g.src = BASE_URL + "/packs/js/sdk.js";
-        s.parentNode.insertBefore(g, s);
-        g.onload = function() {
-          window.chatwootSDK.run({
-            websiteToken: "%VITE_CHATWOOT_WEBSITE_TOKEN%",
-            baseUrl: BASE_URL
-          });
-        };
-      })(document, "script");
-    </script>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
