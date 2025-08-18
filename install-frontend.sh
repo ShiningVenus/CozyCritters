@@ -1,6 +1,16 @@
 #!/usr/bin/env bash
 set -e
 
+# Production installation script for Cozy Critter
+# This script builds the application and provides options for running it
+
+# For Docker deployments, consider running cleanup commands before deployment:
+# docker compose down              # Stop existing containers
+# docker container prune -f       # Remove stopped containers  
+# docker network prune -f         # Remove unused networks
+# docker image prune -f           # Remove unused images
+# Use modern 'docker compose' syntax instead of legacy 'docker-compose'
+
 # Ensure we're at repo root
 cd "$(dirname "$0")"
 
@@ -17,10 +27,14 @@ if [ "$NODE_MAJOR" -lt 18 ]; then
 fi
 
 echo "Installing dependencies..."
-npm ci --omit=dev
+npm ci
 
 echo "Building project..."
 npm run build
+
+echo "✓ Build complete! Static files are in client/dist/"
+echo "  You can serve this directory with any static file server"
+echo "  For Docker deployments, copy client/dist/ contents to your web server"
 
 case "$1" in
   start)
