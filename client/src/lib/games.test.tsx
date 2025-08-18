@@ -21,6 +21,13 @@ test('zen-blocks game registered under calming category', () => {
   assert.equal(game!.config.category, 'calming');
 });
 
+// Verify bubble-pop game is registered correctly
+test('bubble-pop game registered under calming category', () => {
+  const game = gameRegistry.getGame('bubble-pop');
+  assert.ok(game, 'bubble-pop game should be registered');
+  assert.equal(game!.config.category, 'calming');
+});
+
 // Verify MiniGames renders the shape-match card
 
 test('MiniGames lists the Shape Match game', () => {
