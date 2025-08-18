@@ -13,7 +13,7 @@ export function BubblePop({ onComplete, onExit, config }: GameProps) {
     try {
       let ctx = audioCtxRef.current;
       if (!ctx) {
-        ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
+        ctx = new (window.AudioContext || window.webkitAudioContext)();
         audioCtxRef.current = ctx;
       }
       const osc = ctx.createOscillator();
