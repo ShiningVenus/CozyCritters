@@ -12,6 +12,9 @@ Thanks for helping make Cozy Critter better!
    ```bash
    npm run dev
    ```
+3. Optional: test the PWA install flow
+   - Click the **Install App** button in the top-right corner of the home page.
+   - This calls `installApp()` and triggers the browser's install banner.
 
 ## NPM Scripts
 
