@@ -72,7 +72,7 @@ export function ColorPattern({ onComplete, onExit, config }: GameProps) {
       setTimeout(() => {
         setLevel(prev => {
           const newLevel = prev + 1;
-          generatePattern(Math.min(newLevel + 2, 8)); // Cap at 8 colors
+          generatePattern(Math.min(newLevel + 2, 8), newLevel); // Cap at 8 colors
           return newLevel;
         });
         setGameState('ready');
