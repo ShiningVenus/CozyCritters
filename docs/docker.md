@@ -249,6 +249,15 @@ docker logs -f cozy-critters
    - Ensure you have sufficient disk space
    - Check that all required files are present
 
+4. **File permissions issues with web UI**
+   - If you see "403 Forbidden" or files not loading properly, this may be due to incorrect file permissions
+   - The Dockerfile now automatically sets correct permissions (644) for HTML files
+   - For older containers, you can manually fix permissions:
+     ```bash
+     docker exec -it <container-name> chmod 644 /usr/share/nginx/html/index.html
+     ```
+   - Or rebuild the container with the latest Dockerfile which includes the permission fix
+
 ### Performance Tuning
 
 For production deployments, consider:

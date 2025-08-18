@@ -27,6 +27,9 @@ COPY docker/default.conf.template /etc/nginx/conf.d/default.conf
 # Copy built application from builder stage
 COPY --from=builder /app/client/dist /usr/share/nginx/html
 
+# Fix permissions for HTML files to ensure proper web access
+RUN chmod 644 /usr/share/nginx/html/index.html
+
 # Expose port
 EXPOSE 80
 
