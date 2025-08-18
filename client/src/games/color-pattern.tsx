@@ -12,6 +12,9 @@ const COLORS = [
   { name: 'Sunshine', value: 'bg-yellow-200 dark:bg-yellow-500', border: 'border-yellow-300' }
 ];
 
+// Number of base colors shown at level 1
+const BASE_COLORS = 2;
+
 export function ColorPattern({ onComplete, onExit, config }: GameProps) {
   const [pattern, setPattern] = useState<number[]>([]);
   const [userInput, setUserInput] = useState<number[]>([]);
@@ -22,9 +25,9 @@ export function ColorPattern({ onComplete, onExit, config }: GameProps) {
   const [score, setScore] = useState(0);
   const [startTime] = useState(Date.now());
 
-  const generatePattern = (length: number) => {
+  const generatePattern = (length: number, currentLevel = level) => {
     const newPattern = [];
-    const availableColors = Math.min(level + BASE_COLORS, COLORS.length);
+    const availableColors = Math.min(currentLevel + BASE_COLORS, COLORS.length);
     for (let i = 0; i < length; i++) {
       newPattern.push(Math.floor(Math.random() * availableColors));
     }
@@ -81,7 +84,7 @@ export function ColorPattern({ onComplete, onExit, config }: GameProps) {
   };
 
   const startNewGame = () => {
-    generatePattern(3); // Start with 3 colors
+    generatePattern(3, 1); // Start with 3 colors at level 1
     setGameState('ready');
   };
 
@@ -89,7 +92,7 @@ export function ColorPattern({ onComplete, onExit, config }: GameProps) {
     setLevel(1);
     setScore(0);
     setUserInput([]);
-    generatePattern(3);
+    generatePattern(3, 1);
     setGameState('ready');
   };
 
