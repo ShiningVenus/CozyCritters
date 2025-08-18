@@ -9,6 +9,7 @@
 
 > A complete production ready app designed specifically for neurodivergent minds.
 
+**Transparent**: This was made with the help of ChatGPT, Copilot, Replit, and Codex. This is just a personal hobby project and I am studying and learning code still myself. I am a solo person working on this for fun.
 
 Cozy Critter is a private mood tracking app that actually understands ND life.
 It is open source and simple to self-host.
