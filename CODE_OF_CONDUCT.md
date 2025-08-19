@@ -63,7 +63,7 @@ an individual is officially representing the community in public spaces.
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
 reported using our anonymous form, by emailing the dedicated moderation team
-at conduct@cozycritters.org, or by contacting the project team through GitHub
+at [will put real email ASAP], or by contacting the project team through GitHub
 issues or discussions. All complaints will be reviewed and investigated
 promptly and fairly. See the Moderation Policies section for details on how
 reports are handled and what to expect from the process.
@@ -76,7 +76,7 @@ reporter of any incident.
 ### Receiving Reports
 
 Reports can be submitted through an anonymous online form or by emailing
-conduct@cozycritters.org. Direct messages through GitHub issues or discussions
+[real email soon]. Direct messages through GitHub issues or discussions
 are also monitored, but the dedicated channels ensure a prompt response.
 
 ### Moderator Roles and Escalation
