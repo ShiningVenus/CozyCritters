@@ -147,7 +147,7 @@ gameRegistry.register({
   config: {
     id: 'animal-checkers',
     name: 'Critter Checkers',
-    description: 'Friendly foxes and bunnies play a gentle game of checkers.',
+    description: 'Friendly foxes and bunnies play a gentle game of checkers against a calm CPU opponent.',
     emoji: '🦊',
     category: 'focus',
     difficulty: 'easy',
