@@ -6,6 +6,8 @@ export { DrawingPad } from './drawing-pad';
 export { ShapeMatch } from './shape-match';
 export { ZenBlocks } from './zen-blocks';
 export { BubblePop } from './bubble-pop';
+export { AnimalCheckers } from './animal-checkers';
+export { AnimalChess } from './animal-chess';
 
 // This file makes it easier to add new games in the future
 // Just export them here and register them in lib/games.ts
