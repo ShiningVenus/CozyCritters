@@ -2,8 +2,79 @@ import React, { useState } from 'react';
 import { GameProps } from '@/types/game';
 import { Button } from '@/components/ui/button';
 
-type Piece = 'fox' | 'bunny';
+export type Piece = 'fox' | 'bunny';
 const BOARD_SIZE = 8;
+
+export type Move = {
+  from: [number, number];
+  to: [number, number];
+};
+
+export function getValidMoves(board: (Piece | null)[][], side: Piece): Move[] {
+  const moves: Move[] = [];
+  const dir = side === 'fox' ? 1 : -1;
+  for (let r = 0; r < BOARD_SIZE; r++) {
+    for (let c = 0; c < BOARD_SIZE; c++) {
+      if (board[r][c] !== side) continue;
+      const stepTargets: [number, number][] = [
+        [r + dir, c + 1],
+        [r + dir, c - 1]
+      ];
+      for (const [nr, nc] of stepTargets) {
+        if (
+          nr >= 0 &&
+          nr < BOARD_SIZE &&
+          nc >= 0 &&
+          nc < BOARD_SIZE &&
+          board[nr][nc] === null
+        ) {
+          moves.push({ from: [r, c], to: [nr, nc] });
+        }
+      }
+      const captureTargets: [number, number][] = [
+        [r + 2 * dir, c + 2],
+        [r + 2 * dir, c - 2]
+      ];
+      for (const [nr, nc] of captureTargets) {
+        const mr = (r + nr) / 2;
+        const mc = (c + nc) / 2;
+        if (
+          nr >= 0 &&
+          nr < BOARD_SIZE &&
+          nc >= 0 &&
+          nc < BOARD_SIZE &&
+          board[nr][nc] === null
+        ) {
+          const middle = board[mr][mc];
+          if (middle && middle !== side) {
+            moves.push({ from: [r, c], to: [nr, nc] });
+          }
+        }
+      }
+    }
+  }
+  return moves;
+}
+
+export function performCpuMove(
+  board: (Piece | null)[][],
+  side: Piece
+): (Piece | null)[][] {
+  const moves = getValidMoves(board, side);
+  if (moves.length === 0) return board;
+  const choice = moves[Math.floor(Math.random() * moves.length)];
+  const [sr, sc] = choice.from;
+  const [r, c] = choice.to;
+  const newBoard = board.map(row => [...row]);
+  newBoard[r][c] = newBoard[sr][sc];
+  newBoard[sr][sc] = null;
+  if (Math.abs(r - sr) === 2) {
+    const mr = (r + sr) / 2;
+    const mc = (c + sc) / 2;
+    newBoard[mr][mc] = null;
+  }
+  return newBoard;
+}
 
 const pieceEmoji: Record<Piece, string> = {
   fox: '🦊',
@@ -24,13 +95,22 @@ export function AnimalCheckers({ onComplete, onExit, config }: GameProps) {
   const [board, setBoard] = useState<(Piece | null)[][]>(createInitialBoard);
   const [selected, setSelected] = useState<[number, number] | null>(null);
   const [player, setPlayer] = useState<Piece>('fox');
+  const cpu: Piece = 'bunny';
 
   const handleCellClick = (r: number, c: number) => {
     const cell = board[r][c];
 
     if (selected) {
       const [sr, sc] = selected;
-      if (board[r][c] === null && isValidMove(sr, sc, r, c)) {
+      const moves = getValidMoves(board, player);
+      const move = moves.find(
+        m =>
+          m.from[0] === sr &&
+          m.from[1] === sc &&
+          m.to[0] === r &&
+          m.to[1] === c
+      );
+      if (board[r][c] === null && move) {
         const newBoard = board.map(row => [...row]);
         newBoard[r][c] = board[sr][sc];
         newBoard[sr][sc] = null;
@@ -39,8 +119,14 @@ export function AnimalCheckers({ onComplete, onExit, config }: GameProps) {
           const mc = (c + sc) / 2;
           newBoard[mr][mc] = null;
         }
+        const nextPlayer = player === 'fox' ? 'bunny' : 'fox';
         setBoard(newBoard);
-        setPlayer(prev => (prev === 'fox' ? 'bunny' : 'fox'));
+        setPlayer(nextPlayer);
+        if (nextPlayer === cpu) {
+          const cpuBoard = performCpuMove(newBoard, cpu);
+          setBoard(cpuBoard);
+          setPlayer('fox');
+        }
       }
       setSelected(null);
       return;
@@ -49,21 +135,6 @@ export function AnimalCheckers({ onComplete, onExit, config }: GameProps) {
     if (cell === player) {
       setSelected([r, c]);
     }
-  };
-
-  const isValidMove = (sr: number, sc: number, r: number, c: number) => {
-    const dir = player === 'fox' ? 1 : -1;
-    const dr = r - sr;
-    const dc = c - sc;
-
-    if (dr === dir && Math.abs(dc) === 1) return true;
-    if (dr === 2 * dir && Math.abs(dc) === 2) {
-      const mr = sr + dir;
-      const mc = sc + dc / 2;
-      const middle = board[mr][mc];
-      if (middle && middle !== player) return true;
-    }
-    return false;
   };
 
   return (
