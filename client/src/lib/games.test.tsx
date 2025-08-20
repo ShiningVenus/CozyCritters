@@ -28,6 +28,20 @@ test('bubble-pop game registered under calming category', () => {
   assert.equal(game!.config.category, 'calming');
 });
 
+// Verify animal-checkers game is registered correctly
+test('animal-checkers game registered under focus category', () => {
+  const game = gameRegistry.getGame('animal-checkers');
+  assert.ok(game, 'animal-checkers game should be registered');
+  assert.equal(game!.config.category, 'focus');
+});
+
+// Verify animal-chess game is registered correctly
+test('animal-chess game registered under focus category', () => {
+  const game = gameRegistry.getGame('animal-chess');
+  assert.ok(game, 'animal-chess game should be registered');
+  assert.equal(game!.config.category, 'focus');
+});
+
 // Verify MiniGames renders the shape-match card
 
 test('MiniGames lists the Shape Match game', () => {

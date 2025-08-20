@@ -6,6 +6,8 @@ import { ShapeMatch } from '@/games/shape-match';
 import { ZenBlocks } from '@/games/zen-blocks';
 import { CritterCare } from '@/games/critter-care';
 import { BubblePop } from '@/games/bubble-pop';
+import { AnimalCheckers } from '@/games/animal-checkers';
+import { AnimalChess } from '@/games/animal-chess';
 
 // Register all games
 gameRegistry.register({
@@ -140,6 +142,45 @@ gameRegistry.register({
   },
   Component: BubblePop
 });
+
+gameRegistry.register({
+  config: {
+    id: 'animal-checkers',
+    name: 'Critter Checkers',
+    description: 'Friendly foxes and bunnies play a gentle game of checkers.',
+    emoji: '🦊',
+    category: 'focus',
+    difficulty: 'easy',
+    estimatedTime: '5-15 min',
+    accessibility: {
+      motionSensitive: false,
+      soundRequired: false,
+      colorBlindFriendly: true
+    },
+    tags: ['board', 'strategy', 'animals', 'checkers']
+  },
+  Component: AnimalCheckers
+});
+
+gameRegistry.register({
+  config: {
+    id: 'animal-chess',
+    name: 'Critter Chess',
+    description: 'A calm chessboard with animal pieces you can move at your own pace.',
+    emoji: '🦉',
+    category: 'focus',
+    difficulty: 'medium',
+    estimatedTime: '10-30 min',
+    accessibility: {
+      motionSensitive: false,
+      soundRequired: false,
+      colorBlindFriendly: true
+    },
+    tags: ['board', 'strategy', 'animals', 'chess']
+  },
+  Component: AnimalChess
+});
+
 
 // Export the registry for use in components
 export { gameRegistry };
