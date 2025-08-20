@@ -11,7 +11,7 @@
     "build": "vite build && node scripts/copy-content.js",
     "preview": "vite preview",
     "check": "tsc",
-    "test": "echo \"No tests\""
+    "test": "node --import tsx --test client/src/**/*.test.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -66,7 +66,8 @@
     "vaul": "^1.1.2",
     "wouter": "^3.3.5",
     "zod": "^3.24.2",
-    "zod-validation-error": "^3.4.0"
+    "zod-validation-error": "^3.4.0",
+    "chess.js": "^1.0.0"
   },
   "devDependencies": {
     "@replit/vite-plugin-cartographer": "^0.2.8",
