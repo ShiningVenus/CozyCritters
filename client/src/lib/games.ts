@@ -166,7 +166,7 @@ gameRegistry.register({
   config: {
     id: 'animal-chess',
     name: 'Critter Chess',
-    description: 'A calm chessboard with animal pieces you can move at your own pace.',
+    description: 'A calm chessboard with animal pieces and a gentle CPU opponent.',
     emoji: '🦉',
     category: 'focus',
     difficulty: 'medium',

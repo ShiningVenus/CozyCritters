@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Chess } from 'chess.js';
 import { GameProps } from '@/types/game';
 import { Button } from '@/components/ui/button';
-
-const BOARD_SIZE = 8;
 
 const pieceEmoji: Record<string, string> = {
   r: '🦊',
@@ -19,50 +18,61 @@ const pieceEmoji: Record<string, string> = {
   P: '🐹'
 };
 
-function createInitialBoard(): (string | null)[][] {
-  return [
-    ['r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'],
-    Array(8).fill('p'),
-    Array(8).fill(null),
-    Array(8).fill(null),
-    Array(8).fill(null),
-    Array(8).fill(null),
-    Array(8).fill('P'),
-    ['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R']
-  ];
+function indexToSquare(r: number, c: number) {
+  const files = 'abcdefgh';
+  return `${files[c]}${8 - r}`;
 }
 
-function isWhite(piece: string | null) {
-  return piece ? piece === piece.toUpperCase() : false;
+function boardFromGame(game: Chess): (string | null)[][] {
+  const b = game.board() as unknown as Array<Array<{ type: string; color: 'w' | 'b' } | null>>;
+  return b.map(row =>
+    row.map(cell => (cell ? (cell.color === 'w' ? cell.type.toUpperCase() : cell.type) : null))
+  );
+}
+
+export function performCpuMove(game: Chess): string | null {
+  if (game.turn() !== 'b') return null;
+  const moves = game.moves({ verbose: true });
+  if (moves.length === 0) return null;
+  const move = moves[Math.floor(Math.random() * moves.length)];
+  game.move(move.san);
+  return move.san;
 }
 
 export function AnimalChess({ onComplete, onExit, config }: GameProps) {
-  const [board, setBoard] = useState<(string | null)[][]>(createInitialBoard);
+  const [chess] = useState(() => new Chess());
+  const [board, setBoard] = useState<(string | null)[][]>(() => boardFromGame(chess));
   const [selected, setSelected] = useState<[number, number] | null>(null);
   const [player, setPlayer] = useState<'white' | 'black'>('white');
 
   const handleCellClick = (r: number, c: number) => {
-    const piece = board[r][c];
+    if (player !== 'white') return;
+    const square = indexToSquare(r, c);
+    const piece = chess.get(square);
 
     if (selected) {
-      const [sr, sc] = selected;
-      const movingPiece = board[sr][sc];
-      const target = board[r][c];
-      if (movingPiece && (target === null || isWhite(movingPiece) !== isWhite(target))) {
-        const newBoard = board.map(row => [...row]);
-        newBoard[r][c] = movingPiece;
-        newBoard[sr][sc] = null;
-        setBoard(newBoard);
-        setPlayer(prev => (prev === 'white' ? 'black' : 'white'));
-      }
+      const from = indexToSquare(selected[0], selected[1]);
+      const move = chess.move({ from, to: square });
       setSelected(null);
+      if (move) {
+        setBoard(boardFromGame(chess));
+        setPlayer('black');
+      }
       return;
     }
 
-    if (piece && ((player === 'white' && isWhite(piece)) || (player === 'black' && !isWhite(piece)))) {
+    if (piece && piece.color === 'w' && chess.turn() === 'w') {
       setSelected([r, c]);
     }
   };
+
+  useEffect(() => {
+    if (player === 'black') {
+      performCpuMove(chess);
+      setBoard(boardFromGame(chess));
+      setPlayer('white');
+    }
+  }, [player, chess]);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[400px] p-6 bg-gradient-to-br from-slate-50 to-stone-50 dark:from-slate-900/20 dark:to-stone-900/20 rounded-2xl">
