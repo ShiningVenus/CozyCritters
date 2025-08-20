@@ -81,7 +81,7 @@ export function ErrorBoundary({ children, fallback }: Props) {
             </p>
           </div>
 
-          {process.env.NODE_ENV === 'development' && error && (
+          {import.meta.env.DEV && error && (
             <details className="mt-4 text-left">
               <summary className="text-xs text-muted-foreground cursor-pointer">
                 Technical details (dev mode)

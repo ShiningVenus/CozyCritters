@@ -8,7 +8,7 @@ export function BreathingBubble({ onComplete, onExit, config }: GameProps) {
   const [phase, setPhase] = useState<'inhale' | 'hold' | 'exhale' | 'rest'>('inhale');
   const [cycles, setCycles] = useState(0);
   const [timeElapsed, setTimeElapsed] = useState(0);
-  const intervalRef = useRef<NodeJS.Timeout>();
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const startTime = useRef<number>(Date.now());
 
   const phaseDurations = {
