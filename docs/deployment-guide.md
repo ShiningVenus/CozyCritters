@@ -6,7 +6,7 @@ The core app is static.
 
 ## Before you start
 1. Fork this repository to your own GitHub account.
-2. Create an `.env` file if the project requires keys or URLs and push it to your hosting service (never commit secrets).
+2. Copy `.env.example` to `.env`, adjust any values, and provide it to your hosting service (never commit secrets).
 3. Push your fork to GitHub so the platforms can access it.
 
 ## Netlify (client only)
