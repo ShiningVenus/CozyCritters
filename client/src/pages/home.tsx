@@ -8,14 +8,16 @@ import { CustomMessages } from "@/components/custom-messages";
 import { PrivacySettings } from "@/components/privacy-settings";
 import { MoodManager } from "@/components/mood-manager";
 import { NavButton } from "@/components/nav-button";
+import { Community } from "@/pages/community";
 
-type View = "checkIn" | "moodLog" | "customMessages" | "moodManager" | "privacy";
+type View = "checkIn" | "moodLog" | "customMessages" | "moodManager" | "community" | "privacy";
 
 const views: { id: View; label: string }[] = [
   { id: "checkIn", label: "Check-in" },
   { id: "moodLog", label: "My Garden" },
   { id: "customMessages", label: "Messages" },
   { id: "moodManager", label: "Moods" },
+  { id: "community", label: "Community" },
   { id: "privacy", label: "Privacy" },
 ];
 
@@ -80,6 +82,8 @@ export default function Home() {
           <CustomMessages onBack={() => setCurrentView("checkIn")} />
         ) : currentView === "moodManager" ? (
           <MoodManager onBack={() => setCurrentView("checkIn")} />
+        ) : currentView === "community" ? (
+          <Community onBack={() => setCurrentView("checkIn")} />
         ) : (
           <PrivacySettings onBack={() => setCurrentView("checkIn")} />
         )}
