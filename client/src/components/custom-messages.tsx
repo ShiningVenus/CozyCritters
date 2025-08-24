@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Plus, Edit, Trash2, Save, X, Heart } from "lucide-react";
 import { customMessageStore, CustomMessage } from "@/lib/custom-message-store";
+import { CommunityContributions } from "./community-contributions";
 
 interface CustomMessagesProps {
   onBack: () => void;
@@ -59,6 +60,11 @@ export function CustomMessages({ onBack }: CustomMessagesProps) {
       customMessageStore.deleteCustomMessage(id);
       loadMessages();
     }
+  };
+
+  const handleContributionSuccess = (messageId: string) => {
+    // Optionally refresh or show some indicator that message was contributed
+    console.log(`Message ${messageId} contributed to community`);
   };
 
   const getCategoryColor = (category: CustomMessage['category']) => {
@@ -166,6 +172,14 @@ export function CustomMessages({ onBack }: CustomMessagesProps) {
             </div>
           )}
         </div>
+
+        {/* Community Contributions */}
+        {messages.length > 0 && (
+          <CommunityContributions 
+            messages={messages} 
+            onContributionSuccess={handleContributionSuccess}
+          />
+        )}
 
         {/* Messages List */}
         <div className="space-y-4">
