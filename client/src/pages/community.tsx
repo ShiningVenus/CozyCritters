@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { ArrowLeft, ExternalLink, Heart, Users, MessageCircle, Calendar, Download, Globe, CheckCircle } from "lucide-react";
 import { fetchCommunityMessagePacks, downloadMessagePack, CommunityMessagePack } from "@/lib/community-message-packs";
 import { ShareableMoodTemplates } from "@/components/shareable-mood-templates";
+import { CommunityCopingStrategies } from "@/components/community-coping-strategies";
 
 interface CommunityProps {
   onBack: () => void;
@@ -177,6 +178,9 @@ export function Community({ onBack }: CommunityProps) {
 
         {/* Shareable Mood Templates */}
         <ShareableMoodTemplates className="mb-6" />
+
+        {/* Community Coping Strategies */}
+        <CommunityCopingStrategies className="mb-6" />
 
         {/* Community Challenges */}
         <section className="bg-card rounded-lg p-6 border border-border">
