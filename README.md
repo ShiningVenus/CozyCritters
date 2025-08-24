@@ -1,7 +1,7 @@
-# 🐾 Cozy Critter v2.0.0
+# 🐾 Cozy Critter v2.0.2
 ### Animal Themed Mood Tracker for Neurodivergent Minds
 
-[![Version](https://img.shields.io/badge/version-2.0.0-brightgreen.svg)](https://github.com/ShiningVenus/CozyCritters)
+[![Version](https://img.shields.io/badge/version-2.0.2-brightgreen.svg)](https://github.com/ShiningVenus/CozyCritters)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Privacy First](https://img.shields.io/badge/privacy-first-gold.svg)](#-privacy-promise--technical-proof)
 [![Accessibility](https://img.shields.io/badge/accessibility-AAA-purple.svg)](#-what-v1-includes)
@@ -38,7 +38,7 @@ Everything stays on your device because your emotional data is deeply personal.
 - [📝 Changelog](CHANGELOG.md)
 ---
 
-## 🎉 V2.0.0 - Phase 2 Social Features Now Live!
+## 🎉 V2.0.2 - Phase 2 Social Features Now Live!
 
 This is a major update that introduces **Phase 2 social media and forum lite features** while maintaining our commitment to privacy and neurodivergent-friendly design.
 
