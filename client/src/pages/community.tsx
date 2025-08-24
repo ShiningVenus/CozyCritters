@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ArrowLeft, ExternalLink, Heart, Users, MessageCircle, Calendar, Download, Globe, CheckCircle } from "lucide-react";
 import { fetchCommunityMessagePacks, downloadMessagePack, CommunityMessagePack } from "@/lib/community-message-packs";
+import { ShareableMoodTemplates } from "@/components/shareable-mood-templates";
 
 interface CommunityProps {
   onBack: () => void;
@@ -173,6 +174,9 @@ export function Community({ onBack }: CommunityProps) {
             )}
           </div>
         </section>
+
+        {/* Shareable Mood Templates */}
+        <ShareableMoodTemplates className="mb-6" />
 
         {/* Community Challenges */}
         <section className="bg-card rounded-lg p-6 border border-border">
