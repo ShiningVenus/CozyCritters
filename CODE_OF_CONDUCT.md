@@ -62,11 +62,10 @@ an individual is officially representing the community in public spaces.
 ## Enforcement
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
-reported using our anonymous form, by emailing the dedicated moderation team
-at [will put real email ASAP], or by contacting the project team through GitHub
-issues or discussions. All complaints will be reviewed and investigated
-promptly and fairly. See the Moderation Policies section for details on how
-reports are handled and what to expect from the process.
+reported by opening a GitHub issue with the "conduct" label, or by contacting 
+the project team through GitHub issues or discussions. All complaints will be 
+reviewed and investigated promptly and fairly. See the Moderation Policies 
+section for details on how reports are handled and what to expect from the process.
 
 All community leaders are obligated to respect the privacy and security of the
 reporter of any incident.
@@ -75,9 +74,9 @@ reporter of any incident.
 
 ### Receiving Reports
 
-Reports can be submitted through an anonymous online form or by emailing
-[real email soon]. Direct messages through GitHub issues or discussions
-are also monitored, but the dedicated channels ensure a prompt response.
+Reports can be submitted by opening a GitHub issue with the "conduct" label.
+Direct messages through GitHub issues or discussions are also monitored, 
+and provide a prompt response.
 
 ### Moderator Roles and Escalation
 

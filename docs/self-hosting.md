@@ -11,7 +11,7 @@ Choose the method that best fits your setup:
 The easiest way to self-host with automatic HTTPS support.
 
 ```bash
-git clone https://github.com/CatgirlRika/CozyCritters.git
+git clone https://github.com/ShiningVenus/CozyCritters.git
 cd CozyCritters
 ./docker-build.sh
 docker compose up -d
