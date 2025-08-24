@@ -23,3 +23,37 @@ export type MoodEntry = InsertMoodEntry & {
 };
 
 export { encouragementMessages } from "./encouragements";
+
+// User roles for forum moderation
+export type UserRole = 'user' | 'moderator' | 'admin';
+
+export interface UserSession {
+  id: string;
+  username: string;
+  role: UserRole;
+  timestamp: number;
+}
+
+// Forum moderation types
+export interface ModerationAction {
+  id: string;
+  type: 'hide' | 'pin' | 'edit' | 'warn';
+  moderatorId: string;
+  moderatorName: string;
+  reason?: string;
+  timestamp: number;
+  originalContent?: string; // For edit actions
+}
+
+export interface ForumPostModeration {
+  isHidden: boolean;
+  isPinned: boolean;
+  isEdited: boolean;
+  actions: ModerationAction[];
+}
+
+export interface ForumReplyModeration {
+  isHidden: boolean;
+  isEdited: boolean;
+  actions: ModerationAction[];
+}

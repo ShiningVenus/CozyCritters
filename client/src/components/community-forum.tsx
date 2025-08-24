@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { MessageSquare, Heart, User, Clock, ChevronDown, ChevronUp, Plus, Flag, ThumbsUp } from 'lucide-react';
+import { MessageSquare, Heart, User, Clock, ChevronDown, ChevronUp, Plus, Flag, ThumbsUp, Pin, EyeOff, Edit3, Shield } from 'lucide-react';
+import { useUserSession } from '../hooks/useUserSession';
+import { ForumPostModeration, ForumReplyModeration, ModerationAction, UserRole } from '../../../shared/schema';
 
 interface ForumPost {
   id: string;
@@ -17,6 +19,7 @@ interface ForumPost {
     hearts?: boolean;
     helpful?: boolean;
   };
+  moderation?: ForumPostModeration;
 }
 
 interface ForumReply {
@@ -32,6 +35,7 @@ interface ForumReply {
     hearts?: boolean;
     helpful?: boolean;
   };
+  moderation?: ForumReplyModeration;
 }
 
 interface CommunityForumProps {
@@ -49,6 +53,9 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
     category: 'general' as ForumPost['category']
   });
   const [newReply, setNewReply] = useState<{ [postId: string]: string }>({});
+  const [showRolePanel, setShowRolePanel] = useState(false);
+  
+  const { userSession, updateUserRole, hasModeratorAccess, hasAdminAccess } = useUserSession();
 
   // Load posts from localStorage
   useEffect(() => {
@@ -98,13 +105,13 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
   };
 
   const handleCreatePost = () => {
-    if (!newPost.title.trim() || !newPost.content.trim()) return;
+    if (!newPost.title.trim() || !newPost.content.trim() || !userSession) return;
 
     const post: ForumPost = {
       id: crypto.randomUUID(),
       title: newPost.title.trim(),
       content: newPost.content.trim(),
-      author: generateAnonymousName(),
+      author: userSession.username,
       timestamp: Date.now(),
       category: newPost.category,
       replies: [],
@@ -119,12 +126,12 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
 
   const handleAddReply = (postId: string) => {
     const replyContent = newReply[postId]?.trim();
-    if (!replyContent) return;
+    if (!replyContent || !userSession) return;
 
     const reply: ForumReply = {
       id: crypto.randomUUID(),
       content: replyContent,
-      author: generateAnonymousName(),
+      author: userSession.username,
       timestamp: Date.now(),
       reactions: { hearts: 0, helpful: 0 }
     };
@@ -206,6 +213,84 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
     return `${adjective} ${animal}`;
   };
 
+  // Moderation functions
+  const moderatePost = (postId: string, action: 'hide' | 'pin' | 'show' | 'unpin', reason?: string) => {
+    if (!hasModeratorAccess() || !userSession) return;
+
+    const updatedPosts = posts.map(post => {
+      if (post.id === postId) {
+        const moderation = post.moderation || { isHidden: false, isPinned: false, isEdited: false, actions: [] };
+        
+        const moderationAction: ModerationAction = {
+          id: crypto.randomUUID(),
+          type: action === 'show' ? 'hide' : action === 'unpin' ? 'pin' : action,
+          moderatorId: userSession.id,
+          moderatorName: userSession.username,
+          reason,
+          timestamp: Date.now()
+        };
+
+        let updatedModeration = { ...moderation };
+        
+        switch (action) {
+          case 'hide':
+            updatedModeration.isHidden = true;
+            break;
+          case 'show':
+            updatedModeration.isHidden = false;
+            break;
+          case 'pin':
+            updatedModeration.isPinned = true;
+            break;
+          case 'unpin':
+            updatedModeration.isPinned = false;
+            break;
+        }
+
+        updatedModeration.actions.push(moderationAction);
+
+        return { ...post, moderation: updatedModeration };
+      }
+      return post;
+    });
+
+    savePosts(updatedPosts);
+  };
+
+  const moderateReply = (postId: string, replyId: string, action: 'hide' | 'show', reason?: string) => {
+    if (!hasModeratorAccess() || !userSession) return;
+
+    const updatedPosts = posts.map(post => {
+      if (post.id === postId) {
+        const updatedReplies = post.replies.map(reply => {
+          if (reply.id === replyId) {
+            const moderation = reply.moderation || { isHidden: false, isEdited: false, actions: [] };
+            
+            const moderationAction: ModerationAction = {
+              id: crypto.randomUUID(),
+              type: action === 'show' ? 'hide' : action,
+              moderatorId: userSession.id,
+              moderatorName: userSession.username,
+              reason,
+              timestamp: Date.now()
+            };
+
+            let updatedModeration = { ...moderation };
+            updatedModeration.isHidden = action === 'hide';
+            updatedModeration.actions.push(moderationAction);
+
+            return { ...reply, moderation: updatedModeration };
+          }
+          return reply;
+        });
+        return { ...post, replies: updatedReplies };
+      }
+      return post;
+    });
+
+    savePosts(updatedPosts);
+  };
+
   const getCategoryColor = (category: string) => {
     const colors = {
       support: 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-200',
@@ -221,6 +306,17 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
     ? posts 
     : posts.filter(post => post.category === selectedCategory);
 
+  // Filter out hidden posts for regular users, sort pinned posts to top
+  const visiblePosts = filteredPosts
+    .filter(post => hasModeratorAccess() || !post.moderation?.isHidden)
+    .sort((a, b) => {
+      // Pinned posts first
+      if (a.moderation?.isPinned && !b.moderation?.isPinned) return -1;
+      if (!a.moderation?.isPinned && b.moderation?.isPinned) return 1;
+      // Then by timestamp (newest first)
+      return b.timestamp - a.timestamp;
+    });
+
   return (
     <div className={`bg-card dark:bg-card border border-border dark:border-border rounded-xl p-6 ${className}`}>
       <div className="flex items-start gap-3 mb-6">
@@ -234,15 +330,72 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
           <p className="text-muted-foreground dark:text-muted-foreground text-sm">
             Share experiences, ask questions, and support each other in a safe, anonymous space.
           </p>
+          {userSession && (
+            <div className="flex items-center gap-2 mt-2">
+              <span className="text-xs text-muted-foreground">
+                Logged in as: {userSession.username}
+              </span>
+              <span className={`text-xs px-2 py-1 rounded-full ${
+                userSession.role === 'admin' ? 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-200' :
+                userSession.role === 'moderator' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-200' :
+                'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200'
+              }`}>
+                {userSession.role}
+              </span>
+            </div>
+          )}
         </div>
-        <button
-          onClick={() => setShowNewPostForm(true)}
-          className="flex items-center gap-2 px-3 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors text-sm"
-        >
-          <Plus size={16} />
-          New Post
-        </button>
+        <div className="flex gap-2">
+          {hasAdminAccess() && (
+            <button
+              onClick={() => setShowRolePanel(!showRolePanel)}
+              className="flex items-center gap-2 px-3 py-2 bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-200 rounded-lg hover:bg-red-200 dark:hover:bg-red-900/50 transition-colors text-sm"
+            >
+              <Shield size={16} />
+              Admin
+            </button>
+          )}
+          <button
+            onClick={() => setShowNewPostForm(true)}
+            className="flex items-center gap-2 px-3 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors text-sm"
+          >
+            <Plus size={16} />
+            New Post
+          </button>
+        </div>
       </div>
+
+      {/* Admin Role Panel */}
+      {showRolePanel && hasAdminAccess() && (
+        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-900/50 rounded-lg p-4 mb-6">
+          <h4 className="font-medium text-red-900 dark:text-red-200 mb-3">Admin Panel - Role Management</h4>
+          <div className="space-y-2">
+            <p className="text-sm text-red-700 dark:text-red-300">
+              For demo purposes - in a real app, this would be a proper admin interface
+            </p>
+            <div className="flex gap-2">
+              <button
+                onClick={() => updateUserRole('user')}
+                className="px-3 py-1 text-xs bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200 rounded"
+              >
+                Set as User
+              </button>
+              <button
+                onClick={() => updateUserRole('moderator')}
+                className="px-3 py-1 text-xs bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-200 rounded"
+              >
+                Set as Moderator
+              </button>
+              <button
+                onClick={() => updateUserRole('admin')}
+                className="px-3 py-1 text-xs bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-200 rounded"
+              >
+                Set as Admin
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Category Filter */}
       <div className="flex gap-2 mb-4 flex-wrap">
@@ -327,14 +480,30 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
 
       {/* Posts */}
       <div className="space-y-4">
-        {filteredPosts.map(post => (
-          <div key={post.id} className="bg-background border border-border rounded-lg p-4">
+        {visiblePosts.map(post => (
+          <div key={post.id} className={`bg-background border border-border rounded-lg p-4 ${
+            post.moderation?.isHidden ? 'opacity-60 border-red-300 dark:border-red-800' : ''
+          } ${
+            post.moderation?.isPinned ? 'border-yellow-300 dark:border-yellow-700 bg-yellow-50/50 dark:bg-yellow-900/10' : ''
+          }`}>
             {/* Post Header */}
             <div className="flex items-start justify-between mb-3">
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 flex-wrap">
                 <span className={`text-xs px-2 py-1 rounded-full ${getCategoryColor(post.category)}`}>
                   {post.category}
                 </span>
+                {post.moderation?.isPinned && (
+                  <span className="text-xs px-2 py-1 rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-200 flex items-center gap-1">
+                    <Pin size={10} />
+                    Pinned
+                  </span>
+                )}
+                {post.moderation?.isHidden && hasModeratorAccess() && (
+                  <span className="text-xs px-2 py-1 rounded-full bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-200 flex items-center gap-1">
+                    <EyeOff size={10} />
+                    Hidden
+                  </span>
+                )}
                 <span className="text-xs text-muted-foreground">
                   by {post.author}
                 </span>
@@ -343,6 +512,34 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
                   {new Date(post.timestamp).toLocaleDateString()}
                 </span>
               </div>
+              
+              {/* Moderation Controls */}
+              {hasModeratorAccess() && (
+                <div className="flex gap-1">
+                  <button
+                    onClick={() => moderatePost(post.id, post.moderation?.isPinned ? 'unpin' : 'pin')}
+                    className={`p-1 rounded text-xs transition-colors ${
+                      post.moderation?.isPinned 
+                        ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-200 hover:bg-yellow-200 dark:hover:bg-yellow-900/50' 
+                        : 'text-muted-foreground hover:bg-muted/50'
+                    }`}
+                    title={post.moderation?.isPinned ? 'Unpin post' : 'Pin post'}
+                  >
+                    <Pin size={14} />
+                  </button>
+                  <button
+                    onClick={() => moderatePost(post.id, post.moderation?.isHidden ? 'show' : 'hide')}
+                    className={`p-1 rounded text-xs transition-colors ${
+                      post.moderation?.isHidden 
+                        ? 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-200 hover:bg-red-200 dark:hover:bg-red-900/50' 
+                        : 'text-muted-foreground hover:bg-muted/50'
+                    }`}
+                    title={post.moderation?.isHidden ? 'Show post' : 'Hide post'}
+                  >
+                    <EyeOff size={14} />
+                  </button>
+                </div>
+              )}
             </div>
 
             {/* Post Content */}
@@ -386,9 +583,19 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
             {expandedPosts.has(post.id) && (
               <div className="border-t border-border pt-3 mt-3">
                 {/* Existing Replies */}
-                {post.replies.map(reply => (
-                  <div key={reply.id} className="bg-muted/30 rounded-lg p-3 mb-3">
+                {post.replies
+                  .filter(reply => hasModeratorAccess() || !reply.moderation?.isHidden)
+                  .map(reply => (
+                  <div key={reply.id} className={`bg-muted/30 rounded-lg p-3 mb-3 ${
+                    reply.moderation?.isHidden ? 'opacity-60 border border-red-300 dark:border-red-800' : ''
+                  }`}>
                     <div className="flex items-center gap-2 mb-2">
+                      {reply.moderation?.isHidden && hasModeratorAccess() && (
+                        <span className="text-xs px-2 py-1 rounded-full bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-200 flex items-center gap-1">
+                          <EyeOff size={8} />
+                          Hidden
+                        </span>
+                      )}
                       <span className="text-xs text-muted-foreground">
                         {reply.author}
                       </span>
@@ -396,6 +603,21 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
                         <Clock size={10} />
                         {new Date(reply.timestamp).toLocaleDateString()}
                       </span>
+                      
+                      {/* Reply Moderation Controls */}
+                      {hasModeratorAccess() && (
+                        <button
+                          onClick={() => moderateReply(post.id, reply.id, reply.moderation?.isHidden ? 'show' : 'hide')}
+                          className={`p-1 rounded text-xs transition-colors ml-auto ${
+                            reply.moderation?.isHidden 
+                              ? 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-200 hover:bg-red-200 dark:hover:bg-red-900/50' 
+                              : 'text-muted-foreground hover:bg-muted/50'
+                          }`}
+                          title={reply.moderation?.isHidden ? 'Show reply' : 'Hide reply'}
+                        >
+                          <EyeOff size={12} />
+                        </button>
+                      )}
                     </div>
                     <p className="text-sm text-foreground mb-2">{reply.content}</p>
                     <div className="flex items-center gap-2">
@@ -447,7 +669,7 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
           </div>
         ))}
 
-        {filteredPosts.length === 0 && (
+        {visiblePosts.length === 0 && (
           <div className="text-center py-8 text-muted-foreground">
             <MessageSquare size={48} className="mx-auto mb-4 opacity-50" />
             <p>No posts in this category yet.</p>
