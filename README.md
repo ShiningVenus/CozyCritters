@@ -1,7 +1,7 @@
 # 🐾 Cozy Critter v1.0.0
 ### Animal Themed Mood Tracker for Neurodivergent Minds
 
-[![Version](https://img.shields.io/badge/version-1.0.0-brightgreen.svg)](https://github.com/CatgirlRika/CozyCritters)
+[![Version](https://img.shields.io/badge/version-1.0.0-brightgreen.svg)](https://github.com/ShiningVenus/CozyCritters)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Privacy First](https://img.shields.io/badge/privacy-first-gold.svg)](#-privacy-promise--technical-proof)
 [![Accessibility](https://img.shields.io/badge/accessibility-AAA-purple.svg)](#-what-v1-includes)
@@ -34,6 +34,7 @@ Everything stays on your device because your emotional data is deeply personal.
 - [🛠️ Technical Details](#-tech--architecture)
 - [📚 Full Docs](docs/README.md)
 - [🎨 Mood Customization](docs/mood-customization.md)
+- [🤝 Community Support](docs/community-support.md)
 ---
 
 ## 🎉 V1.0.0 - What's Ready Now
@@ -171,6 +172,7 @@ A dedicated `docs/` folder provides everything you need for development, self-ho
 - [Backup & export](docs/backup-export.md)
 - [FAQ](docs/faq.md)
 - [Contributing guide](docs/contributing.md)
+- [Community support & resources](docs/community-support.md)
 - [Reddit r/selfhosted post draft](docs/reddit-selfhosted-post.md)
 
 ---
@@ -476,9 +478,29 @@ Your community's wellbeing matters. Let's make emotional self-care accessible to
 
 ## 💚 Questions or Want to Contribute?
 
-Open an issue or reach out!
+### 🤝 Community Support
 
-Friendly contributions and suggestions are always welcome.
+**Need help?** Our community is here for you:
+- 🐛 **Bug reports & technical issues**: [Open a GitHub issue](https://github.com/ShiningVenus/CozyCritters/issues)
+- 💬 **Questions & general support**: [Start a GitHub Discussion](https://github.com/ShiningVenus/CozyCritters/discussions)
+- 📚 **Comprehensive support guide**: [Community Support Documentation](docs/community-support.md)
+
+**We understand neurodivergent communication needs:**
+- Written communication preferred
+- No pressure for immediate responses  
+- Direct, literal communication welcomed
+- Accommodations available - just let us know
+
+### 🌟 Contributing
+
+Friendly contributions and suggestions are always welcome! Whether you're:
+- 📝 Fixing documentation typos
+- ♿ Testing accessibility features
+- 🐛 Reporting bugs you've found
+- 💡 Suggesting new features
+- 🔧 Contributing code improvements
+
+See our [Contributing Guide](docs/contributing.md) and [Community Support](docs/community-support.md) for detailed information.
 
 ---
 
