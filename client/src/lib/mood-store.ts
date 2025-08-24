@@ -2,6 +2,7 @@ import { MoodEntry, InsertMoodEntry } from "@shared/schema";
 import { nanoid } from "nanoid";
 import { customMessageStore } from "./custom-message-store";
 import { getLocalArray, saveLocalArray, removeLocalItem } from "./local-storage";
+import { handleComponentError, ErrorSeverity } from "./error-handler";
 
 const MOOD_STORAGE_KEY = "cozy-critter-moods";
 
@@ -50,7 +51,11 @@ export class MoodStore {
       saveLocalArray(MOOD_STORAGE_KEY, updatedMoods);
       return true;
     } catch (error) {
-      console.error("Error deleting mood entry from localStorage:", error);
+      handleComponentError(
+        error instanceof Error ? error : new Error(String(error)),
+        'MoodStore',
+        'deleteMoodEntry'
+      );
       return false;
     }
   }

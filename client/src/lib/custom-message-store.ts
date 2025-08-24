@@ -1,6 +1,7 @@
 import { encouragementMessages } from "@shared/encouragements";
 import { nanoid } from "nanoid";
 import { getLocalArray, saveLocalArray, removeLocalItem } from "./local-storage";
+import { handleComponentError } from "./error-handler";
 
 const CUSTOM_MESSAGES_KEY = "cozy-critter-custom-messages";
 
@@ -44,7 +45,11 @@ export class CustomMessageStore {
       saveLocalArray(CUSTOM_MESSAGES_KEY, existingMessages);
       return true;
     } catch (error) {
-      console.error("Error updating custom message:", error);
+      handleComponentError(
+        error instanceof Error ? error : new Error(String(error)),
+        'CustomMessageStore',
+        'updateCustomMessage'
+      );
       return false;
     }
   }
@@ -61,7 +66,11 @@ export class CustomMessageStore {
       saveLocalArray(CUSTOM_MESSAGES_KEY, updatedMessages);
       return true;
     } catch (error) {
-      console.error("Error deleting custom message from localStorage:", error);
+      handleComponentError(
+        error instanceof Error ? error : new Error(String(error)),
+        'CustomMessageStore',
+        'deleteCustomMessage'
+      );
       return false;
     }
   }

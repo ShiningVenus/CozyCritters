@@ -2,20 +2,24 @@
  * Utility functions for safe localStorage operations
  */
 
+import { withLocalStorageErrorHandling } from "./error-handler";
+
 /**
  * Safely retrieves and parses an array from localStorage
  * @param key - The localStorage key
  * @returns The parsed array or an empty array if not found/invalid
  */
 export function getLocalArray<T>(key: string): T[] {
-  try {
-    const raw = localStorage.getItem(key);
-    if (!raw) return [];
-    const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed : [];
-  } catch {
-    return [];
-  }
+  return withLocalStorageErrorHandling(
+    () => {
+      const raw = localStorage.getItem(key);
+      if (!raw) return [];
+      const parsed = JSON.parse(raw);
+      return Array.isArray(parsed) ? parsed : [];
+    },
+    [],
+    { action: 'getLocalArray', additionalData: { key } }
+  );
 }
 
 /**
@@ -24,11 +28,14 @@ export function getLocalArray<T>(key: string): T[] {
  * @param value - The array to save
  */
 export function saveLocalArray<T>(key: string, value: T[]): void {
-  try {
-    localStorage.setItem(key, JSON.stringify(value));
-  } catch (error) {
-    console.warn(`Failed to save to localStorage with key "${key}":`, error);
-  }
+  withLocalStorageErrorHandling(
+    () => {
+      localStorage.setItem(key, JSON.stringify(value));
+      return true;
+    },
+    false,
+    { action: 'saveLocalArray', additionalData: { key, valueLength: value.length } }
+  );
 }
 
 /**
@@ -37,13 +44,15 @@ export function saveLocalArray<T>(key: string, value: T[]): void {
  * @returns The parsed object or null if not found/invalid
  */
 export function getLocalObject<T>(key: string): T | null {
-  try {
-    const raw = localStorage.getItem(key);
-    if (!raw) return null;
-    return JSON.parse(raw) as T;
-  } catch {
-    return null;
-  }
+  return withLocalStorageErrorHandling(
+    () => {
+      const raw = localStorage.getItem(key);
+      if (!raw) return null;
+      return JSON.parse(raw) as T;
+    },
+    null,
+    { action: 'getLocalObject', additionalData: { key } }
+  );
 }
 
 /**
@@ -52,11 +61,14 @@ export function getLocalObject<T>(key: string): T | null {
  * @param value - The object to save
  */
 export function saveLocalObject<T>(key: string, value: T): void {
-  try {
-    localStorage.setItem(key, JSON.stringify(value));
-  } catch (error) {
-    console.warn(`Failed to save to localStorage with key "${key}":`, error);
-  }
+  withLocalStorageErrorHandling(
+    () => {
+      localStorage.setItem(key, JSON.stringify(value));
+      return true;
+    },
+    false,
+    { action: 'saveLocalObject', additionalData: { key } }
+  );
 }
 
 /**
@@ -64,9 +76,12 @@ export function saveLocalObject<T>(key: string, value: T): void {
  * @param key - The localStorage key
  */
 export function removeLocalItem(key: string): void {
-  try {
-    localStorage.removeItem(key);
-  } catch (error) {
-    console.warn(`Failed to remove from localStorage with key "${key}":`, error);
-  }
+  withLocalStorageErrorHandling(
+    () => {
+      localStorage.removeItem(key);
+      return true;
+    },
+    false,
+    { action: 'removeLocalItem', additionalData: { key } }
+  );
 }
