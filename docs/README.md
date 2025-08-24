@@ -6,7 +6,7 @@ Welcome! This folder contains everything you need to develop, self-host, and ver
   - A gentle, privacy-first, offline-capable mood tracker PWA built for neurodivergent folks.
   - All personal data stays in your browser (localStorage). No accounts, no tracking.
 
-Version: v1.0.0
+Version: v2.0.2
 License: MIT
 
 Quick links
