@@ -3,6 +3,7 @@ import { fetchMoods, MoodOption } from "@/lib/content";
 import { EmojiPicker } from "@/components/emoji-picker";
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
 import { isEmoji } from "@/lib/utils";
+import { getLocalArray, saveLocalArray } from "@/lib/local-storage";
 
 interface MoodManagerProps {
   onBack: () => void;
@@ -10,21 +11,6 @@ interface MoodManagerProps {
 
 const CUSTOM_MOODS_KEY = "cozy-critter-custom-moods";
 const HIDDEN_MOODS_KEY = "cozy-critter-hidden-moods";
-
-function getLocalArray<T>(key: string): T[] {
-  try {
-    const raw = localStorage.getItem(key);
-    if (!raw) return [];
-    const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed : [];
-  } catch {
-    return [];
-  }
-}
-
-function saveLocalArray<T>(key: string, value: T[]): void {
-  localStorage.setItem(key, JSON.stringify(value));
-}
 
 export function MoodManager({ onBack }: MoodManagerProps) {
   const [moods, setMoods] = useState<MoodOption[]>([]);

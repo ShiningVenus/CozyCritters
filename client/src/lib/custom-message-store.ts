@@ -1,5 +1,6 @@
 import { encouragementMessages } from "@shared/encouragements";
 import { nanoid } from "nanoid";
+import { getLocalArray, saveLocalArray, removeLocalItem } from "./local-storage";
 
 const CUSTOM_MESSAGES_KEY = "cozy-critter-custom-messages";
 
@@ -21,21 +22,12 @@ export class CustomMessageStore {
     const existingMessages = this.getAllCustomMessages();
     const updatedMessages = [customMessage, ...existingMessages];
 
-    localStorage.setItem(CUSTOM_MESSAGES_KEY, JSON.stringify(updatedMessages));
+    saveLocalArray(CUSTOM_MESSAGES_KEY, updatedMessages);
     return customMessage;
   }
 
   public getAllCustomMessages(): CustomMessage[] {
-    try {
-      const stored = localStorage.getItem(CUSTOM_MESSAGES_KEY);
-      if (!stored) return [];
-
-      const parsed = JSON.parse(stored);
-      return Array.isArray(parsed) ? parsed : [];
-    } catch (error) {
-      console.error("Error reading custom messages from localStorage:", error);
-      return [];
-    }
+    return getLocalArray<CustomMessage>(CUSTOM_MESSAGES_KEY);
   }
 
   public updateCustomMessage(
@@ -49,7 +41,7 @@ export class CustomMessageStore {
       if (messageIndex === -1) return false;
 
       existingMessages[messageIndex] = { ...existingMessages[messageIndex], ...updates };
-      localStorage.setItem(CUSTOM_MESSAGES_KEY, JSON.stringify(existingMessages));
+      saveLocalArray(CUSTOM_MESSAGES_KEY, existingMessages);
       return true;
     } catch (error) {
       console.error("Error updating custom message:", error);
@@ -66,7 +58,7 @@ export class CustomMessageStore {
         return false; // Message not found
       }
 
-      localStorage.setItem(CUSTOM_MESSAGES_KEY, JSON.stringify(updatedMessages));
+      saveLocalArray(CUSTOM_MESSAGES_KEY, updatedMessages);
       return true;
     } catch (error) {
       console.error("Error deleting custom message from localStorage:", error);
@@ -75,7 +67,7 @@ export class CustomMessageStore {
   }
 
   public clearAllCustomMessages(): void {
-    localStorage.removeItem(CUSTOM_MESSAGES_KEY);
+    removeLocalItem(CUSTOM_MESSAGES_KEY);
   }
 
   public getRandomMessage(includeCustom: boolean = true): string {
