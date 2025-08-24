@@ -141,5 +141,5 @@ Take your time, communicate in the way that works for you, and know that this co
 
 ---
 
-**Last updated**: January 2025  
+**Last updated**: August 2025  
 **Questions about this document?** Open a GitHub Discussion with "community-support" in the title.
