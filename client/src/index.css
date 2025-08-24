@@ -28,6 +28,18 @@
   --calm: hsl(183.7500 33.6735% 72.1569%);
   --radius: 1.3rem;
   --font-inter: 'Inter', sans-serif;
+  --font-size-base: 16px;
+  --font-size-sm: 14px;
+  --font-size-lg: 18px;
+  --font-size-xl: 20px;
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
 }
 
 .dark {
@@ -56,28 +68,53 @@
 }
 
 .autism-awareness {
-  --background: hsl(43 70% 95%);
-  --foreground: hsl(30 25% 20%);
-  --card: hsl(45 60% 92%);
-  --card-foreground: hsl(30 25% 15%);
-  --popover: hsl(43 70% 95%);
-  --popover-foreground: hsl(30 25% 20%);
-  --primary: hsl(41 90% 55%);
-  --primary-foreground: hsl(30 35% 10%);
-  --secondary: hsl(15 85% 70%);
-  --secondary-foreground: hsl(15 50% 20%);
-  --muted: hsl(42 40% 85%);
-  --muted-foreground: hsl(30 15% 35%);
-  --accent: hsl(280 60% 70%);
-  --accent-foreground: hsl(280 30% 15%);
-  --destructive: hsl(356 85% 60%);
+  --background: hsl(45 60% 96%);
+  --foreground: hsl(25 35% 18%);
+  --card: hsl(47 50% 94%);
+  --card-foreground: hsl(25 35% 15%);
+  --popover: hsl(45 60% 96%);
+  --popover-foreground: hsl(25 35% 18%);
+  --primary: hsl(38 85% 50%);
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(20 70% 65%);
+  --secondary-foreground: hsl(0 0% 100%);
+  --muted: hsl(44 35% 88%);
+  --muted-foreground: hsl(25 25% 40%);
+  --accent: hsl(180 25% 60%);
+  --accent-foreground: hsl(0 0% 100%);
+  --destructive: hsl(0 70% 55%);
   --destructive-foreground: hsl(0 0% 100%);
-  --border: hsl(42 50% 80%);
-  --input: hsl(45 55% 88%);
-  --ring: hsl(41 90% 55%);
-  --neutral: hsl(43 70% 93%);
-  --brown: hsl(35 60% 40%);
-  --calm: hsl(280 40% 75%);
+  --border: hsl(44 40% 82%);
+  --input: hsl(46 45% 90%);
+  --ring: hsl(38 85% 50%);
+  --neutral: hsl(45 50% 95%);
+  --brown: hsl(30 55% 45%);
+  --calm: hsl(180 30% 70%);
+}
+
+.sensory-friendly {
+  --background: hsl(220 15% 98%);
+  --foreground: hsl(220 15% 15%);
+  --card: hsl(220 10% 96%);
+  --card-foreground: hsl(220 15% 15%);
+  --popover: hsl(220 15% 98%);
+  --popover-foreground: hsl(220 15% 15%);
+  --primary: hsl(200 20% 45%);
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(160 20% 60%);
+  --secondary-foreground: hsl(0 0% 100%);
+  --muted: hsl(220 10% 92%);
+  --muted-foreground: hsl(220 15% 35%);
+  --accent: hsl(180 15% 55%);
+  --accent-foreground: hsl(0 0% 100%);
+  --destructive: hsl(0 50% 50%);
+  --destructive-foreground: hsl(0 0% 100%);
+  --border: hsl(220 10% 88%);
+  --input: hsl(220 10% 94%);
+  --ring: hsl(200 20% 45%);
+  --neutral: hsl(220 10% 95%);
+  --brown: hsl(25 30% 50%);
+  --calm: hsl(180 20% 70%);
 }
 
 @layer base {
@@ -103,6 +140,33 @@
   @media (max-width: 640px) {
     html {
       font-size: 16px;
+    }
+    
+    /* Improve touch targets on mobile */
+    button, 
+    input[type="radio"],
+    input[type="checkbox"],
+    select {
+      min-height: 44px;
+      min-width: 44px;
+    }
+    
+    /* Better spacing for mobile */
+    .mood-card {
+      padding: var(--spacing-md);
+      margin: var(--spacing-sm);
+    }
+    
+    /* Larger tap targets for radio buttons */
+    input[type="radio"] {
+      transform: scale(1.2);
+    }
+  }
+  
+  /* Tablet and larger mobile devices */
+  @media (min-width: 641px) and (max-width: 1024px) {
+    .mood-card {
+      padding: var(--spacing-lg);
     }
   }
 }
