@@ -3,6 +3,8 @@ import { ArrowLeft, ExternalLink, Heart, Users, MessageCircle, Calendar, Downloa
 import { fetchCommunityMessagePacks, downloadMessagePack, CommunityMessagePack } from "@/lib/community-message-packs";
 import { ShareableMoodTemplates } from "@/components/shareable-mood-templates";
 import { CommunityCopingStrategies } from "@/components/community-coping-strategies";
+import { CommunityForum } from "@/components/community-forum";
+import { CommunityDashboard } from "@/components/community-dashboard";
 
 interface CommunityProps {
   onBack: () => void;
@@ -67,6 +69,9 @@ export function Community({ onBack }: CommunityProps) {
       </header>
 
       <main className="p-6 space-y-6">
+        {/* Community Dashboard - Phase 2 Feature */}
+        <CommunityDashboard className="mb-6" />
+
         {/* Community Resources */}
         <section className="bg-card rounded-lg p-6 border border-border">
           <h2 className="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
@@ -175,6 +180,9 @@ export function Community({ onBack }: CommunityProps) {
             )}
           </div>
         </section>
+
+        {/* Community Forum - Phase 2 Feature */}
+        <CommunityForum className="mb-6" />
 
         {/* Shareable Mood Templates */}
         <ShareableMoodTemplates className="mb-6" />

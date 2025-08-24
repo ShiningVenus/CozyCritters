@@ -1,7 +1,7 @@
-# 🐾 Cozy Critter v1.0.0
+# 🐾 Cozy Critter v2.0.0
 ### Animal Themed Mood Tracker for Neurodivergent Minds
 
-[![Version](https://img.shields.io/badge/version-1.0.0-brightgreen.svg)](https://github.com/ShiningVenus/CozyCritters)
+[![Version](https://img.shields.io/badge/version-2.0.0-brightgreen.svg)](https://github.com/ShiningVenus/CozyCritters)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Privacy First](https://img.shields.io/badge/privacy-first-gold.svg)](#-privacy-promise--technical-proof)
 [![Accessibility](https://img.shields.io/badge/accessibility-AAA-purple.svg)](#-what-v1-includes)
@@ -27,7 +27,7 @@ Everything stays on your device because your emotional data is deeply personal.
 ---
 
 ## 📋 Quick Navigation
-- [✨ What's Included](#-what-v1-includes)
+- [✨ What's Included](#-what-v2-includes)
 - [🚀 Getting Started](#-how-to-run-locally)
 - [🛡️ Privacy & Security](#-privacy-promise--technical-proof)
 - [🏢 For Organizations](#-for-autism--neurodivergent-support-organizations)
@@ -35,22 +35,41 @@ Everything stays on your device because your emotional data is deeply personal.
 - [📚 Full Docs](docs/README.md)
 - [🎨 Mood Customization](docs/mood-customization.md)
 - [🤝 Community Support](docs/community-support.md)
+- [📝 Changelog](CHANGELOG.md)
 ---
 
-## 🎉 V1.0.0 - What's Ready Now
+## 🎉 V2.0.0 - Phase 2 Social Features Now Live!
 
-This isn't a beta or "coming soon" Cozy Critter v1 is complete and ready to be your daily mood companion.
+This is a major update that introduces **Phase 2 social media and forum lite features** while maintaining our commitment to privacy and neurodivergent-friendly design.
 
-### 🌟 Why V1 Matters for ND Folks
+### 🌟 What's New in Phase 2
 
-| Feature | Why It Matters |
-|---------|----------------|
-| No more waiting | All features work right now, no "premium" barriers |
-| Stable and reliable | Won't break or change unexpectedly (we know how hard transitions are) |
-| Actually finished | Unlike many apps that promise accessibility "later," everything works today |
+| Feature | What It Does |
+|---------|--------------|
+| **Community Forum** | Anonymous discussion boards with threaded conversations |
+| **Community Dashboard** | Real-time stats showing how our supportive community grows |
+| **Enhanced Interactions** | Hearts, helpful votes, and meaningful replies |
+| **Category Organization** | Support, Celebration, Questions, Share, and General topics |
+| **Anonymous Profiles** | Randomized animal names like "Gentle Penguin" and "Wise Owl" |
 | Your feedback shaped this | Built with real ND experiences in mind, not neurotypical assumptions |
 
-## ✨ What V1 Includes
+## ✨ What V2 Includes
+
+### 💬 Community Forum (NEW in v2.0!)
+Anonymous discussion boards where you can:
+- Share experiences and ask questions safely
+- Give and receive support from the ND community  
+- React to posts with hearts and helpful votes
+- Participate in threaded conversations
+- Browse by category (Support, Celebration, Questions, etc.)
+- Use randomly assigned animal names for complete anonymity
+
+### 📊 Community Dashboard (NEW in v2.0!)
+See how our supportive community grows:
+- Real-time community interaction stats
+- Weekly community goals and progress
+- Highlights of helpful content and celebrations
+- All data remains anonymous and private
 
 ### 🐾 Animal Mood Check-ins
 Choose from adorable animal emoji that match your energy.
@@ -61,9 +80,13 @@ No pressure to explain or justify sometimes you just feel like:
 - 🦋 A gentle butterfly
 - Plus other cute animals!
 
-All perfectly valid.
-
----
+### 🤝 Community Features (Enhanced in v2.0!)
+- **NEW**: Participate in forum discussions and support others
+- **NEW**: View community dashboard with real-time engagement stats  
+- Download message packs created by the ND community
+- Share your mood tracking templates with others
+- Contribute coping strategies anonymously
+- Participate in gentle weekly challenges
 
 ### 📝 Notes That Don't Judge
 Add notes when you want to never required.
