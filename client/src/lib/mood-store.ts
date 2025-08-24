@@ -1,6 +1,8 @@
 import { MoodEntry, InsertMoodEntry } from "@shared/schema";
 import { nanoid } from "nanoid";
 import { customMessageStore } from "./custom-message-store";
+import { getLocalArray, saveLocalArray, removeLocalItem } from "./local-storage";
+import { handleComponentError, ErrorSeverity } from "./error-handler";
 
 const MOOD_STORAGE_KEY = "cozy-critter-moods";
 
@@ -14,21 +16,12 @@ export class MoodStore {
     const existingMoods = this.getAllMoodEntries();
     const updatedMoods = [moodEntry, ...existingMoods];
 
-    localStorage.setItem(MOOD_STORAGE_KEY, JSON.stringify(updatedMoods));
+    saveLocalArray(MOOD_STORAGE_KEY, updatedMoods);
     return moodEntry;
   }
 
   public getAllMoodEntries(): MoodEntry[] {
-    try {
-      const stored = localStorage.getItem(MOOD_STORAGE_KEY);
-      if (!stored) return [];
-
-      const parsed = JSON.parse(stored);
-      return Array.isArray(parsed) ? parsed : [];
-    } catch (error) {
-      console.error("Error reading mood entries from localStorage:", error);
-      return [];
-    }
+    return getLocalArray<MoodEntry>(MOOD_STORAGE_KEY);
   }
 
   public getMoodEntriesByDateRange(startDate: Date, endDate: Date): MoodEntry[] {
@@ -55,23 +48,27 @@ export class MoodStore {
         return false;
       }
 
-      localStorage.setItem(MOOD_STORAGE_KEY, JSON.stringify(updatedMoods));
+      saveLocalArray(MOOD_STORAGE_KEY, updatedMoods);
       return true;
     } catch (error) {
-      console.error("Error deleting mood entry from localStorage:", error);
+      handleComponentError(
+        error instanceof Error ? error : new Error(String(error)),
+        'MoodStore',
+        'deleteMoodEntry'
+      );
       return false;
     }
   }
 
   public clearAllMoodEntries(): void {
-    localStorage.removeItem(MOOD_STORAGE_KEY);
+    removeLocalItem(MOOD_STORAGE_KEY);
   }
 
   public clearAllData(): void {
     this.clearAllMoodEntries();
     customMessageStore.clearAllCustomMessages();
     // Also clear theme preference to fully reset
-    localStorage.removeItem("cozy-critter-theme");
+    removeLocalItem("cozy-critter-theme");
   }
 
   public getDataSummary(): {

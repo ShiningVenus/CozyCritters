@@ -1,20 +1,43 @@
 // Accessibility Test Suite for Cozy Critters
 // This is a basic accessibility validation script for manual testing
 
-export function runAccessibilityAudit() {
+export interface AccessibilityAuditResult {
+  passed: boolean;
+  issues: string[];
+  summary: {
+    totalImages: number;
+    totalHeadings: number;
+    totalFocusableElements: number;
+    totalInputs: number;
+    totalSkipLinks: number;
+    totalLiveRegions: number;
+  };
+}
+
+/**
+ * Check all images for alt text accessibility
+ */
+function checkImageAltText(): string[] {
   const issues: string[] = [];
-  
-  // Check for alt text on images
   const images = document.querySelectorAll('img');
+  
   images.forEach((img, index) => {
     if (!img.alt && !img.getAttribute('aria-hidden')) {
       issues.push(`Image ${index + 1} missing alt text`);
     }
   });
   
-  // Check for proper heading hierarchy
+  return issues;
+}
+
+/**
+ * Check for proper heading hierarchy
+ */
+function checkHeadingHierarchy(): string[] {
+  const issues: string[] = [];
   const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
   let lastLevel = 0;
+  
   headings.forEach((heading, index) => {
     const level = parseInt(heading.tagName.charAt(1));
     if (index === 0 && level !== 1) {
@@ -26,13 +49,16 @@ export function runAccessibilityAudit() {
     lastLevel = level;
   });
   
-  // Check for focus indicators
-  const focusableElements = document.querySelectorAll(
-    'button, input, textarea, select, a[href], [tabindex]:not([tabindex="-1"])'
-  );
-  
-  // Check for form labels
+  return issues;
+}
+
+/**
+ * Check form inputs for proper labeling
+ */
+function checkFormLabels(): string[] {
+  const issues: string[] = [];
   const inputs = document.querySelectorAll('input, textarea, select');
+  
   inputs.forEach((input, index) => {
     const id = input.id;
     const ariaLabel = input.getAttribute('aria-label');
@@ -44,37 +70,28 @@ export function runAccessibilityAudit() {
     }
   });
   
-  // Check for skip links
+  return issues;
+}
+
+/**
+ * Check for keyboard navigation support
+ */
+function checkKeyboardNavigation(): string[] {
+  const issues: string[] = [];
   const skipLinks = document.querySelectorAll('a[href^="#"]');
+  
   if (skipLinks.length === 0) {
     issues.push('No skip links found for keyboard navigation');
   }
   
-  // Check for aria-live regions for dynamic content
-  const liveRegions = document.querySelectorAll('[aria-live]');
-  
-  // Check color contrast (basic check)
-  const colorIssues = checkColorContrast();
-  issues.push(...colorIssues);
-  
-  return {
-    passed: issues.length === 0,
-    issues,
-    summary: {
-      totalImages: images.length,
-      totalHeadings: headings.length,
-      totalFocusableElements: focusableElements.length,
-      totalInputs: inputs.length,
-      totalSkipLinks: skipLinks.length,
-      totalLiveRegions: liveRegions.length
-    }
-  };
+  return issues;
 }
 
+/**
+ * Check color contrast (basic implementation)
+ */
 function checkColorContrast(): string[] {
   const issues: string[] = [];
-  
-  // Basic contrast check for common elements
   const textElements = document.querySelectorAll('p, span, button, input, textarea');
   
   textElements.forEach((element, index) => {
@@ -90,6 +107,59 @@ function checkColorContrast(): string[] {
   
   return issues;
 }
+
+/**
+ * Gather element counts for summary
+ */
+function getElementCounts() {
+  const images = document.querySelectorAll('img');
+  const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+  const focusableElements = document.querySelectorAll(
+    'button, input, textarea, select, a[href], [tabindex]:not([tabindex="-1"])'
+  );
+  const inputs = document.querySelectorAll('input, textarea, select');
+  const skipLinks = document.querySelectorAll('a[href^="#"]');
+  const liveRegions = document.querySelectorAll('[aria-live]');
+  
+  return {
+    totalImages: images.length,
+    totalHeadings: headings.length,
+    totalFocusableElements: focusableElements.length,
+    totalInputs: inputs.length,
+    totalSkipLinks: skipLinks.length,
+    totalLiveRegions: liveRegions.length
+  };
+}
+
+/**
+ * Main accessibility audit function - runs all checks
+ */
+export function runAccessibilityAudit(): AccessibilityAuditResult {
+  const issues: string[] = [];
+  
+  // Run all accessibility checks
+  issues.push(...checkImageAltText());
+  issues.push(...checkHeadingHierarchy());
+  issues.push(...checkFormLabels());
+  issues.push(...checkKeyboardNavigation());
+  issues.push(...checkColorContrast());
+  
+  return {
+    passed: issues.length === 0,
+    issues,
+    summary: getElementCounts()
+  };
+}
+
+// Export individual check functions for targeted testing
+export {
+  checkImageAltText,
+  checkHeadingHierarchy,
+  checkFormLabels,
+  checkKeyboardNavigation,
+  checkColorContrast,
+  getElementCounts
+};
 
 // Export for use in development
 if (typeof window !== 'undefined' && import.meta.env.DEV) {

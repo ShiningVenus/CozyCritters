@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Chess } from 'chess.js';
+import { Chess, Square } from 'chess.js';
 import { GameProps } from '@/types/game';
 import { Button } from '@/components/ui/button';
 
@@ -18,9 +18,9 @@ const pieceEmoji: Record<string, string> = {
   P: '🐹'
 };
 
-function indexToSquare(r: number, c: number) {
+function indexToSquare(r: number, c: number): Square {
   const files = 'abcdefgh';
-  return `${files[c]}${8 - r}`;
+  return `${files[c]}${8 - r}` as Square;
 }
 
 function boardFromGame(game: Chess): (string | null)[][] {
