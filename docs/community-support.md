@@ -4,10 +4,20 @@ Welcome to the Cozy Critter community! This document provides comprehensive info
 
 ## 🤝 Getting Help
 
+### 💬 Community Forums (Recommended!)
+Our built-in anonymous discussion boards are perfect for:
+- **General support** and sharing experiences with other ND folks
+- **Asking questions** about daily challenges and coping strategies
+- **Celebrating wins** both big and small
+- **Finding resources** shared by the community
+- **Anonymous participation** with randomly generated animal names
+
+👉 **[Complete Forums Guide](../FORUMS.md)** - Everything you need to know about using the discussion boards
+
 ### GitHub Issues & Discussions
 - **Bug Reports**: [Open an issue](https://github.com/ShiningVenus/CozyCritters/issues/new) for bugs or technical problems
 - **Feature Requests**: Use GitHub issues to suggest new features or improvements
-- **General Questions**: Start a [GitHub Discussion](https://github.com/ShiningVenus/CozyCritters/discussions) for questions about usage, self-hosting, or general support
+- **Technical Questions**: Start a [GitHub Discussion](https://github.com/ShiningVenus/CozyCritters/discussions) for questions about usage, self-hosting, or general support
 - **Security Issues**: Report security concerns through GitHub issues (we take security seriously)
 
 ### Response Times
@@ -32,10 +42,11 @@ Welcome to the Cozy Critter community! This document provides comprehensive info
 ## 🛠️ Technical Support
 
 ### Self-Help Resources
-1. **[FAQ](faq.md)** - Common questions and solutions
-2. **[Self-hosting Guide](self-hosting.md)** - Complete deployment instructions
-3. **[Privacy & Security](privacy-security.md)** - Verify our security claims
-4. **[Architecture Overview](architecture.md)** - Technical documentation
+1. **[Community Forums Guide](../FORUMS.md)** - How to use the discussion boards
+2. **[FAQ](faq.md)** - Common questions and solutions
+3. **[Self-hosting Guide](self-hosting.md)** - Complete deployment instructions
+4. **[Privacy & Security](privacy-security.md)** - Verify our security claims
+5. **[Architecture Overview](architecture.md)** - Technical documentation
 
 ### Getting Help with Setup
 - Check existing [GitHub issues](https://github.com/ShiningVenus/CozyCritters/issues) for similar problems

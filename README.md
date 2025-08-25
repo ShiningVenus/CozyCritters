@@ -28,6 +28,7 @@ Everything stays on your device because your emotional data is deeply personal.
 
 ## 📋 Quick Navigation
 - [✨ What's Included](#-what-v2-includes)
+- [💬 Community Forums](FORUMS.md) - Complete guide to discussion boards
 - [🚀 Getting Started](#-how-to-run-locally)
 - [🛡️ Privacy & Security](#-privacy-promise--technical-proof)
 - [🏢 For Organizations](#-for-autism--neurodivergent-support-organizations)
@@ -63,6 +64,8 @@ Anonymous discussion boards where you can:
 - Participate in threaded conversations
 - Browse by category (Support, Celebration, Questions, etc.)
 - Use randomly assigned animal names for complete anonymity
+
+📖 **[Read the complete Forums Guide →](FORUMS.md)**
 
 ### 📊 Community Dashboard (NEW in v2.0!)
 See how our supportive community grows:

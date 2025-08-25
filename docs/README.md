@@ -10,6 +10,7 @@ Version: v2.0.2
 License: MIT
 
 Quick links
+- **Community Forums**: ../FORUMS.md - Complete guide to using the discussion boards
 - Self-hosting: ./self-hosting.md
 - Deployment guide: ./deployment-guide.md
 - Privacy & security verification: ./privacy-security.md
