@@ -11,8 +11,9 @@ License: MIT
 
 Quick links
 - **Community Forums**: ../FORUMS.md - Complete guide to using the discussion boards
-- Self-hosting: ./self-hosting.md
-- Deployment guide: ./deployment-guide.md
+- **🌐 Deployment guide**: ./deployment-guide.md - Static hosting (Netlify, Vercel, GitHub Pages)
+- **🚀 VPS deployment guide**: ./vps-deployment.md - DigitalOcean, cloud servers, shared hosting
+- **🐳 Self-hosting**: ./self-hosting.md - Advanced self-hosting and Docker
 - Privacy & security verification: ./privacy-security.md
 - Accessibility notes: ./accessibility.md
 - Mood customization: ./mood-customization.md
