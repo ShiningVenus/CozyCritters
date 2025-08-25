@@ -34,6 +34,7 @@ Everything stays on your device because your emotional data is deeply personal.
 - [🛠️ Technical Details](#-tech--architecture)
 - [📚 Full Docs](docs/README.md)
 - [🎨 Mood Customization](docs/mood-customization.md)
+- [🎨 Theme Editing Guide](docs/theme-editing-guide.md)
 - [🤝 Community Support](docs/community-support.md)
 - [📝 Changelog](CHANGELOG.md)
 ---
