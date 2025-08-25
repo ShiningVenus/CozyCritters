@@ -122,6 +122,7 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
   const [showModerationPanel, setShowModerationPanel] = useState(false);
   const [showAdminSetup, setShowAdminSetup] = useState(false);
   const [showForumManagement, setShowForumManagement] = useState(false);
+  const [showForumStats, setShowForumStats] = useState(false);
   
   // Forum management states
   const [newForumData, setNewForumData] = useState({
@@ -813,6 +814,14 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
                   <Folder size={14} />
                   Forum Management
                 </button>
+                <button
+                  onClick={() => setShowForumStats(!showForumStats)}
+                  className="phpbb-admin-btn"
+                  title="Forum Statistics"
+                >
+                  <FileText size={14} />
+                  Forum Stats
+                </button>
               </>
             )}
             {hasModeratorAccess() && (
@@ -930,6 +939,75 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
                 ))}
               </div>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* Forum Statistics Panel */}
+      {showForumStats && hasAdminAccess() && (
+        <div className="phpbb-admin-panel">
+          <h4 className="font-bold mb-2">Forum Statistics & Analytics</h4>
+          <p className="text-sm mb-3">View detailed statistics about forum activity and user engagement.</p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+            <div className="bg-blue-50 border border-blue-200 rounded p-3">
+              <div className="flex items-center gap-2">
+                <MessageSquare className="text-blue-600" size={20} />
+                <div>
+                  <p className="text-sm text-blue-600">Total Posts</p>
+                  <p className="text-xl font-bold text-blue-800">{posts.length}</p>
+                </div>
+              </div>
+            </div>
+            <div className="bg-green-50 border border-green-200 rounded p-3">
+              <div className="flex items-center gap-2">
+                <FileText className="text-green-600" size={20} />
+                <div>
+                  <p className="text-sm text-green-600">Total Topics</p>
+                  <p className="text-xl font-bold text-green-800">{topics.length}</p>
+                </div>
+              </div>
+            </div>
+            <div className="bg-purple-50 border border-purple-200 rounded p-3">
+              <div className="flex items-center gap-2">
+                <Folder className="text-purple-600" size={20} />
+                <div>
+                  <p className="text-sm text-purple-600">Forums</p>
+                  <p className="text-xl font-bold text-purple-800">{boards.length}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <div className="bg-gray-50 border border-gray-200 rounded p-3">
+              <h5 className="font-semibold mb-2">Recent Activity</h5>
+              <div className="space-y-2">
+                {posts.slice(-5).reverse().map(post => (
+                  <div key={post.id} className="flex items-center justify-between text-sm">
+                    <span>New post by {post.author}</span>
+                    <span className="text-gray-500">{new Date(post.timestamp).toLocaleDateString()}</span>
+                  </div>
+                ))}
+                {posts.length === 0 && (
+                  <p className="text-gray-500 text-sm">No recent activity</p>
+                )}
+              </div>
+            </div>
+
+            <div className="bg-yellow-50 border border-yellow-200 rounded p-3">
+              <h5 className="font-semibold mb-2">Forum Health</h5>
+              <div className="grid grid-cols-2 gap-4 text-sm">
+                <div>
+                  <p className="text-gray-600">Posts per Topic</p>
+                  <p className="font-bold">{topics.length > 0 ? (posts.length / topics.length).toFixed(1) : '0'}</p>
+                </div>
+                <div>
+                  <p className="text-gray-600">Active Forums</p>
+                  <p className="font-bold">{boards.filter(board => board.postCount > 0).length} / {boards.length}</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}
@@ -1358,6 +1436,25 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
         isOpen={showAdminSetup}
         onClose={() => setShowAdminSetup(false)}
       />
+
+      {/* phpBB-style Footer */}
+      <div className="phpbb-footer">
+        <div className="phpbb-footer-content">
+          <div className="phpbb-footer-info">
+            <span className="phpbb-powered">
+              Powered by <strong>CozyCritters Forum</strong> v2.1.0
+            </span>
+            <span className="phpbb-copyright">
+              © 2025 CozyCritters. All rights reserved.
+            </span>
+          </div>
+          <div className="phpbb-footer-stats">
+            <span>
+              Neurodivergent-friendly community • Privacy-first design
+            </span>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
