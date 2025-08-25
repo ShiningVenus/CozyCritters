@@ -161,3 +161,64 @@ export function getDefaultCredentials() {
     }
   };
 }
+
+/**
+ * Get all admin/moderator usernames for enhanced permissions checking
+ */
+export function getAllAdminUsernames(): string[] {
+  const accounts = getAdminAccounts();
+  return accounts.map(account => account.username);
+}
+
+/**
+ * Check if a username belongs to an admin/moderator account
+ */
+export function isStaffUser(username: string): { isStaff: boolean; role?: UserRole } {
+  const accounts = getAdminAccounts();
+  const account = accounts.find(acc => acc.username === username);
+  
+  if (account) {
+    return { isStaff: true, role: account.role };
+  }
+  
+  return { isStaff: false };
+}
+
+/**
+ * Delete an admin account (admins only)
+ */
+export async function deleteAdminAccount(username: string, adminUsername: string, adminPassword: string): Promise<boolean> {
+  // Verify admin credentials first
+  const adminRole = await verifyAdminCredentials(adminUsername, adminPassword);
+  if (adminRole !== 'admin') {
+    throw new Error('Only administrators can delete accounts');
+  }
+  
+  const accounts = getAdminAccounts();
+  const accountIndex = accounts.findIndex(account => account.username === username);
+  
+  if (accountIndex === -1) {
+    throw new Error('Account not found');
+  }
+  
+  // Prevent deleting the last admin account
+  const adminAccounts = accounts.filter(acc => acc.role === 'admin');
+  if (adminAccounts.length === 1 && accounts[accountIndex].role === 'admin') {
+    throw new Error('Cannot delete the last administrator account');
+  }
+  
+  accounts.splice(accountIndex, 1);
+  localStorage.setItem(ADMIN_ACCOUNTS_KEY, JSON.stringify(accounts));
+  return true;
+}
+
+/**
+ * List all admin accounts (for admin management interface)
+ */
+export function listAdminAccounts(): Array<{ username: string; role: UserRole }> {
+  const accounts = getAdminAccounts();
+  return accounts.map(account => ({
+    username: account.username,
+    role: account.role
+  }));
+}

@@ -17,23 +17,33 @@ export function useUserSession() {
     if (savedSession) {
       try {
         const session = JSON.parse(savedSession) as UserSession;
-        setUserSession(session);
+        
+        // Check if session is expired (older than 30 days)
+        const maxAge = 30 * 24 * 60 * 60 * 1000; // 30 days in milliseconds
+        if (Date.now() - session.timestamp > maxAge) {
+          console.log('Session expired, creating new session');
+          localStorage.removeItem(USER_SESSION_KEY);
+          // Create new session below
+        } else {
+          setUserSession(session);
+          return;
+        }
       } catch (error) {
         console.warn('Failed to parse user session:', error);
         localStorage.removeItem(USER_SESSION_KEY);
       }
-    } else {
-      // Create default user session
-      const defaultSession: UserSession = {
-        id: crypto.randomUUID(),
-        username: generateAnonymousName(),
-        role: 'user',
-        timestamp: Date.now(),
-        isRegistered: false
-      };
-      setUserSession(defaultSession);
-      localStorage.setItem(USER_SESSION_KEY, JSON.stringify(defaultSession));
     }
+    
+    // Create default user session if no valid session exists
+    const defaultSession: UserSession = {
+      id: crypto.randomUUID(),
+      username: generateAnonymousName(),
+      role: 'user',
+      timestamp: Date.now(),
+      isRegistered: false
+    };
+    setUserSession(defaultSession);
+    localStorage.setItem(USER_SESSION_KEY, JSON.stringify(defaultSession));
   }, []);
 
   const updateUserRole = (newRole: UserRole) => {
@@ -146,6 +156,27 @@ export function useUserSession() {
     localStorage.setItem(USER_SESSION_KEY, JSON.stringify(defaultSession));
   };
 
+  const refreshSession = () => {
+    // Update session timestamp to keep it active
+    if (userSession) {
+      const updatedSession: UserSession = {
+        ...userSession,
+        timestamp: Date.now()
+      };
+      setUserSession(updatedSession);
+      localStorage.setItem(USER_SESSION_KEY, JSON.stringify(updatedSession));
+    }
+  };
+
+  const clearExpiredSessions = () => {
+    // Clear sessions older than 30 days
+    const maxAge = 30 * 24 * 60 * 60 * 1000; // 30 days in milliseconds
+    if (userSession && (Date.now() - userSession.timestamp > maxAge)) {
+      console.log('Session expired, creating new session');
+      logoutUser();
+    }
+  };
+
   return {
     userSession,
     updateUserRole,
@@ -155,6 +186,8 @@ export function useUserSession() {
     registerUser,
     loginUser,
     logoutUser,
+    refreshSession,
+    clearExpiredSessions,
     generateAnonymousName
   };
 }
