@@ -8,6 +8,7 @@ import { ForumModerationPanel } from './forum-moderation-panel';
 import { AdminSetup } from './admin-setup';
 import { initializeForumTheme } from '../lib/forum-themes';
 import { isProduction } from '../lib/environment';
+import { isStaffUser } from '../lib/admin-accounts';
 import './phpbb-forum.css';
 
 interface ForumBoard {
@@ -130,6 +131,44 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
   });
   
   const { userSession, updateUserRole, hasModeratorAccess, hasAdminAccess, generateAnonymousName, logoutUser } = useUserSession();
+
+  // Helper function to get the appropriate author name for posts
+  const getAuthorName = () => {
+    if (userSession?.isRegistered && userSession.username) {
+      return userSession.username;
+    }
+    return generateAnonymousName();
+  };
+
+  // Helper function to get role display info for a user
+  const getUserRoleInfo = (username: string) => {
+    // Check if this username matches current session and has a role
+    if (userSession?.username === username && userSession.isRegistered) {
+      switch (userSession.role) {
+        case 'admin':
+          return { title: 'Administrator', badge: '🛡️', class: 'text-red-600 font-bold' };
+        case 'moderator':
+          return { title: 'Moderator', badge: '⚖️', class: 'text-blue-600 font-semibold' };
+        default:
+          return { title: 'Member', badge: '', class: '' };
+      }
+    }
+    
+    // For posts by other users, check if they're staff using admin accounts
+    const staffInfo = isStaffUser(username);
+    if (staffInfo.isStaff) {
+      switch (staffInfo.role) {
+        case 'admin':
+          return { title: 'Administrator', badge: '🛡️', class: 'text-red-600 font-bold' };
+        case 'moderator':
+          return { title: 'Moderator', badge: '⚖️', class: 'text-blue-600 font-semibold' };
+        default:
+          return { title: 'Member', badge: '', class: '' };
+      }
+    }
+    
+    return { title: 'Member', badge: '', class: '' };
+  };
 
   // Load forum data from localStorage and migrate legacy data
   useEffect(() => {
@@ -418,7 +457,7 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
   const handleCreateTopic = () => {
     if (!newTopic.title.trim() || !newTopic.content.trim() || !selectedBoardId) return;
 
-    const author = generateAnonymousName();
+    const author = getAuthorName();
     const topicId = crypto.randomUUID();
     const postId = crypto.randomUUID();
 
@@ -475,7 +514,7 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
   const handleCreatePost = () => {
     if (!newPost.content.trim() || !selectedTopicId) return;
 
-    const author = generateAnonymousName();
+    const author = getAuthorName();
     const postId = crypto.randomUUID();
 
     const post: ForumPost = {
@@ -1062,7 +1101,14 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
                             {topic.title}
                           </button>
                           <div className="phpbb-topic-meta">
-                            by {topic.author} » {formatTimestamp(topic.timestamp)}
+                            by <span className={getUserRoleInfo(topic.author).class}>
+                              {topic.author}
+                              {getUserRoleInfo(topic.author).badge && (
+                                <span className="ml-1" title={getUserRoleInfo(topic.author).title}>
+                                  {getUserRoleInfo(topic.author).badge}
+                                </span>
+                              )}
+                            </span> » {formatTimestamp(topic.timestamp)}
                           </div>
                         </div>
                       </div>
@@ -1072,7 +1118,14 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
                     <td className="phpbb-lastpost-cell">
                       <div className="phpbb-lastpost-info">
                         <div className="phpbb-lastpost-meta">
-                          by {topic.lastPostAuthor}<br />
+                          by <span className={getUserRoleInfo(topic.lastPostAuthor).class}>
+                            {topic.lastPostAuthor}
+                            {getUserRoleInfo(topic.lastPostAuthor).badge && (
+                              <span className="ml-1" title={getUserRoleInfo(topic.lastPostAuthor).title}>
+                                {getUserRoleInfo(topic.lastPostAuthor).badge}
+                              </span>
+                            )}
+                          </span><br />
                           {formatTimestamp(topic.lastPostTimestamp)}
                         </div>
                       </div>
@@ -1177,8 +1230,15 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
                     <User size={32} className="text-gray-400" />
                   </div>
                   <div className="phpbb-author-details">
-                    <div className="phpbb-author-name">{post.author}</div>
-                    <div className="phpbb-author-title">Member</div>
+                    <div className="phpbb-author-name">
+                      <span className={getUserRoleInfo(post.author).class}>{post.author}</span>
+                      {getUserRoleInfo(post.author).badge && (
+                        <span className="ml-1" title={getUserRoleInfo(post.author).title}>
+                          {getUserRoleInfo(post.author).badge}
+                        </span>
+                      )}
+                    </div>
+                    <div className="phpbb-author-title">{getUserRoleInfo(post.author).title}</div>
                   </div>
                 </div>
                 <div className="phpbb-post-content">
