@@ -60,9 +60,9 @@ export function Community({ onBack }: CommunityProps) {
           <div>
             <h1 className="text-2xl font-bold flex items-center gap-2">
               <Users size={24} />
-              Community
+              Ko-fi Community
             </h1>
-            <p className="text-sm opacity-90">Connect, support, and grow together</p>
+            <p className="text-sm opacity-90">For supporters of <a href="https://ko-fi.com/shiningvenus" target="_blank" rel="noopener noreferrer" className="underline hover:opacity-80">ko-fi.com/shiningvenus</a></p>
           </div>
         </div>
       </header>
@@ -75,13 +75,31 @@ export function Community({ onBack }: CommunityProps) {
         <section className="bg-card rounded-lg p-6 border border-border">
           <h2 className="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
             <Globe size={20} />
-            Community Resources
+            Ko-fi Community Resources
           </h2>
           <p className="text-muted-foreground mb-4">
-            Helpful resources and organizations for neurodivergent individuals and their supporters.
+            Resources and support for our ko-fi community members and neurodivergent supporters.
           </p>
           
           <div className="space-y-3">
+            <div className="border border-border rounded-lg p-4 bg-primary/5">
+              <h3 className="font-medium text-foreground mb-2 flex items-center gap-2">
+                <Heart size={16} className="text-red-500" />
+                Support Our Ko-fi
+              </h3>
+              <p className="text-sm text-muted-foreground mb-2">
+                This app is made with love for our ko-fi supporters. Your support helps maintain this safe space.
+              </p>
+              <a
+                href="https://ko-fi.com/shiningvenus"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-primary hover:text-primary/80 text-sm font-medium"
+              >
+                Visit ko-fi.com/shiningvenus <ExternalLink size={14} />
+              </a>
+            </div>
+            
             <div className="border border-border rounded-lg p-4">
               <h3 className="font-medium text-foreground mb-2">Autism Self Advocacy Network (ASAN)</h3>
               <p className="text-sm text-muted-foreground mb-2">

@@ -1,7 +1,7 @@
 {
-  "name": "Cozy Critter Mood Tracker",
-  "short_name": "Cozy Critter",
-  "description": "A neurodivergent-friendly mood tracking app with animal companions",
+  "name": "Cozy Critter for Ko-fi Community",
+  "short_name": "Cozy Critter Ko-fi",
+  "description": "A private mood tracking app for ko-fi.com/shiningvenus supporters with content moderation tools",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#f5f5dc",

@@ -1,10 +1,13 @@
-# Privacy Policy
+# Privacy Policy for Cozy Critter Ko-fi Community Edition
 
-**Last updated: January 14, 2025**
+**Last updated: August 25, 2025**
+**Version: 1.1.0 - Ko-fi Community Edition**
 
 ## The Simple Version
 
-Cozy Critter is built privacy-first. **We don't collect, store, or share any of your personal data.** Everything stays on your device, always.
+Cozy Critter Ko-fi Community Edition is built privacy-first for supporters of [ko-fi.com/shiningvenus](https://ko-fi.com/shiningvenus). **We don't collect, store, or share any of your personal data.** Everything stays on your device, always.
+
+This app is designed exclusively for our ko-fi community members and includes content moderation features to maintain a safe space for neurodivergent supporters.
 
 ## What Data We Handle
 
@@ -80,13 +83,14 @@ If you have questions about privacy or this policy, you can:
 - Open an issue on our GitHub repository
 - Check the code yourself - it's all open source
 - Use the data deletion feature to see privacy in action
+- Contact through [ko-fi.com/shiningvenus](https://ko-fi.com/shiningvenus)
 
 ## The Bottom Line
 
-**Cozy Critter is designed so we literally cannot access your mood data, even if we wanted to.** Your privacy isn't just a promise - it's built into how the app works.
+**Cozy Critter Ko-fi Community Edition is designed so we literally cannot access your mood data, even if we wanted to.** Your privacy isn't just a promise - it's built into how the app works.
 
 Your emotional wellbeing data is deeply personal. That's why it never leaves your device, never goes to any server, and is always under your complete control.
 
 ---
 
-*Built with privacy and neurodivergent experiences in mind. 💚*
+*Built with privacy and neurodivergent experiences in mind for the ko-fi.com/shiningvenus community. 💚*

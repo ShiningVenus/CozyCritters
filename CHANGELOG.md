@@ -5,6 +5,32 @@ All notable changes to CozyCritters will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2025-08-25
+
+### 🌟 Ko-fi Community Edition
+
+#### Added
+- **Ko-fi Community Focus**: App now specifically designed for supporters of ko-fi.com/shiningvenus
+- **Content Moderation Context**: Added content moderation tools and messaging for ko-fi community
+- **Ko-fi Branding**: Updated app title, descriptions, and headers to reflect ko-fi community focus
+- **Ko-fi Links**: Direct links to ko-fi.com/shiningvenus throughout the app
+- **Community Resources**: Special ko-fi supporter section in community resources
+
+#### Changed
+- **App Title**: "Cozy Critter" → "Cozy Critter for Ko-fi Community" 
+- **Version**: Updated to v1.1 to reflect ko-fi community edition
+- **Privacy Policy**: Updated to mention ko-fi community context
+- **Community Page**: Header now shows "Ko-fi Community" with supporter links
+- **Home Page**: Subtitle now shows "For Ko-fi Community" with ko-fi link
+- **README**: Completely rewritten to focus on ko-fi supporters and private app status
+
+#### Technical
+- **Manifest**: Updated PWA manifest for ko-fi community branding
+- **Package Version**: Updated to 1.1.0 from 2.1.0 to reflect ko-fi edition
+- **Documentation**: All docs updated to reflect private ko-fi app status
+
+---
+
 ## [2.0.2] - 2025-08-24
 
 ### 🌟 Phase 2.0.2 Forum & Social Media Lite Enhancements

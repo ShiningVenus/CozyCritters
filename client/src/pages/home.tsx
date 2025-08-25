@@ -46,8 +46,8 @@ export default function Home() {
           <h1 className="text-2xl font-bold mb-2">
             <span role="img" aria-label="leaf">🌿</span> Cozy Critter
           </h1>
-          <p className="text-sm opacity-90">Your safe space for mood tracking</p>
-          <p className="text-xs opacity-70 mt-1">v1.0.0</p>
+          <p className="text-sm opacity-90">For Ko-fi Community</p>
+          <p className="text-xs opacity-70 mt-1">v1.1 • <a href="https://ko-fi.com/shiningvenus" target="_blank" rel="noopener noreferrer" className="underline hover:opacity-80">ko-fi.com/shiningvenus</a></p>
         </div>
         
         {/* Navigation tabs */}

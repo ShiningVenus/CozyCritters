@@ -1,26 +1,28 @@
-# 🐾 Cozy Critter v2.0.2
-### Animal Themed Mood Tracker for Neurodivergent Minds
+# 🐾 Cozy Critter for Ko-fi Community v1.1
+### Private Mood Tracker with Content Moderation for Ko-fi Supporters
 
-[![Version](https://img.shields.io/badge/version-2.0.2-brightgreen.svg)](https://github.com/ShiningVenus/CozyCritters)
+[![Version](https://img.shields.io/badge/version-1.1.0-brightgreen.svg)](https://github.com/ShiningVenus/CozyCritters)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Privacy First](https://img.shields.io/badge/privacy-first-gold.svg)](#-privacy-promise--technical-proof)
-[![Accessibility](https://img.shields.io/badge/accessibility-AAA-purple.svg)](#-what-v1-includes)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/0b8a2ea2-73c5-4158-b6fd-3050f6007f63/deploy-status)](https://app.netlify.com/projects/cozycritter/deploys)
+[![Ko-fi](https://img.shields.io/badge/Ko--fi-shiningvenus-red.svg)](https://ko-fi.com/shiningvenus)
 
-> A complete production ready app designed specifically for neurodivergent minds.
+> **This is a private application exclusively for supporters of [ko-fi.com/shiningvenus](https://ko-fi.com/shiningvenus)**
 
-**Transparent**: This was made with the help of ChatGPT, Copilot, Replit, and Codex. This is just a personal hobby project and I am studying and learning code still myself. I am a solo person working on this for fun.
+**About this app**: This is a personal hobby project for my ko-fi community, built with the help of ChatGPT, Copilot, Replit, and Codex. This includes content moderation functions specifically designed for my ko-fi supporters.
 
-Cozy Critter is a private mood tracking app that actually understands ND life.
-It is open source and simple to self-host.
+Cozy Critter is a private mood tracking app designed specifically for the Ko-fi community at [ko-fi.com/shiningvenus](https://ko-fi.com/shiningvenus). It includes content moderation tools and community features tailored for neurodivergent supporters.
 
-What makes it different:
+What makes it special for Ko-fi supporters:
 - 🚫 No overwhelming interfaces
-- 🚫 No judgment
+- 🚫 No judgment  
 - 🚫 No data harvesting
-- ✨ Just you, cute animals, and a safe place for your feelings
+- ✨ Safe space designed for my ko-fi community
+- 🛡️ Content moderation tools for community safety
+- 💚 Neurodivergent-friendly design patterns
 
 Check in with adorable animal emoji, add your own notes when you want to, and get encouragement that really gets masking, sensory overwhelm, and executive function struggles.
+
+**This app is exclusively for supporters of [ko-fi.com/shiningvenus](https://ko-fi.com/shiningvenus)** and includes content moderation features to maintain a safe community space.
 
 Everything stays on your device because your emotional data is deeply personal.
 
@@ -39,15 +41,17 @@ Everything stays on your device because your emotional data is deeply personal.
 - [📝 Changelog](CHANGELOG.md)
 ---
 
-## 🎉 V2.0.2 - Phase 2 Social Features Now Live!
+## 🎉 V1.1 - Ko-fi Community Edition Now Live!
 
-This is a major update that introduces **Phase 2 social media and forum lite features** while maintaining our commitment to privacy and neurodivergent-friendly design.
+This version is specifically designed for supporters of [ko-fi.com/shiningvenus](https://ko-fi.com/shiningvenus) and includes content moderation features while maintaining our commitment to privacy and neurodivergent-friendly design.
 
-### 🌟 What's New in Phase 2
+### 🌟 What's New in Ko-fi Edition
 
 | Feature | What It Does |
 |---------|--------------|
-| **Community Forum** | Anonymous discussion boards with threaded conversations |
+| **Ko-fi Community Focus** | Tailored specifically for ko-fi.com/shiningvenus supporters |
+| **Content Moderation Tools** | Safe community management features for ko-fi members |
+| **Private Community Space** | Exclusive access for ko-fi supporters only |
 | **Community Dashboard** | Real-time stats showing how our supportive community grows |
 | **Enhanced Interactions** | Hearts, helpful votes, and meaningful replies |
 | **Category Organization** | Support, Celebration, Questions, Share, and General topics |
@@ -447,21 +451,22 @@ You don't need to wait for "more features" to start taking better care of your e
 
 Start today. Your mental health matters now.
 
-## 🏢 For Autism & Neurodivergent Support Organizations
+## 🏢 For Ko-fi Supporters & Neurodivergent Communities
 
-Are you a nonprofit, support group, or organization serving the autistic/ND community?
+Are you a supporter of [ko-fi.com/shiningvenus](https://ko-fi.com/shiningvenus) or part of our neurodivergent community?
 
-Cozy Critter v1.0.0 is completely free and open source making it perfect for your community programs.
+Cozy Critter v1.1 is made specifically for our ko-fi community with content moderation features and community support tools.
 
 ---
 
-### 🎯 Why Your Community Will Love This
+### 🎯 Why Ko-fi Supporters Will Love This
 
 | Benefit | Impact |
 |---------|--------|
-| Privacy first design | No data concerns for vulnerable individuals |
-| Actually accessible | Built with real ND input, not compliance checkboxes |
-| Works offline | Great for individuals with limited internet access |
+| Privacy first design | No data concerns for vulnerable individuals in our community |
+| Actually accessible | Built with real ND input from ko-fi supporters |
+| Works offline | Great for supporters with limited internet access |
+| Content moderation tools | Safe community management for ko-fi members |
 | Trauma-informed | No forced positivity or invalidating messaging |
 
 ---
