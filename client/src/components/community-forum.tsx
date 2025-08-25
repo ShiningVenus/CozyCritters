@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { MessageSquare, Heart, User, Clock, ChevronDown, ChevronUp, Plus, Flag, ThumbsUp, Pin, EyeOff, Edit3, Shield, Folder, Users, FileText, UserPlus, LogIn, LogOut, Settings, Key } from 'lucide-react';
+import { MessageSquare, Heart, User, Clock, ChevronDown, ChevronUp, Plus, Flag, ThumbsUp, Pin, EyeOff, Edit3, Shield, Folder, Users, FileText, UserPlus, LogIn, LogOut, Settings, Key, BarChart3 } from 'lucide-react';
 import { useUserSession } from '../hooks/useUserSession';
 import { ForumPostModeration, ForumReplyModeration, ModerationAction, UserRole } from '../../../shared/schema';
 import { UserAuthModal } from './user-auth-modal';
 import { ForumThemeSelector } from './forum-theme-selector';
 import { ForumModerationPanel } from './forum-moderation-panel';
 import { AdminSetup } from './admin-setup';
+import { AdminDashboard } from './admin-dashboard';
 import { initializeForumTheme } from '../lib/forum-themes';
 import { isProduction } from '../lib/environment';
 import { isStaffUser } from '../lib/admin-accounts';
+import { hasPermission } from '../lib/admin-permissions';
+import { logAuditEvent } from '../lib/admin-audit';
+import { updateUserActivity, incrementUserPostCount } from '../lib/admin-users';
 import './phpbb-forum.css';
 
 interface ForumBoard {
@@ -121,6 +125,7 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
   const [authModalMode, setAuthModalMode] = useState<'register' | 'login'>('register');
   const [showModerationPanel, setShowModerationPanel] = useState(false);
   const [showAdminSetup, setShowAdminSetup] = useState(false);
+  const [showAdminDashboard, setShowAdminDashboard] = useState(false);
   const [showForumManagement, setShowForumManagement] = useState(false);
   const [showForumStats, setShowForumStats] = useState(false);
   
@@ -462,6 +467,12 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
     const topicId = crypto.randomUUID();
     const postId = crypto.randomUUID();
 
+    // Update user activity and post count if registered
+    if (userSession?.isRegistered && userSession.username) {
+      updateUserActivity(userSession.username);
+      incrementUserPostCount(userSession.username);
+    }
+
     const topic: ForumTopic = {
       id: topicId,
       title: newTopic.title.trim(),
@@ -507,6 +518,23 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
     setTopics(updatedTopics);
     setPosts(updatedPosts);
     saveForumData(updatedBoards, updatedTopics, updatedPosts);
+
+    // Log topic creation if user is registered
+    if (userSession?.isRegistered) {
+      logAuditEvent(
+        userSession.username,
+        userSession.role,
+        'forum_created',
+        'topic',
+        {
+          topicTitle: topic.title,
+          boardId: selectedBoardId,
+          contentLength: newTopic.content.length
+        },
+        'success',
+        topicId
+      );
+    }
     
     setNewTopic({ title: '', content: '' });
     setShowNewTopicForm(false);
@@ -517,6 +545,12 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
 
     const author = getAuthorName();
     const postId = crypto.randomUUID();
+
+    // Update user activity and post count if registered
+    if (userSession?.isRegistered && userSession.username) {
+      updateUserActivity(userSession.username);
+      incrementUserPostCount(userSession.username);
+    }
 
     const post: ForumPost = {
       id: postId,
@@ -561,6 +595,23 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
     setTopics(updatedTopics);
     setPosts(updatedPosts);
     saveForumData(updatedBoards, updatedTopics, updatedPosts);
+
+    // Log post creation if user is registered
+    if (userSession?.isRegistered) {
+      logAuditEvent(
+        userSession.username,
+        userSession.role,
+        'forum_created',
+        'post',
+        {
+          topicId: selectedTopicId,
+          topicTitle: currentTopic?.title || 'Unknown',
+          contentLength: newPost.content.length
+        },
+        'success',
+        postId
+      );
+    }
     
     setNewPost({ content: '' });
     setShowNewPostForm(false);
@@ -842,6 +893,16 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
               >
                 <Key size={14} />
                 Admin Setup
+              </button>
+            )}
+            {(hasAdminAccess() || hasModeratorAccess()) && (
+              <button
+                onClick={() => setShowAdminDashboard(true)}
+                className="phpbb-admin-btn"
+                title="Admin Dashboard"
+              >
+                <BarChart3 size={14} />
+                Dashboard
               </button>
             )}
           </div>
@@ -1437,6 +1498,16 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
         isOpen={showAdminSetup}
         onClose={() => setShowAdminSetup(false)}
       />
+
+      {/* Admin Dashboard */}
+      {showAdminDashboard && userSession && (
+        <AdminDashboard
+          isOpen={showAdminDashboard}
+          onClose={() => setShowAdminDashboard(false)}
+          currentUser={userSession.username}
+          currentRole={userSession.role}
+        />
+      )}
 
       {/* phpBB-style Footer */}
       <div className="phpbb-footer">
