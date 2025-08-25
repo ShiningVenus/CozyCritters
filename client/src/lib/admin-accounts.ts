@@ -4,6 +4,7 @@
 
 import { hashPassword, verifyPassword } from './password-utils';
 import { UserSession, UserRole } from '../../../shared/schema';
+import { logAuditEvent } from './admin-audit';
 
 // Predefined admin accounts with hashed credentials
 interface AdminAccount {
@@ -81,10 +82,19 @@ export async function verifyAdminCredentials(username: string, password: string)
     if (account.username === username) {
       const isValid = await verifyPassword(password, account.passwordHash);
       if (isValid) {
+        logAuditEvent(username, account.role, 'admin_login', 'admin_panel', { 
+          loginTime: new Date().toISOString() 
+        });
         return account.role;
       }
     }
   }
+  
+  // Log failed login attempt
+  logAuditEvent(username, 'user', 'admin_login', 'admin_panel', { 
+    loginTime: new Date().toISOString(),
+    outcome: 'failed'
+  }, 'failure', undefined, 'Invalid credentials');
   
   return null;
 }
@@ -114,9 +124,22 @@ export async function createAdminAccount(username: string, password: string, rol
     
     accounts.push(newAccount);
     localStorage.setItem(ADMIN_ACCOUNTS_KEY, JSON.stringify(accounts));
+    
+    // Log the account creation
+    logAuditEvent('system', 'admin', 'user_created', 'admin_account', {
+      newUsername: username,
+      newRole: role,
+      createdAt: new Date().toISOString()
+    });
+    
     return true;
   } catch (error) {
     console.error('Failed to create admin account:', error);
+    logAuditEvent('system', 'admin', 'user_created', 'admin_account', {
+      newUsername: username,
+      newRole: role,
+      error: error instanceof Error ? error.message : 'Unknown error'
+    }, 'failure');
     return false;
   }
 }
@@ -134,9 +157,18 @@ export async function changeAdminPassword(username: string, oldPassword: string,
         try {
           accounts[i].passwordHash = await hashPassword(newPassword);
           localStorage.setItem(ADMIN_ACCOUNTS_KEY, JSON.stringify(accounts));
+          
+          // Log password change
+          logAuditEvent(username, accounts[i].role, 'password_changed', 'admin_account', {
+            changedAt: new Date().toISOString()
+          });
+          
           return true;
         } catch (error) {
           console.error('Failed to change password:', error);
+          logAuditEvent(username, accounts[i].role, 'password_changed', 'admin_account', {
+            error: error instanceof Error ? error.message : 'Unknown error'
+          }, 'failure');
           return false;
         }
       }
@@ -207,8 +239,17 @@ export async function deleteAdminAccount(username: string, adminUsername: string
     throw new Error('Cannot delete the last administrator account');
   }
   
+  const deletedAccount = accounts[accountIndex];
   accounts.splice(accountIndex, 1);
   localStorage.setItem(ADMIN_ACCOUNTS_KEY, JSON.stringify(accounts));
+  
+  // Log account deletion
+  logAuditEvent(adminUsername, adminRole, 'user_deleted', 'admin_account', {
+    deletedUsername: username,
+    deletedRole: deletedAccount.role,
+    deletedAt: new Date().toISOString()
+  });
+  
   return true;
 }
 

@@ -1424,6 +1424,7 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
       {showModerationPanel && hasModeratorAccess() && (
         <ForumModerationPanel
           userRole={userSession?.role || 'user'}
+          username={userSession?.username || 'anonymous'}
           onModerationAction={handleModerationAction}
           posts={posts}
           topics={topics}

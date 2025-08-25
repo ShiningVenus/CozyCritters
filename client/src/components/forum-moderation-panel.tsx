@@ -16,9 +16,12 @@ import {
   X
 } from 'lucide-react';
 import { ModerationAction, ForumPostModeration, ForumReplyModeration } from '../../../shared/schema';
+import { hasPermission } from '../lib/admin-permissions';
+import { logAuditEvent } from '../lib/admin-audit';
 
 interface ModerationPanelProps {
   userRole: 'user' | 'moderator' | 'admin';
+  username: string; // Add username for permission checking
   onModerationAction: (action: ModerationAction, targetId: string, targetType: 'post' | 'topic') => void;
   posts: any[];
   topics: any[];
@@ -37,6 +40,7 @@ interface ModerationReport {
 
 export function ForumModerationPanel({ 
   userRole, 
+  username,
   onModerationAction, 
   posts, 
   topics, 
@@ -69,15 +73,45 @@ export function ForumModerationPanel({
     reason?: string,
     originalContent?: string
   ) => {
+    // Check permissions before performing action
+    const permissionKey = targetType === 'post' ? 'MODERATE_POSTS' : 'MODERATE_TOPICS';
+    const permissionCheck = hasPermission(username, permissionKey, userRole);
+    
+    if (!permissionCheck.hasPermission) {
+      console.error('Access denied:', permissionCheck.reason);
+      return;
+    }
+
     const action: ModerationAction = {
       id: crypto.randomUUID(),
       type,
-      moderatorId: 'current-user', // In real app, this would be the actual user ID
-      moderatorName: 'Current Moderator', // In real app, this would be the actual moderator name
+      moderatorId: username,
+      moderatorName: username,
       reason,
       timestamp: Date.now(),
       originalContent
     };
+
+    // Log the moderation action
+    const auditActionType = type === 'hide' ? (targetType === 'post' ? 'post_hidden' : 'topic_locked') :
+                           type === 'pin' ? 'topic_pinned' :
+                           type === 'edit' ? (targetType === 'post' ? 'post_edited' : 'topic_locked') :
+                           type === 'delete' ? (targetType === 'post' ? 'post_deleted' : 'topic_deleted') :
+                           'post_edited';
+    
+    logAuditEvent(
+      username,
+      userRole,
+      auditActionType as any,
+      targetType,
+      {
+        targetId,
+        action: type,
+        reason: reason || 'No reason provided'
+      },
+      'success',
+      targetId
+    );
 
     // Save to moderation history
     const updatedHistory = [action, ...moderationHistory];
