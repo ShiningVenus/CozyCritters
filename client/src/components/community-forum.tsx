@@ -774,17 +774,17 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
                   <Folder size={14} />
                   Forum Management
                 </button>
-                {hasModeratorAccess() && (
-                  <button
-                    onClick={() => setShowModerationPanel(true)}
-                    className="phpbb-admin-btn"
-                    title="Moderation Panel"
-                  >
-                    <Settings size={14} />
-                    Moderation
-                  </button>
-                )}
               </>
+            )}
+            {hasModeratorAccess() && (
+              <button
+                onClick={() => setShowModerationPanel(true)}
+                className="phpbb-admin-btn"
+                title="Moderation Panel"
+              >
+                <Settings size={14} />
+                Moderation
+              </button>
             )}
             {(hasAdminAccess() || hasModeratorAccess()) && (
               <button
