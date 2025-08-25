@@ -190,6 +190,8 @@ Proof:
 A dedicated `docs/` folder provides everything you need for development, self-hosting, privacy verification, and community contributions.
 
 - [docs/README.md](docs/README.md) — Docs overview & quick links
+- [**🌐 Deployment guide**](docs/deployment-guide.md) — Static hosting (Netlify, Vercel, GitHub Pages)
+- [**🚀 VPS deployment guide**](docs/vps-deployment.md) — DigitalOcean, cloud servers, shared hosting  
 - [Self-hosting guide](docs/self-hosting.md) — **🐳 Docker support included!**
 - [Docker deployment guide](docs/docker.md) — Complete containerized setup
 - [Local development](docs/local-development.md)
