@@ -28,4 +28,6 @@ Be respectful and inclusive. See the [Code of Conduct](../CODE_OF_CONDUCT.md) fo
 
 ## Need help?
 
-- Open a discussion or issue.
+- Post in the Community Forums General Discussion for development questions
+- Open a GitHub discussion or issue for technical problems  
+- Check the [Forums Guide](../FORUMS.md) for community participation guidelines
