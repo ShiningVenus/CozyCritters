@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { UserSession, UserRole } from '../../../shared/schema';
 import { hashPassword, verifyPassword } from '../lib/password-utils';
+import { verifyAdminCredentials, initializeAdminAccounts } from '../lib/admin-accounts';
+import { isProduction } from '../lib/environment';
 
 const USER_SESSION_KEY = 'cozy-critter-user-session';
 
@@ -8,6 +10,9 @@ export function useUserSession() {
   const [userSession, setUserSession] = useState<UserSession | null>(null);
 
   useEffect(() => {
+    // Initialize admin accounts on app load
+    initializeAdminAccounts();
+    
     const savedSession = localStorage.getItem(USER_SESSION_KEY);
     if (savedSession) {
       try {
@@ -33,6 +38,12 @@ export function useUserSession() {
 
   const updateUserRole = (newRole: UserRole) => {
     if (!userSession) return;
+    
+    // In production, prevent unauthorized role elevation
+    if (isProduction()) {
+      console.warn('Role elevation blocked in production mode. Use admin setup interface.');
+      return;
+    }
     
     const updatedSession: UserSession = {
       ...userSession,
@@ -79,6 +90,23 @@ export function useUserSession() {
   };
 
   const loginUser = async (username: string, password: string): Promise<boolean> => {
+    // First check if it's an admin/mod account
+    const adminRole = await verifyAdminCredentials(username, password);
+    if (adminRole) {
+      // Login as admin/mod
+      const adminSession: UserSession = {
+        id: crypto.randomUUID(),
+        username,
+        role: adminRole,
+        timestamp: Date.now(),
+        isRegistered: true,
+        passwordHash: await hashPassword(password) // Store for session verification
+      };
+      setUserSession(adminSession);
+      localStorage.setItem(USER_SESSION_KEY, JSON.stringify(adminSession));
+      return true;
+    }
+    
     // In a real app, this would check against a database
     // For this local-only app, we check if the current user matches
     if (!userSession?.isRegistered || !userSession.passwordHash) {

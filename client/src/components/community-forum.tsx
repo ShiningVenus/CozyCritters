@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { MessageSquare, Heart, User, Clock, ChevronDown, ChevronUp, Plus, Flag, ThumbsUp, Pin, EyeOff, Edit3, Shield, Folder, Users, FileText, UserPlus, LogIn, Settings } from 'lucide-react';
+import { MessageSquare, Heart, User, Clock, ChevronDown, ChevronUp, Plus, Flag, ThumbsUp, Pin, EyeOff, Edit3, Shield, Folder, Users, FileText, UserPlus, LogIn, Settings, Key } from 'lucide-react';
 import { useUserSession } from '../hooks/useUserSession';
 import { ForumPostModeration, ForumReplyModeration, ModerationAction, UserRole } from '../../../shared/schema';
 import { UserAuthModal } from './user-auth-modal';
 import { ForumThemeSelector } from './forum-theme-selector';
 import { ForumModerationPanel } from './forum-moderation-panel';
+import { AdminSetup } from './admin-setup';
 import { initializeForumTheme } from '../lib/forum-themes';
+import { isProduction } from '../lib/environment';
 import './phpbb-forum.css';
 
 interface ForumBoard {
@@ -117,6 +119,7 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [authModalMode, setAuthModalMode] = useState<'register' | 'login'>('register');
   const [showModerationPanel, setShowModerationPanel] = useState(false);
+  const [showAdminSetup, setShowAdminSetup] = useState(false);
   
   const { userSession, updateUserRole, hasModeratorAccess, hasAdminAccess, generateAnonymousName } = useUserSession();
 
@@ -695,13 +698,15 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
             <ForumThemeSelector />
             {hasAdminAccess() && (
               <>
-                <button
-                  onClick={() => setShowRolePanel(!showRolePanel)}
-                  className="phpbb-admin-btn"
-                >
-                  <Shield size={14} />
-                  Admin Panel
-                </button>
+                {!isProduction() && (
+                  <button
+                    onClick={() => setShowRolePanel(!showRolePanel)}
+                    className="phpbb-admin-btn"
+                  >
+                    <Shield size={14} />
+                    Admin Panel
+                  </button>
+                )}
                 {hasModeratorAccess() && (
                   <button
                     onClick={() => setShowModerationPanel(true)}
@@ -713,12 +718,20 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
                 )}
               </>
             )}
+            <button
+              onClick={() => setShowAdminSetup(true)}
+              className="phpbb-admin-btn"
+              title="Admin Setup"
+            >
+              <Key size={14} />
+              Admin Setup
+            </button>
           </div>
         )}
       </div>
 
       {/* Admin Panel */}
-      {showRolePanel && hasAdminAccess() && (
+      {showRolePanel && hasAdminAccess() && !isProduction() && (
         <div className="phpbb-admin-panel">
           <h4 className="font-bold mb-2">Admin Panel - Role Management</h4>
           <p className="text-sm mb-3">For demo purposes - in a real app, this would be a proper admin interface</p>
@@ -1127,6 +1140,12 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
           onClose={() => setShowModerationPanel(false)}
         />
       )}
+
+      {/* Admin Setup */}
+      <AdminSetup
+        isOpen={showAdminSetup}
+        onClose={() => setShowAdminSetup(false)}
+      />
     </div>
   );
 }
