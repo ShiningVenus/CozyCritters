@@ -1,19 +1,19 @@
-/* phpBB2 Classic Forum Styles */
+/* phpBB2 Classic Forum Styles with CSS Custom Properties for Theming */
 .phpbb-forum {
   font-family: Verdana, Arial, Helvetica, sans-serif;
   font-size: 11px;
-  background-color: #ffffff;
-  color: #000000;
+  background-color: var(--forum-bg, #ffffff);
+  color: var(--forum-text, #000000);
 }
 
 .phpbb-container {
-  background-color: #ffffff;
-  border: 1px solid #c5c5c5;
+  background-color: var(--forum-bg, #ffffff);
+  border: 1px solid var(--forum-border, #c5c5c5);
 }
 
 .phpbb-header {
-  background: linear-gradient(to bottom, #dee3e7, #d1d7dc);
-  border-bottom: 1px solid #c5c5c5;
+  background: var(--forum-header-bg, linear-gradient(to bottom, #dee3e7, #d1d7dc));
+  border-bottom: 1px solid var(--forum-border, #c5c5c5);
   padding: 10px;
   display: flex;
   justify-content: space-between;
@@ -29,7 +29,7 @@
 .phpbb-title {
   font-size: 18px;
   font-weight: bold;
-  color: #006699;
+  color: var(--forum-link, #006699);
   margin: 0;
 }
 
@@ -37,11 +37,11 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  color: #444444;
+  color: var(--forum-text, #444444);
 }
 
 .phpbb-admin-btn {
-  background: #006699;
+  background: var(--forum-button, #006699);
   color: white;
   border: none;
   padding: 4px 8px;
@@ -52,17 +52,21 @@
   gap: 4px;
 }
 
+.phpbb-admin-btn:hover {
+  background: var(--forum-button-hover, #0088cc);
+}
+
 .phpbb-admin-panel {
-  background: #f7f8fa;
-  border: 1px solid #d1d7dc;
+  background: var(--forum-table-row-hover, #f7f8fa);
+  border: 1px solid var(--forum-border, #d1d7dc);
   margin: 5px;
   padding: 10px;
   font-size: 11px;
 }
 
 .phpbb-role-btn {
-  background: #e4e8eb;
-  border: 1px solid #c5c5c5;
+  background: var(--forum-table-row-hover, #e4e8eb);
+  border: 1px solid var(--forum-border, #c5c5c5);
   padding: 2px 6px;
   font-size: 10px;
   cursor: pointer;
@@ -75,30 +79,30 @@
 .phpbb-table {
   width: 100%;
   border-collapse: collapse;
-  background-color: #ffffff;
-  border: 1px solid #c5c5c5;
+  background-color: var(--forum-bg, #ffffff);
+  border: 1px solid var(--forum-border, #c5c5c5);
 }
 
 .phpbb-table-header {
-  background: linear-gradient(to bottom, #dee3e7, #d1d7dc);
-  border-bottom: 1px solid #c5c5c5;
+  background: var(--forum-table-header, linear-gradient(to bottom, #dee3e7, #d1d7dc));
+  border-bottom: 1px solid var(--forum-border, #c5c5c5);
 }
 
 .phpbb-table-header th {
   padding: 8px;
   font-weight: bold;
-  color: #444444;
+  color: var(--forum-text, #444444);
   text-align: left;
-  border-right: 1px solid #c5c5c5;
+  border-right: 1px solid var(--forum-border, #c5c5c5);
   font-size: 11px;
 }
 
 .phpbb-table-row {
-  border-bottom: 1px solid #e4e8eb;
+  border-bottom: 1px solid var(--forum-border, #e4e8eb);
 }
 
 .phpbb-table-row:hover {
-  background-color: #f7f8fa;
+  background-color: var(--forum-table-row-hover, #f7f8fa);
 }
 
 .phpbb-forum-col {
@@ -120,26 +124,28 @@
 
 .phpbb-forum-cell, .phpbb-topic-cell {
   padding: 8px;
-  border-right: 1px solid #e4e8eb;
+  border-right: 1px solid var(--forum-border, #e4e8eb);
 }
 
 .phpbb-count-cell {
   padding: 8px;
   text-align: center;
-  border-right: 1px solid #e4e8eb;
-  color: #444444;
+  border-right: 1px solid var(--forum-border, #e4e8eb);
+  color: var(--forum-text, #444444);
 }
 
 .phpbb-lastpost-cell {
   padding: 8px;
   font-size: 10px;
-  color: #666666;
+  color: var(--forum-text, #666666);
+  opacity: 0.8;
 }
 
 .phpbb-empty-cell {
   padding: 20px;
   text-align: center;
-  color: #888888;
+  color: var(--forum-text, #888888);
+  opacity: 0.7;
   font-style: italic;
 }
 
@@ -163,7 +169,7 @@
 }
 
 .phpbb-forum-link, .phpbb-topic-link {
-  color: #006699;
+  color: var(--forum-link, #006699);
   text-decoration: none;
   font-weight: bold;
   font-size: 12px;
@@ -174,12 +180,13 @@
 }
 
 .phpbb-forum-link:hover, .phpbb-topic-link:hover {
-  color: #dd6900;
+  color: var(--forum-link-hover, #dd6900);
   text-decoration: underline;
 }
 
 .phpbb-forum-desc, .phpbb-topic-meta {
-  color: #666666;
+  color: var(--forum-text, #666666);
+  opacity: 0.7;
   font-size: 10px;
   margin-top: 2px;
 }
@@ -189,24 +196,26 @@
 }
 
 .phpbb-lastpost-topic {
-  color: #006699;
+  color: var(--forum-link, #006699);
   font-weight: bold;
   margin-bottom: 2px;
 }
 
 .phpbb-lastpost-meta {
-  color: #666666;
+  color: var(--forum-text, #666666);
+  opacity: 0.7;
 }
 
 .phpbb-no-posts {
-  color: #888888;
+  color: var(--forum-text, #888888);
+  opacity: 0.7;
   font-style: italic;
 }
 
 .phpbb-breadcrumb {
-  background: #f7f8fa;
+  background: var(--forum-table-row-hover, #f7f8fa);
   padding: 8px 10px;
-  border-bottom: 1px solid #e4e8eb;
+  border-bottom: 1px solid var(--forum-border, #e4e8eb);
   font-size: 11px;
   display: flex;
   align-items: center;
@@ -214,7 +223,7 @@
 }
 
 .phpbb-breadcrumb-link {
-  color: #006699;
+  color: var(--forum-link, #006699);
   text-decoration: none;
   background: none;
   border: none;
@@ -228,26 +237,27 @@
 }
 
 .phpbb-breadcrumb-separator {
-  color: #666666;
+  color: var(--forum-text, #666666);
+  opacity: 0.7;
   font-weight: bold;
 }
 
 .phpbb-breadcrumb-current {
-  color: #444444;
+  color: var(--forum-text, #444444);
   font-weight: bold;
 }
 
 .phpbb-board-header, .phpbb-topic-header {
-  background: linear-gradient(to bottom, #dee3e7, #d1d7dc);
+  background: var(--forum-table-header, linear-gradient(to bottom, #dee3e7, #d1d7dc));
   padding: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #c5c5c5;
+  border-bottom: 1px solid var(--forum-border, #c5c5c5);
 }
 
 .phpbb-board-title h2, .phpbb-topic-title {
-  color: #444444;
+  color: var(--forum-text, #444444);
   font-size: 14px;
   font-weight: bold;
   margin: 0;
@@ -256,7 +266,7 @@
 }
 
 .phpbb-new-topic-btn, .phpbb-reply-btn {
-  background: #006699;
+  background: var(--forum-button, #006699);
   color: white;
   border: none;
   padding: 6px 12px;
@@ -269,23 +279,23 @@
 }
 
 .phpbb-new-topic-btn:hover, .phpbb-reply-btn:hover {
-  background: #0088cc;
+  background: var(--forum-button-hover, #0088cc);
 }
 
 .phpbb-form-container {
-  background: #ffffff;
-  border: 1px solid #c5c5c5;
+  background: var(--forum-bg, #ffffff);
+  border: 1px solid var(--forum-border, #c5c5c5);
   margin: 10px 5px;
 }
 
 .phpbb-form-title {
-  background: linear-gradient(to bottom, #dee3e7, #d1d7dc);
+  background: var(--forum-table-header, linear-gradient(to bottom, #dee3e7, #d1d7dc));
   padding: 8px 10px;
   margin: 0;
   font-size: 12px;
   font-weight: bold;
-  color: #444444;
-  border-bottom: 1px solid #c5c5c5;
+  color: var(--forum-text, #444444);
+  border-bottom: 1px solid var(--forum-border, #c5c5c5);
 }
 
 .phpbb-form-content {
@@ -300,17 +310,18 @@
   display: block;
   font-weight: bold;
   margin-bottom: 5px;
-  color: #444444;
+  color: var(--forum-text, #444444);
   font-size: 11px;
 }
 
 .phpbb-form-input, .phpbb-form-textarea {
   width: 100%;
   padding: 4px;
-  border: 1px solid #c5c5c5;
+  border: 1px solid var(--forum-border, #c5c5c5);
   font-family: Verdana, Arial, Helvetica, sans-serif;
   font-size: 11px;
-  background-color: #ffffff;
+  background-color: var(--forum-bg, #ffffff);
+  color: var(--forum-text, #000000);
 }
 
 .phpbb-form-textarea {
@@ -323,7 +334,7 @@
 }
 
 .phpbb-submit-btn {
-  background: #006699;
+  background: var(--forum-button, #006699);
   color: white;
   border: none;
   padding: 6px 12px;
@@ -332,19 +343,27 @@
   cursor: pointer;
 }
 
+.phpbb-submit-btn:hover {
+  background: var(--forum-button-hover, #0088cc);
+}
+
 .phpbb-submit-btn:disabled {
   background: #cccccc;
   cursor: not-allowed;
 }
 
 .phpbb-cancel-btn {
-  background: #e4e8eb;
-  color: #444444;
-  border: 1px solid #c5c5c5;
+  background: var(--forum-table-row-hover, #e4e8eb);
+  color: var(--forum-text, #444444);
+  border: 1px solid var(--forum-border, #c5c5c5);
   padding: 6px 12px;
   border-radius: 2px;
   font-size: 11px;
   cursor: pointer;
+}
+
+.phpbb-cancel-btn:hover {
+  background: var(--forum-border, #d1d7dc);
 }
 
 .phpbb-posts-container {
