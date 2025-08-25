@@ -14,8 +14,17 @@ export function usePWA() {
   const [isInstallable, setIsInstallable] = useState(false);
   const [isInstalled, setIsInstalled] = useState(false);
   const [isOnline, setIsOnline] = useState(() => (typeof navigator !== 'undefined' ? navigator.onLine : true));
+  const [isPermanentlyDismissed, setIsPermanentlyDismissed] = useState(false);
 
   useEffect(() => {
+    // Check if user has permanently dismissed the PWA prompt
+    const checkPermanentDismissal = () => {
+      const dismissed = localStorage.getItem('cozy-critter-pwa-dismissed');
+      if (dismissed === 'true') {
+        setIsPermanentlyDismissed(true);
+      }
+    };
+
     // Check if app is already installed
     const checkIfInstalled = () => {
       if (window.matchMedia('(display-mode: standalone)').matches) {
@@ -26,8 +35,12 @@ export function usePWA() {
     // Handle PWA install prompt
     const handleBeforeInstallPrompt = (e: Event) => {
       e.preventDefault();
-      setInstallPrompt(e as BeforeInstallPromptEvent);
-      setIsInstallable(true);
+      // Only set as installable if not permanently dismissed
+      const dismissed = localStorage.getItem('cozy-critter-pwa-dismissed');
+      if (dismissed !== 'true') {
+        setInstallPrompt(e as BeforeInstallPromptEvent);
+        setIsInstallable(true);
+      }
     };
 
     // Handle successful installation
@@ -41,6 +54,7 @@ export function usePWA() {
     const handleOnline = () => setIsOnline(true);
     const handleOffline = () => setIsOnline(false);
 
+    checkPermanentDismissal();
     checkIfInstalled();
 
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
@@ -71,6 +85,10 @@ export function usePWA() {
         setIsInstallable(false);
         setInstallPrompt(null);
         return true;
+      } else if (choiceResult.outcome === 'dismissed') {
+        // User dismissed the prompt, but don't permanently dismiss unless they click "No thanks"
+        setIsInstallable(false);
+        setInstallPrompt(null);
       }
       return false;
     } catch (error) {
@@ -79,10 +97,18 @@ export function usePWA() {
     }
   };
 
+  const permanentlyDismiss = () => {
+    localStorage.setItem('cozy-critter-pwa-dismissed', 'true');
+    setIsPermanentlyDismissed(true);
+    setIsInstallable(false);
+    setInstallPrompt(null);
+  };
+
   return {
-    isInstallable,
+    isInstallable: isInstallable && !isPermanentlyDismissed,
     isInstalled,
     isOnline,
     installApp,
+    permanentlyDismiss,
   };
 }
