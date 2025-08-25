@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { UserSession, UserRole } from '../../../shared/schema';
+import { hashPassword, verifyPassword } from '../lib/password-utils';
 
 const USER_SESSION_KEY = 'cozy-critter-user-session';
 
@@ -22,7 +23,8 @@ export function useUserSession() {
         id: crypto.randomUUID(),
         username: generateAnonymousName(),
         role: 'user',
-        timestamp: Date.now()
+        timestamp: Date.now(),
+        isRegistered: false
       };
       setUserSession(defaultSession);
       localStorage.setItem(USER_SESSION_KEY, JSON.stringify(defaultSession));
@@ -56,10 +58,61 @@ export function useUserSession() {
     return userSession?.role === 'admin';
   };
 
+  const registerUser = async (username: string, password: string): Promise<boolean> => {
+    if (!userSession) return false;
+
+    try {
+      const passwordHash = await hashPassword(password);
+      const updatedSession: UserSession = {
+        ...userSession,
+        username,
+        isRegistered: true,
+        passwordHash
+      };
+      setUserSession(updatedSession);
+      localStorage.setItem(USER_SESSION_KEY, JSON.stringify(updatedSession));
+      return true;
+    } catch (error) {
+      console.error('Failed to register user:', error);
+      return false;
+    }
+  };
+
+  const loginUser = async (username: string, password: string): Promise<boolean> => {
+    // In a real app, this would check against a database
+    // For this local-only app, we check if the current user matches
+    if (!userSession?.isRegistered || !userSession.passwordHash) {
+      return false;
+    }
+
+    try {
+      const isValidPassword = await verifyPassword(password, userSession.passwordHash);
+      return isValidPassword && userSession.username === username;
+    } catch (error) {
+      console.error('Failed to login user:', error);
+      return false;
+    }
+  };
+
+  const updateUsername = (newUsername: string) => {
+    if (!userSession) return;
+    
+    const updatedSession: UserSession = {
+      ...userSession,
+      username: newUsername
+    };
+    setUserSession(updatedSession);
+    localStorage.setItem(USER_SESSION_KEY, JSON.stringify(updatedSession));
+  };
+
   return {
     userSession,
     updateUserRole,
+    updateUsername,
     hasModeratorAccess,
-    hasAdminAccess
+    hasAdminAccess,
+    registerUser,
+    loginUser,
+    generateAnonymousName
   };
 }

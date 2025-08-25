@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { MessageSquare, Heart, User, Clock, ChevronDown, ChevronUp, Plus, Flag, ThumbsUp, Pin, EyeOff, Edit3, Shield, Folder, Users, FileText } from 'lucide-react';
+import { MessageSquare, Heart, User, Clock, ChevronDown, ChevronUp, Plus, Flag, ThumbsUp, Pin, EyeOff, Edit3, Shield, Folder, Users, FileText, UserPlus, LogIn } from 'lucide-react';
 import { useUserSession } from '../hooks/useUserSession';
 import { ForumPostModeration, ForumReplyModeration, ModerationAction, UserRole } from '../../../shared/schema';
+import { UserAuthModal } from './user-auth-modal';
+import { ForumThemeSelector } from './forum-theme-selector';
+import { initializeForumTheme } from '../lib/forum-themes';
 import './phpbb-forum.css';
 
 interface ForumBoard {
@@ -110,11 +113,16 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
     content: ''
   });
   const [showRolePanel, setShowRolePanel] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [authModalMode, setAuthModalMode] = useState<'register' | 'login'>('register');
   
-  const { userSession, updateUserRole, hasModeratorAccess, hasAdminAccess } = useUserSession();
+  const { userSession, updateUserRole, hasModeratorAccess, hasAdminAccess, generateAnonymousName } = useUserSession();
 
   // Load forum data from localStorage and migrate legacy data
   useEffect(() => {
+    // Initialize forum theme
+    initializeForumTheme();
+    
     const savedBoards = localStorage.getItem('cozy-critter-forum-boards');
     const savedTopics = localStorage.getItem('cozy-critter-forum-topics');
     const savedPosts = localStorage.getItem('cozy-critter-forum-posts-new');
@@ -370,14 +378,6 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
     localStorage.setItem('cozy-critter-forum-posts-new', JSON.stringify(postsData));
   };
 
-  const generateAnonymousName = () => {
-    const animals = ['Fox', 'Owl', 'Rabbit', 'Penguin', 'Deer', 'Cat', 'Bear', 'Wolf', 'Squirrel', 'Hedgehog', 'Badger', 'Otter', 'Raccoon', 'Chipmunk'];
-    const adjectives = ['Gentle', 'Wise', 'Kind', 'Brave', 'Calm', 'Thoughtful', 'Patient', 'Creative', 'Curious', 'Peaceful', 'Friendly', 'Caring', 'Helpful', 'Quiet'];
-    const animal = animals[Math.floor(Math.random() * animals.length)];
-    const adjective = adjectives[Math.floor(Math.random() * adjectives.length)];
-    return `${adjective} ${animal}`;
-  };
-
   const handleCreateTopic = () => {
     if (!newTopic.title.trim() || !newTopic.content.trim() || !selectedBoardId) return;
 
@@ -558,7 +558,37 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
         </div>
         {userSession && (
           <div className="phpbb-user-info">
-            <span className="text-sm">Welcome, {generateAnonymousName()}</span>
+            <span className="text-sm">Welcome, {userSession.username}</span>
+            {!userSession.isRegistered && (
+              <>
+                <button
+                  onClick={() => {
+                    setAuthModalMode('register');
+                    setShowAuthModal(true);
+                  }}
+                  className="phpbb-admin-btn"
+                  title="Register to secure your username"
+                >
+                  <UserPlus size={14} />
+                  Register
+                </button>
+                <button
+                  onClick={() => {
+                    setAuthModalMode('login');
+                    setShowAuthModal(true);
+                  }}
+                  className="phpbb-admin-btn"
+                  title="Login to your account"
+                >
+                  <LogIn size={14} />
+                  Login
+                </button>
+              </>
+            )}
+            {userSession.isRegistered && (
+              <span className="text-xs text-green-600">✓ Registered</span>
+            )}
+            <ForumThemeSelector />
             {hasAdminAccess() && (
               <button
                 onClick={() => setShowRolePanel(!showRolePanel)}
@@ -905,6 +935,13 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
       {viewMode === 'boards' && renderBoardsView()}
       {viewMode === 'topics' && renderTopicsView()}
       {viewMode === 'posts' && renderPostsView()}
+      
+      {/* User Authentication Modal */}
+      <UserAuthModal
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
+        mode={authModalMode}
+      />
     </div>
   );
 }

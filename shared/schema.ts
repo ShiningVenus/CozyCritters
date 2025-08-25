@@ -32,6 +32,8 @@ export interface UserSession {
   username: string;
   role: UserRole;
   timestamp: number;
+  isRegistered?: boolean;
+  passwordHash?: string;
 }
 
 // Forum moderation types

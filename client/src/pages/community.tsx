@@ -3,7 +3,6 @@ import { ArrowLeft, ExternalLink, Heart, Users, MessageCircle, Calendar, Downloa
 import { fetchCommunityMessagePacks, downloadMessagePack, CommunityMessagePack } from "@/lib/community-message-packs";
 import { ShareableMoodTemplates } from "@/components/shareable-mood-templates";
 import { CommunityCopingStrategies } from "@/components/community-coping-strategies";
-import { CommunityForum } from "@/components/community-forum";
 import { CommunityDashboard } from "@/components/community-dashboard";
 
 interface CommunityProps {
@@ -181,8 +180,32 @@ export function Community({ onBack }: CommunityProps) {
           </div>
         </section>
 
-        {/* Community Forum - Phase 2 Feature */}
-        <CommunityForum className="mb-6" />
+        {/* Community Forum - Now Standalone */}
+        <section className="bg-card rounded-lg p-6 border border-border mb-6">
+          <h2 className="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
+            <MessageCircle size={20} />
+            CozyCritters Forum
+          </h2>
+          <p className="text-muted-foreground mb-4">
+            Join our anonymous, ND-friendly forum to connect with others, share experiences, and find support.
+          </p>
+          <div className="bg-primary/10 border border-primary/20 rounded-lg p-4 mb-4">
+            <h3 className="font-medium text-foreground mb-2">✨ New Features</h3>
+            <ul className="text-sm text-muted-foreground space-y-1">
+              <li>• Anonymous posting with optional registration</li>
+              <li>• Multiple sensory-friendly themes</li>
+              <li>• No email required - privacy first</li>
+              <li>• Classic phpBB-style interface</li>
+            </ul>
+          </div>
+          <a
+            href="/forum"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+          >
+            <MessageCircle size={16} />
+            Open Forum
+          </a>
+        </section>
 
         {/* Shareable Mood Templates */}
         <ShareableMoodTemplates className="mb-6" />
