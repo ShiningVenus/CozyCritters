@@ -461,3 +461,59 @@
   color: white;
   border-color: #004477;
 }
+
+/* phpBB-style Footer */
+.phpbb-footer {
+  border-top: 1px solid var(--forum-border, #c5c5c5);
+  background: var(--forum-header-bg, linear-gradient(to bottom, #dee3e7, #d1d7dc));
+  padding: 8px 12px;
+  margin-top: 20px;
+  font-size: 10px;
+  color: var(--forum-text-muted, #666666);
+}
+
+.phpbb-footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.phpbb-footer-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.phpbb-powered {
+  font-weight: normal;
+}
+
+.phpbb-powered strong {
+  color: var(--forum-link, #006699);
+  font-weight: bold;
+}
+
+.phpbb-copyright {
+  color: var(--forum-text-muted, #888888);
+  font-size: 9px;
+}
+
+.phpbb-footer-stats {
+  text-align: right;
+  font-size: 9px;
+  color: var(--forum-text-muted, #888888);
+}
+
+/* Responsive footer */
+@media (max-width: 600px) {
+  .phpbb-footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .phpbb-footer-stats {
+    text-align: center;
+  }
+}

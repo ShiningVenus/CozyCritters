@@ -410,10 +410,88 @@ export function ForumModerationPanel({
 
           {activeTab === 'users' && userRole === 'admin' && (
             <div className="h-full overflow-y-auto p-4">
-              <div className="text-center py-8 text-gray-500">
-                User management features coming soon...
-                <br />
-                <span className="text-sm">This would include user role management, bans, warnings, etc.</span>
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-lg font-semibold mb-4">User Management</h3>
+                  
+                  {/* User Statistics */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                      <div className="flex items-center gap-2">
+                        <User className="text-blue-600" size={20} />
+                        <div>
+                          <p className="text-sm text-blue-600">Total Users</p>
+                          <p className="text-xl font-bold text-blue-800">24</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                      <div className="flex items-center gap-2">
+                        <Shield className="text-green-600" size={20} />
+                        <div>
+                          <p className="text-sm text-green-600">Active Moderators</p>
+                          <p className="text-xl font-bold text-green-800">3</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                      <div className="flex items-center gap-2">
+                        <Clock className="text-yellow-600" size={20} />
+                        <div>
+                          <p className="text-sm text-yellow-600">Online Today</p>
+                          <p className="text-xl font-bold text-yellow-800">12</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Quick Actions */}
+                  <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 mb-6">
+                    <h4 className="font-semibold mb-3">Quick Actions</h4>
+                    <div className="flex flex-wrap gap-2">
+                      <button className="px-3 py-2 bg-blue-600 text-white rounded text-sm hover:bg-blue-700">
+                        Send Announcement
+                      </button>
+                      <button className="px-3 py-2 bg-green-600 text-white rounded text-sm hover:bg-green-700">
+                        Backup User Data
+                      </button>
+                      <button className="px-3 py-2 bg-orange-600 text-white rounded text-sm hover:bg-orange-700">
+                        View Reports
+                      </button>
+                      <button className="px-3 py-2 bg-purple-600 text-white rounded text-sm hover:bg-purple-700">
+                        Manage Roles
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Recent User Activity */}
+                  <div>
+                    <h4 className="font-semibold mb-3">Recent User Activity</h4>
+                    <div className="space-y-3">
+                      {[
+                        { user: 'Gentle Fox', action: 'Created new topic', time: '5 minutes ago', type: 'post' },
+                        { user: 'Wise Owl', action: 'Replied to discussion', time: '12 minutes ago', type: 'reply' },
+                        { user: 'Brave Rabbit', action: 'Registered account', time: '1 hour ago', type: 'join' },
+                        { user: 'Calm Bear', action: 'Updated profile', time: '2 hours ago', type: 'profile' }
+                      ].map((activity, index) => (
+                        <div key={index} className="flex items-center justify-between p-3 bg-white border rounded">
+                          <div className="flex items-center gap-3">
+                            <div className={`w-2 h-2 rounded-full ${
+                              activity.type === 'post' ? 'bg-blue-500' :
+                              activity.type === 'reply' ? 'bg-green-500' :
+                              activity.type === 'join' ? 'bg-purple-500' : 'bg-gray-500'
+                            }`} />
+                            <div>
+                              <p className="font-medium">{activity.user}</p>
+                              <p className="text-sm text-gray-600">{activity.action}</p>
+                            </div>
+                          </div>
+                          <span className="text-sm text-gray-500">{activity.time}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           )}

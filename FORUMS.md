@@ -268,5 +268,5 @@ Take your time, communicate in whatever way feels comfortable, and know that eve
 ---
 
 **Last Updated**: January 2025  
-**Version**: 2.0.2  
+**Version**: 2.1.0  
 **Questions about the forums?** Post in General Discussion with "forum-help" in the title.
