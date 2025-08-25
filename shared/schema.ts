@@ -39,7 +39,7 @@ export interface UserSession {
 // Forum moderation types
 export interface ModerationAction {
   id: string;
-  type: 'hide' | 'pin' | 'edit' | 'warn';
+  type: 'hide' | 'pin' | 'edit' | 'warn' | 'delete';
   moderatorId: string;
   moderatorName: string;
   reason?: string;

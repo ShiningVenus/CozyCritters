@@ -3,7 +3,7 @@ import { usePWA } from "@/hooks/use-pwa";
 import { useState } from "react";
 
 export function PWAInstallPrompt() {
-  const { isInstallable, installApp } = usePWA();
+  const { isInstallable, installApp, permanentlyDismiss } = usePWA();
   const [isDismissed, setIsDismissed] = useState(false);
 
   if (!isInstallable || isDismissed) return null;
@@ -13,6 +13,11 @@ export function PWAInstallPrompt() {
     if (success) {
       setIsDismissed(true);
     }
+  };
+
+  const handleNoThanks = () => {
+    permanentlyDismiss();
+    setIsDismissed(true);
   };
 
   return (
@@ -28,7 +33,7 @@ export function PWAInstallPrompt() {
           <p className="text-xs opacity-90 mb-3">
             Get the app on your home screen for quick access to your mood tracking, even offline!
           </p>
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-wrap">
             <button
               onClick={handleInstall}
               className="flex items-center gap-1 px-3 py-1.5 bg-primary-foreground text-primary rounded text-xs font-medium hover:bg-primary-foreground/90 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-foreground/50"
@@ -41,6 +46,12 @@ export function PWAInstallPrompt() {
               className="px-3 py-1.5 text-primary-foreground/80 hover:text-primary-foreground text-xs transition-colors focus:outline-none focus:ring-2 focus:ring-primary-foreground/50 rounded"
             >
               Maybe later
+            </button>
+            <button
+              onClick={handleNoThanks}
+              className="px-3 py-1.5 text-primary-foreground/60 hover:text-primary-foreground/80 text-xs transition-colors focus:outline-none focus:ring-2 focus:ring-primary-foreground/50 rounded"
+            >
+              No thanks
             </button>
           </div>
         </div>

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { MessageSquare, Heart, User, Clock, ChevronDown, ChevronUp, Plus, Flag, ThumbsUp, Pin, EyeOff, Edit3, Shield, Folder, Users, FileText, UserPlus, LogIn } from 'lucide-react';
+import { MessageSquare, Heart, User, Clock, ChevronDown, ChevronUp, Plus, Flag, ThumbsUp, Pin, EyeOff, Edit3, Shield, Folder, Users, FileText, UserPlus, LogIn, Settings } from 'lucide-react';
 import { useUserSession } from '../hooks/useUserSession';
 import { ForumPostModeration, ForumReplyModeration, ModerationAction, UserRole } from '../../../shared/schema';
 import { UserAuthModal } from './user-auth-modal';
 import { ForumThemeSelector } from './forum-theme-selector';
+import { ForumModerationPanel } from './forum-moderation-panel';
 import { initializeForumTheme } from '../lib/forum-themes';
 import './phpbb-forum.css';
 
@@ -115,28 +116,47 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
   const [showRolePanel, setShowRolePanel] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [authModalMode, setAuthModalMode] = useState<'register' | 'login'>('register');
+  const [showModerationPanel, setShowModerationPanel] = useState(false);
   
   const { userSession, updateUserRole, hasModeratorAccess, hasAdminAccess, generateAnonymousName } = useUserSession();
 
   // Load forum data from localStorage and migrate legacy data
   useEffect(() => {
-    // Initialize forum theme
-    initializeForumTheme();
-    
-    const savedBoards = localStorage.getItem('cozy-critter-forum-boards');
-    const savedTopics = localStorage.getItem('cozy-critter-forum-topics');
-    const savedPosts = localStorage.getItem('cozy-critter-forum-posts-new');
-    const legacyPosts = localStorage.getItem('cozy-critter-forum-posts');
+    try {
+      // Initialize forum theme
+      initializeForumTheme();
+      
+      const savedBoards = localStorage.getItem('cozy-critter-forum-boards');
+      const savedTopics = localStorage.getItem('cozy-critter-forum-topics');
+      const savedPosts = localStorage.getItem('cozy-critter-forum-posts-new');
+      const legacyPosts = localStorage.getItem('cozy-critter-forum-posts');
 
-    if (savedBoards && savedTopics && savedPosts) {
-      setBoards(JSON.parse(savedBoards));
-      setTopics(JSON.parse(savedTopics));
-      setPosts(JSON.parse(savedPosts));
-    } else if (legacyPosts) {
-      // Migrate legacy data to new structure
-      migrateLegacyData(JSON.parse(legacyPosts));
-    } else {
-      // Initialize with default forum structure
+      if (savedBoards && savedTopics && savedPosts) {
+        try {
+          setBoards(JSON.parse(savedBoards));
+          setTopics(JSON.parse(savedTopics));
+          setPosts(JSON.parse(savedPosts));
+          console.log('Forum data loaded successfully');
+        } catch (error) {
+          console.error('Error parsing saved forum data:', error);
+          initializeDefaultForums();
+        }
+      } else if (legacyPosts) {
+        try {
+          // Migrate legacy data to new structure
+          migrateLegacyData(JSON.parse(legacyPosts));
+          console.log('Legacy forum data migrated successfully');
+        } catch (error) {
+          console.error('Error migrating legacy forum data:', error);
+          initializeDefaultForums();
+        }
+      } else {
+        // Initialize with default forum structure
+        initializeDefaultForums();
+      }
+    } catch (error) {
+      console.error('Error initializing forum:', error);
+      // Fallback to basic forum structure
       initializeDefaultForums();
     }
   }, []);
@@ -373,9 +393,15 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
   };
 
   const saveForumData = (boardsData: ForumBoard[], topicsData: ForumTopic[], postsData: ForumPost[]) => {
-    localStorage.setItem('cozy-critter-forum-boards', JSON.stringify(boardsData));
-    localStorage.setItem('cozy-critter-forum-topics', JSON.stringify(topicsData));
-    localStorage.setItem('cozy-critter-forum-posts-new', JSON.stringify(postsData));
+    try {
+      localStorage.setItem('cozy-critter-forum-boards', JSON.stringify(boardsData));
+      localStorage.setItem('cozy-critter-forum-topics', JSON.stringify(topicsData));
+      localStorage.setItem('cozy-critter-forum-posts-new', JSON.stringify(postsData));
+      console.log('Forum data saved successfully');
+    } catch (error) {
+      console.error('Error saving forum data:', error);
+      // Could show user notification here in a real app
+    }
   };
 
   const handleCreateTopic = () => {
@@ -514,6 +540,84 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
     saveForumData(boards, topics, updatedPosts);
   };
 
+  const handleModerationAction = (action: ModerationAction, targetId: string, targetType: 'post' | 'topic') => {
+    if (targetType === 'post') {
+      const updatedPosts = posts.map(post => {
+        if (post.id === targetId) {
+          const currentModeration = post.moderation || {
+            isHidden: false,
+            isPinned: false,
+            isEdited: false,
+            actions: []
+          };
+
+          let newModeration: ForumPostModeration;
+          
+          switch (action.type) {
+            case 'hide':
+              newModeration = {
+                ...currentModeration,
+                isHidden: !currentModeration.isHidden,
+                actions: [...currentModeration.actions, action]
+              };
+              break;
+            case 'pin':
+              newModeration = {
+                ...currentModeration,
+                isPinned: !currentModeration.isPinned,
+                actions: [...currentModeration.actions, action]
+              };
+              break;
+            case 'edit':
+              newModeration = {
+                ...currentModeration,
+                isEdited: true,
+                actions: [...currentModeration.actions, action]
+              };
+              break;
+            default:
+              newModeration = {
+                ...currentModeration,
+                actions: [...currentModeration.actions, action]
+              };
+          }
+
+          return {
+            ...post,
+            moderation: newModeration
+          };
+        }
+        return post;
+      });
+      
+      setPosts(updatedPosts);
+      saveForumData(boards, topics, updatedPosts);
+    } else if (targetType === 'topic') {
+      const updatedTopics = topics.map(topic => {
+        if (topic.id === targetId) {
+          switch (action.type) {
+            case 'pin':
+              return {
+                ...topic,
+                isPinned: !topic.isPinned
+              };
+            case 'hide':
+              return {
+                ...topic,
+                isLocked: true // Hide topics by locking them
+              };
+            default:
+              return topic;
+          }
+        }
+        return topic;
+      });
+      
+      setTopics(updatedTopics);
+      saveForumData(boards, updatedTopics, posts);
+    }
+  };
+
   const formatTimestamp = (timestamp: number) => {
     const date = new Date(timestamp);
     const now = new Date();
@@ -590,13 +694,24 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
             )}
             <ForumThemeSelector />
             {hasAdminAccess() && (
-              <button
-                onClick={() => setShowRolePanel(!showRolePanel)}
-                className="phpbb-admin-btn"
-              >
-                <Shield size={14} />
-                Admin Panel
-              </button>
+              <>
+                <button
+                  onClick={() => setShowRolePanel(!showRolePanel)}
+                  className="phpbb-admin-btn"
+                >
+                  <Shield size={14} />
+                  Admin Panel
+                </button>
+                {hasModeratorAccess() && (
+                  <button
+                    onClick={() => setShowModerationPanel(true)}
+                    className="phpbb-admin-btn"
+                  >
+                    <Settings size={14} />
+                    Moderation
+                  </button>
+                )}
+              </>
             )}
           </div>
         )}
@@ -902,13 +1017,42 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
                   </div>
                 </div>
                 <div className="phpbb-post-content">
-                  <div className="phpbb-post-text">
-                    {post.content}
+                  {/* Moderation indicators */}
+                  {post.moderation?.isHidden && (
+                    <div className="mb-2 p-2 bg-red-50 border border-red-200 rounded text-sm">
+                      <div className="flex items-center gap-2 text-red-700">
+                        <EyeOff size={14} />
+                        <span className="font-medium">Hidden Content</span>
+                      </div>
+                      {hasModeratorAccess() && (
+                        <div className="mt-1 text-red-600">
+                          This post has been hidden by a moderator
+                        </div>
+                      )}
+                    </div>
+                  )}
+                  
+                  {post.moderation?.isEdited && (
+                    <div className="mb-2 p-2 bg-yellow-50 border border-yellow-200 rounded text-sm">
+                      <div className="flex items-center gap-2 text-yellow-700">
+                        <Edit3 size={14} />
+                        <span>Last edited by moderator</span>
+                      </div>
+                    </div>
+                  )}
+
+                  <div className={`phpbb-post-text ${post.moderation?.isHidden && !hasModeratorAccess() ? 'opacity-50 blur-sm' : ''}`}>
+                    {post.moderation?.isHidden && !hasModeratorAccess() 
+                      ? '[This content has been hidden]' 
+                      : post.content
+                    }
                   </div>
+                  
                   <div className="phpbb-post-reactions">
                     <button
                       onClick={() => handleReaction(post.id, 'hearts')}
                       className={`phpbb-reaction-btn ${post.userReacted?.hearts ? 'active' : ''}`}
+                      disabled={post.moderation?.isHidden && !hasModeratorAccess()}
                     >
                       <Heart size={14} />
                       {post.reactions.hearts}
@@ -916,10 +1060,40 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
                     <button
                       onClick={() => handleReaction(post.id, 'helpful')}
                       className={`phpbb-reaction-btn ${post.userReacted?.helpful ? 'active' : ''}`}
+                      disabled={post.moderation?.isHidden && !hasModeratorAccess()}
                     >
                       <ThumbsUp size={14} />
                       {post.reactions.helpful}
                     </button>
+                    
+                    {/* Quick report button for regular users */}
+                    {!hasModeratorAccess() && !post.moderation?.isHidden && (
+                      <button
+                        onClick={() => {
+                          // Quick report functionality
+                          const reason = prompt('Please specify the reason for reporting this post:');
+                          if (reason) {
+                            const reports = JSON.parse(localStorage.getItem('cozy-critter-moderation-reports') || '[]');
+                            const newReport = {
+                              id: crypto.randomUUID(),
+                              targetId: post.id,
+                              targetType: 'post',
+                              reason: reason.trim(),
+                              reporterId: userSession?.id || 'anonymous',
+                              timestamp: Date.now(),
+                              status: 'pending'
+                            };
+                            reports.push(newReport);
+                            localStorage.setItem('cozy-critter-moderation-reports', JSON.stringify(reports));
+                            alert('Thank you for your report. Our moderators will review it shortly.');
+                          }
+                        }}
+                        className="phpbb-reaction-btn"
+                        title="Report this post"
+                      >
+                        <Flag size={14} />
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
@@ -942,6 +1116,17 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
         onClose={() => setShowAuthModal(false)}
         mode={authModalMode}
       />
+
+      {/* Moderation Panel */}
+      {showModerationPanel && hasModeratorAccess() && (
+        <ForumModerationPanel
+          userRole={userSession?.role || 'user'}
+          onModerationAction={handleModerationAction}
+          posts={posts}
+          topics={topics}
+          onClose={() => setShowModerationPanel(false)}
+        />
+      )}
     </div>
   );
 }
