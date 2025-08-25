@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MessageSquare, Heart, User, Clock, ChevronDown, ChevronUp, Plus, Flag, ThumbsUp, Pin, EyeOff, Edit3, Shield, Folder, Users, FileText, UserPlus, LogIn, Settings, Key } from 'lucide-react';
+import { MessageSquare, Heart, User, Clock, ChevronDown, ChevronUp, Plus, Flag, ThumbsUp, Pin, EyeOff, Edit3, Shield, Folder, Users, FileText, UserPlus, LogIn, LogOut, Settings, Key } from 'lucide-react';
 import { useUserSession } from '../hooks/useUserSession';
 import { ForumPostModeration, ForumReplyModeration, ModerationAction, UserRole } from '../../../shared/schema';
 import { UserAuthModal } from './user-auth-modal';
@@ -120,8 +120,16 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
   const [authModalMode, setAuthModalMode] = useState<'register' | 'login'>('register');
   const [showModerationPanel, setShowModerationPanel] = useState(false);
   const [showAdminSetup, setShowAdminSetup] = useState(false);
+  const [showForumManagement, setShowForumManagement] = useState(false);
   
-  const { userSession, updateUserRole, hasModeratorAccess, hasAdminAccess, generateAnonymousName } = useUserSession();
+  // Forum management states
+  const [newForumData, setNewForumData] = useState({
+    name: '',
+    description: '',
+    icon: '💬'
+  });
+  
+  const { userSession, updateUserRole, hasModeratorAccess, hasAdminAccess, generateAnonymousName, logoutUser } = useUserSession();
 
   // Load forum data from localStorage and migrate legacy data
   useEffect(() => {
@@ -621,6 +629,45 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
     }
   };
 
+  const handleCreateForum = () => {
+    if (!newForumData.name.trim() || !hasAdminAccess()) return;
+
+    const newBoard: ForumBoard = {
+      id: crypto.randomUUID(),
+      name: newForumData.name.trim(),
+      description: newForumData.description.trim() || 'No description provided',
+      icon: newForumData.icon,
+      topicCount: 0,
+      postCount: 0
+    };
+
+    const updatedBoards = [...boards, newBoard];
+    setBoards(updatedBoards);
+    saveForumData(updatedBoards, topics, posts);
+    
+    setNewForumData({ name: '', description: '', icon: '💬' });
+    setShowForumManagement(false);
+  };
+
+  const handleDeleteForum = (boardId: string) => {
+    if (!hasAdminAccess()) return;
+    
+    // Remove the board
+    const updatedBoards = boards.filter(board => board.id !== boardId);
+    
+    // Remove all topics in this board
+    const updatedTopics = topics.filter(topic => topic.boardId !== boardId);
+    
+    // Remove all posts in topics from this board
+    const topicsToDelete = topics.filter(topic => topic.boardId === boardId).map(t => t.id);
+    const updatedPosts = posts.filter(post => !topicsToDelete.includes(post.topicId));
+    
+    setBoards(updatedBoards);
+    setTopics(updatedTopics);
+    setPosts(updatedPosts);
+    saveForumData(updatedBoards, updatedTopics, updatedPosts);
+  };
+
   const formatTimestamp = (timestamp: number) => {
     const date = new Date(timestamp);
     const now = new Date();
@@ -665,8 +712,15 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
         </div>
         {userSession && (
           <div className="phpbb-user-info">
-            <span className="text-sm">Welcome, {userSession.username}</span>
-            {!userSession.isRegistered && (
+            <span className="text-sm">
+              Welcome, {userSession.username}
+              {userSession.role !== 'user' && (
+                <span className="ml-1 px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded font-semibold">
+                  {userSession.role.toUpperCase()}
+                </span>
+              )}
+            </span>
+            {!userSession.isRegistered ? (
               <>
                 <button
                   onClick={() => {
@@ -691,54 +745,152 @@ export function CommunityForum({ className = "" }: CommunityForumProps) {
                   Login
                 </button>
               </>
-            )}
-            {userSession.isRegistered && (
-              <span className="text-xs text-green-600">✓ Registered</span>
+            ) : (
+              <button
+                onClick={logoutUser}
+                className="phpbb-admin-btn"
+                title="Logout from your account"
+              >
+                <LogOut size={14} />
+                Logout
+              </button>
             )}
             <ForumThemeSelector />
             {hasAdminAccess() && (
               <>
-                {!isProduction() && (
-                  <button
-                    onClick={() => setShowRolePanel(!showRolePanel)}
-                    className="phpbb-admin-btn"
-                  >
-                    <Shield size={14} />
-                    Admin Panel
-                  </button>
-                )}
-                {hasModeratorAccess() && (
-                  <button
-                    onClick={() => setShowModerationPanel(true)}
-                    className="phpbb-admin-btn"
-                  >
-                    <Settings size={14} />
-                    Moderation
-                  </button>
-                )}
+                <button
+                  onClick={() => setShowRolePanel(!showRolePanel)}
+                  className="phpbb-admin-btn"
+                  title="Admin Panel - User Management"
+                >
+                  <Shield size={14} />
+                  Admin Panel
+                </button>
+                <button
+                  onClick={() => setShowForumManagement(!showForumManagement)}
+                  className="phpbb-admin-btn"
+                  title="Forum Management"
+                >
+                  <Folder size={14} />
+                  Forum Management
+                </button>
               </>
             )}
-            <button
-              onClick={() => setShowAdminSetup(true)}
-              className="phpbb-admin-btn"
-              title="Admin Setup"
-            >
-              <Key size={14} />
-              Admin Setup
-            </button>
+            {hasModeratorAccess() && (
+              <button
+                onClick={() => setShowModerationPanel(true)}
+                className="phpbb-admin-btn"
+                title="Moderation Panel"
+              >
+                <Settings size={14} />
+                Moderation
+              </button>
+            )}
+            {(hasAdminAccess() || hasModeratorAccess()) && (
+              <button
+                onClick={() => setShowAdminSetup(true)}
+                className="phpbb-admin-btn"
+                title="Admin Setup"
+              >
+                <Key size={14} />
+                Admin Setup
+              </button>
+            )}
           </div>
         )}
       </div>
 
       {/* Admin Panel */}
-      {showRolePanel && hasAdminAccess() && !isProduction() && (
+      {showRolePanel && hasAdminAccess() && (
         <div className="phpbb-admin-panel">
-          <h4 className="font-bold mb-2">Admin Panel - Role Management</h4>
-          <p className="text-sm mb-3">For demo purposes - in a real app, this would be a proper admin interface</p>
+          <h4 className="font-bold mb-2">Admin Panel - User Role Management</h4>
+          <p className="text-sm mb-3">Manage user roles and permissions. Use with caution.</p>
           <div className="flex gap-2">
             <button onClick={() => updateUserRole('user')} className="phpbb-role-btn">Set as User</button>
             <button onClick={() => updateUserRole('moderator')} className="phpbb-role-btn">Set as Moderator</button>
             <button onClick={() => updateUserRole('admin')} className="phpbb-role-btn">Set as Admin</button>
+          </div>
+          <div className="mt-3 p-2 bg-yellow-50 border border-yellow-200 rounded text-sm">
+            <strong>Current Role:</strong> {userSession?.role?.toUpperCase()}
+          </div>
+        </div>
+      )}
+
+      {/* Forum Management Panel */}
+      {showForumManagement && hasAdminAccess() && (
+        <div className="phpbb-admin-panel">
+          <h4 className="font-bold mb-2">Forum Management - Create/Manage Forums</h4>
+          <p className="text-sm mb-3">Create new forums and manage existing ones. Forums are like categories that contain topics.</p>
+          
+          <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded">
+            <h5 className="font-semibold mb-2">Create New Forum</h5>
+            <div className="space-y-2">
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  placeholder="Forum name (e.g., 'Technical Support')"
+                  value={newForumData.name}
+                  onChange={(e) => setNewForumData({...newForumData, name: e.target.value})}
+                  className="flex-1 px-2 py-1 border border-gray-300 rounded text-sm"
+                />
+                <select
+                  value={newForumData.icon}
+                  onChange={(e) => setNewForumData({...newForumData, icon: e.target.value})}
+                  className="px-2 py-1 border border-gray-300 rounded text-sm"
+                >
+                  <option value="💬">💬 General</option>
+                  <option value="🤝">🤝 Support</option>
+                  <option value="🎉">🎉 Celebrations</option>
+                  <option value="💭">💭 Discussion</option>
+                  <option value="🔧">🔧 Technical</option>
+                  <option value="📝">📝 Feedback</option>
+                  <option value="🎮">🎮 Games</option>
+                  <option value="📚">📚 Resources</option>
+                </select>
+              </div>
+              <textarea
+                placeholder="Forum description (optional)"
+                value={newForumData.description}
+                onChange={(e) => setNewForumData({...newForumData, description: e.target.value})}
+                className="w-full px-2 py-1 border border-gray-300 rounded text-sm"
+                rows={2}
+              />
+              <button
+                onClick={handleCreateForum}
+                disabled={!newForumData.name.trim()}
+                className="px-3 py-1 bg-green-600 text-white rounded text-sm hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Create Forum
+              </button>
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <h5 className="font-semibold">Existing Forums</h5>
+            {boards.length === 0 ? (
+              <p className="text-gray-500 text-sm">No forums created yet.</p>
+            ) : (
+              <div className="space-y-1">
+                {boards.map(board => (
+                  <div key={board.id} className="flex items-center justify-between p-2 bg-gray-50 rounded">
+                    <div className="flex items-center gap-2">
+                      <span className="text-lg">{board.icon}</span>
+                      <div>
+                        <div className="font-medium text-sm">{board.name}</div>
+                        <div className="text-xs text-gray-600">{board.description}</div>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => handleDeleteForum(board.id)}
+                      className="px-2 py-1 bg-red-600 text-white rounded text-xs hover:bg-red-700"
+                      title={`Delete ${board.name} forum`}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       )}

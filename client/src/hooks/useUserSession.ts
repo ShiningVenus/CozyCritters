@@ -133,6 +133,19 @@ export function useUserSession() {
     localStorage.setItem(USER_SESSION_KEY, JSON.stringify(updatedSession));
   };
 
+  const logoutUser = () => {
+    // Create new anonymous session
+    const defaultSession: UserSession = {
+      id: crypto.randomUUID(),
+      username: generateAnonymousName(),
+      role: 'user',
+      timestamp: Date.now(),
+      isRegistered: false
+    };
+    setUserSession(defaultSession);
+    localStorage.setItem(USER_SESSION_KEY, JSON.stringify(defaultSession));
+  };
+
   return {
     userSession,
     updateUserRole,
@@ -141,6 +154,7 @@ export function useUserSession() {
     hasAdminAccess,
     registerUser,
     loginUser,
+    logoutUser,
     generateAnonymousName
   };
 }
