@@ -29,6 +29,7 @@ Everything stays on your device because your emotional data is deeply personal.
 ## 📋 Quick Navigation
 - [✨ What's Included](#-what-v2-includes)
 - [💬 Community Forums](FORUMS.md) - Complete guide to discussion boards
+- [🎯 Standalone Forums](STANDALONE-FORUMS.md) - Independent forum application
 - [🚀 Getting Started](#-how-to-run-locally)
 - [🛡️ Privacy & Security](#-privacy-promise--technical-proof)
 - [🏢 For Organizations](#-for-autism--neurodivergent-support-organizations)

@@ -44,6 +44,12 @@ export default defineConfig(async () => ({
   build: {
     outDir: "dist",
     emptyOutDir: true,
+    rollupOptions: {
+      input: {
+        main: resolve(__dirname, "client", "index.html"),
+        forum: resolve(__dirname, "client", "forum.html"),
+      },
+    },
   },
   server: {
     fs: { strict: true, deny: ["**/.*"] },
